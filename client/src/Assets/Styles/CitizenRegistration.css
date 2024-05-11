@@ -1,0 +1,56 @@
+.citizen_reg_box {
+    min-height: 90vh;
+  }
+  
+  .citizen_reg_left {
+    background-image: url(../Images/citizenreg.jpg);
+  background-size: cover;
+  }
+
+  .citizen_reg_right {
+    height: 90vh;
+    background-color: #0e0e0e;
+    /* padding: 10px; */
+  }
+  
+  .citizen_reg_title {
+    color: #e2e2e2;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-top: 5rem;
+    text-align: center;
+  }
+  
+  .citizen_reg_input_grp {
+    /* height: 300px; */
+    width: 600px;
+    margin: 30px auto;
+  }
+  
+  .user_inp {
+    border: 3px solid #5f5e5e;
+    border-radius: none;
+  }
+  
+  .citizen_reg_input_grp p {
+    text-align: center;
+    color: #e2e2e2;
+    text-align: center;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-top: 15px;
+  }
+  .citizen_reg_input_grp label {
+    
+    color: #e2e2e2;
+    
+  }
+
+  .citizen_reg_log_link a{
+    color: #e2e2e2;
+  }
+  

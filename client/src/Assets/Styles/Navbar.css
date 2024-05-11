@@ -1,0 +1,38 @@
+.navbar_bg{
+    background-color: #121212;
+    height: 10vh;
+}
+
+.navbar_title{
+    color: #e2e2e2;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 0;
+}
+
+.navbar_box{
+    display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar_sub_title{
+    width: 20%;
+}
+.navbar_sub_title p{
+    color: #E2E2E2;
+font-size: 12px;
+font-style: normal;
+font-weight: 700;
+line-height: 24px; /* 133.333% */
+letter-spacing: 0.18px;
+text-transform: capitalize;
+}
+
+.navbar_sub_title a{
+    text-decoration: none;
+}
+.navbar_sub_title a:hover{
+    text-decoration: underline;
+    color:#ffff
+}
