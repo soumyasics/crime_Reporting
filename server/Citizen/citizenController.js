@@ -3,7 +3,7 @@ const Citizen = require('./citizenSchema');
 const jwt=require('jsonwebtoken')
 const registerCitizen = async (req, res) => {
     try {
-        const { firstname, lastname, contact, email, aadhar, password, housename, street, state, nationality, pincode } = req.body;
+         const { firstname, lastname, contact, email, aadhar, password, housename, street, state, nationality, pincode } = req.body;
 
         const newCitizen = new Citizen({
             firstname,
