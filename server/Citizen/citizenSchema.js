@@ -3,7 +3,7 @@ const mongoose= require("mongoose");
 const userSchema=mongoose.Schema({
     firstname:{
         type:String,
-      
+       
         required:true,
        
     },
@@ -57,6 +57,16 @@ const userSchema=mongoose.Schema({
 
     },pincode:{
         type:Number,
+        required:true
+
+    },
+    dob:{
+        type:Date,
+        required:true
+
+    },
+    gender:{
+        type:String,
         required:true
 
     }
