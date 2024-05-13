@@ -10,6 +10,7 @@ const registerCitizen = async (req, res) => {
             lastname,
             contact,
             email,
+            dob,
             aadhar,
             password,
             housename,

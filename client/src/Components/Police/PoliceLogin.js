@@ -1,8 +1,25 @@
 import React from 'react'
 import '../../Assets/Styles/PoliceLogin.css'
 import { Link } from 'react-router-dom'
+import { useFormik } from 'formik';
+import { LoginSchema } from "../Constants/Schema";
 
 function PoliceLogin() {
+
+  const onSubmit = (values) => {
+    // Handle login submission
+    console.log(values);
+  };
+
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormik({
+    initialValues: {
+      email: '',
+      password: ''
+    },
+    validationSchema: LoginSchema,
+    onSubmit: onSubmit
+  });
+
   return (
     <div>
       <div className="container">
@@ -14,12 +31,35 @@ function PoliceLogin() {
             
             <h2 className="citizen_login_title" >Police Login</h2>
             <div className="citizen_login_input_grp">
-            <input type="email" class="form-control user_inp " id="exampleFormControlInput1" placeholder="Email"/>
-            <input type="password" class="form-control user_inp mt-3" id="exampleFormControlInput1" placeholder="Password"/>
-            <p className="text-end"><Link to='/police_forgotpassword' >Forgot Password?</Link></p>
+              <input 
+                type="email" 
+                className="form-control user_inp" 
+                id="email" 
+                placeholder="Email" 
+                name="email" 
+                value={values.email} 
+                onChange={handleChange} 
+                onBlur={handleBlur} 
+              />
+              {errors.email && touched.email && (<span className="text-danger">{errors.email}</span>)}
+              <input 
+                type="password" 
+                className="form-control user_inp mt-3" 
+                id="password" 
+                placeholder="Password" 
+                name="password" 
+                value={values.password} 
+                onChange={handleChange} 
+                onBlur={handleBlur} 
+              />
+              {errors.password && touched.password && (<span className="text-danger">{errors.password}</span>)}
 
-            <button type="submit" className="btn btn-secondary w-100 mt-3" >Login</button>
-            <p>Don't have an account? <Link to='/police_register'>Register</Link></p>
+              <p className="text-end"><Link to='/police_forgotpassword' >Forgot Password?</Link></p>
+
+              <button type="submit" className="btn btn-secondary w-100 mt-3" onClick={handleSubmit}>
+                Login
+              </button>
+              <p>Don't have an account? <Link to='/police_register'>Register</Link></p>
             </div>
           </div>
           

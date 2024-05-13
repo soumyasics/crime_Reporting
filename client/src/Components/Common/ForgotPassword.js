@@ -1,6 +1,7 @@
 import React from 'react'
+import '../../Assets/Styles/CitizenForgotPassword.css'
 
-function PoliceForgotPassword() {
+function ForgotPassword({activeUser}) {
   return (
     <div>
       <div className="container">
@@ -11,7 +12,7 @@ function PoliceForgotPassword() {
           <div className="col-lg-5 col-md-8 col-sm-6 citizen_login_right">
             
             <h2 className="citizen_login_title" >Forgot Password</h2>
-            <p className='citizen_forgot_password_subtitle' >Police</p>
+            <p className='citizen_forgot_password_subtitle' >{activeUser}</p>
             <div className="citizen_login_input_grp">
             <input type="email" class="form-control user_inp " id="exampleFormControlInput1" placeholder="Email"/>
             <input type="password" class="form-control user_inp mt-3" id="exampleFormControlInput1" placeholder="Password"/>
@@ -27,4 +28,4 @@ function PoliceForgotPassword() {
   )
 }
 
-export default PoliceForgotPassword
+export default ForgotPassword

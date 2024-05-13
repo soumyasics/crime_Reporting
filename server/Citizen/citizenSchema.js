@@ -19,6 +19,12 @@ const userSchema=mongoose.Schema({
         required:true,
        
     },
+    dob:{
+        type:Date,
+        
+        required:true,
+       
+    },
     email:{
         type:String,
         unique:true,
@@ -59,7 +65,8 @@ const userSchema=mongoose.Schema({
         type:Number,
         required:true
 
-    }
+    },
+    
 });
 module.exports=mongoose.model('citizens',userSchema)
 
