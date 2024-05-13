@@ -3,7 +3,7 @@ const mongoose= require("mongoose");
 const userSchema=mongoose.Schema({
     firstname:{
         type:String,
-      
+       
         required:true,
        
     },
@@ -15,12 +15,6 @@ const userSchema=mongoose.Schema({
     },
     contact:{
         type:String,
-        
-        required:true,
-       
-    },
-    dob:{
-        type:Date,
         
         required:true,
        
@@ -66,7 +60,16 @@ const userSchema=mongoose.Schema({
         required:true
 
     },
-    
+    dob:{
+        type:Date,
+        required:true
+
+    },
+    gender:{
+        type:String,
+        required:true
+
+    }
 });
 module.exports=mongoose.model('citizens',userSchema)
 

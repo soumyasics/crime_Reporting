@@ -8,24 +8,23 @@ import { CitizenRegistrationSchema } from "../Constants/Schema";
 function CitizenRegistration() {
   const onSubmit = (e) => {
     // e.preventDefault();
-    console.log(values);
-    // axiosInstance.post('/audienceRegistration',values)
-    // .then((res)=>{
-    //   console.log('woking',res);
-    //   console.log(res.data);
-    //   if (res.data.status==200) {
-    //     // toast.success("Registration Successful")
-    //     // navigate('/audience_login')
-    //   }else{
-    //     // toast.error("Registration Failed")
+    console.log(values); 
+    axiosInstance.post('/registerCitizen',values)
+    .then((res)=>{
+      console.log('woking',res);
+      if (res.data.status==200) {
+        // toast.success("Registration Successful")
+        // navigate('/audience_login')
+      }else{
+        // toast.error("Registration Failed")
 
-    //   }
-    // })
-    // .catch((err)=>{
-    //   console.log('error',err);
-    //   // toast.error("Registration Failed")
+      }
+    })
+    .catch((err)=>{
+      console.log('error',err);
+      // toast.error("Registration Failed")
 
-    // })
+    })
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
