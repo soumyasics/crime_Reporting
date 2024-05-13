@@ -3,7 +3,7 @@ const Citizen = require('./citizenSchema');
 const jwt=require('jsonwebtoken')
 const registerCitizen = async (req, res) => {
     try {
-         const { firstname, lastname, contact, email, aadhar, password, housename, street, state, nationality, pincode } = req.body;
+         const { firstname, lastname,  dob, contact, email, aadhar, password, housename, street, state, nationality, pincode } = req.body;
 
         const newCitizen = new Citizen({
             firstname,
@@ -16,7 +16,9 @@ const registerCitizen = async (req, res) => {
             street,
             state,
             nationality,
-            pincode
+            pincode,
+            dob,
+            gender
         });
 
         let existingCitizen1 = await Citizen.findOne({ aadhar });
@@ -92,7 +94,7 @@ const viewCitizens = (req, res) => {
 
 // Update citizen by ID
 const editCitizenById =async (req, res) => {
-    const { firstname, lastname, contact, email, housename, street, state, nationality, pincode } = req.body;
+    const { firstname, lastname, contact,  dob, email, housename, street, state, nationality, pincode } = req.body;
     let existingCitizen = await Citizen.findOne({ contact });
     if (existingCitizen) {
         return res.json({
@@ -106,7 +108,8 @@ const editCitizenById =async (req, res) => {
         lastname,
         contact,
         email,
-    
+        dob,
+        gender,
         housename,
         street,
         state,

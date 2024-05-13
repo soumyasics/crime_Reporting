@@ -59,6 +59,16 @@ const userSchema=mongoose.Schema({
         type:Number,
         required:true
 
+    },
+    dob:{
+        type:Date,
+        required:true
+
+    },
+    gender:{
+        type:String,
+        required:true
+
     }
 });
 module.exports=mongoose.model('citizens',userSchema)
