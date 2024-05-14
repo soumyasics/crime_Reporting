@@ -94,15 +94,19 @@ const viewCitizens = (req, res) => {
 
 // Update citizen by ID
 const editCitizenById =async (req, res) => {
-    const { firstname, lastname, contact,  dob, email, housename, street, state, nationality, pincode } = req.body;
-    let existingCitizen = await Citizen.findOne({ contact });
-    if (existingCitizen) {
-        return res.json({
-            status: 409,
-            msg: "contact Number Already Registered With Us !!",
-            data: null
-        });
+    let flag=0
+    const { firstname, lastname, contact,gender,  dob, email, housename, street, state, nationality, pincode } = req.body;
+    let existingCitizen = await Citizen.find({ contact });
+    let citizenData = await Citizen.findById({  _id: req.params.id  });
+await existingCitizen.map(x=>{
+    if (x.contact!=citizenData.contact) {
+      flag=1        
     }
+    
+})
+
+if(flag==0){
+   
    await Citizen.findByIdAndUpdate({ _id: req.params.id }, {
         firstname,
         lastname,
@@ -130,6 +134,14 @@ const editCitizenById =async (req, res) => {
                 Error: err
             });
         });
+    }
+    else{
+        return res.json({
+            status: 409,
+            msg: "contact Number Already Registered With Us !!",
+            data: null
+        });
+    }
 };
 
 // View citizen by ID
