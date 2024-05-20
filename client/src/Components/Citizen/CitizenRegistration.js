@@ -1,29 +1,35 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../Assets/Styles/CitizenRegistration.css";
 import axiosInstance from "../Constants/BaseUrl";
 import { useFormik } from "formik";
 import { CitizenRegistrationSchema } from "../Constants/Schema";
+import { toast } from "react-toastify";
 
 function CitizenRegistration() {
+
+  const navigate=useNavigate();
+
   const onSubmit = (e) => {
     // e.preventDefault();
-    console.log(values); 
-    axiosInstance.post('/registerCitizen',values)
+
+    const { confirmPassword, ...dataToSend } = values;
+
+    axiosInstance.post('/registerCitizen',dataToSend)
     .then((res)=>{
       console.log('woking',res);
       if (res.data.status==200) {
-        // toast.success("Registration Successful")
-        // navigate('/audience_login')
-      }else{
-        // toast.error("Registration Failed")
+        toast.success("Registration Successful")
+        navigate('/citizen_login')
+      }else if(res.data.status==409){
+        toast.warning(res.data.msg)
 
+      }else{
+        toast.error('Registration Failed')
       }
     })
     .catch((err)=>{
-      console.log('error',err);
-      // toast.error("Registration Failed")
-
+      toast.error('Registration Failed')
     })
   };
 
@@ -43,6 +49,7 @@ function CitizenRegistration() {
         nationality: "",
         pincode: "",
         gender: "",
+        confirmPassword:''
       },
       validationSchema: CitizenRegistrationSchema,
       onSubmit,
@@ -278,6 +285,7 @@ function CitizenRegistration() {
                     placeholder="Confirm Password"
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    value={values.confirmPassword}
                     name="confirmPassword"
                   />
                   {errors.confirmPassword && touched.confirmPassword && (

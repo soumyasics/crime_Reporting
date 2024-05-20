@@ -95,12 +95,12 @@ const viewCitizens = (req, res) => {
 
 // Update citizen by ID
 const editCitizenById =async (req, res) => {
-    const { firstname, lastname, contact,  dob, email, housename, street, state, nationality, pincode } = req.body;
+    const { firstname, lastname, contact,  dob, email, housename, street, state, nationality, pincode, gender } = req.body;
     let existingCitizen = await Citizen.findOne({ contact });
     if (existingCitizen) {
         return res.json({
             status: 409,
-            msg: "contact Number Already Registered With Us !!",
+            msg: "Contact Number Already Registered With Us !!",
             data: null
         });
     }

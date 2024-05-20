@@ -25,3 +25,11 @@ export const CitizenRegistrationSchema  = yup.object().shape({
     gender: yup.string().min(2,"Enter minimum 2 characters").required("Required"),
 
 })
+
+export const ForgotPasswordSchema = yup.object().shape({
+  email: yup.string().email("Please enter a valid email").required("Email is required"),
+  password: yup.string().min(5,"1 uppercase, 1 number, 1 symbol").max(16).matches(passwordRule,"1 uppercase, 1 number, 1 symbol").required("Required"),
+  confirmPassword: yup.string()
+    .oneOf([yup.ref('password'), null], 'Passwords must match')
+    .required('Confirm Password is required'),
+});

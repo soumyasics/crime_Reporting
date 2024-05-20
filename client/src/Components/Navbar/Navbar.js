@@ -1,24 +1,23 @@
-import React from "react";
-import "../../Assets/Styles/Navbar.css";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import NavbarCall from "./NavbarCall";
 
 function Navbar() {
+  const [auth, setauth] = useState(0);
+  useEffect(() => {
+    if (localStorage.getItem("citizenToken") != null) {
+      setauth(1);
+    } else {
+      setauth(0);
+    }
+  }, [auth]);
+
   return (
     <div>
-      <nav class="navbar navbar_bg">
-        <div class="container-fluid container navbar_box">
-          <p class=" navbar_title" href="#">
-            Crime Reporting
-          </p>
-          <div className="navbar_sub_title d-flex justify-content-between" >
-            <p><Link to='/' >Home</Link></p>
-            <p><Link to='/about' >About</Link></p>
-            <p><Link to='/citizen_login' >Login</Link></p>
-          </div>
-        </div>
-      </nav>
+      <NavbarCall auth={auth} />
     </div>
   );
 }
 
 export default Navbar;
+
+

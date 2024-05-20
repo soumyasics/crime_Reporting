@@ -2,7 +2,7 @@ import React from "react";
 import "../../Assets/Styles/HomePage.css";
 import img from "../../Assets/Images/landingmain.jpg";
 
-function HomePage() {
+function Banner() {
   return (
     <div>
       <div className="home_page">
@@ -26,4 +26,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default Banner;

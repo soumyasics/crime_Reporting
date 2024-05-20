@@ -1,15 +1,37 @@
 import React from "react";
 import "../../Assets/Styles/CitizenLogin.css";
 import img from "../../Assets/Images/loginpage.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from 'formik';
 import { LoginSchema } from "../Constants/Schema";
+import { toast } from "react-toastify";
+import axiosInstance from "../Constants/BaseUrl";
 
 function CitizenLogin() {
 
-  const onSubmit = (values) => {
+  const navigate=useNavigate();
+
+  const onSubmit = () => {
 
     console.log(values);
+    axiosInstance.post('/loginCitizen',values)
+    .then((res)=>{
+      console.log('woking',res);
+      if (res.data.status==200) {
+        toast.success("Login Successful")
+        localStorage.setItem('citizenToken',res.data.data._id)
+        navigate('/citizen_home')
+        window.location.reload(false)
+      }else if(res.data.status==405){
+        toast.warning(res.data.msg)
+
+      }else{
+        toast.error('Login Failed')
+      }
+    })
+    .catch((err)=>{
+      toast.error('Login Failed')
+    })
 
   };
 
@@ -29,7 +51,8 @@ function CitizenLogin() {
           <div className="col-lg-7 col-md-4 col-sm-6 citizen_login_left"></div>
           <div className="col-lg-5 col-md-8 col-sm-6 citizen_login_right">
             <h2 className="citizen_login_title">Citizen Login</h2>
-            <div className="citizen_login_input_grp">
+            <form onSubmit={(e)=>{handleSubmit(e)}} >
+              <div className="citizen_login_input_grp">
               <input
                 type="email"
                 className="form-control user_inp"
@@ -60,6 +83,8 @@ function CitizenLogin() {
               </button>
               <p>Don't have an account? <Link to='/citizen_register' >Register</Link></p>
             </div>
+            </form>
+            
           </div>
         </div>
       </div>
