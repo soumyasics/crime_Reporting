@@ -100,7 +100,7 @@ function ForgotPassword({ activeUser }) {
 
               <button
                 type="submit"
-                className="btn btn-secondary w-100 mt-3"
+                className="button_bg w-100 mt-3"
                 onClick={handleSubmit}
               >
                 Reset Password

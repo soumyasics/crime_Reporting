@@ -21,6 +21,8 @@ import CitizenLandingPage from './Components/Citizen/CitizenLandingPage';
 import Banner from './Components/Common/Banner';
 import Home from './Components/Common/Home';
 import Footer2 from './Components/Footer/Footer2';
+import AdminLogin from './Components/Admin/AdminLogin';
+import LoginBanner from './Components/Common/LoginBanner';
 
 function App() {
   return (
@@ -37,7 +39,7 @@ function App() {
         <Route path='/citizen_login' element={[<CitizenLogin/>]} />
         <Route path='/citizen_forgotpassword' element={[<ForgotPassword activeUser='Citizen' />]} />
         <Route path='/citizen_register' element={[<CitizenRegistration/>]} />
-        <Route path='/citizen_home' element={[<CitizenLandingPage/>]} />
+        <Route path='/citizen_home' element={[<LoginBanner/>,<CitizenLandingPage/>]} />
         <Route path='/citizen_profile' element={[<CitizenProfile/>]} />
 
         {/* Police  */}
@@ -49,6 +51,13 @@ function App() {
         {/* Scrb  */}
 
         <Route path='/scrb_login' element={[<ScrbLogin/>]} />
+
+
+        {/* Admin  */}
+
+        <Route path='/admin' element={[<AdminLogin/>]} />
+
+
 
       </Routes>
     </div>

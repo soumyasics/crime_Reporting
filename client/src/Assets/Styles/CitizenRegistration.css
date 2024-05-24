@@ -9,12 +9,12 @@
 
   .citizen_reg_right {
     min-height: 90vh;
-    background-color: #0e0e0e;
+    /* background-color: #0e0e0e; */
     /* padding: 10px; */
   }
   
   .citizen_reg_title {
-    color: #e2e2e2;
+    color: #121212;
     font-size: 30px;
     font-style: normal;
     font-weight: 600;
@@ -36,7 +36,7 @@
   
   .citizen_reg_input_grp p {
     text-align: center;
-    color: #e2e2e2;
+    color: #121212;
     text-align: center;
     font-size: 12px;
     font-style: normal;
@@ -46,11 +46,11 @@
   }
   .citizen_reg_input_grp label {
     
-    color: #e2e2e2;
+    color: #121212;
     
   }
 
   .citizen_reg_log_link a{
-    color: #e2e2e2;
+    color: #121212;
   }
   

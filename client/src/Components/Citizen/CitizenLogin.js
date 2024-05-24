@@ -1,6 +1,6 @@
+
 import React from "react";
 import "../../Assets/Styles/CitizenLogin.css";
-import img from "../../Assets/Images/loginpage.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from 'formik';
 import { LoginSchema } from "../Constants/Schema";
@@ -8,31 +8,32 @@ import { toast } from "react-toastify";
 import axiosInstance from "../Constants/BaseUrl";
 
 function CitizenLogin() {
+  const navigate = useNavigate();
 
-  const navigate=useNavigate();
-
-  const onSubmit = () => {
-
+  const onSubmit = (values) => {
     console.log(values);
-    axiosInstance.post('/loginCitizen',values)
-    .then((res)=>{
-      console.log('woking',res);
-      if (res.data.status==200) {
-        toast.success("Login Successful")
-        localStorage.setItem('citizenToken',res.data.data._id)
-        navigate('/citizen_home')
-        window.location.reload(false)
-      }else if(res.data.status==405){
-        toast.warning(res.data.msg)
+    axiosInstance.post('/loginCitizen', values)
+      .then((res) => {
+        console.log('working', res);
+        if (res.data.status === 200) {
+          localStorage.setItem('citizenToken', res.data.data._id);
+          toast.success("Login Successful");
 
-      }else{
-        toast.error('Login Failed')
-      }
-    })
-    .catch((err)=>{
-      toast.error('Login Failed')
-    })
+          // Delay the navigation and reload to allow the toast message to be displayed
+          setTimeout(() => {
+            navigate('/citizen_home');
+            window.location.reload();
+          }, 500); // Adjust the delay time as needed
 
+        } else if (res.data.status === 405) {
+          toast.warning(res.data.msg);
+        } else {
+          toast.error('Login Failed');
+        }
+      })
+      .catch((err) => {
+        toast.error('Login Failed');
+      });
   };
 
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormik({
@@ -48,43 +49,40 @@ function CitizenLogin() {
     <div>
       <div className="container">
         <div className="row citizen_login_box">
-          <div className="col-lg-7 col-md-4 col-sm-6 citizen_login_left"></div>
-          <div className="col-lg-5 col-md-8 col-sm-6 citizen_login_right">
+          <div className="container col-lg-6 col-md-4 col-sm-6 citizen_login_left"></div>
+          <div className="col-lg-6 col-md-8 col-sm-6 citizen_login_right ">
             <h2 className="citizen_login_title">Citizen Login</h2>
-            <form onSubmit={(e)=>{handleSubmit(e)}} >
+            <form onSubmit={handleSubmit}>
               <div className="citizen_login_input_grp">
-              <input
-                type="email"
-                className="form-control user_inp"
-                id="email"
-                placeholder="Email"
-                name="email"
-                value={values.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              {errors.email && touched.email && (<span className="text-danger">{errors.email}</span>)}
-              <input
-                type="password"
-                className="form-control user_inp mt-3"
-                id="password"
-                placeholder="Password"
-                name="password"
-                value={values.password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              {errors.password && touched.password && (<span className="text-danger">{errors.password}</span>)}
-
-              <p className="text-end"><Link to='/citizen_forgotpassword' >Forgot Password?</Link></p>
-
-              <button type="submit" className="btn btn-secondary w-100 mt-3" onClick={handleSubmit}>
-                Login
-              </button>
-              <p>Don't have an account? <Link to='/citizen_register' >Register</Link></p>
-            </div>
+                <input
+                  type="email"
+                  className="form-control user_inp"
+                  id="email"
+                  placeholder="Email"
+                  name="email"
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.email && touched.email && (<span className="text-danger">{errors.email}</span>)}
+                <input
+                  type="password"
+                  className="form-control user_inp mt-3"
+                  id="password"
+                  placeholder="Password"
+                  name="password"
+                  value={values.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.password && touched.password && (<span className="text-danger">{errors.password}</span>)}
+                <p className="text-end fs-6"><Link to='/citizen_forgotpassword'>Forgot Password?</Link></p>
+                <button type="submit" className="button_bg w-100 mt-3">
+                  Login
+                </button>
+                <p className="fs-6" >Don't have an account? <Link to='/citizen_register'>Register</Link></p>
+              </div>
             </form>
-            
           </div>
         </div>
       </div>
@@ -93,3 +91,4 @@ function CitizenLogin() {
 }
 
 export default CitizenLogin;
+

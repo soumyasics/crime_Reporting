@@ -297,13 +297,13 @@ function CitizenRegistration() {
                 <div className="col-12 mt-2">
                   <button
                     type="submit"
-                    className="btn btn-secondary w-100 mt-3"
+                    className="button_bg w-100 mt-3"
                   >
                     Sign In
                   </button>
                 </div>
 
-                <p className="citizen_reg_log_link">
+                <p className="citizen_reg_log_link fs-6">
                   Already have an account?{" "}
                   <Link to="/citizen_login">Login now</Link>
                 </p>

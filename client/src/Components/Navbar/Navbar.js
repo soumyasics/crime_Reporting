@@ -6,6 +6,8 @@ function Navbar() {
   useEffect(() => {
     if (localStorage.getItem("citizenToken") != null) {
       setauth(1);
+    }else if(localStorage.getItem("adminToken")!=null) {
+      setauth(2);
     } else {
       setauth(0);
     }

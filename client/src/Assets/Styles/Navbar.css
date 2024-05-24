@@ -1,6 +1,8 @@
 .navbar_bg {
   background-color: #383638;
-  height: 10vh;
+  /* height: 10vh; */
+  padding: 5px 55px;
+  color: #ffffff;
 }
 
 .navbar_title {
@@ -25,8 +27,8 @@
 
 .navbar_logo {
   display: flex;
-  height: 100px;
-  width: 200px;
+  /* height: 100px; */
+  width: 210px;
   justify-content: space-between;
 }
 
@@ -57,7 +59,7 @@
   font-style: normal;
   font-weight: 700;
   line-height: 24px; /* 133.333% */
-  letter-spacing: 0.18px;
+  /* letter-spacing: 0.18px; */
   text-transform: capitalize;
 }
 

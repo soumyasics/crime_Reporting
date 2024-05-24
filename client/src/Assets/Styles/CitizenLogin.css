@@ -1,7 +1,6 @@
 .citizen_login_box {
-  height: 500px;
   height: 90vh;
-}
+} 
 
 .citizen_login_left {
   background-image: url(../Images/citizenlogin.jpg);
@@ -9,12 +8,12 @@
 }
 .citizen_login_right {
   height: 90vh;
-  background-color: #121212;
+  /* background-color: #c08282; */
   padding: 65px 10px;
 }
 
 .citizen_login_title {
-  color: #f5ebff;
+  color: #121212;
   font-size: 30px;
   font-style: normal;
   font-weight: 400;
@@ -36,7 +35,7 @@
 
 .citizen_login_input_grp p {
   text-align: center;
-  color: #ffff;
+  color: #121212;
   text-align: center;
   font-size: 12px;
   font-style: normal;
@@ -46,5 +45,5 @@
 }
 
 a{
-  color: #ffff;
+  color: #121212;
 }

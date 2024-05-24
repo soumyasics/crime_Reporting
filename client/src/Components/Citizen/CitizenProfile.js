@@ -29,7 +29,7 @@ function CitizenProfile() {
         }
       })
       .catch((err) => {
-        toast.error("Registration Failed");
+        // toast.error("Registration Failed");
       });
   }, []);
 
@@ -98,9 +98,9 @@ function CitizenProfile() {
 
   return (
     <div className="citizen_profile">
-      <div className="citizen_profile_head">
+      <div className="citizen_profile_head navbar_bg">
         <div className="container citizen_profile_title d-flex justify-content-between">
-          <div >
+          <div className="citizen_profile_name" >
             <h4>PROFILE</h4>
             <p>
               {values.firstname} {values.lastname}
