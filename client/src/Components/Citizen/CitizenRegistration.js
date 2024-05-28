@@ -10,6 +10,8 @@ function CitizenRegistration() {
 
   const navigate=useNavigate();
 
+  const today = new Date().toISOString().split('T')[0];
+
   const onSubmit = (e) => {
     // e.preventDefault();
 
@@ -19,8 +21,24 @@ function CitizenRegistration() {
     .then((res)=>{
       console.log('woking',res);
       if (res.data.status==200) {
-        toast.success("Registration Successful")
-        navigate('/citizen_login')
+        axiosInstance.post('/loginCitizen', {email:dataToSend.email,password:dataToSend.password})
+      .then((res) => {
+        console.log('working', res);
+        if (res.data.status === 200) {
+          localStorage.setItem('citizenToken', res.data.data._id);
+          toast.success("Login Successful");
+          navigate('/citizen_home');
+
+        } else if (res.data.status === 405) {
+          toast.warning(res.data.msg);
+        } else {
+          toast.error('Login Failed');
+        }
+      })
+      .catch((err) => {
+        toast.error('Login Failed');
+      });
+       
       }else if(res.data.status==409){
         toast.warning(res.data.msg)
 
@@ -152,6 +170,7 @@ function CitizenRegistration() {
                     value={values.dob}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    max={today}
                   />
                   {errors.dob && touched.dob && (
                     <span className="text-danger">{errors.dob}</span>
@@ -299,7 +318,7 @@ function CitizenRegistration() {
                     type="submit"
                     className="button_bg w-100 mt-3"
                   >
-                    Sign In
+                    Sign Up
                   </button>
                 </div>
 

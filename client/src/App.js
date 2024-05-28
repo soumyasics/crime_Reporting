@@ -23,24 +23,25 @@ import Home from './Components/Common/Home';
 import Footer2 from './Components/Footer/Footer2';
 import AdminLogin from './Components/Admin/AdminLogin';
 import LoginBanner from './Components/Common/LoginBanner';
+import UserNavbar from './Components/Navbar/UserNavbar';
 
 function App() {
   return (
     <BrowserRouter basename='crime_reporting' >
       <ScrollToTop/>
-      <Navbar/>
+      {/* <Navbar/> */}
     <div className="App">
       <Routes>
-        <Route path='/' element={[<Home/>]} />
-        <Route path='/about' element={[<About/>,<Services/>]} />
+        <Route path='/' element={[<LandingNavbar/>,<Home/>]} />
+        <Route path='/about' element={[<LandingNavbar/>,<About/>,<Services/>]} />
 
         {/* Citizen  */}
 
-        <Route path='/citizen_login' element={[<CitizenLogin/>]} />
-        <Route path='/citizen_forgotpassword' element={[<ForgotPassword activeUser='Citizen' />]} />
-        <Route path='/citizen_register' element={[<CitizenRegistration/>]} />
-        <Route path='/citizen_home' element={[<LoginBanner/>,<CitizenLandingPage/>]} />
-        <Route path='/citizen_profile' element={[<CitizenProfile/>]} />
+        <Route path='/citizen_login' element={[<LandingNavbar/>,<CitizenLogin/>]} />
+        <Route path='/citizen_forgotpassword' element={[<LandingNavbar/>,<ForgotPassword activeUser='Citizen' />]} />
+        <Route path='/citizen_register' element={[<LandingNavbar/>,<CitizenRegistration/>]} />
+        <Route path='/citizen_home' element={[<UserNavbar/>,<LoginBanner/>,<CitizenLandingPage/>]} />
+        <Route path='/citizen_profile' element={[<UserNavbar/>,<CitizenProfile/>]} />
 
         {/* Police  */}
 

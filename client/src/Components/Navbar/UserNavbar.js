@@ -34,7 +34,6 @@ function UserNavbar() {
   const handleLogout = () => {
     localStorage.clear();
     navigate("/");
-    window.location.reload(false);
   };
 
   return (
@@ -68,6 +67,7 @@ function UserNavbar() {
       <nav class="navbar navbar-expand-lg navbar_bg">
         <div class="container-fluid">
          
+        <Link to='/citizen_home' className="text-decoration-none" >
           <div className="navbar_logo">
             <img src={logo} className="img-fluid" alt="logo" />
             <div>
@@ -77,6 +77,7 @@ function UserNavbar() {
               <p className="navbar_slogan">Stay connected stay safe</p>
             </div>
           </div>
+            </Link>
           <button
             class="navbar-toggler"
             type="button"

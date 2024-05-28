@@ -18,12 +18,7 @@ function CitizenLogin() {
         if (res.data.status === 200) {
           localStorage.setItem('citizenToken', res.data.data._id);
           toast.success("Login Successful");
-
-          // Delay the navigation and reload to allow the toast message to be displayed
-          setTimeout(() => {
-            navigate('/citizen_home');
-            window.location.reload();
-          }, 500); // Adjust the delay time as needed
+          navigate('/citizen_home');
 
         } else if (res.data.status === 405) {
           toast.warning(res.data.msg);

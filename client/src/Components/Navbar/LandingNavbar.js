@@ -35,6 +35,7 @@ function LandingNavbar() {
       <nav class="navbar navbar-expand-lg navbar_bg">
         <div class="container-fluid">
          
+          <Link to='/' className="text-decoration-none" >
           <div className="navbar_logo">
             <img src={logo} className="img-fluid" alt="logo" />
             <div>
@@ -44,6 +45,7 @@ function LandingNavbar() {
               <p className="navbar_slogan">Stay connected stay safe</p>
             </div>
           </div>
+            </Link>
           <button
             class="navbar-toggler"
             type="button"
@@ -69,13 +71,13 @@ function LandingNavbar() {
               </li>
               <li class="nav-item">
                 <Link to="/about" class="nav-link" href="#" id="text_color_white">
-                  About
+                  About Us
                 </Link>
               </li>
               
               <li class="nav-item">
                 <Link to="/citizen_login" class="nav-link" href="#" id="text_color_white">
-                  SignIn
+                  Sign In
                 </Link>
               </li>
               

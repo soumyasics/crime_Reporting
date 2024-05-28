@@ -18,7 +18,7 @@ function Banner() {
           </p>
         </div>
 
-        <div className="col-12 home_page_img mt-3">
+        <div className="col-12 home_page_img">
           <img src={img} className="img-fluid" />
         </div>
       </div>

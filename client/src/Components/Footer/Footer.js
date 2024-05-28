@@ -40,9 +40,9 @@ function Footer() {
           <div>
             <p className="footer_title">Keep In Touch</p>
             <div className="footer_links">
-              <img src={fb} className="img-fluid" alt="facebook_logo" />
-              <img src={insta} className="img-fluid" alt="instagram_logo" />
-              <img src={browser} className="img-fluid" alt="browser" />
+              <a href="https://www.facebook.com/login/" ><img src={fb} className="img-fluid" alt="facebook_logo" /></a>
+              <a href="https://www.instagram.com/accounts/login/?hl=en" ><img src={insta} className="img-fluid" alt="instagram_logo" /></a>
+              <a href="https://accounts.google.com/signin/v2/identifier?service=mail" ></a><img src={browser} className="img-fluid" alt="browser" />
             </div>
           </div>
         </div>
