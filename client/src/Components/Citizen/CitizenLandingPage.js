@@ -7,7 +7,7 @@ import img2 from "../../Assets/Images/citizenlanding1.png";
 import img3 from "../../Assets/Images/checkmarkIcon.png";
 
 function CitizenLandingPage() {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     if (localStorage.getItem("citizenToken") == null) {
@@ -20,7 +20,7 @@ function CitizenLandingPage() {
       <div className="container citizen_landingpage">
         <p className="citizen_landingpage_content">
           Crime reporting is an important beat of journalism. In order to report
-          crime related news, it is necessarythat the reporter should have good
+          crime related news, it is necessary that the reporter should have good
           knowledge of law, police and court. Connect and live more safely.
           Citizen is a personal safety network that empowers you to protect
           yourself and the people and places you care about. Download for access
@@ -49,10 +49,10 @@ function CitizenLandingPage() {
           </div>
           <div className="col-6">
             <div className="citizen_img_content">
-              <p className="citizen_img_content_head">
+              <p className="citizen_img_content_head mt-3">
                 We’ve Been Protecting The Community Since 1980
               </p>
-              <p className="citizen_img_content_para">
+              <p className="citizen_img_content_para mt-2">
                 Lorem ipsum dolor sit amet,consectetuer adipiscing elit. Aenean
                 commodo ligula eget dolor .Aenean massa.cum sociis natoque
                 peanatibus et magnis dis parturient montes nascetur ridiculus
@@ -76,15 +76,15 @@ function CitizenLandingPage() {
                 <div className="mt-4" >
                 <div className="citizen_img_content_points d-flex mb-3">
                     <img src={img3} />
-                    <p className="px-3">Protect The Society</p>
+                    <p className="px-3">Professional</p>
                   </div>
                   <div className="citizen_img_content_points d-flex mb-3">
                     <img src={img3} />
-                    <p className="px-3">On The Public Side</p>
+                    <p className="px-3">Advocating Justice</p>
                   </div>
                   <div className="citizen_img_content_points d-flex mb-3">
                     <img src={img3} />
-                    <p className="px-3">Open Minded</p>
+                    <p className="px-3">The Society Frontliner</p>
                   </div>
                 </div>
               </div>

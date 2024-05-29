@@ -4,53 +4,47 @@ import { useFormik } from "formik";
 import { CitizenRegistrationSchema } from "../Constants/Schema";
 import axiosInstance from "../Constants/BaseUrl";
 import { toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function CitizenProfile() { 
   const [userDetails, setUserDetails] = useState({});
-
   const navigate = useNavigate();
+  const today = new Date().toISOString().split('T')[0];
 
   useEffect(() => {
     if (localStorage.getItem("citizenToken") == null) {
       navigate("/");
     }
-  });
+  }, [navigate]);
 
-  const id=localStorage.getItem('citizenToken')
+  const id = localStorage.getItem('citizenToken');
 
   useEffect(() => {
     axiosInstance
       .post(`/viewCitizenById/${id}`)
       .then((res) => {
-        console.log("woking", res);
         if (res.data.status === 200) {
           setUserDetails(res.data.data);
         }
       })
       .catch((err) => {
-        // toast.error("Registration Failed");
+        toast.error("Failed to fetch user details");
       });
-  }, []);
+  }, [id]);
 
-  const onSubmit = (e) => {
+  const onSubmit = (values) => {
     const { confirmPassword, ...dataToSend } = values;
-    console.log("Submitting data:", dataToSend); 
 
     axiosInstance
       .post(`/editCitizenById/${id}`, dataToSend)
       .then((res) => {
-        console.log("Response:", res);
         if (res.data.status === 200) {
           toast.success("Updated Successfully");
-        } else if (res.data.status == 409) {
-          toast.warning(res.data.msg);
-        } else if (res.data.status == 500) {
+        } else {
           toast.warning(res.data.msg);
         }
       })
       .catch((err) => {
-        console.error("Error:", err); 
         toast.error("Updation Failed");
       });
   };
@@ -63,20 +57,20 @@ function CitizenProfile() {
   const formattedDate = userDetails.dob ? formatDate(userDetails.dob) : "";
 
   const initialUserDetails = {
-    firstname: userDetails.firstname,
-    lastname: userDetails.lastname,
-    email: userDetails.email,
-    dob: formattedDate, 
-    contact: userDetails.contact,
-    aadhar: userDetails.aadhar,
-    password: userDetails.password, 
-    housename: userDetails.housename,
-    street: userDetails.street,
-    state: userDetails.state,
-    nationality: userDetails.nationality,
-    pincode: userDetails.pincode,
-    gender: userDetails.gender, 
-    confirmPassword: userDetails.password,
+    firstname: userDetails.firstname || '',
+    lastname: userDetails.lastname || '',
+    email: userDetails.email || '',
+    dob: formattedDate,
+    contact: userDetails.contact || '',
+    aadhar: userDetails.aadhar || '',
+    password: userDetails.password || '',
+    housename: userDetails.housename || '',
+    street: userDetails.street || '',
+    state: userDetails.state || '',
+    nationality: userDetails.nationality || '',
+    pincode: userDetails.pincode || '',
+    gender: userDetails.gender || '',
+    confirmPassword: userDetails.password || '',
   };
 
   const {
@@ -86,40 +80,30 @@ function CitizenProfile() {
     handleBlur,
     handleChange,
     handleSubmit,
-    setValues,
   } = useFormik({
     initialValues: initialUserDetails,
     validationSchema: CitizenRegistrationSchema,
     onSubmit,
-    enableReinitialize: true, 
+    enableReinitialize: true,
   });
-
-  console.log(values);
 
   return (
     <div className="citizen_profile">
       <div className="citizen_profile_head navbar_bg">
         <div className="container citizen_profile_title d-flex justify-content-between">
-          <div className="citizen_profile_name" >
+          <div className="citizen_profile_name">
             <h4>PROFILE</h4>
-            <p>
-              {values.firstname} {values.lastname}
-            </p>
+            <p>{values.firstname} {values.lastname}</p>
           </div>
-          {/* <Link to={'/'} onClick={()=>{localStorage.clear()}} > <h6 className="text-dark fw-bold"   >Logout</h6></Link> */}
         </div>
       </div>
       <div className="container citizen_profile_body">
-        <form
-          onSubmit={(e) => {
-            handleSubmit(e);
-          }}
-        >
+        <form onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-6">
               <input
                 type="text"
-                class="form-control user_inp "
+                className="form-control user_inp"
                 id="firstname"
                 placeholder="First Name"
                 name="firstname"
@@ -131,12 +115,11 @@ function CitizenProfile() {
                 <span className="text-danger">{errors.firstname}</span>
               )}
             </div>
-
             <div className="col-6">
               <input
                 type="text"
-                class="form-control user_inp "
-                id="exampleFormControlInput1"
+                className="form-control user_inp"
+                id="lastname"
                 placeholder="Second Name"
                 name="lastname"
                 value={values.lastname}
@@ -150,8 +133,8 @@ function CitizenProfile() {
             <div className="col-6 mt-2">
               <input
                 type="email"
-                class="form-control user_inp "
-                id="exampleFormControlInput1"
+                className="form-control user_inp"
+                id="email"
                 placeholder="Email"
                 name="email"
                 value={values.email}
@@ -162,14 +145,14 @@ function CitizenProfile() {
                 <span className="text-danger">{errors.email}</span>
               )}
             </div>
-
-            <div className="col-6 d-flex justify-content-between mt-2">
+            <div className="col-6 mt-2">
               <label>Date of Birth</label>
               <input
                 type="date"
-                class="form-control user_inp "
-                id="exampleFormControlInput1"
+                className="form-control user_inp"
+                id="dob"
                 name="dob"
+                max={today}
                 value={values.dob}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -181,8 +164,8 @@ function CitizenProfile() {
             <div className="col-6 mt-2">
               <input
                 type="number"
-                class="form-control user_inp "
-                id="exampleFormControlInput1"
+                className="form-control user_inp"
+                id="contact"
                 placeholder="Contact"
                 name="contact"
                 value={values.contact}
@@ -196,8 +179,8 @@ function CitizenProfile() {
             <div className="col-6 mt-2">
               <input
                 type="text"
-                class="form-control user_inp "
-                id="exampleFormControlInput1"
+                className="form-control user_inp"
+                id="aadhar"
                 placeholder="Aadhaar"
                 name="aadhar"
                 value={values.aadhar}
@@ -211,8 +194,8 @@ function CitizenProfile() {
             <div className="col-6 mt-2">
               <input
                 type="text"
-                class="form-control user_inp "
-                id="exampleFormControlInput1"
+                className="form-control user_inp"
+                id="housename"
                 placeholder="House Name"
                 name="housename"
                 value={values.housename}
@@ -226,8 +209,8 @@ function CitizenProfile() {
             <div className="col-6 mt-2">
               <input
                 type="text"
-                class="form-control user_inp "
-                id="exampleFormControlInput1"
+                className="form-control user_inp"
+                id="street"
                 placeholder="Street Name"
                 name="street"
                 value={values.street}
@@ -241,8 +224,8 @@ function CitizenProfile() {
             <div className="col-6 mt-2">
               <input
                 type="text"
-                class="form-control user_inp "
-                id="exampleFormControlInput1"
+                className="form-control user_inp"
+                id="state"
                 placeholder="State"
                 value={values.state}
                 onChange={handleChange}
@@ -256,8 +239,8 @@ function CitizenProfile() {
             <div className="col-6 mt-2">
               <input
                 type="text"
-                class="form-control user_inp "
-                id="exampleFormControlInput1"
+                className="form-control user_inp"
+                id="nationality"
                 placeholder="Nationality"
                 value={values.nationality}
                 onChange={handleChange}
@@ -271,7 +254,7 @@ function CitizenProfile() {
             <div className="col-6 mt-2">
               <input
                 type="number"
-                class="form-control user_inp "
+                className="form-control user_inp"
                 id="pincode"
                 placeholder="Pincode"
                 value={values.pincode}
@@ -283,7 +266,6 @@ function CitizenProfile() {
                 <span className="text-danger">{errors.pincode}</span>
               )}
             </div>
-
             <div className="col-12 mt-2 text-center">
               <button type="submit" className="button_bg w-25 mt-3">
                 Update
