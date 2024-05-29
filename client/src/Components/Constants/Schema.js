@@ -2,6 +2,10 @@ import * as yup from 'yup';
 
 const passwordRule = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
 // min 5 char, 1 uppercase, 1 lowercase, 1number, 1 symbol
+const today = new Date();
+const maxDate = today.toISOString().split('T')[0];
+
+
 
 export const LoginSchema = yup.object().shape({
     email: yup.string().email("Please enter a valid email").required("Email is required"),
@@ -25,8 +29,8 @@ export const LoginSchema = yup.object().shape({
     email: yup.string()
       .email("Please enter a valid email")
       .required("Required"),
-    dob: yup.string().required("Required"),
-    aadhar: yup.string()
+      dob: yup.date().max(new Date(), 'Date of Birth cannot be in the future').required('Date of Birth is required'),
+      aadhar: yup.string()
       .matches(/^\d{12}$/, "Aadhaar number must be a 12 digit number")
       .required("Required"),
     password: yup.string()
