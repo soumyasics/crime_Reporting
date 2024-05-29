@@ -34,7 +34,6 @@ function Footer() {
           <div>
             <p className="footer_title">Location</p>
             <p className="footer_content">abc building</p>
-            <p className="footer_content">aaa</p>
             <p className="footer_content">crimereporting@gmail.com</p>
           </div>
           <div>

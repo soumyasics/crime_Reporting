@@ -36,17 +36,16 @@ export const LoginSchema = yup.object().shape({
       .oneOf([yup.ref('password'), null], 'Passwords must match')
       .required('Required'),
     housename: yup.string()
-      .matches(/^[a-zA-Z\s]+$/, "Only letters are allowed")
+      
       .min(2, "Enter minimum 2 characters")
       .max(20, "Maximum 20 characters are allowed")
       .required("Required"),
     street: yup.string()
-      .matches(/^[a-zA-Z\s]+$/, "Only letters are allowed")
+      
       .min(2, "Enter minimum 2 characters")
       .max(20, "Maximum 20 characters are allowed")
       .required("Required"),
     state: yup.string()
-      .matches(/^[a-zA-Z\s]+$/, "Only letters are allowed")
       .min(2, "Enter minimum 2 characters")
       .max(20, "Maximum 20 characters are allowed")
       .required("Required"),
