@@ -47,7 +47,7 @@ function App() {
         {/* Police  */}
 
         <Route path='/police_register' element={[<Navbar/>,<PoliceRegister/>]} />
-        <Route path='/police_login' element={[<PoliceLogin/>]} />
+        <Route path='/police_login' element={[<Navbar/>,<PoliceLogin/>]} />
         <Route path='/police_forgotpassword' element={[<ForgotPassword activeUser='Police' />]} />
 
         {/* Scrb  */}

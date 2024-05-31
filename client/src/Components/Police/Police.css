@@ -48,6 +48,29 @@
     font-weight: bold;
 }
 .color{
-    font-size: 10px;
+    font-size: 12px;
     font-weight: bold;
+}
+
+/* Police Login */
+.image{
+    height: 700px;
+    width: 700px;
+}
+.btnlogin{
+    border-color: #A10303;
+    background-color: #A10303;
+    color: white;
+    border-radius: 10px;
+    height: 40px;
+    width: 400px;
+    box-shadow: 1px  3px 1px 0 rgba(0, 0, 0, 0.2);
+}
+#password{
+    box-shadow: 1px  3px 1px 0 rgba(0, 0, 0, 0.2);
+}
+.policelog{
+    font-weight: bold;
+    text-align: center;
+    margin-top: 200px;
 }

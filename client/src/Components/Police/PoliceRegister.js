@@ -137,7 +137,7 @@ function PoliceRegister() {
               value={data.policestationname}
               onChange={handleChange}
               />
-              {errors.policestationname && <div className="text-danger">{errors.policestationname}</div>}         
+              {errors.policestationname && <div className="text-danger color">{errors.policestationname}</div>}         
             </div>
             <Row>
               <Col className='container'>
@@ -151,7 +151,7 @@ function PoliceRegister() {
                   value={data.policestationcode}
                   onChange={handleChange}
                   />
-              {errors.policestationcode && <div className="text-danger">{errors.policestationcode}</div>}
+              {errors.policestationcode && <div className="text-danger color">{errors.policestationcode}</div>}
                 </div>
                 <div className='mt-4'>
                   <input
@@ -173,7 +173,7 @@ function PoliceRegister() {
                   value={data.totalofficers}
                   onChange={handleChange}
                   />
-                 {errors.totalofficers && <div className="text-danger">{errors.totalofficers}</div>}
+                 {errors.totalofficers && <div className="text-danger color">{errors.totalofficers}</div>}
                 </div>               
                 </Col>
               <Col className='container'>
@@ -187,7 +187,7 @@ function PoliceRegister() {
                   value={data.address}
                   onChange={handleChange}
                   />
-                 {errors.address && <div className="text-danger">{errors.address}</div>}
+                 {errors.address && <div className="text-danger color">{errors.address}</div>}
                 </div>
                 <div className='mt-4'>
                   <input
@@ -198,7 +198,7 @@ function PoliceRegister() {
                   value={data.contact}
                   onChange={handleChange}
                   />
-                 {errors.contact && <div className="text-danger">{errors.contact}</div>}
+                 {errors.contact && <div className="text-danger color">{errors.contact}</div>}
                 </div>
                 <div className='mt-4'>
                 <select className="text" 
@@ -211,7 +211,7 @@ function PoliceRegister() {
                                         <option key={index} value={district}>{district}</option>
                                     ))}
               </select>
-              {errors.district && <div className="text-danger">{errors.district}</div>}
+              {errors.district && <div className="text-danger color">{errors.district}</div>}
                 </div>
                 </Col>
             </Row>
@@ -224,7 +224,7 @@ function PoliceRegister() {
                   value={data.email}
                   onChange={handleChange}
                   />
-              {errors.email && <div className="text-danger">{errors.email}</div>}
+              {errors.email && <div className="text-danger color">{errors.email}</div>}
                 </div>
                 <Row>
                   <Col>
@@ -237,7 +237,7 @@ function PoliceRegister() {
                   value={data.password}
                   onChange={handleChange}
                   />
-                 {errors.password && <div className="text-danger">{errors.password}</div>}
+                 {errors.password && <div className="text-danger color">{errors.password}</div>}
                 </div>
                   </Col>
                   <Col>
@@ -250,7 +250,7 @@ function PoliceRegister() {
                   value={data.confirmpassword}
                   onChange={handleChange}
                   />
-              {errors.confirmpassword && <div className="text-danger">{errors.confirmpassword}</div>}
+              {errors.confirmpassword && <div className="text-danger color">{errors.confirmpassword}</div>}
                 </div>
                   </Col>
                 </Row>
