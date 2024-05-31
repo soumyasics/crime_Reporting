@@ -1,0 +1,49 @@
+/* Police register */
+.img{ 
+    height: 700px;
+    width: 700px;
+}
+.policereg{
+    margin-top: 50px;
+    font-family: "poppins";
+    font-weight: bold;
+    text-align: center;
+}
+.textbox{
+    border: none;
+    height: 40px;
+    width: 315px;
+    box-shadow: 1px  3px 1px 0 rgba(0, 0, 0, 0.2);
+    color: grey;
+    height: 40px;
+    width: 700px;
+    font-size: 13px;
+    font-weight: bold;
+}
+.text{
+    border: none;
+    height: 40px;
+    width: 320px;
+    box-shadow: 1px  3px 1px 0 rgba(0, 0, 0, 0.2);
+    color: grey;
+    font-size: 13px;
+    font-weight: bold;
+}
+.btnsign{
+    background-color: #A10303;
+    border-color: white;
+    color: white;
+    height: 50px;
+    width: 700px;
+    font-weight: bold;
+}
+.login{
+    text-align: center;
+    color: #00000080;
+    font-weight: bold;
+}
+.lognow{
+    text-decoration: none;
+    color: #00000080;
+    font-weight: bold;
+}
