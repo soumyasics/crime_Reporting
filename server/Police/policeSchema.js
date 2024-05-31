@@ -1,12 +1,12 @@
 const mongoose= require("mongoose");
 
-const userSchema=mongoose.Schema({
+const policeSchema=mongoose.Schema({
 
     policestationname:{
         type:String,
         require:true,
     },
-    Policestationcode:{
+    policestationcode:{
         type:String,
         require:true,
     },
@@ -15,7 +15,7 @@ const userSchema=mongoose.Schema({
         require:true,
     },
     totalofficers:{
-        type:String,
+        type:Number,
         require:true,
     },
     password:{
@@ -27,7 +27,7 @@ const userSchema=mongoose.Schema({
         require:true,
     },
     contact:{
-        type:String,
+        type:Number,
         require:true,
     },
     district:{
@@ -42,6 +42,9 @@ const userSchema=mongoose.Schema({
     confirmpassword:{
         type:String,
         require:true,
+    },idproof:{
+        type:Object,
+        require:true,
     }
 })
-module.exports=mongoose.model('police',userSchema)
+module.exports=mongoose.model('police',policeSchema)

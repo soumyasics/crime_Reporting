@@ -1,5 +1,6 @@
 const router=require('express').Router()
 const citizen=require('./Citizen/citizenController')
+const police=require('./Police/policeController')
 
 //citizen routes
 router.post('/registerCitizen', citizen.registerCitizen);//done
@@ -11,6 +12,9 @@ router.post('/deleteCitizenById/:id', citizen.deleteCitizenById);
 router.post('/resetPassword/:id', citizen.resetPassword);
 router.post('/loginCitizen', citizen.login);
 router.post('/requireAuthCitizen', citizen.requireAuth);
+
+//police routes
+router.post('/policeregister',police.registerPolice)
 
 
 module.exports=router
