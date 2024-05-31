@@ -5,11 +5,12 @@ import policereg from '../../Assets/Images/policereg.png'
 import './Police.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import axiosInstance from '../Constants/BaseUrl';
 
 function PoliceRegister() {
   const[data,setData]=useState({
     policestationname:"",
-    Policestationcode:"",
+    policestationcode:"",
     stationchargeofficers:"",
     totalofficers:"",
     password:"",
@@ -21,7 +22,7 @@ function PoliceRegister() {
   })
   const[errors,setErrors]=useState({
     policestationname:"",
-    Policestationcode:"",
+    policestationcode:"",
     stationchargeofficers:"",
     totalofficers:"",
     password:"",
@@ -69,7 +70,6 @@ function PoliceRegister() {
     return '';
   }
 
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -77,7 +77,7 @@ function PoliceRegister() {
     let formIsValid=true;
 
     errors.policestationname = validateField('Policestationname', data.policestationname);
-    errors.Policestationcode = validateField('Policestationcode', data.Policestationcode);
+    errors.policestationcode = validateField('policestationcode', data.policestationcode);
     errors.stationchargeofficers = validateField('Stationchargeofficers', data.stationchargeofficers);
     errors.totalofficers = validateField('Totalofficers', data.totalofficers);
     errors.address = validateField('Address', data.address);
@@ -101,15 +101,20 @@ function PoliceRegister() {
         formIsValid = false;
         errors.confirmpassword = "Passwords do not match";
       }
-  
-
-  
 
     setErrors(errors);
     if (formIsValid){
       console.log("data",data);
     }
   }
+
+  axiosInstance.post('/policeregister')
+    .then((res) => {
+      console.log('woking',res);
+      if (res.data.status==200){
+        console.log('working', res);
+      }
+    })
 
   return (
     <div>
@@ -132,8 +137,7 @@ function PoliceRegister() {
               value={data.policestationname}
               onChange={handleChange}
               />
-              {errors.policestationname && <div className="text-danger">{errors.policestationname}</div>}
-           
+              {errors.policestationname && <div className="text-danger">{errors.policestationname}</div>}         
             </div>
             <Row>
               <Col className='container'>
@@ -143,11 +147,11 @@ function PoliceRegister() {
                   type='text'
                   className='text'
                   placeholder='Police Station Code '
-                  name='Policestationcode'
-                  value={data.Policestationcode}
+                  name='policestationcode'
+                  value={data.policestationcode}
                   onChange={handleChange}
                   />
-              {errors.Policestationcode && <div className="text-danger">{errors.Policestationcode}</div>}
+              {errors.policestationcode && <div className="text-danger">{errors.policestationcode}</div>}
                 </div>
                 <div className='mt-4'>
                   <input
@@ -158,7 +162,7 @@ function PoliceRegister() {
                   value={data.stationchargeofficers}
                   onChange={handleChange}
                   />
-                 {errors.stationchargeofficers && <div className="text-danger">{errors.stationchargeofficers}</div>}
+                 {errors.stationchargeofficers && <div className="text-danger color">{errors.stationchargeofficers}</div>}
                 </div>
                 <div className='mt-4'>
                   <input
@@ -184,7 +188,6 @@ function PoliceRegister() {
                   onChange={handleChange}
                   />
                  {errors.address && <div className="text-danger">{errors.address}</div>}
-
                 </div>
                 <div className='mt-4'>
                   <input
@@ -196,7 +199,6 @@ function PoliceRegister() {
                   onChange={handleChange}
                   />
                  {errors.contact && <div className="text-danger">{errors.contact}</div>}
-
                 </div>
                 <div className='mt-4'>
                 <select className="text" 
@@ -210,7 +212,6 @@ function PoliceRegister() {
                                     ))}
               </select>
               {errors.district && <div className="text-danger">{errors.district}</div>}
-
                 </div>
                 </Col>
             </Row>
@@ -237,7 +238,6 @@ function PoliceRegister() {
                   onChange={handleChange}
                   />
                  {errors.password && <div className="text-danger">{errors.password}</div>}
-
                 </div>
                   </Col>
                   <Col>
@@ -251,15 +251,10 @@ function PoliceRegister() {
                   onChange={handleChange}
                   />
               {errors.confirmpassword && <div className="text-danger">{errors.confirmpassword}</div>}
-
                 </div>
                   </Col>
                 </Row>
-               
 
-                
-                
-              
             <div className='mt-4'>
               <button type="submit" className='btnsign'>Sign In</button>
             </div>
