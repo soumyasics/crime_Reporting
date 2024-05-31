@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const axiosInstance = axios.create({
 
-  //server api
+//server api
   
   baseURL: 'http://hybrid.srishticampus.in:4042/crime_reporting_api/', 
 

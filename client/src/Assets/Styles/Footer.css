@@ -14,6 +14,10 @@
   align-items:center ;
 }
 
+.footer_logo img{
+  height: 80px;
+}
+
 .footer_logo_title {
   font-size: 22.45px;
   font-weight: 700;
@@ -62,5 +66,5 @@ text-transform: capitalize;
 .footer_links{
   display: flex;
   justify-content: space-between;
-  padding: 40px 0;
+  padding: 20px 0;
 }
