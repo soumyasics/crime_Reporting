@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../Assets/Images/logo.png";
+import logo from "../../Assets/Images/logos.png";
 import axiosInstance from "../Constants/BaseUrl";
 
 function UserNavbar() {
