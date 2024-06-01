@@ -25,6 +25,8 @@ import AdminLogin from './Components/Admin/AdminLogin';
 import LoginBanner from './Components/Common/LoginBanner';
 import UserNavbar from './Components/Navbar/UserNavbar';
 import NavbarCall from './Components/Navbar/NavbarCall';
+import PoliceRecentCrimes from './Components/Police/PoliceRecentCrimes';
+import PoliceLandingPageContent from'./Components/Police/PoliceLandingPageContent';
 
 function App() {
   return (
@@ -41,7 +43,7 @@ function App() {
         <Route path='/citizen_login' element={[<LandingNavbar/>,<CitizenLogin/>]} />
         <Route path='/citizen_forgotpassword' element={[<LandingNavbar/>,<ForgotPassword activeUser='Citizen' />]} />
         <Route path='/citizen_register' element={[<LandingNavbar/>,<CitizenRegistration/>]} />
-        <Route path='/citizen_home' element={[<UserNavbar/>,<LoginBanner/>,<CitizenLandingPage/>]} />
+        <Route path='/citizen_home' element={[<UserNavbar/>,<LoginBanner user='citizen' />,<CitizenLandingPage/>]} />
         <Route path='/citizen_profile' element={[<UserNavbar/>,<CitizenProfile/>]} />
 
         {/* Police  */}
@@ -49,6 +51,8 @@ function App() {
         <Route path='/police_register' element={[<Navbar/>,<PoliceRegister/>]} />
         <Route path='/police_login' element={[<Navbar/>,<PoliceLogin/>]} />
         <Route path='/police_forgotpassword' element={[<ForgotPassword activeUser='Police' />]} />
+        <Route path='/police_home' element={[<LoginBanner user='police' />,<PoliceLandingPageContent/>,<PoliceRecentCrimes/>]} />
+        
 
         {/* Scrb  */}
 
