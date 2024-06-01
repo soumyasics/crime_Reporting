@@ -39,7 +39,7 @@ const policeSchema=mongoose.Schema({
         unique:true,
         required:true,
     },
-,idproof:{
+idproof:{
         type:Object,
         require:true,
     }
