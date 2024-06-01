@@ -1,181 +1,267 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../../Assets/Styles/CitizenRegistration.css'
 import { Link } from 'react-router-dom'
-import { useFormik } from 'formik'
-import { PoliceRegistrationSchema } from '../Constants/Schema'
+import policereg from '../../Assets/Images/policereg.png'
+import './Police.css';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import axiosInstance from '../Constants/BaseUrl';
 
 function PoliceRegister() {
-
-  const onSubmit=(values)=>{
-    console.log(values)
-  }
-  const { values,errors,touched, handleChange, handleBlur, handleSubmit } = useFormik({
-    initialValues:{
-      station_name:'',
-      station_incharge_officer:'',
-      total_officers:'',
-      email:'',
-      contact:'',
-      district:'',
-      state:'',
-      password:'',
-      confirm_password:''
-    },
-    validationSchema:PoliceRegistrationSchema,
-    onSubmit:onSubmit
-    
+  const[data,setData]=useState({
+    policestationname:"",
+    policestationcode:"",
+    stationchargeofficers:"",
+    totalofficers:"",
+    password:"",
+    address:"",
+    contact:"",
+    district:"",
+    email:"",
+    confirmpassword:""
   })
-  console.log(values);
+  const[errors,setErrors]=useState({
+    policestationname:"",
+    policestationcode:"",
+    stationchargeofficers:"",
+    totalofficers:"",
+    password:"",
+    address:"",
+    contact:"",
+    district:"",
+    email:"",
+    confirmpassword:""
+  })
+  const districts=[
+    'Alappuzha','Ernakulam','Idukki','Kannur','Kasaragod',
+    'Kollam', 'Kottayam', 'Kozhikode', 'Malappuram', 'Palakkad',
+    'Pathanamthitta', 'Thiruvananthapuram', 'Thrissur', 'Wayanad'
+  ];
+
+  const handleChange = (event) => {    
+    const { name, value } = event.target;
+    setData(prevData => ({
+      ...prevData,
+      [name]: value
+    }));
+    setErrors(prevErrors => ({
+      ...prevErrors,
+      [name]: ''
+    }));
+  };
+
+  function validateField(fieldName, value) {
+    if (!value.trim()) {
+      return `${fieldName} is required`;
+    }
+
+    if(fieldName === "Email" && !value.endsWith("@gmail.com")){
+      return "Email must be a valid Gmail address."
+    }
+    return '';
+  }
+  
+  function validateContact(fieldName, value) {
+    if (!value.trim()) {
+      return `${fieldName} is required`;
+    } else if (value.length !== 10) {
+      return 'Please enter a valid Contact Number';
+    }
+    return '';
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    let errors = {};
+    let formIsValid=true;
+
+    errors.policestationname = validateField('Policestationname', data.policestationname);
+    errors.policestationcode = validateField('policestationcode', data.policestationcode);
+    errors.stationchargeofficers = validateField('Stationchargeofficers', data.stationchargeofficers);
+    errors.totalofficers = validateField('Totalofficers', data.totalofficers);
+    errors.address = validateField('Address', data.address);
+    errors.contact = validateContact('Contact', data.contact);
+    errors.district = validateField('District', data.district);
+    errors.email = validateField('Email', data.email);
+
+    const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[A-Z]).{6,}$/;
+      if (!data.password.trim()) {
+        formIsValid = false;
+        errors.password = "Password is required";
+      } else if (!passwordRegex.test(data.password)) { // Pass the password to the test method
+        errors.password =
+          "Password must contain at least one number, one special character, and one capital letter";
+      }
+    
+      if (!data.confirmpassword.trim()) {
+        formIsValid = false;
+        errors.confirmpassword = "Confirm Password is required";
+      } else if (data.confirmpassword !== data.password) {
+        formIsValid = false;
+        errors.confirmpassword = "Passwords do not match";
+      }
+
+    setErrors(errors);
+    if (formIsValid){
+      console.log("data",data);
+    }
+  }
+
+  axiosInstance.post('/policeregister')
+    .then((res) => {
+      console.log('woking',res);
+      if (res.data.status==200){
+        console.log('working', res);
+      }
+    })
+
   return (
     <div>
-      <div className="container">
-        <div className="row citizen_reg_box">
-          <div className="col-lg-5 col-md-4 col-sm-6 citizen_reg_left"></div>
-          <div className="col-lg-7 col-md-8 col-sm-6 citizen_reg_right">
-            <h2 className="citizen_reg_title">Station Registration</h2>
-            <div className="citizen_reg_input_grp row">
-              <div className="col-12">
-                <input
-                  type="text"
-                  class="form-control user_inp "
-                  id="exampleFormControlInput1"
-                  placeholder="Station Name"
-                  name="station_name"
-                  value={values.station_name} 
-                  onChange={handleChange} 
-                  onBlur={handleBlur} 
-                />
-              {errors.station_name && touched.station_name && (<span className="text-danger">{errors.station_name}</span>)}
-
-              </div>
-
-              <div className="col-6 mt-2">
-                <input
-                  type="text"
-                  class="form-control user_inp "
-                  id="exampleFormControlInput1"
-                  placeholder="Station Incharge Officer"
-                  name="station_incharge_officer"
-                  value={values.station_incharge_officer} 
-                  onChange={handleChange} 
-                  onBlur={handleBlur}
-                />
-            {errors.station_incharge_officer && touched.station_incharge_officer && (<span className="text-danger">{errors.station_incharge_officer}</span>)}
-
-              </div>
-              <div className="col-6 mt-2">
-                <input
-                  type="number"
-                  class="form-control user_inp "
-                  id="exampleFormControlInput1"
-                  placeholder="Total Officers"
-                  name="total_officers"
-                  value={values.total_officers} 
-                  onChange={handleChange} 
-                  onBlur={handleBlur}
-                />
-                 {errors.total_officers && touched.total_officers && (<span className="text-danger">{errors.total_officers}</span>)}
-             
-              </div>
-             
-              
-              <div className="col-6 mt-2">
-                <input
-                  type="email"
-                  class="form-control user_inp "
-                  id="exampleFormControlInput1"
-                  placeholder="Email"
-                  name="email"
-                  value={values.email} 
-                  onChange={handleChange} 
-                  onBlur={handleBlur}
-                />
-                {errors.email && touched.email && (<span className="text-danger">{errors.email}</span>)}
-
-              </div>
-               
-              <div className="col-6 mt-2">
-                    <input
-                    type="text"
-                    class="form-control user_inp "
-                    id="exampleFormControlInput1"
-                    placeholder="Contact"
-                    name="contact"
-                    value={values.contact} 
-                    onChange={handleChange} 
-                    onBlur={handleBlur}
-                    />
-              {errors.contact && touched.contact && (<span className="text-danger">{errors.contact}</span>)}
-
-                </div>
-               
-                <div className="col-6 mt-2">
-                    <input
-                    type="text"
-                    class="form-control user_inp "
-                    id="exampleFormControlInput1"
-                    placeholder="District"
-                    name="district"
-                    value={values.district} 
-                    onChange={handleChange} 
-                    onBlur={handleBlur}
-                    />
-              {errors.district && touched.district && (<span className="text-danger">{errors.district}</span>)}
-
-                </div>
-                <div className="col-6 mt-2">
-                    <input
-                    type="text"
-                    class="form-control user_inp "
-                    id="exampleFormControlInput1"
-                    placeholder="State"
-                    name="state"
-                    value={values.state} 
-                    onChange={handleChange} 
-                    onBlur={handleBlur}
-                    />
-              {errors.state && touched.state && (<span className="text-danger">{errors.state}</span>)}
-
-                </div>
-                
-                <div className="col-6 mt-2">
-                    <input
-                    type="text"
-                    class="form-control user_inp "
-                    id="exampleFormControlInput1"
-                    placeholder="Password"
-                    name="password"
-                    value={values.password} 
-                    onChange={handleChange} 
-                    onBlur={handleBlur}
-                    />
-              {errors.password && touched.password && (<span className="text-danger">{errors.password}</span>)}
-
-                </div>
-                <div className="col-6 mt-2">
-                    <input
-                    type="text"
-                    class="form-control user_inp "
-                    id="exampleFormControlInput1"
-                    placeholder="Confirm Password"
-                    name="confirm_password"
-                    value={values.confirm_password} 
-                    onChange={handleChange} 
-                    onBlur={handleBlur}
-                    />
-              {errors.confirm_password && touched.confirm_password && (<span className="text-danger">{errors.confirm_password}</span>)}
-
-                </div>
-                <div className="col-12 mt-2">
-                    <button type="submit" className="btn btn-secondary w-100 mt-3" onClick={handleSubmit}>
-                Sign In
-              </button>
-                </div>
-              
-              <p className="citizen_reg_log_link" >Already have an account? <Link to='/police_login' >Login now</Link></p>
+      <div>
+        <Row>
+          <Col className='container'>
+            <img src={policereg} className='img'></img>
+          </Col>
+          <Col className='container'>
+            <div>
+              <h3 className='policereg'>Police Station Registration </h3>
             </div>
-          </div>
-        </div>
+            <form onSubmit={handleSubmit}>
+            <div className='mt-5'>
+            
+              <input type='text' 
+              className='textbox'
+              placeholder='Police Station Name'
+              name='policestationname'
+              value={data.policestationname}
+              onChange={handleChange}
+              />
+              {errors.policestationname && <div className="text-danger">{errors.policestationname}</div>}         
+            </div>
+            <Row>
+              <Col className='container'>
+                
+                <div className='mt-4'>
+                  <input
+                  type='text'
+                  className='text'
+                  placeholder='Police Station Code '
+                  name='policestationcode'
+                  value={data.policestationcode}
+                  onChange={handleChange}
+                  />
+              {errors.policestationcode && <div className="text-danger">{errors.policestationcode}</div>}
+                </div>
+                <div className='mt-4'>
+                  <input
+                  type='text'
+                  className='text'
+                  placeholder='Station Incharge Officers'
+                  name='stationchargeofficers'
+                  value={data.stationchargeofficers}
+                  onChange={handleChange}
+                  />
+                 {errors.stationchargeofficers && <div className="text-danger color">{errors.stationchargeofficers}</div>}
+                </div>
+                <div className='mt-4'>
+                  <input
+                  type='text'
+                  className='text'
+                  placeholder='Total Officers'
+                  name='totalofficers'
+                  value={data.totalofficers}
+                  onChange={handleChange}
+                  />
+                 {errors.totalofficers && <div className="text-danger">{errors.totalofficers}</div>}
+                </div>               
+                </Col>
+              <Col className='container'>
+                
+                <div className='mt-4'>
+                  <input
+                  type='text'
+                  className='text'
+                  placeholder='Address'
+                  name='address'
+                  value={data.address}
+                  onChange={handleChange}
+                  />
+                 {errors.address && <div className="text-danger">{errors.address}</div>}
+                </div>
+                <div className='mt-4'>
+                  <input
+                  type='text'
+                  className='text'
+                  placeholder='Contact'
+                  name='contact'
+                  value={data.contact}
+                  onChange={handleChange}
+                  />
+                 {errors.contact && <div className="text-danger">{errors.contact}</div>}
+                </div>
+                <div className='mt-4'>
+                <select className="text" 
+                                name="district" 
+                                value={data.district}
+                                onChange={handleChange}
+                                >
+                                    <option >Select District</option>
+                                    {districts.map((district, index) => (
+                                        <option key={index} value={district}>{district}</option>
+                                    ))}
+              </select>
+              {errors.district && <div className="text-danger">{errors.district}</div>}
+                </div>
+                </Col>
+            </Row>
+            <div className='mt-4'>
+                  <input
+                  type='text'
+                  className='textbox'
+                  placeholder='Email'
+                  name='email'
+                  value={data.email}
+                  onChange={handleChange}
+                  />
+              {errors.email && <div className="text-danger">{errors.email}</div>}
+                </div>
+                <Row>
+                  <Col>
+                  <div className='mt-4'>
+                  <input
+                  type='password'
+                  className='text'
+                  placeholder='Password '
+                  name='password'
+                  value={data.password}
+                  onChange={handleChange}
+                  />
+                 {errors.password && <div className="text-danger">{errors.password}</div>}
+                </div>
+                  </Col>
+                  <Col>
+                  <div className='mt-4'>
+                  <input
+                  type='password'
+                  className='text'
+                  placeholder='Confirm Password'
+                  name='confirmpassword'
+                  value={data.confirmpassword}
+                  onChange={handleChange}
+                  />
+              {errors.confirmpassword && <div className="text-danger">{errors.confirmpassword}</div>}
+                </div>
+                  </Col>
+                </Row>
+
+            <div className='mt-4'>
+              <button type="submit" className='btnsign'>Sign In</button>
+            </div>
+            <p className="login mt-4" >Already have an account? <Link to='/police_login' className='lognow'>Login now</Link></p>
+            </form>
+          </Col>
+        </Row>
       </div>
     </div>
   )

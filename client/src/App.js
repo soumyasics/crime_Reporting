@@ -24,8 +24,7 @@ import Footer2 from './Components/Footer/Footer2';
 import AdminLogin from './Components/Admin/AdminLogin';
 import LoginBanner from './Components/Common/LoginBanner';
 import UserNavbar from './Components/Navbar/UserNavbar';
-import PoliceLandingPageContent from './Components/Police/PoliceLandingPageContent';
-import PoliceRecentCrimes from './Components/Police/PoliceRecentCrimes';
+import NavbarCall from './Components/Navbar/NavbarCall';
 
 function App() {
   return (
@@ -47,7 +46,7 @@ function App() {
 
         {/* Police  */}
 
-        <Route path='/police_register' element={[<PoliceRegister/>]} />
+        <Route path='/police_register' element={[<Navbar/>,<PoliceRegister/>]} />
         <Route path='/police_login' element={[<PoliceLogin/>]} />
         <Route path='/police_forgotpassword' element={[<ForgotPassword activeUser='Police' />]} />
         <Route path='/police_home' element={[<LoginBanner user='police' />,<PoliceLandingPageContent/>,<PoliceRecentCrimes/>]} />
