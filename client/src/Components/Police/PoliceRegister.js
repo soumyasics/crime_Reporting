@@ -3,8 +3,8 @@ import '../../Assets/Styles/CitizenRegistration.css'
 import { Link } from 'react-router-dom'
 import policereg from '../../Assets/Images/policereg.png'
 import './Police.css';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+// import Row from 'react-bootstrap/Row';
+// import Col from 'react-bootstrap/Col';
 import axiosInstance from '../Constants/BaseUrl';
 
 function PoliceRegister() {
@@ -119,11 +119,11 @@ function PoliceRegister() {
   return (
     <div>
       <div>
-        <Row>
-          <Col className='container'>
+        <div className='row'>
+          <div className='col-6 container-fluid' >
             <img src={policereg} className='img'></img>
-          </Col>
-          <Col className='container'>
+          </div>
+          <div className='col-6'>
             <div>
               <h3 className='policereg'>Police Station Registration </h3>
             </div>
@@ -139,8 +139,8 @@ function PoliceRegister() {
               />
               {errors.policestationname && <div className="text-danger color">{errors.policestationname}</div>}         
             </div>
-            <Row>
-              <Col className='container'>
+            <div className='row'>
+              <div className='col-6 container-fluid'>
                 
                 <div className='mt-4'>
                   <input
@@ -175,8 +175,8 @@ function PoliceRegister() {
                   />
                  {errors.totalofficers && <div className="text-danger color">{errors.totalofficers}</div>}
                 </div>               
-                </Col>
-              <Col className='container'>
+                </div>
+              <div className='col-6'>
                 
                 <div className='mt-4'>
                   <input
@@ -213,8 +213,8 @@ function PoliceRegister() {
               </select>
               {errors.district && <div className="text-danger color">{errors.district}</div>}
                 </div>
-                </Col>
-            </Row>
+                </div>
+            </div>
             <div className='mt-4'>
                   <input
                   type='text'
@@ -226,8 +226,8 @@ function PoliceRegister() {
                   />
               {errors.email && <div className="text-danger color">{errors.email}</div>}
                 </div>
-                <Row>
-                  <Col>
+                <div className='row'>
+                  <div className='col-6'>
                   <div className='mt-4'>
                   <input
                   type='password'
@@ -239,8 +239,8 @@ function PoliceRegister() {
                   />
                  {errors.password && <div className="text-danger color">{errors.password}</div>}
                 </div>
-                  </Col>
-                  <Col>
+                  </div>
+                  <div className='col-6 container-fluid'>
                   <div className='mt-4'>
                   <input
                   type='password'
@@ -252,16 +252,16 @@ function PoliceRegister() {
                   />
               {errors.confirmpassword && <div className="text-danger color">{errors.confirmpassword}</div>}
                 </div>
-                  </Col>
-                </Row>
+                  </div>
+                </div>
 
             <div className='mt-4'>
               <button type="submit" className='btnsign'>Sign In</button>
             </div>
             <p className="login mt-4" >Already have an account? <Link to='/police_login' className='lognow'>Login now</Link></p>
             </form>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </div>
     </div>
   )
