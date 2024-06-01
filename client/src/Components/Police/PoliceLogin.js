@@ -56,7 +56,7 @@ function PoliceLogin() {
 
               <p className="text-end"><Link to='/police_forgotpassword' >Forgot Password?</Link></p>
 
-              <button type="submit" className="btn btn-secondary w-100 mt-3" onClick={handleSubmit}>
+              <button type="submit" className="btn btn-secondary w-100 mt-3 police_login_btn" onClick={handleSubmit}>
                 Login
               </button>
               <p>Don't have an account? <Link to='/police_register'>Register</Link></p>
