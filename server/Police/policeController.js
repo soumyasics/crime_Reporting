@@ -5,7 +5,7 @@ const jwt=require('jsonwebtoken')
 
 const registerPolice = async (req, res) => {
     try{
-        const { policestationname, policestationcode, stationchargeofficers, totalofficers, password, address, contact, district, email, confirmpassword} = req.body
+        const { policestationname, policestationcode, stationchargeofficers, totalofficers, password, address, contact, district, email} = req.body
     console.log(req.body.policestationcode);
         const newPolice = new Police({
             policestationname,
@@ -16,9 +16,7 @@ const registerPolice = async (req, res) => {
             address,
             contact,
             district,
-            email,
-            confirmpassword
-        });
+            email        });
 console.log(policestationcode);
         let existingPolice = await Police.findOne({policestationcode});
         console.log("es",existingPolice);
