@@ -108,13 +108,13 @@ function PoliceRegister() {
     }
   }
 
-  axiosInstance.post('/policeregister')
-    .then((res) => {
-      console.log('woking',res);
-      if (res.data.status==200){
-        console.log('working', res);
-      }
-    })
+  // axiosInstance.post('/policeregister')
+  //   .then((res) => {
+  //     console.log('woking',res);
+  //     if (res.data.status==200){
+  //       console.log('working', res);
+  //     }
+  //   })
 
   return (
     <div>

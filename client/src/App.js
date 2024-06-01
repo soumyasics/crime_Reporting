@@ -25,6 +25,8 @@ import AdminLogin from './Components/Admin/AdminLogin';
 import LoginBanner from './Components/Common/LoginBanner';
 import UserNavbar from './Components/Navbar/UserNavbar';
 import NavbarCall from './Components/Navbar/NavbarCall';
+import PoliceRecentCrimes from './Components/Police/PoliceRecentCrimes';
+import PoliceLandingPageContent from'./Components/Police/PoliceLandingPageContent';
 
 function App() {
   return (
