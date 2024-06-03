@@ -8,7 +8,7 @@ function LoginBanner() {
       <div className='citizen_banner' >
         <img src={bannerImg} className='img-fluid' alt='citizen_banner' />
       </div>
-    </div>
+    </div> 
   )
 }
 
