@@ -29,8 +29,8 @@ export const LoginSchema = yup.object().shape({
     email: yup.string()
       .email("Please enter a valid email")
       .required("Required"),
-      dob: yup.date().max(new Date(), 'Date of Birth cannot be in the future').required('Date of Birth is required'),
-      aadhar: yup.string()
+    dob: yup.date().max(new Date(), 'Date of Birth cannot be in the future').required('Date of Birth is required'),
+    aadhar: yup.string()
       .matches(/^\d{12}$/, "Aadhaar number must be a 12 digit number")
       .required("Required"),
     password: yup.string()
@@ -73,3 +73,39 @@ export const ForgotPasswordSchema = yup.object().shape({
     .oneOf([yup.ref('password'), null], 'Passwords must match')
     .required('Confirm Password is required'),
 });
+
+export const PoliceRegistrationSchema=yup.object().shape({
+  station_name:yup.string()
+    .matches(/^[a-zA-Z\s]+$/, "Only letters are allowed")
+    .min(2, "Enter minimum 2 characters")
+    .max(20, "Maximum 20 characters are allowed")
+    .required("Required"),
+  station_incharge_officer:yup.string()
+    .matches(/^[a-zA-Z\s]+$/, "Only letters are allowed")
+    .min(2, "Enter minimum 2 characters")
+    .max(20, "Maximum 20 characters are allowed")
+    .required("Required"),
+  total_officers:yup.string(),
+  email:yup.string()
+    .email("Please enter a valid email")
+    .required("Required"),
+  contact:yup.string()
+    .matches(/^[0-9]+$/, "Only digits are allowed")
+    .matches(/^\d{10}$/, "Phone number must be a 10 digit number")
+    .required("Required"),
+  district:yup.string()
+    .min(2, "Enter minimum 2 characters")
+    .max(Infinity, "Maximum 20 characters are allowed")
+    .required("Required"),
+  state: yup.string()
+    .min(2, "Enter minimum 2 characters")
+      .max(20, "Maximum 20 characters are allowed")
+      .required("Required"),
+  password: yup.string()
+    .matches(passwordRule, "Password must contain 1 uppercase letter, 1 number, and 1 special character")
+    .required("Required"),
+  confirmPassword: yup.string()
+    .oneOf([yup.ref('password'), null], 'Passwords must match')
+    .required('Required'), 
+
+})
