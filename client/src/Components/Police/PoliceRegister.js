@@ -18,8 +18,7 @@ function PoliceRegister() {
     contact:"",
     district:"",
     email:"",
-    confirmpassword:"",
-    idProof:null
+    confirmpassword:""
   })
   const[errors,setErrors]=useState({
     policestationname:"",
@@ -108,9 +107,7 @@ function PoliceRegister() {
       console.log("data",data);
     }
   }
-  const handleFileChange = (event) => {
-    setData("idProof", event.currentTarget.files[0]);
-  };
+
   // axiosInstance.post('/policeregister')
   //   .then((res) => {
   //     console.log('woking',res);
@@ -121,7 +118,7 @@ function PoliceRegister() {
 
   return (
     <div>
-      
+       
       <div>
         <div className='row'>
           <div className='col-6 container-fluid' >
@@ -258,19 +255,7 @@ function PoliceRegister() {
                 </div>
                   </div>
                 </div>
-                <div className='row'>
-                  <div className='col-6'>
-                  <div className='mt-4'>
-                  <input
-                  type='file'
-                  className='text'
-                  
-                  name='idProof'
-              onChange={handleFileChange}
-                  />
-                </div>
-                  </div>
-                  </div>
+
             <div className='mt-4'>
               <button type="submit" className='btnsign'>Sign In</button>
             </div>

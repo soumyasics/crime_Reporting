@@ -11,7 +11,7 @@ const policeSchema=mongoose.Schema({
         require:true,
     },
     stationchargeofficers:{
-        type:Array,
+        type:String,
         require:true,
     },
     totalofficers:{

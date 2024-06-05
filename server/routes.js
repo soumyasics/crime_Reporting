@@ -15,6 +15,12 @@ router.post('/requireAuthCitizen', citizen.requireAuth);
 
 //police routes
 router.post('/policeregister',police.upload,police.registerPolice)
-
-
+router.post('/loginPolice',police.login)
+router.post('/forgotPasswordPolice',police.forgotPassword)
+router.post('/resetPasswordloginPolice/:id',police.resetPassword)
+router.post('/editPoliceById/:id',police.editPoliceById)
+router.post('/deletePoliceById/:id',police.deletePoliceById)
+router.post('/viewallPolicesforadmin',police.viewallPolicesforadmin)
+router.post('/acceptPoliceById/:id',police.acceptPoliceById)
+router.post('/rejectPoliceById/:id',police.rejectPoliceById)
 module.exports=router
