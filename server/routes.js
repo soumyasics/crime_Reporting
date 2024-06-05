@@ -14,7 +14,7 @@ router.post('/loginCitizen', citizen.login);
 router.post('/requireAuthCitizen', citizen.requireAuth);
 
 //police routes
-router.post('/policeregister',police.registerPolice)
+router.post('/policeregister',police.upload,police.registerPolice)
 
 
 module.exports=router

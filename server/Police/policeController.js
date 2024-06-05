@@ -1,8 +1,17 @@
 const Police= require("./policeSchema")
 const secret = 'police';
 const jwt=require('jsonwebtoken')
-
-
+const multer=require('multer')
+const storage = multer.diskStorage({
+    destination: function (req, res, cb) {
+      cb(null, "./upload");
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    },
+  });
+  
+  const upload = multer({ storage: storage }).single("idProof");
 const registerPolice = async (req, res) => {
     try{
         const { policestationname, policestationcode, stationchargeofficers, totalofficers, password, address, contact, district, email} = req.body
@@ -16,8 +25,9 @@ const registerPolice = async (req, res) => {
             address,
             contact,
             district,
-            email        });
-console.log(policestationcode);
+            email,
+        idProof:req.file   });
+
         let existingPolice = await Police.findOne({policestationcode});
         console.log("es",existingPolice);
         if(existingPolice){
@@ -71,4 +81,8 @@ console.log(policestationcode);
     }
 };
 
-module.exports={registerPolice}
+module.exports={
+    registerPolice,
+    upload
+
+}
