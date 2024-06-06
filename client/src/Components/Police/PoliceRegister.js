@@ -1,13 +1,17 @@
 import React, { useState } from 'react'
 import '../../Assets/Styles/CitizenRegistration.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import policereg from '../../Assets/Images/policereg.png'
 import './Police.css';
 // import Row from 'react-bootstrap/Row';
 // import Col from 'react-bootstrap/Col';
 import axiosInstance from '../Constants/BaseUrl';
+import { toast } from 'react-toastify';
 
 function PoliceRegister() {
+
+  const navigate=useNavigate();
+
   const[data,setData]=useState({
     policestationname:"",
     policestationcode:"",
@@ -105,16 +109,28 @@ function PoliceRegister() {
     setErrors(errors);
     if (formIsValid){
       console.log("data",data);
+
+      axiosInstance.post('/loginAdvocate', data)
+      .then(response => {
+          console.log("Response:", response);
+          if (response.data.status === 200) {
+              console.log("Login Successful");
+              toast.success("Login Successful");
+              navigate('/advocate_home')
+              localStorage.setItem('advocateId',response.data.data._id)
+          } else {
+              console.log("Login Failed");
+              alert("Login Failed");
+          }
+      })
+      .catch(error => {
+          console.error("There was an error!", error);
+      });
+
     }
   }
 
-  // axiosInstance.post('/policeregister')
-  //   .then((res) => {
-  //     console.log('woking',res);
-  //     if (res.data.status==200){
-  //       console.log('working', res);
-  //     }
-  //   })
+
 
   return (
     <div>

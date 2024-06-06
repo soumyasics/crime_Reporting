@@ -56,6 +56,7 @@
 .image{
     height: 700px;
     width: 700px;
+    object-fit: cover;
 }
 .btnlogin{
     border-color: #A10303;
@@ -74,3 +75,5 @@
     text-align: center;
     margin-top: 200px;
 }
+
+

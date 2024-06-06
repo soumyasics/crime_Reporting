@@ -10,6 +10,8 @@ function ForgotPassword({ activeUser }) {
 
   const navigate=useNavigate()
 
+  console.log(activeUser);
+
   const onSubmit = (values) => {
     const { confirmPassword, ...dataToSend } = values;
     console.log(dataToSend);
@@ -33,6 +35,9 @@ function ForgotPassword({ activeUser }) {
             toast.error("Updation Failed");
           });
         break;
+        case "Police":
+          console.log('user police');
+          break
     }
   };
 
