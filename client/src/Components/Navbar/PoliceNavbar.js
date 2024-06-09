@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import logo from "../../Assets/Images/logo.png";
 
@@ -6,6 +6,12 @@ import logo from "../../Assets/Images/logo.png";
 function PoliceNavbar() {
 
     const navigate=useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("policeId") == null) {
+      navigate("/");
+    }
+  });
 
     const handleLogout = () => {
         localStorage.clear();

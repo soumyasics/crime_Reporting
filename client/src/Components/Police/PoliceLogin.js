@@ -15,44 +15,44 @@ function PoliceLogin() {
 
 
   const onSubmit = (values) => {
-    // axiosInstance.post('/loginUser', values)
-    //     .then((res) => {
-    //         console.log(res);
-    //         if (res.data.status === 200) {
-    //             if (!isToastVisible) {
-    //                 setToastVisible(true);
-    //                 toast.success("Registration Successful", {
-    //                     onClose: () => setToastVisible(false),
-    //                 });
-    //             }
-    //             localStorage.setItem('policeId',res.data.data._id)
-    //             navigate('/police_home');
-    //         } else if (res.data.status === 405) {
-    //             if (!isToastVisible) {
-    //                 setToastVisible(true);
-    //                 toast.warning(res.data.msg, {
-    //                     onClose: () => setToastVisible(false),
-    //                 });
-    //             }
-    //         } else {
-    //             if (!isToastVisible) {
-    //                 setToastVisible(true);
-    //                 toast.error('Registration Failed', {
-    //                     onClose: () => setToastVisible(false),
-    //                 });
-    //             }
-    //         }
-    //     })
-    //     .catch(() => {
-    //         if (!isToastVisible) {
-    //             setToastVisible(true);
-    //             toast.error('Registration Failed', {
-    //                 onClose: () => setToastVisible(false),
-    //             });
-    //         }
-    //     }
-    //   );
-    // console.log(values);
+    axiosInstance.post('/loginPolice', values)
+        .then((res) => {
+            console.log(res);
+            if (res.data.status === 200) {
+                if (!isToastVisible) {
+                    setToastVisible(true);
+                    toast.success("Registration Successful", {
+                        onClose: () => setToastVisible(false),
+                    });
+                }
+                localStorage.setItem('policeId',res.data.data._id)
+                navigate('/police_home');
+            } else if (res.data.status === 405) {
+                if (!isToastVisible) {
+                    setToastVisible(true);
+                    toast.warning(res.data.msg, {
+                        onClose: () => setToastVisible(false),
+                    });
+                }
+            } else {
+                if (!isToastVisible) {
+                    setToastVisible(true);
+                    toast.error('Something Went Wrong', {
+                        onClose: () => setToastVisible(false),
+                    });
+                }
+            }
+        })
+        .catch(() => {
+            if (!isToastVisible) {
+                setToastVisible(true);
+                toast.error('Something Went Wrong', {
+                    onClose: () => setToastVisible(false),
+                });
+            }
+        }
+      );
+    console.log(values);
     navigate('/police_home');
 
   };
@@ -75,7 +75,8 @@ function PoliceLogin() {
         </Col>
         <Col className="container">
           <h2 className="policelog">Police Login</h2>
-          <div className="citizen_login_input_grp">
+          <form onSubmit={handleSubmit} >
+            <div className="citizen_login_input_grp">
             <input
               type="email"
               className="form-control user_inp"
@@ -107,13 +108,15 @@ function PoliceLogin() {
               <Link to="/police_forgotpassword">Forgot Password?</Link>
             </p>
 
-            <button type="submit" className="btnlogin" onClick={handleSubmit}>
+            <button type="submit" className="btnlogin" >
               Login
             </button>
             <p>
               Don't have an account? <Link to="/police_register">Register</Link>
             </p>
           </div>
+          </form>
+          
         </Col>
       </Row>
     </div>

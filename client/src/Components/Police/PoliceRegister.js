@@ -153,7 +153,7 @@ function PoliceRegister() {
       console.log("data", data);
 
       axiosInstance
-        .post("/policeregister", data,{
+        .post("/policeregister", data, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -162,9 +162,8 @@ function PoliceRegister() {
           console.log("Response:", response);
           if (response.data.status === 200) {
             console.log("Login Successful");
-            toast.success("Login Successful");
+            toast.success("Registered Successfully");
             navigate("/police_login");
-            localStorage.setItem("advocateId", response.data.data._id);
           } else if (response.data.status === 409) {
             toast.warning(response.data.msg);
           } else {
@@ -302,31 +301,35 @@ function PoliceRegister() {
               </div>
               <div className="row">
                 <div className="col-6 mt-4">
-                <input
-                  type="text"
-                  className="text"
-                  placeholder="Email"
-                  name="email"
-                  value={data.email}
-                  onChange={handleChange}
-                />
-                {errors.email && (
-                  <div className="text-danger color">{errors.email}</div>
-                )}
+                  <input
+                    type="text"
+                    className="text"
+                    placeholder="Email"
+                    name="email"
+                    value={data.email}
+                    onChange={handleChange}
+                  />
+                  {errors.email && (
+                    <div className="text-danger color">{errors.email}</div>
+                  )}
+                </div>
+                <div className="col-6 mt-4">
+                  <input
+                    type="file"
+                    className="file-input"
+                    name="idProof"
+                    id="idProof"
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="idProof" className="custom-file-label">
+                    <i className="ri-upload-2-fill"></i> Upload ID Proof
+                  </label>
+                  {errors.idProof && (
+                    <div className="text-danger color">{errors.idProof}</div>
+                  )}
+                </div>
               </div>
-              <div className="col-6 mt-4">
-                <input
-                  type="file"
-                  className="text"
-                  name="idProof"
-                  onChange={handleChange}
-                />
-                {errors.idProof && (
-                  <div className="text-danger color">{errors.idProof}</div>
-                )}
-              </div>
-              </div>
-              
+
               <div className="row">
                 <div className="col-6">
                   <div className="mt-4">
