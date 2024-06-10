@@ -56,6 +56,7 @@
 .image{
     height: 700px;
     width: 700px;
+    object-fit: cover;
 }
 .btnlogin{
     border-color: #A10303;
@@ -74,3 +75,33 @@
     text-align: center;
     margin-top: 200px;
 }
+
+
+.file-input {
+    display: none;
+  }
+  
+  .custom-file-label {
+    display: inline-flex;
+    align-items: center;
+    width: 90%;
+    padding: 0.5rem 0;
+    color: #5f5e5e;
+    box-shadow: 1px  3px 1px 0 rgba(0, 0, 0, 0.2);
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .custom-file-label i {
+    margin-right: 0.5rem;
+  }
+  
+  /* .custom-file-label:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  } */
+
+
