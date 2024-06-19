@@ -28,6 +28,7 @@ import NavbarCall from './Components/Navbar/NavbarCall';
 import PoliceRecentCrimes from './Components/Police/PoliceRecentCrimes';
 import PoliceLandingPageContent from'./Components/Police/PoliceLandingPageContent';
 import PoliceNavbar from './Components/Navbar/PoliceNavbar';
+import AdminHome from './Components/Admin/AdminHome';
 
 function App() {
   return (
@@ -63,6 +64,7 @@ function App() {
         {/* Admin  */}
 
         <Route path='/admin' element={[<AdminLogin/>]} />
+        <Route path='/admin_home' element={[<LandingNavbar/>,<AdminHome/>]} />
 
 
 

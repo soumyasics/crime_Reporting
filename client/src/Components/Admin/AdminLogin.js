@@ -4,12 +4,12 @@ import img from '../../Assets/Images/adminImg.png'
 
 function AdminLogin() {
   return (
-    <div>
-      <div className="container row">
-        <div className="col-md-8 admin_login_leftbox">
+    <div className="container" >
+      <div className="row">
+        <div className="col-7 admin_login_leftbox">
             <div className="admin_login_leftbox_container">
-                <p className="admin_login_leftbox_title" >Admin</p>
-                <div className="citizen_login_input_grp">
+                <p className="admin_login_leftbox_title pb-5" >Admin</p>
+                <div className="">
                 <input
                   type="email"
                   className="form-control user_inp mb-4"
@@ -27,11 +27,15 @@ function AdminLogin() {
                   
                 />
                 </div>
+                <button type="submit" className="btnlogin mt-4 w-25" >
+              Login
+            </button>
             </div>
         </div>
-        <div className="col-md-4 admin_login_rightbox">
-            <img src={img} />
+        <div className="col-5 admin_login_rightbox">
+            <img src={img} width={500} />
         </div>
+        
       </div>
     </div>
   );
