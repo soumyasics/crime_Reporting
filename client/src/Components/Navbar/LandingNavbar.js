@@ -2,52 +2,25 @@ import React from "react";
 import "../../Assets/Styles/Navbar.css";
 import logo from "../../Assets/Images/logo.png";
 import { Link } from "react-router-dom";
- 
+
 function LandingNavbar() {
   return (
     <div>
-      {/* <nav class="navbar navbar_bg">
-        <div class="container-fluid container navbar_box">
-          <div className="navbar_logo" >
-            <img src={logo} className="img-fluid" alt="logo" />
-            <div>
-              <p class=" navbar_title" href="#">
-              Crime <span>Reporting</span>
-            </p>
-            <p className="navbar_slogan" >Stay connect stay safe</p>
-
+      <nav className="navbar navbar-expand-lg navbar_bg">
+        <div className="container-fluid">
+          <Link to='/' className="text-decoration-none">
+            <div className="navbar_logo">
+              <img src={logo} className="img-fluid" alt="logo" />
+              <div>
+                <p className="navbar_title">
+                  Crime <span>Reporting</span>
+                </p>
+                <p className="navbar_slogan">Stay connected stay safe</p>
+              </div>
             </div>
-          </div>
-
-          <div className="navbar_sub_title d-flex justify-content-between">
-            <p>
-              <Link to="/">Home</Link>
-            </p>
-            <p>
-              <Link to="/about">About</Link>
-            </p>
-            <p>
-              <Link to="/citizen_login">Login</Link>
-            </p>
-          </div>
-        </div>
-      </nav> */}
-      <nav class="navbar navbar-expand-lg navbar_bg">
-        <div class="container-fluid">
-         
-          <Link to='/' className="text-decoration-none" >
-          <div className="navbar_logo">
-            <img src={logo} className="img-fluid" alt="logo" />
-            <div>
-              <p className="navbar_title">
-                Crime <span>Reporting</span>
-              </p>
-              <p className="navbar_slogan">Stay connected stay safe</p>
-            </div>
-          </div>
-            </Link>
+          </Link>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarText"
@@ -55,32 +28,52 @@ function LandingNavbar() {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse flex-grow-0 mt-3">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 " id="text_color_white">
-              <li class="nav-item">
+          <div className="collapse navbar-collapse flex-grow-0 mt-3" id="navbarText">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0" id="text_color_white">
+              <li className="nav-item">
                 <Link
-                to={'/'}
-                  class="nav-link"
+                  to='/'
+                  className="nav-link"
                   aria-current="page"
                   id="text_color_white"
                 >
                   Home
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link to="/about" class="nav-link" href="#" id="text_color_white">
+              <li className="nav-item">
+                <Link to="/about" className="nav-link" id="text_color_white">
                   About Us
                 </Link>
               </li>
               
-              <li class="nav-item">
-                <Link to="/citizen_login" class="nav-link" href="#" id="text_color_white">
+              <li className="nav-item dropdown">
+                <Link
+                  to="#"
+                  className="nav-link dropdown-toggle"
+                  // id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  id="text_color_white"
+                >
                   Sign In
                 </Link>
+                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li>
+                    <Link to="/citizen_login" className="dropdown-item">
+                      Citizen Login
+                    </Link>
+                  </li>
+                 
+                  <li>
+                    <Link to="/police_login" className="dropdown-item">
+                      Police Login
+                    </Link>
+                  </li>
+                </ul>
               </li>
-              
               
             </ul>
           </div>

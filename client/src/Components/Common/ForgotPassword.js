@@ -7,8 +7,9 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 function ForgotPassword({ activeUser }) {
+  const navigate = useNavigate();
 
-  const navigate=useNavigate()
+  console.log(activeUser);
 
   const onSubmit = (values) => {
     const { confirmPassword, ...dataToSend } = values;
@@ -23,6 +24,25 @@ function ForgotPassword({ activeUser }) {
             if (res.data.status == 200) {
               toast.success("Updated Successfully");
               navigate("/citizen_login");
+            } else if (res.data.status == 500) {
+              toast.warning(res.data.msg);
+            } else {
+              toast.error("Updation Failed");
+            }
+          })
+          .catch((err) => {
+            toast.error("Updation Failed");
+          });
+        break;
+
+      case "Police":
+        axiosInstance
+          .post("/forgotPasswordPolice", dataToSend)
+          .then((res) => {
+            console.log("woking", res);
+            if (res.data.status == 200) {
+              toast.success("Updated Successfully");
+              navigate("/police_login");
             } else if (res.data.status == 500) {
               toast.warning(res.data.msg);
             } else {

@@ -39,9 +39,9 @@ const policeSchema=mongoose.Schema({
         unique:true,
         required:true,
     },
-idproof:{
+idProof:{
         type:Object,
-        require:true,
+        required:true,
     }
 })
 module.exports=mongoose.model('police',policeSchema)
