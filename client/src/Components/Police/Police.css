@@ -1,7 +1,7 @@
 /* Police register */
 .img{ 
     height: 700px;
-    width: 600px;
+    width:100%;
 }
 .policereg{
     margin-top: 50px;
@@ -16,14 +16,14 @@
     box-shadow: 1px  3px 1px 0 rgba(0, 0, 0, 0.2);
     color: grey;
     height: 40px;
-    width: 700px;
+    width: 100%;
     font-size: 13px;
     font-weight: bold;
 }
 .text{
     border: none;
     height: 40px;
-    width: 320px;
+    width:100%;
     box-shadow: 1px  3px 1px 0 rgba(0, 0, 0, 0.2);
     color: grey;
     font-size: 13px;
@@ -34,7 +34,7 @@
     border-color: white;
     color: white;
     height: 50px;
-    width: 700px;
+    width: 100%;
     font-weight: bold;
 }
 .login{
@@ -51,6 +51,28 @@
     font-size: 12px;
     font-weight: bold;
 }
+
+.file-input {
+    display: none;
+  }
+  
+  .custom-file-label {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 0;
+    color:grey;
+    box-shadow: 1px  3px 1px 0 rgba(0, 0, 0, 0.2);
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .custom-file-label i {
+    margin-right: 0.5rem;
+  }
 
 /* Police Login */
 .image{
@@ -76,32 +98,8 @@
     margin-top: 200px;
 }
 
+/* New Police Station Register */
 
-.file-input {
-    display: none;
-  }
-  
-  .custom-file-label {
-    display: inline-flex;
-    align-items: center;
-    width: 90%;
-    padding: 0.5rem 0;
-    color: #5f5e5e;
-    box-shadow: 1px  3px 1px 0 rgba(0, 0, 0, 0.2);
-    font-size: 13px;
-    font-weight: bold;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  
-  .custom-file-label i {
-    margin-right: 0.5rem;
-  }
-  
-  /* .custom-file-label:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
-  } */
-
-
+.newpolicestation-req-thead{
+    background-color: black;
+}

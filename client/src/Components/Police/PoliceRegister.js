@@ -320,7 +320,7 @@ function PoliceRegister() {
                     name="idProof"
                     id="idProof"
                     onChange={handleChange}
-                  />
+                  />  
                   <label htmlFor="idProof" className="custom-file-label">
                     <i className="ri-upload-2-fill"></i> Upload ID Proof
                   </label>

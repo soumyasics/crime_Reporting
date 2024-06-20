@@ -29,6 +29,10 @@ import PoliceRecentCrimes from './Components/Police/PoliceRecentCrimes';
 import PoliceLandingPageContent from'./Components/Police/PoliceLandingPageContent';
 import PoliceNavbar from './Components/Navbar/PoliceNavbar';
 import AdminHome from './Components/Admin/AdminHome';
+import AdminSidebar from './Components/Admin/AdminSidebar';
+import AdminDashboard from './Components/Admin/AdminDashboard';
+import AdminMain from './Components/Admin/AdminMain';
+import NewPoliceStationReq from './Components/Police/NewPoliceStationReq';
 
 function App() {
   return (
@@ -54,6 +58,7 @@ function App() {
         <Route path='/police_login' element={[<LandingNavbar/>,<PoliceLogin/>]} />
         <Route path='/police_forgotpassword' element={[<LandingNavbar/>,<ForgotPassword activeUser='Police' />]} />
         <Route path='/police_home' element={[<PoliceNavbar/>,<LoginBanner user='police' />,<PoliceLandingPageContent/>,<PoliceRecentCrimes/>]} />
+        <Route path='/newpolicestationreq' element={[<LandingNavbar/>,<NewPoliceStationReq/>]} />
         
 
         {/* Scrb  */}
@@ -63,15 +68,16 @@ function App() {
 
         {/* Admin  */}
 
-        <Route path='/admin' element={[<AdminLogin/>]} />
+        <Route path='/admin' element={[<LandingNavbar/>,<AdminLogin/>]} />
         <Route path='/admin_home' element={[<LandingNavbar/>,<AdminHome/>]} />
-
+        <Route path='/admin-main' element={[<LandingNavbar/>,<AdminMain/>]} />
+        <Route path='/admin-dashboard' element={[<LandingNavbar/>,<AdminMain data="admindashboard"/>]} />
 
 
       </Routes>
     </div>
-    <Footer/>
-    <Footer2/>
+    {/* <Footer/>
+    <Footer2/> */}
     </BrowserRouter>
     
   );
