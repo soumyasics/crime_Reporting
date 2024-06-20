@@ -1,7 +1,7 @@
 /* Police register */
 .img{ 
     height: 700px;
-    width: 600px;
+    width:100%;
 }
 .policereg{
     margin-top: 50px;
@@ -16,14 +16,14 @@
     box-shadow: 1px  3px 1px 0 rgba(0, 0, 0, 0.2);
     color: grey;
     height: 40px;
-    width: 700px;
+    width: 100%;
     font-size: 13px;
     font-weight: bold;
 }
 .text{
     border: none;
     height: 40px;
-    width: 320px;
+    width:100%;
     box-shadow: 1px  3px 1px 0 rgba(0, 0, 0, 0.2);
     color: grey;
     font-size: 13px;
@@ -34,7 +34,7 @@
     border-color: white;
     color: white;
     height: 50px;
-    width: 700px;
+    width: 100%;
     font-weight: bold;
 }
 .login{
