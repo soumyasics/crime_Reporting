@@ -100,6 +100,32 @@
 
 /* New Police Station Register */
 
-.newpolicestation-req-thead{
+.newpolice-stationreq-thead{
     background-color: black;
+}
+.newpolice-stationreq-eye{
+    background-color: #00000033;
+    color:  #4B84F3;
+    font-size: 30px;
+    cursor: pointer;
+    border: none;
+    width: 20%;
+}
+.newpolice-stationreq-tick{
+    background-color: #00000033;
+    color: #088C1D;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    width: 20%;
+}
+.newpolice-stationreq-cross{
+    background-color: #00000033;
+    font-size: 30px;
+    font-weight:bolder;
+    color: #A10303;
+    cursor: pointer;
+    border: none;
+    width: 20%;
 }
