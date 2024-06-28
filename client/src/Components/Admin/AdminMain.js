@@ -3,6 +3,7 @@ import AdminSidebar from './AdminSidebar'
 import AdminDashboard from './AdminDashboard'
 import AdminLogin from './AdminLogin'
 import PoliceRegister from '../Police/PoliceRegister'
+import NewPoliceStationReq from '../Police/NewPoliceStationReq'
 
 function AdminMain({data}) {
   return (
@@ -15,6 +16,8 @@ function AdminMain({data}) {
           <div className='col-9'>
            {data === "admindashboard" ? (
             <AdminDashboard/>
+           ):data === "newpolicestationreq" ?(
+            <NewPoliceStationReq/>
            ):(
            <AdminDashboard/>
            )}

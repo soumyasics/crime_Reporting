@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 function AdminSidebar() {
 
 
-  return (
+  return (  
   
     <div>
       <div className="admin-sidebar-background">
@@ -22,7 +22,7 @@ function AdminSidebar() {
           <Link to="/admin-dashboard" className="admin-dash-link"><h5 className="pt-5"><MdDashboard/> Dashboard</h5></Link>
           <Link to='' className="admin-dash-link"><h5 className="pt-4"><IoIosNotifications/> Crime Alerts</h5></Link>
           <Link to='' className="admin-dash-link"><h5 className="pt-4"><FaBuildingShield/> Police Station</h5></Link>
-          <Link to='' className="admin-dash-link"><h5 className="pt-4"><FaBuildingShield/> Police Station Request</h5></Link>
+          <Link to='/newpolicestationreq' className="admin-dash-link"><h5 className="pt-4"><FaBuildingShield/> Police Station Request</h5></Link>
           <Link to='' className="admin-dash-link"><h5 className="pt-4"><MdLocalPolice/> New Police Station</h5></Link>
           <Link to='' className="admin-dash-link"><h5 className="pt-4"><FaPoll/> Complaints</h5></Link>
           <Link to='' className="admin-dash-link"><h5 className="pt-4"><FaLock/> Change Password</h5></Link>

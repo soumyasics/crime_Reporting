@@ -42,6 +42,10 @@ const policeSchema=mongoose.Schema({
 idProof:{
         type:Object,
         required:true,
+    },
+    isActive:{
+        type:String,
+        default:'pending'
     }
 })
 module.exports=mongoose.model('police',policeSchema)
