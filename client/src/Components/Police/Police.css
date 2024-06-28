@@ -129,3 +129,82 @@
     border: none;
     width: 20%;
 }
+
+/* Police ViewCases */
+
+.policeview-cases-cross{
+    background-color: #088C1D;
+    color: white;
+    border: none;
+    height: 30px;
+    width: 30px;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.policeview-cases-tick{
+    background-color: #DF1212;
+    color: white;
+    border: none;
+    height: 30px;
+    width: 30px;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.policeview-cases-eye{
+    background-color: #0E6DDC;
+    color: white;
+    border: none;
+    height: 30px;
+    width: 30px;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Case Details */
+
+.case-details-h6{
+    background-color: #383638;
+    color: white;
+    height: 9vh;
+    width: 100%;
+}
+.case-details-span{
+    background-color: #00000033;
+    height: 6vh;
+    width: 100%;
+    color: #00000080;
+    padding-left: 10px;
+    padding-top: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.case-details-victim{
+    color: #00000080;
+    font-size: 17px;
+}
+.case-details-victim1{
+    color: #00000080;
+    font-size: 17px;
+    font-weight: bold;
+}
+.case-details-acceptbtn{
+    border: none;
+    color: white;
+    height: 6vh;
+    width: 20%;
+    background-color: #088C1D;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.case-details-rejectbtn{
+    border: none;
+    color: white;
+    height: 6vh;
+    width: 20%;
+    background-color: #DF1212;
+    border-radius: 10px;
+    font-weight: bold;
+}

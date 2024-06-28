@@ -1,68 +1,106 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../../Assets/Styles/Scrb.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik';
 import { LoginSchema } from "../Constants/Schema";
+import scrblogin from '../../Assets/Images/scrblogin.png'
+import axios from 'axios';
 
 function ScrbLogin() {
 
-  const onSubmit = (values) => {
-    // Handle login submission
-    console.log(values);
-  };
+  const [data,setData]=useState({
+    email:"",
+    password:""
+  })
 
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormik({
-    initialValues: {
-      email: '',
-      password: ''
-    },
-    validationSchema: LoginSchema,
-    onSubmit: onSubmit
-  });
+  const[errors,setErrors]=useState({
+    email:"",
+    password:""
+  })
+
+  const [formIsValid,setFormIsValid]=useState(true);
+
+  const navigate=useNavigate();
+
+  const handleChange = (e) =>{
+    const {name,value} = e.target;
+    setData({
+      ...data,[name]:value,
+    })
+    setErrors((prevErrors) => ({...prevErrors,[name]:""}));
+  }
+  const validateField = (fieldName, value) => {
+    if (!value.trim()) {
+        setFormIsValid(false);
+        return `${fieldName} is required`;
+    }
+    return '';
+  }; 
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let errors = {};
+    let formIsValid = true;
+
+    errors.email = validateField('Email', data.email);
+    if (errors.email) formIsValid = false;
+
+    errors.password = validateField('Password', data.password);
+    if (errors.password) formIsValid = false;
+
+    setErrors(errors);
+    setFormIsValid(formIsValid);
+
+    
+  }
 
   return (
     <div>
-      <div className="container">
-        <div className="row citizen_login_box">
-          <div className="col-lg-7 col-md-4 col-sm-6 scrb_login_left">
-            
+      <div className='row'>
+        <div className='col'>
+          <img src={scrblogin} className='scrb-login-img'></img>
+        </div>
+        <div className='col'>
+          <div className='text-center mt-5'>
+            <h4 className='scrb-login-h4 pt-5'>SCRB Login</h4>
           </div>
-          <div className="col-lg-5 col-md-8 col-sm-6 citizen_login_right">
-            
-            <h2 className="citizen_login_title" >SCRB Login</h2>
-            <div className="citizen_login_input_grp">
-              <input 
-                type="email" 
-                className="form-control user_inp" 
-                id="email" 
-                placeholder="Email" 
-                name="email" 
-                value={values.email} 
-                onChange={handleChange} 
-                onBlur={handleBlur} 
-              />
-              {errors.email && touched.email && (<span className="text-danger">{errors.email}</span>)}
-              <input 
-                type="password" 
-                className="form-control user_inp mt-3" 
-                id="password" 
-                placeholder="Password" 
-                name="password" 
-                value={values.password} 
-                onChange={handleChange} 
-                onBlur={handleBlur} 
-              />
-              {errors.password && touched.password && (<span className="text-danger">{errors.password}</span>)}
+            <div>
+              <form onSubmit={handleSubmit}>
+                <div className='row'>
+                  <div className='col-3'></div>
+                  <div className='col-6'>
+                    <div className='mt-5'>
+                      <input type='email'
+                      placeholder='Email'
+                      className='scrb-login-textbox ps-3'
+                      name='email'
+                      value={data.email}
+                      onChange={handleChange}
+                      />
+                      {errors.email && <span className='text-danger'>{errors.email}</span>}
+                    </div>
+                    <div className='mt-5'>
+                      <input type='password'
+                      placeholder='Password'
+                      className='scrb-login-textbox ps-3'
+                      name='password'
+                      value={data.password}
+                      onChange={handleChange}
+                      />
+                      {errors.password && <span className='text-danger'>{errors.password}</span>}
+                    </div>
+                    <div className='text-center mt-5'>
+                      <button className='scrb-login-loginbtn'>Login</button>
+                    </div>
 
-              {/* <p className="text-end"><Link to='/scrb_forgotpassword' >Forgot Password?</Link></p> */}
-
-              <button type="submit" className="btn btn-secondary w-100 mt-3" onClick={handleSubmit}>
-                Login
-              </button>
-              {/* <p>Don't have an account? Register</p> */}
+                    <div className='mt-4 scrb-login-forgetlink'>
+                      <Link to='/scrb-forgetpswd' className='scrb-login-linkforget'>Forget Password</Link>
+                    </div>
+                  </div>
+                  <div className='col-3'></div>
+                </div>
+              </form>
             </div>
-          </div>
-          
         </div>
       </div>
     </div>
