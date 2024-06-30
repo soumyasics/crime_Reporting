@@ -72,6 +72,12 @@ function LandingNavbar() {
                       Police Login
                     </Link>
                   </li>
+
+                  <li>
+                    <Link to="/scrb_login" className="dropdown-item">
+                      Scrb Login
+                    </Link>
+                  </li>
                 </ul>
               </li>
               

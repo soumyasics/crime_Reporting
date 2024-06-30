@@ -334,12 +334,13 @@ const createToken = (user) => {
   
 //update profile completed
 const viewallPolicesforadmin = (req, res) => {
-    Police.find({ isactive:'pending'})
+    Police.find({ isActive:'pending'})
     .exec()
         .then((result) => {
             res.json({
                 status: 200,
-                msg: result
+                msg: 'data obtained Succesfully',
+                data:result
             })
         })
         .catch((err) => {
@@ -352,7 +353,9 @@ const viewallPolicesforadmin = (req, res) => {
   }
   //Admin view Police request completed
   const acceptPoliceById = (req, res) => {
-    Police.findByIdAndUpdate({ _id: req.params.id }, { isactive: 'accepted' }).exec()
+    console.log("id",req.params.id);
+
+    Police.findByIdAndUpdate({ _id: req.params.id }, { isActive: 'accepted' }).exec()
         .then((result) => {
             res.json({
                 status: 200,

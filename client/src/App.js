@@ -29,6 +29,17 @@ import PoliceRecentCrimes from './Components/Police/PoliceRecentCrimes';
 import PoliceLandingPageContent from'./Components/Police/PoliceLandingPageContent';
 import PoliceNavbar from './Components/Navbar/PoliceNavbar';
 import AdminHome from './Components/Admin/AdminHome';
+import AdminSidebar from './Components/Admin/AdminSidebar';
+import AdminDashboard from './Components/Admin/AdminDashboard';
+import AdminMain from './Components/Admin/AdminMain';
+import NewPoliceStationReq from './Components/Police/NewPoliceStationReq';
+import PoliceViewCases from './Components/Police/PoliceViewCases';
+import CaseDetails from './Components/Police/CaseDetails';
+import ScrbForgetpswd from './Components/Scrb/ScrbForgetpswd';
+import ReportCrime from './Components/Citizen/ReportCrime';
+import ScrbSidebar from './Components/Scrb/ScrbSidebar';
+import ScrbDashboard from './Components/Scrb/ScrbDashboard';
+import ScrbMain from './Components/Scrb/ScrbMain';
 
 function App() {
   return (
@@ -47,6 +58,7 @@ function App() {
         <Route path='/citizen_register' element={[<LandingNavbar/>,<CitizenRegistration/>]} />
         <Route path='/citizen_home' element={[<UserNavbar/>,<LoginBanner user='citizen' />,<CitizenLandingPage/>]} />
         <Route path='/citizen_profile' element={[<UserNavbar/>,<CitizenProfile/>]} />
+        <Route path='/citizen/reportcrime' element={[<LandingNavbar/>,<ReportCrime/>]}/>
 
         {/* Police  */}
 
@@ -54,18 +66,22 @@ function App() {
         <Route path='/police_login' element={[<LandingNavbar/>,<PoliceLogin/>]} />
         <Route path='/police_forgotpassword' element={[<LandingNavbar/>,<ForgotPassword activeUser='Police' />]} />
         <Route path='/police_home' element={[<PoliceNavbar/>,<LoginBanner user='police' />,<PoliceLandingPageContent/>,<PoliceRecentCrimes/>]} />
-        
+        <Route path='/newpolicestationreq' element={[<LandingNavbar/>,<AdminMain data="newpolicestationreq"/>]} />
+        <Route path='/policeviewcases' element={[<LandingNavbar/>,<PoliceViewCases/>]} />
+        <Route path='/casedetails' element={[<LandingNavbar/>,<CaseDetails/>]}/>
 
         {/* Scrb  */}
 
-        <Route path='/scrb_login' element={[<ScrbLogin/>]} />
-
-
+        <Route path='/scrb_login' element={[<LandingNavbar/>,<ScrbLogin/>]} />
+        <Route path='/scrb-forgetpswd' element={[<LandingNavbar/>,<ScrbForgetpswd/>]}/>
+        <Route path='/scrb-sidebar' element={[<LandingNavbar/>,<ScrbSidebar/>]} />
+        <Route path='/scrb-dashboard' element={[<LandingNavbar/>,<ScrbMain data="scrbdashboard"/>]}/>
         {/* Admin  */}
 
-        <Route path='/admin' element={[<AdminLogin/>]} />
+        <Route path='/admin' element={[<LandingNavbar/>,<AdminLogin/>]} />
         <Route path='/admin_home' element={[<LandingNavbar/>,<AdminHome/>]} />
-
+        {/* <Route path='/admin-main' element={[<LandingNavbar/>,<AdminMain/>]} /> */}
+        <Route path='/admin-dashboard' element={[<LandingNavbar/>,<AdminMain data="admindashboard"/>]} />
 
 
       </Routes>

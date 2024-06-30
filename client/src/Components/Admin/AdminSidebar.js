@@ -1,31 +1,33 @@
 import React from "react";
 import "../../Assets/Styles/AdminSidebar.css";
-import icon1 from "../../Assets/Images/dashIcon1.png";
-import icon2 from "../../Assets/Images/dashIcon2.png";
-import icon3 from "../../Assets/Images/dashIcon3.png";
-import icon4 from "../../Assets/Images/dashIcon3.png";
-import icon5 from "../../Assets/Images/dashIcon5.png";
-import icon6 from "../../Assets/Images/dashIcon6.png";
+import { MdDashboard } from "react-icons/md";
+import { IoIosNotifications } from "react-icons/io";
+import { FaBuildingShield } from "react-icons/fa6";
+import { FaPoll } from "react-icons/fa";
+import { RiGitRepositoryFill } from "react-icons/ri";
+import { FaLock } from "react-icons/fa";
+import { MdOutlineLogout } from "react-icons/md";
+import { MdLocalPolice } from "react-icons/md";
+import { Link } from "react-router-dom";
+
 
 function AdminSidebar() {
-  const menuDetails = [
-    { icon: icon1, title: "Dashboard" },
-    { icon: icon2, title: "Crime Alerts" },
-    { icon: icon3, title: "Police Station" },
-    { icon: icon3, title: "Police Station Request" },
-    { icon: icon4, title: "New Police Stataion" },
-    { icon: icon5, title: "Complaints" },
-    { icon: icon6, title: "Case Reports" },
-  ];
 
-  return (
+
+  return (  
+  
     <div>
-      <div className="admin_sidebar">
-        <div className="admin_container">
-          <div className="admin_title_container" >
-            <div>icon</div>
-            <div>Dashboard</div>
-          </div>
+      <div className="admin-sidebar-background">
+        <div className="pt-5 ms-5 admin-sidebar-h4">
+          <Link to="/admin-dashboard" className="admin-dash-link"><h5 className="pt-5"><MdDashboard/> Dashboard</h5></Link>
+          <Link to='' className="admin-dash-link"><h5 className="pt-4"><IoIosNotifications/> Crime Alerts</h5></Link>
+          <Link to='' className="admin-dash-link"><h5 className="pt-4"><FaBuildingShield/> Police Station</h5></Link>
+          <Link to='/newpolicestationreq' className="admin-dash-link"><h5 className="pt-4"><FaBuildingShield/> Police Station Request</h5></Link>
+          <Link to='' className="admin-dash-link"><h5 className="pt-4"><MdLocalPolice/> New Police Station</h5></Link>
+          <Link to='' className="admin-dash-link"><h5 className="pt-4"><FaPoll/> Complaints</h5></Link>
+          <Link to='' className="admin-dash-link"><h5 className="pt-4"><FaLock/> Change Password</h5></Link>
+          <Link to='' className="admin-dash-link"><h5 className="pt-4"><RiGitRepositoryFill/> Case Report</h5></Link>
+          <Link to='' className="admin-dash-link"><h5 className="pt-4"><MdOutlineLogout/> Logout</h5></Link>
         </div>
       </div>
     </div>
