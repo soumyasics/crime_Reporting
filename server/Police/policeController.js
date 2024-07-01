@@ -334,7 +334,7 @@ const createToken = (user) => {
   
 //update profile completed
 const viewallPolicesforadmin = (req, res) => {
-    Police.find({ isActive:'pending'})
+    Police.find({adminApproved:'false'})
     .exec()
         .then((result) => {
             res.json({
@@ -351,8 +351,10 @@ const viewallPolicesforadmin = (req, res) => {
             console.log(err);
         })
   }
+
   //Admin view Police request completed
-  const acceptPoliceById = (req, res) => {
+
+  const activatePoliceById = (req, res) => {
     console.log("id",req.params.id);
 
     Police.findByIdAndUpdate({ _id: req.params.id }, { isActive: 'accepted' }).exec()
@@ -374,7 +376,7 @@ const viewallPolicesforadmin = (req, res) => {
   }
   //Police accept completed
   
-  const rejectPoliceById =async (req, res) => {
+  const deactivatePoliceById =async (req, res) => {
     await Police.findByIdAndUpdate({ _id: req.params.id },{isActive:'rejected'}).exec()
         .then((result) => {
             res.json({
@@ -392,6 +394,61 @@ const viewallPolicesforadmin = (req, res) => {
         })
   
       }
+
+//Admin view Police request completed
+
+
+//Admin Accept Police
+const acceptPoliceById = (req, res) => {
+    // console.log("id", req.params.id);
+
+    Police.findByIdAndUpdate({_id:req.params.id}, { adminApproved: true  })
+    .then(result => {
+        if (result) { 
+            res.json({
+                status: 200,
+                msg: 'Data obtained',
+                data: result
+            });
+        } else {
+            res.json({
+                status: 200,
+                msg: 'No Data obtained'
+            });
+        }
+    })
+    .catch(err => {
+        res.status(500).json({
+            status: 500,
+            msg: 'Error in API',
+            error: err
+        });
+    });
+};
+
+  //Police accept completed
+  
+  //Admin reject Police
+  const rejectPoliceById =async (req, res) => {
+    Police.findByIdAndDelete({_id:req.params.id})
+    .exec()
+        .then((result) => {
+            res.json({
+                status: 200,
+                data: result,
+                msg: 'data deleted'
+            })
+        })
+        .catch(err => {
+            res.json({
+                status: 500,
+                msg: 'Error in API',
+                err: err
+            })
+        })
+  
+      }
+
 module.exports={
     registerPolice,
     viewPolices,
@@ -405,6 +462,8 @@ module.exports={
 upload,
 viewallPolicesforadmin,
 acceptPoliceById,
-rejectPoliceById
+rejectPoliceById,
+activatePoliceById,
+deactivatePoliceById
 
 }
