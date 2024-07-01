@@ -41,7 +41,7 @@ function AdminLogin() {
       console.log(values);
       if(mail== data.email && pass==data.password){
         alert("Logged in Successfully");
-        Navigate("/admin-main")
+        Navigate("/admin_home")
       }
       else{
         alert("Username or password is incorrect")

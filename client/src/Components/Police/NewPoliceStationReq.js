@@ -26,27 +26,30 @@ const getData=()=>{
        getData()
     },[])
 
-    const handleApprove = (id) =>{
-        console.log("in btn",id);
+    const handleApprove = (id) => {
+        console.log("in btn", id);
         axiosInstance.post(`/acceptPoliceById/${id}`)
-        .then((res) => {
-            console.log(res);
-            if(res.data.status === 200){
-                const updatedData = data.map((newpolicestationreq) => {
-                    if(newpolicestationreq._id === id){
-                        return { ...newpolicestationreq,adminApproved:true};
-                    }
-                    return newpolicestationreq;
-                });
-                setData(updatedData);
-                // window.location.reload()
-                getData()
-            }
-        })
-        .catch((error) => {
-            console.error("Error",error);
-        });
+            .then((res) => {
+                console.log(res);
+                if (res.data.status === 200) {
+                    const updatedData = data.map((newpolicestationreq) => {
+                        if (newpolicestationreq._id === id) {
+                            return { ...newpolicestationreq, adminApproved: true };
+                        }
+                        return newpolicestationreq;
+                    });
+                    setData(updatedData);
+                    window.location.reload()
+                    getData();
+                } else {
+                    console.error("No data obtained");
+                }
+            })
+            .catch((error) => {
+                console.error("Error", error);
+            });
     };
+    
 
     const handleReject = (id) => {
         axiosInstance.post(`rejectPoliceById/${id}`)
@@ -59,7 +62,7 @@ const getData=()=>{
                     return newpolicestationreq;
                 });
                 setData(updatedData);
-                // window.location.reload();
+                window.location.reload();
             }
         })
         .catch((err) => {

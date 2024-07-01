@@ -39,13 +39,17 @@ const policeSchema=mongoose.Schema({
         unique:true,
         required:true,
     },
-idProof:{
+    idProof:{
         type:Object,
         required:true,
     },
     isActive:{
         type:String,
         default:'pending'
+    },
+    adminApproved:{
+        type:Boolean,
+        default:false
     }
 })
 module.exports=mongoose.model('police',policeSchema)
