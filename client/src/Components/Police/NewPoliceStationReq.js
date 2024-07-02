@@ -4,6 +4,7 @@ import { IoEyeSharp } from "react-icons/io5";
 import { TiTick } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
 import './Police.css';
+import { Link } from 'react-router-dom';
 function NewPoliceStationReq() {
 
     const[data,setData]=useState([])
@@ -101,9 +102,12 @@ const getData=()=>{
                             <td>{newpolicestationreq.policestationcode}</td>
                             <td>{newpolicestationreq.district}</td>
                             <td >
+                                <Link to={`/viewallpolicereq/${newpolicestationreq._id}`}>
                                 <button className='newpolice-stationreq-eye'>
                                     <IoEyeSharp/>
-                                </button>                               
+                                </button>
+                                </Link>
+                                                               
                                 <button className='ms-4 newpolice-stationreq-tick' onClick={()=>handleApprove(newpolicestationreq._id)}>
                                     <TiTick  />
                                 </button>

@@ -208,3 +208,66 @@
     border-radius: 10px;
     font-weight: bold;
 }
+
+/* View All Police Station */
+
+.viewallpolicest_icon{
+    background-color: transparent;
+    color:  #4B84F3;
+    font-size: 30px;
+    cursor: pointer;
+    border: none;
+    width: 35%;
+}
+
+.viewpolicestation_cross_icon{
+    background-color: red;
+    color: white;
+    border: none;
+    height: 30px;
+    width: 30px;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.viewpolicestation_tick_icon{
+    background-color: #088C1D;
+    color: white;
+    border: none;
+    height: 30px;
+    width: 30px;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* View Police Station Profile */
+
+.viewprofile_policestation{
+    padding-top: 100px;
+}
+
+.viewprofile_policestation_cross_icon{
+    background-color: red;
+    color: white;
+    border: none;
+    margin-top: 20px;
+    height: 40px;
+    width: 150px;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.viewprofile_policestation_tick_icon{
+    background-color: #088C1D;
+    color: white;
+    border: none;
+    margin-top: 20px;
+    height: 40px;
+    width: 150px;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}

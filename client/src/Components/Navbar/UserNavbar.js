@@ -91,7 +91,7 @@ function UserNavbar() {
           </button>
           <div class="collapse navbar-collapse flex-grow-0 mt-3">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 " id="text_color_white">
-              <li class="nav-item">
+              <li class="nav-item m-3">
                 <Link
                 to={'/citizen_home'}
                   class="nav-link"
@@ -101,27 +101,27 @@ function UserNavbar() {
                   Home
                 </Link>
               </li>
-              <li class="nav-item">
+              <li class="nav-item m-3">
                 <a class="nav-link" href="#" id="text_color_white">
                   Crime
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item m-3">
                 <a class="nav-link" href="#" id="text_color_white">
                   Complaints
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item m-3">
                 <a class="nav-link" href="#" id="text_color_white">
                   View Alerts
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item m-3">
                 <a class="nav-link" href="#" id="text_color_white">
                   Police Station
                 </a>
               </li>
-              <li class="nav-item ">
+              <li class="nav-item m-3">
                
                 <div class="dropdown-center">
                   <button

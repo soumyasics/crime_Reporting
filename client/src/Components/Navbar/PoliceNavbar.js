@@ -13,6 +13,9 @@ function PoliceNavbar() {
     }
   });
 
+  const id = localStorage.getItem('policeId');
+
+
     const handleLogout = () => {
         localStorage.clear();
         navigate("/");
@@ -47,7 +50,7 @@ function PoliceNavbar() {
           </button>
           <div class="collapse navbar-collapse flex-grow-0 mt-3">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 " id="text_color_white">
-              <li class="nav-item">
+              <li class="nav-item m-3">
                 <Link
                 to={'/police_home'}
                   class="nav-link"
@@ -57,7 +60,19 @@ function PoliceNavbar() {
                   Home
                 </Link>
               </li>
-              <li class="nav-item">
+
+              <li class="nav-item m-3">
+                <Link
+                to={`/policeprofile/${id}`}
+                  class="nav-link"
+                  aria-current="page"
+                  id="text_color_white"
+                >
+                  Profile
+                </Link>
+              </li>
+
+              <li class="nav-item m-3">
                 <Link
                 to={'/'} onClick={handleLogout}
                   class="nav-link"
@@ -67,6 +82,7 @@ function PoliceNavbar() {
                   Logout
                 </Link>
               </li>
+              
              
               {/* <li class="nav-item">
                 <a class="nav-link" href="#" id="text_color_white">
