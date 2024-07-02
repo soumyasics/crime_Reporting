@@ -26,5 +26,6 @@ router.post('/rejectPoliceById/:id',police.rejectPoliceById)
 router.post('/activatePoliceById/:id',police.activatePoliceById)
 router.post('/deactivatePoliceById/:id',police.deactivatePoliceById)
 router.post('/viewPolices',police.viewPolices)
+router.post('/viewpolice/:id',police.viewPoliceById)
 
 module.exports=router

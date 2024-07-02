@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react'
+import { Link } from 'react-router-dom'
 import "../../Assets/Styles/Navbar.css";
 import logo from "../../Assets/Images/logo.png";
-import { Link } from "react-router-dom";
 
-function LandingNavbar() {
+function LoginNav() {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar_bg">
+        <nav className="navbar navbar-expand-lg navbar_bg">
         <div className="container-fluid">
           <Link to='/' className="text-decoration-none">
             <div className="navbar_logo">
@@ -42,52 +42,25 @@ function LandingNavbar() {
                   Home
                 </Link>
               </li>
+
               <li className="nav-item m-3">
                 <Link to="/about" className="nav-link" id="text_color_white">
                   About Us
                 </Link>
               </li>
               
-              <div className="dropdown-center" >
               <li className="nav-item m-3">
-                <Link
-                  to="#"
-                  className="nav-link "
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  id="text_color_white"
-                >
-                  Sign In
+                <Link to="" className="nav-link" id="text_color_white">
+                  Contact Us
                 </Link>
-                <ul className="dropdown-menu landing_dropdown_style" aria-labelledby="navbarDropdown">
-                  <li>
-                    <Link to="/citizen_login" className="dropdown-item">
-                      Citizen Login
-                    </Link>
-                  </li>
-                 
-                  <li>
-                    <Link to="/police_login" className="dropdown-item">
-                      Police Login
-                    </Link>
-                  </li>
-
-                  <li>
-                    <Link to="/scrb_login" className="dropdown-item">
-                      Scrb Login
-                    </Link>
-                  </li>
-                </ul>
               </li>
-              </div>
               
             </ul>
           </div>
         </div>
       </nav>
     </div>
-  );
+  )
 }
 
-export default LandingNavbar;
+export default LoginNav

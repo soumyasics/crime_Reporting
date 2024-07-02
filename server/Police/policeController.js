@@ -83,7 +83,7 @@ const registerPolice = async (req, res) => {
 
 // View all Polices
 const viewPolices = (req, res) => {
-    Police.find()
+    Police.find({adminApproved:true})
         .exec()
         .then(data => {
             if (data.length > 0) {
@@ -376,7 +376,6 @@ const viewallPolicesforadmin = (req, res) => {
                 err: err
             })
         })
-  
   }
   //Police accept completed
   

@@ -26,13 +26,13 @@ function CitizenRegistration() {
         console.log('working', res);
         if (res.data.status === 200) {
           localStorage.setItem('citizenToken', res.data.data._id);
-          toast.success("Login Successful");
-          navigate('/citizen_home');
+          toast.success("Registation Successful");
+          navigate('/citizen_login');
 
         } else if (res.data.status === 405) {
           toast.warning(res.data.msg);
         } else {
-          toast.error('Login Failed');
+          toast.error('Registation Failed');
         }
       })
       .catch((err) => {
