@@ -21,7 +21,7 @@ function PoliceLogin() {
             if (res.data.status === 200) {
                 if (!isToastVisible) {
                     setToastVisible(true);
-                    toast.success("Registration Successful", {
+                    toast.success("Login Successful", {
                         onClose: () => setToastVisible(false),
                     });
                 }
