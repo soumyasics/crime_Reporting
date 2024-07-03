@@ -58,7 +58,7 @@ function App() {
         <Route path='/citizen_register' element={[<LandingNavbar/>,<CitizenRegistration/>]} />
         <Route path='/citizen_home' element={[<UserNavbar/>,<LoginBanner user='citizen' />,<CitizenLandingPage/>]} />
         <Route path='/citizen_profile' element={[<UserNavbar/>,<CitizenProfile/>]} />
-        <Route path='/citizen/reportcrime' element={[<LandingNavbar/>,<ReportCrime/>]}/>
+        <Route path='/citizen/reportcrime' element={[<UserNavbar/>,<ReportCrime/>]}/>
 
         {/* Police  */}
 
@@ -66,7 +66,7 @@ function App() {
         <Route path='/police_login' element={[<LandingNavbar/>,<PoliceLogin/>]} />
         <Route path='/police_forgotpassword' element={[<LandingNavbar/>,<ForgotPassword activeUser='Police' />]} />
         <Route path='/police_home' element={[<PoliceNavbar/>,<LoginBanner user='police' />,<PoliceLandingPageContent/>,<PoliceRecentCrimes/>]} />
-        <Route path='/newpolicestationreq' element={[<LandingNavbar/>,<AdminMain data="newpolicestationreq"/>]} />
+        <Route path='/newpolicestationreq' element={[<AdminMain data="newpolicestationreq"/>]} />
         <Route path='/policeviewcases' element={[<LandingNavbar/>,<PoliceViewCases/>]} />
         <Route path='/casedetails' element={[<LandingNavbar/>,<CaseDetails/>]}/>
 
@@ -78,10 +78,10 @@ function App() {
         <Route path='/scrb-dashboard' element={[<LandingNavbar/>,<ScrbMain data="scrbdashboard"/>]}/>
         {/* Admin  */}
 
-        <Route path='/admin' element={[<LandingNavbar/>,<AdminLogin/>]} />
-        <Route path='/admin_home' element={[<LandingNavbar/>,<AdminHome/>]} />
+        <Route path='/admin' element={[<AdminLogin/>]} />
+        <Route path='/admin_home' element={[<AdminHome/>]} />
         {/* <Route path='/admin-main' element={[<LandingNavbar/>,<AdminMain/>]} /> */}
-        <Route path='/admin-dashboard' element={[<LandingNavbar/>,<AdminMain data="admindashboard"/>]} />
+        <Route path='/admin-dashboard' element={[<AdminMain data="admindashboard"/>]} />
 
 
       </Routes>
