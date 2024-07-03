@@ -62,7 +62,7 @@ function App() {
         <Route path='/citizen_register' element={[<LoginNav/>,<CitizenRegistration/>]} />
         <Route path='/citizen_home' element={[<UserNavbar/>,<LoginBanner user='citizen' />,<CitizenLandingPage/>]} />
         <Route path='/citizen_profile' element={[<UserNavbar/>,<CitizenProfile/>]} />
-        <Route path='/citizen/reportcrime' element={[<LandingNavbar/>,<ReportCrime/>]}/>
+        <Route path='/citizen/reportcrime' element={[<UserNavbar/>,<ReportCrime/>]}/>
 
         {/* Police  */}
 
@@ -70,6 +70,7 @@ function App() {
         <Route path='/police_login' element={[<LoginNav/>,<PoliceLogin/>]} />
         <Route path='/police_forgotpassword' element={[<LoginNav/>,<ForgotPassword activeUser='Police' />]} />
         <Route path='/police_home' element={[<PoliceNavbar/>,<LoginBanner user='police' />,<PoliceLandingPageContent/>,<PoliceRecentCrimes/>]} />
+        <Route path='/newpolicestationreq' element={[<AdminMain data="newpolicestationreq"/>]} />
         <Route path='/policeviewcases' element={[<LandingNavbar/>,<PoliceViewCases/>]} />
         <Route path='/casedetails' element={[<LandingNavbar/>,<CaseDetails/>]}/>
         <Route path='/policeprofile/:id' element={[<PoliceNavbar/>,<PoliceProfile/>]} />

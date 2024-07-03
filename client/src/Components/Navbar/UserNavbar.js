@@ -101,10 +101,10 @@ function UserNavbar() {
                   Home
                 </Link>
               </li>
-              <li class="nav-item m-3">
-                <a class="nav-link" href="#" id="text_color_white">
+              <li class="nav-item">
+                <Link class="nav-link" to={'/citizen/reportcrime'} id="text_color_white">
                   Crime
-                </a>
+                </Link>
               </li>
               <li class="nav-item m-3">
                 <a class="nav-link" href="#" id="text_color_white">

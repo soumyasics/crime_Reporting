@@ -3,16 +3,29 @@ import './Police.css';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../Constants/BaseUrl';
 import { toast } from 'react-toastify';
-import { useFormik } from 'formik';
-import { PoliceRegistrationSchema } from '../Constants/Schema';
 import station from '../../Assets/Images/policestation.png';
 
 function PoliceProfile() {
   const [userDetails, setUserDetails] = useState({});
+  const [formData, setFormData] = useState({
+    policestationname: '',
+    policestationcode: '',
+    stationchargeofficers: '',
+    totalofficers: '',
+    aadhar: '',
+    password: '',
+    address: '',
+    contact: '',
+    district: '',
+    email: '',
+    idProof: null,
+  });
+
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem("policeId") == null) {
+    if (!localStorage.getItem("policeId")) {
       navigate("/");
     }
   }, [navigate]);
@@ -20,8 +33,7 @@ function PoliceProfile() {
   const id = localStorage.getItem('policeId');
 
   useEffect(() => {
-    axiosInstance
-      .post(`/viewpolice/${id}`)
+    axiosInstance.post(`/viewpolice/${id}`)
       .then((res) => {
         if (res.data.status === 200) {
           setUserDetails(res.data.data);
@@ -33,51 +45,101 @@ function PoliceProfile() {
       });
   }, [id]);
 
-  const onSubmit = (values) => {
-    const { confirmPassword, ...dataToSend } = values;
-    console.log(dataToSend);
-    axiosInstance.post(`/editPoliceById/${id}`, dataToSend)
-      .then((res) => {
-        console.log(res);
+  useEffect(() => {
+    if (userDetails) {
+      setFormData({
+        policestationname: userDetails.policestationname || '',
+        policestationcode: userDetails.policestationcode || '',
+        stationchargeofficers: userDetails.stationchargeofficers || '',
+        totalofficers: userDetails.totalofficers || '',
+        aadhar: userDetails.aadhar || '',
+        password: userDetails.password || '',
+        address: userDetails.address || '',
+        contact: userDetails.contact || '',
+        district: userDetails.district || '',
+        email: userDetails.email || '',
+        idProof: null,
+      });
+    }
+  }, [userDetails]);
+
+  const handleChange = (event) => {
+    const { name, value, files } = event.target;
+    if (files) {
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: files[0],
+      }));
+    } else {
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
+    setErrors((prevState) => ({
+      ...prevState,
+      [name]: '',
+    }));
+  };
+
+  function validateField(fieldName, value) {
+    if (typeof value === 'string' && !value.trim()) {
+      return `${fieldName} is required`;
+    }
+    if (!value) {
+      return `${fieldName} is required`;
+    }
+    return '';
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    let errors = {};
+    let formIsValid = true;
+
+    // Validate each field
+    errors.policestationname = validateField('Police Station Name', formData.policestationname);
+    errors.policestationcode = validateField('Police Station Code', formData.policestationcode);
+    errors.stationchargeofficers = validateField('Station Charge Officers', formData.stationchargeofficers);
+    errors.totalofficers = validateField('Total Officers', formData.totalofficers);
+    errors.address = validateField('Address', formData.address);
+    errors.contact = validateField('Contact', formData.contact);
+    errors.district = validateField('District', formData.district);
+    errors.email = validateField('Email', formData.email);
+
+    setErrors(errors);
+
+    for (let key in errors) {
+      if (errors[key]) {
+        formIsValid = false;
+        break;
+      }
+    }
+
+    if (formIsValid) {
+      const formDataToSend = new FormData();
+      Object.keys(formData).forEach((key) => {
+        if (key === 'idProof' && formData[key] !== null) {
+          formDataToSend.append(key, formData[key]);
+        } else {
+          formDataToSend.append(key, formData[key]);
+        }
+      });
+
+      try {
+        const res = await axiosInstance.post(`/editPoliceById/${id}`, formDataToSend);
         if (res.data.status === 200) {
           toast.success("Updated Successfully");
         } else {
           toast.warning(res.data.msg);
         }
-      })
-      .catch((err) => {
+      } catch (error) {
         toast.error("Updation Failed");
-        console.error("Error updating police details:", err);
-      });
+        console.error("Error updating police details:", error);
+      }
+    }
   };
-
-  const initialPoliceDetails = {
-    policestationname: userDetails.policestationname || '',
-    policestationcode: userDetails.policestationcode || '',
-    stationchargeofficers: userDetails.stationchargeofficers || '',
-    totalofficers: userDetails.totalofficers || '',
-    aadhar: userDetails.aadhar || '',
-    password: userDetails.password || '',
-    address: userDetails.address || '',
-    contact: userDetails.contact || '',
-    district: userDetails.district || '',
-    email: userDetails.email || '',
-    idProof: userDetails.idProof,
-  };
-
-  const {
-    values,
-    errors,
-    touched,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-  } = useFormik({
-    initialValues: initialPoliceDetails,
-    validationSchema: PoliceRegistrationSchema,
-    onSubmit,
-    enableReinitialize: true,
-  });
 
   return (
     <div className="citizen_profile">
@@ -85,12 +147,12 @@ function PoliceProfile() {
         <div className="container citizen_profile_title d-flex justify-content-between">
           <div className="citizen_profile_name">
             <h4>PROFILE</h4>
-            <p>{values.policestationname}</p>
+            <p>{formData.policestationname}</p>
           </div>
         </div>
       </div>
       <div className="container citizen_profile_body">
-        <form onSubmit={(e)=>{handleSubmit(e)}}>
+        <form onSubmit={handleSubmit}>
           <div className='row'>
             <div className='col-6'>
               <img src={station} className='img-fluid' alt="station" />
@@ -104,11 +166,10 @@ function PoliceProfile() {
                     id="policestationname"
                     placeholder="Police Station Name"
                     name="policestationname"
-                    value={values.policestationname}
+                    value={formData.policestationname}
                     onChange={handleChange}
-                    onBlur={handleBlur}
                   />
-                  {errors.policestationname && touched.policestationname && (
+                  {errors.policestationname && (
                     <span className="text-danger">{errors.policestationname}</span>
                   )}
                 </div>
@@ -119,11 +180,10 @@ function PoliceProfile() {
                     id="policestationcode"
                     placeholder="Police Station Code"
                     name="policestationcode"
-                    value={values.policestationcode}
+                    value={formData.policestationcode}
                     onChange={handleChange}
-                    onBlur={handleBlur}
                   />
-                  {errors.policestationcode && touched.policestationcode && (
+                  {errors.policestationcode && (
                     <span className="text-danger">{errors.policestationcode}</span>
                   )}
                 </div>
@@ -134,11 +194,10 @@ function PoliceProfile() {
                     id="address"
                     placeholder="Address"
                     name="address"
-                    value={values.address}
+                    value={formData.address}
                     onChange={handleChange}
-                    onBlur={handleBlur}
                   />
-                  {errors.address && touched.address && (
+                  {errors.address && (
                     <span className="text-danger">{errors.address}</span>
                   )}
                 </div>
@@ -149,11 +208,10 @@ function PoliceProfile() {
                     id="stationchargeofficers"
                     placeholder="Station Charge Officers"
                     name="stationchargeofficers"
-                    value={values.stationchargeofficers}
+                    value={formData.stationchargeofficers}
                     onChange={handleChange}
-                    onBlur={handleBlur}
                   />
-                  {errors.stationchargeofficers && touched.stationchargeofficers && (
+                  {errors.stationchargeofficers && (
                     <span className="text-danger">{errors.stationchargeofficers}</span>
                   )}
                 </div>
@@ -164,11 +222,10 @@ function PoliceProfile() {
                     id="contact"
                     placeholder="Contact"
                     name="contact"
-                    value={values.contact}
+                    value={formData.contact}
                     onChange={handleChange}
-                    onBlur={handleBlur}
                   />
-                  {errors.contact && touched.contact && (
+                  {errors.contact && (
                     <span className="text-danger">{errors.contact}</span>
                   )}
                 </div>
@@ -179,11 +236,10 @@ function PoliceProfile() {
                     id="totalofficers"
                     placeholder="Total Officers"
                     name="totalofficers"
-                    value={values.totalofficers}
+                    value={formData.totalofficers}
                     onChange={handleChange}
-                    onBlur={handleBlur}
                   />
-                  {errors.totalofficers && touched.totalofficers && (
+                  {errors.totalofficers && (
                     <span className="text-danger">{errors.totalofficers}</span>
                   )}
                 </div>
@@ -193,12 +249,11 @@ function PoliceProfile() {
                     className="form-control user_inp"
                     id="district"
                     placeholder="District"
-                    value={values.district}
+                    value={formData.district}
                     onChange={handleChange}
-                    onBlur={handleBlur}
                     name="district"
                   />
-                  {errors.district && touched.district && (
+                  {errors.district && (
                     <span className="text-danger">{errors.district}</span>
                   )}
                 </div>
@@ -209,11 +264,10 @@ function PoliceProfile() {
                     id="email"
                     placeholder="Email"
                     name="email"
-                    value={values.email}
+                    value={formData.email}
                     onChange={handleChange}
-                    onBlur={handleBlur}
                   />
-                  {errors.email && touched.email && (
+                  {errors.email && (
                     <span className="text-danger">{errors.email}</span>
                   )}
                 </div>
@@ -231,4 +285,4 @@ function PoliceProfile() {
   );
 }
 
-export default PoliceProfile;
+export default PoliceProfile

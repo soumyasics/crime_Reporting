@@ -53,8 +53,6 @@ function PoliceLogin() {
         }
       );
     console.log(values);
-    navigate('/police_home');
-
   };
 
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
