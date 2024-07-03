@@ -80,7 +80,7 @@ function App() {
         <Route path='/scrb_login' element={[<LoginNav/>,<ScrbLogin/>]} />
         <Route path='/scrb-forgetpswd' element={[<LoginNav/>,<ScrbForgetpswd/>]}/>
         <Route path='/scrb-sidebar' element={[<LandingNavbar/>,<ScrbSidebar/>]} />
-        <Route path='/scrb-dashboard' element={[<LandingNavbar/>,<ScrbMain data="scrbdashboard"/>]}/>
+        <Route path='/scrb-dashboard' element={[<LoginNav/>,<ScrbMain data="scrbdashboard"/>]}/>
 
 
         {/* Admin  */}
