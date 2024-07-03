@@ -40,6 +40,10 @@ import ReportCrime from './Components/Citizen/ReportCrime';
 import ScrbSidebar from './Components/Scrb/ScrbSidebar';
 import ScrbDashboard from './Components/Scrb/ScrbDashboard';
 import ScrbMain from './Components/Scrb/ScrbMain';
+import PoliceProfile from './Components/Police/PoliceProfile';
+import ViewAllPoliceStation from './Components/Police/ViewAllPoliceStation';
+import ViewProfile_Policestation from './Components/Police/ViewProfile_Policestation';
+import LoginNav from './Components/Navbar/LoginNav';
 
 function App() {
   return (
@@ -53,35 +57,45 @@ function App() {
 
         {/* Citizen  */}
 
-        <Route path='/citizen_login' element={[<LandingNavbar/>,<CitizenLogin/>]} />
-        <Route path='/citizen_forgotpassword' element={[<LandingNavbar/>,<ForgotPassword activeUser='Citizen' />]} />
-        <Route path='/citizen_register' element={[<LandingNavbar/>,<CitizenRegistration/>]} />
+        <Route path='/citizen_login' element={[<LoginNav/>,<CitizenLogin/>]} />
+        <Route path='/citizen_forgotpassword' element={[<LoginNav/>,<ForgotPassword activeUser='Citizen' />]} />
+        <Route path='/citizen_register' element={[<LoginNav/>,<CitizenRegistration/>]} />
         <Route path='/citizen_home' element={[<UserNavbar/>,<LoginBanner user='citizen' />,<CitizenLandingPage/>]} />
         <Route path='/citizen_profile' element={[<UserNavbar/>,<CitizenProfile/>]} />
         <Route path='/citizen/reportcrime' element={[<UserNavbar/>,<ReportCrime/>]}/>
 
         {/* Police  */}
 
-        <Route path='/police_register' element={[<LandingNavbar/>,<PoliceRegister/>]} />
-        <Route path='/police_login' element={[<LandingNavbar/>,<PoliceLogin/>]} />
-        <Route path='/police_forgotpassword' element={[<LandingNavbar/>,<ForgotPassword activeUser='Police' />]} />
+        <Route path='/police_register' element={[<LoginNav/>,<PoliceRegister/>]} />
+        <Route path='/police_login' element={[<LoginNav/>,<PoliceLogin/>]} />
+        <Route path='/police_forgotpassword' element={[<LoginNav/>,<ForgotPassword activeUser='Police' />]} />
         <Route path='/police_home' element={[<PoliceNavbar/>,<LoginBanner user='police' />,<PoliceLandingPageContent/>,<PoliceRecentCrimes/>]} />
         <Route path='/newpolicestationreq' element={[<AdminMain data="newpolicestationreq"/>]} />
         <Route path='/policeviewcases' element={[<LandingNavbar/>,<PoliceViewCases/>]} />
         <Route path='/casedetails' element={[<LandingNavbar/>,<CaseDetails/>]}/>
+        <Route path='/policeprofile/:id' element={[<PoliceNavbar/>,<PoliceProfile/>]} />
+
 
         {/* Scrb  */}
 
-        <Route path='/scrb_login' element={[<LandingNavbar/>,<ScrbLogin/>]} />
-        <Route path='/scrb-forgetpswd' element={[<LandingNavbar/>,<ScrbForgetpswd/>]}/>
+        <Route path='/scrb_login' element={[<LoginNav/>,<ScrbLogin/>]} />
+        <Route path='/scrb-forgetpswd' element={[<LoginNav/>,<ScrbForgetpswd/>]}/>
         <Route path='/scrb-sidebar' element={[<LandingNavbar/>,<ScrbSidebar/>]} />
-        <Route path='/scrb-dashboard' element={[<LandingNavbar/>,<ScrbMain data="scrbdashboard"/>]}/>
+        <Route path='/scrb-dashboard' element={[<LoginNav/>,<ScrbMain data="scrbdashboard"/>]}/>
+
+
         {/* Admin  */}
 
-        <Route path='/admin' element={[<AdminLogin/>]} />
-        <Route path='/admin_home' element={[<AdminHome/>]} />
-        {/* <Route path='/admin-main' element={[<LandingNavbar/>,<AdminMain/>]} /> */}
-        <Route path='/admin-dashboard' element={[<AdminMain data="admindashboard"/>]} />
+        <Route path='/admin' element={[<LoginNav/>,<AdminLogin/>]} />
+        <Route path='/admin_home' element={[<LoginNav/>,<AdminHome/>]} />
+        <Route path='/admin-dashboard' element={[<LoginNav/>,<AdminMain data="admindashboard"/>]} />
+
+        {/* Admin View Police */}
+
+        <Route path='/viewallpolicestation' element={[<LoginNav/>,<AdminMain data="viewallpolicestation"/>]} />
+        <Route path='/viewallpolice/:id' element={[<LoginNav/>,<AdminMain data="viewallpoliceprofile"/>]}/>
+        <Route path='/viewallpolicereq/:id' element={[<LoginNav/>,<AdminMain data="viewallpolicereqprofile"/>]}/>
+        <Route path='/newpolicestationreq' element={[<LoginNav/>,<AdminMain data="newpolicestationreq"/>]} />
 
 
       </Routes>

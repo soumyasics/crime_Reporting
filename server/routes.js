@@ -1,6 +1,7 @@
 const router=require('express').Router()
 const citizen=require('./Citizen/citizenController')
 const police=require('./Police/policeController')
+const crime=require('./Crime/crimeController')
 
 //citizen routes
 router.post('/registerCitizen', citizen.registerCitizen);//done
@@ -26,5 +27,16 @@ router.post('/rejectPoliceById/:id',police.rejectPoliceById)
 router.post('/activatePoliceById/:id',police.activatePoliceById)
 router.post('/deactivatePoliceById/:id',police.deactivatePoliceById)
 router.post('/viewPolices',police.viewPolices)
+router.post('/viewpolice/:id',police.viewPoliceById)
+
+
+//Crime Routes
+router.post('/addcrime',crime.upload,crime.addCrime)
+router.post('/viewallcrime',crime.viewCrime)
+router.post('/viewCrimeById/:id',crime.viewCrimeById)
+router.post('/editCrimeById/:id',crime.editCaseById) // Not Working
+router.post('/acceptCrimeById/:id',crime.acceptCrimeById)
+router.post('/rejectCrimeById/:id',crime.rejectCrimeById)
+
 
 module.exports=router

@@ -44,8 +44,8 @@ const policeSchema=mongoose.Schema({
         required:true,
     },
     isActive:{
-        type:String,
-        default:'pending'
+        type:Boolean,
+        default:false
     },
     adminApproved:{
         type:Boolean,

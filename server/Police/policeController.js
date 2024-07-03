@@ -83,7 +83,7 @@ const registerPolice = async (req, res) => {
 
 // View all Polices
 const viewPolices = (req, res) => {
-    Police.find()
+    Police.find({adminApproved:true})
         .exec()
         .then(data => {
             if (data.length > 0) {
@@ -293,7 +293,11 @@ const createToken = (user) => {
         if (user.password!=password) {
           return res.json({ status:405,msg: 'Password Mismatch !!' });
         }
-  
+        if (!user.adminApproved) {
+            return res.json({ status:405,msg: 'Waiting for Admin Approval !!' });
+          } if (!user.isActive) {
+            return res.json({ status:405,msg: 'You Are Currently Deactivated By Admin !!' });
+          }
       
         const token = createToken(user);
   
@@ -357,7 +361,7 @@ const viewallPolicesforadmin = (req, res) => {
   const activatePoliceById = (req, res) => {
     console.log("id",req.params.id);
 
-    Police.findByIdAndUpdate({ _id: req.params.id }, { isActive: 'accepted' }).exec()
+    Police.findByIdAndUpdate({ _id: req.params.id }, { isActive:true }).exec()
         .then((result) => {
             res.json({
                 status: 200,
@@ -372,12 +376,11 @@ const viewallPolicesforadmin = (req, res) => {
                 err: err
             })
         })
-  
   }
   //Police accept completed
   
   const deactivatePoliceById =async (req, res) => {
-    await Police.findByIdAndUpdate({ _id: req.params.id },{isActive:'rejected'}).exec()
+    await Police.findByIdAndUpdate({ _id: req.params.id },{isActive:false}).exec()
         .then((result) => {
             res.json({
                 status: 200,
@@ -402,7 +405,7 @@ const viewallPolicesforadmin = (req, res) => {
 const acceptPoliceById = (req, res) => {
     // console.log("id", req.params.id);
 
-    Police.findByIdAndUpdate({_id:req.params.id}, { adminApproved: true  })
+    Police.findByIdAndUpdate({_id:req.params.id}, { adminApproved: true,isActive:true  })
     .then(result => {
         if (result) { 
             res.json({

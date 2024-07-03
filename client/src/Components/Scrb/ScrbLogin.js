@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
 import '../../Assets/Styles/Scrb.css'
-import { Link, useNavigate } from 'react-router-dom'
-import { useFormik } from 'formik';
-import { LoginSchema } from "../Constants/Schema";
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import scrblogin from '../../Assets/Images/scrblogin.png'
-import axios from 'axios';
 
 function ScrbLogin() {
 
@@ -12,6 +9,9 @@ function ScrbLogin() {
     email:"",
     password:""
   })
+
+  let username="Scrb"
+  let pass="Scrb@123"
 
   const[errors,setErrors]=useState({
     email:"",
@@ -41,18 +41,28 @@ function ScrbLogin() {
     e.preventDefault();
     let errors = {};
     let formIsValid = true;
-
+  
     errors.email = validateField('Email', data.email);
     if (errors.email) formIsValid = false;
-
+  
     errors.password = validateField('Password', data.password);
     if (errors.password) formIsValid = false;
-
+  
     setErrors(errors);
-    setFormIsValid(formIsValid);
-
-    
-  }
+  
+    if (formIsValid) {
+      const values = { email: data.email, password: data.password };
+      console.log(values);
+  
+      if (username === data.email && pass === data.password) {
+        alert("Logged in Successfully");
+        navigate("/scrb-dashboard");
+      } else {
+        alert("Username or password is incorrect");
+      }
+    }
+  };
+  
 
   return (
     <div>
@@ -70,7 +80,7 @@ function ScrbLogin() {
                   <div className='col-3'></div>
                   <div className='col-6'>
                     <div className='mt-5'>
-                      <input type='email'
+                      <input type='text'
                       placeholder='Email'
                       className='scrb-login-textbox ps-3'
                       name='email'

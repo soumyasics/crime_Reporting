@@ -4,6 +4,9 @@ import AdminDashboard from './AdminDashboard'
 import AdminLogin from './AdminLogin'
 import PoliceRegister from '../Police/PoliceRegister'
 import NewPoliceStationReq from '../Police/NewPoliceStationReq'
+import ViewAllPoliceStation from '../Police/ViewAllPoliceStation'
+import ViewProfile_Policestation from '../Police/ViewProfile_Policestation'
+import ViewProfile_PoliceReq from '../Police/ViewProfile_PoliceReq'
 
 function AdminMain({data}) {
   return (
@@ -18,9 +21,15 @@ function AdminMain({data}) {
             <AdminDashboard/>
            ):data === "newpolicestationreq" ?(
             <NewPoliceStationReq/>
-           ):(
+           ):data === "viewallpolicestation" ?(
+            <ViewAllPoliceStation/>
+           ):data === "viewallpoliceprofile" ?(
+              <ViewProfile_Policestation/>
+           ):data === "viewallpolicereqprofile" ?(
+              <ViewProfile_PoliceReq/>
+           ):
            <AdminDashboard/>
-           )}
+           }
           </div>
         </div>
       </div>

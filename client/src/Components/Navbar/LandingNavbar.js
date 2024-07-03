@@ -32,7 +32,7 @@ function LandingNavbar() {
           </button>
           <div className="collapse navbar-collapse flex-grow-0 mt-3" id="navbarText">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0" id="text_color_white">
-              <li className="nav-item">
+              <li className="nav-item m-3">
                 <Link
                   to='/'
                   className="nav-link"
@@ -42,17 +42,17 @@ function LandingNavbar() {
                   Home
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item m-3">
                 <Link to="/about" className="nav-link" id="text_color_white">
                   About Us
                 </Link>
               </li>
               
-              <li className="nav-item dropdown">
+              <div className="dropdown-center" >
+              <li className="nav-item m-3">
                 <Link
                   to="#"
-                  className="nav-link dropdown-toggle"
-                  // id="navbarDropdown"
+                  className="nav-link "
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
@@ -60,7 +60,7 @@ function LandingNavbar() {
                 >
                   Sign In
                 </Link>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <ul className="dropdown-menu landing_dropdown_style" aria-labelledby="navbarDropdown">
                   <li>
                     <Link to="/citizen_login" className="dropdown-item">
                       Citizen Login
@@ -80,6 +80,7 @@ function LandingNavbar() {
                   </li>
                 </ul>
               </li>
+              </div>
               
             </ul>
           </div>
