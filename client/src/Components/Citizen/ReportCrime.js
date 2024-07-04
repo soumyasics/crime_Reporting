@@ -2,6 +2,24 @@ import React, { useEffect, useState } from 'react'
 import '../../Assets/Styles/CitizenLogin.css'
 import axiosInstance from '../Constants/BaseUrl'
 function ReportCrime() {
+
+  const [viewPoliceStation,setViewPoliceStation]=useState([])
+
+  useEffect(() => {
+    axiosInstance.post('/viewPolices')
+        .then(response => {
+            console.log(response);
+            if (response.data.status === 200) {
+                setViewPoliceStation(response.data.data)
+            } else {
+                console.log('No data obtained');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching furniture data:', error);
+        });
+    }, []); 
+    
   const [data, setData] = useState({
     policestationname: '',
     victimname: '',
@@ -27,57 +45,121 @@ function ReportCrime() {
     photoevidence: null,
   });
 
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (event) => {
+    const { name, value, files } = event.target;
     if (files) {
-      setFormData({ ...formData, [name]: files[0] });
+      setData(prevData => ({
+        ...prevData,
+        [name]: files[0]
+      }));
     } else {
-      setData({ ...data, [name]: value });
+      setData(prevData => ({
+        ...prevData,
+        [name]: value
+      }));
     }
+    setErrors(prevErrors => ({
+      ...prevErrors,
+      [name]: ''
+    }));
   };
-  console.log(data)
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateContact = (contact) => {
+    const contactRegex = /^\d{10}$/;
+    return contactRegex.test(contact);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     let formIsValid = true;
-    // for (const key in data) {
-    //   formData.append(key, data[key]);
-    // }
-    // for (const key in formData) {
-    //   formData.append(key, formData[key]);
-    // }
-    if(formIsValid){
-      const formData = new FormData();
-      data.append("policestationname",data.policestationname)
-      data.append("victimname",data.victimname)
-      data.append("victimgender",data.victimgender)
-      data.append("victimemail",data.victimemail)
-      data.append("victimaddress",data.victimaddress)
-      data.append("incidentdate",data.incidentdate)
-      data.append("incidenttime",data.incidenttime)
-      data.append("incidentlocation",data.incidentlocation)
-      data.append("incidentcity",data.incidentcity)
-      data.append("crimetype",data.crimetype)
-      data.append("crimeitem",data.crimeitem)
-      data.append("witnessname",data.witnessname)
-      data.append("witnesscontact",data.witnesscontact)
-      data.append("witnessaddress",data.witnessaddress)
-      data.append("witnessstatement",data.witnessstatement)
-      data.append("numofsuspect",data.numofsuspect)
-      data.append("physicaldescription",data.physicaldescription)
-      data.append("evidencedescription",data.evidencedescription)
-      data.append("comments",data.comments)
-      data.append("audioevidence",data.audioevidence)
-      data.append("videoevidence",data.videoevidence)
-      data.append("photoevidence",data.photoevidence)
+    let newErrors = {};
+
+    if (!data.policestationname) {
+      newErrors.policestationname = 'Police station name is required';
+      formIsValid = false;
     }
 
-    try {
-      const response = await axiosInstance.post('/addcrime', formData);
-      console.log(response.data);
-      alert("Cases Added Successfully")
-    } catch (error) {
-      console.error('Error submitting form', error);
+    if (!data.victimname) {
+      newErrors.victimname = 'Victim name is required';
+      formIsValid = false;
+    }
+
+    if (!data.incidentdate) {
+      newErrors.incidentdate = 'Incident Date is required';
+      formIsValid = false;
+    }
+    if (!data.incidenttime) {
+      newErrors.incidenttime = 'Incident time is required';
+      formIsValid = false;
+    }
+    if (!data.incidentlocation) {
+      newErrors.incidentlocation = 'Incident Location is required';
+      formIsValid = false;
+    }
+    if (!data.crimetype) {
+      newErrors.crimetype = 'Crime Type is required';
+      formIsValid = false;
+    }
+
+    if  (!validateEmail(data.victimemail)) {
+      newErrors.victimemail = 'Invalid email format';
+      formIsValid = false;
+    }
+
+    if (!validateContact(data.witnesscontact)) {
+      newErrors.witnesscontact = 'Invalid contact number';
+      formIsValid = false;
+    }
+
+    setErrors(newErrors);
+
+    if (formIsValid) {
+      const formData = new FormData();
+      formData.append('policestationname', data.policestationname);
+      formData.append('victimname', data.victimname);
+      formData.append('victimgender', data.victimgender);
+      formData.append('victimemail', data.victimemail);
+      formData.append('victimaddress', data.victimaddress);
+      formData.append('incidentdate', data.incidentdate);
+      formData.append('incidenttime', data.incidenttime);
+      formData.append('incidentlocation', data.incidentlocation);
+      formData.append('incidentcity', data.incidentcity);
+      formData.append('crimetype', data.crimetype);
+      formData.append('crimeitem', data.crimeitem);
+      formData.append('witnessname', data.witnessname);
+      formData.append('witnesscontact', data.witnesscontact);
+      formData.append('witnessaddress', data.witnessaddress);
+      formData.append('witnessstatement', data.witnessstatement);
+      formData.append('numofsuspect', data.numofsuspect);
+      formData.append('physicaldescription', data.physicaldescription);
+      formData.append('evidencedescription', data.evidencedescription);
+      formData.append('comments', data.comments);
+      formData.append('audioevidence', data.audioevidence);
+      formData.append('videoevidence', data.videoevidence);
+      formData.append('photoevidence', data.photoevidence);
+
+      try {
+        console.log("data",data);
+        const response = await axiosInstance.post('/addcrime', data, 
+          { headers: {
+          'Content-Type': 'multipart/form-data',
+        }
+      },)
+        if (response.data.status === 200) {
+          alert("Case Added Successfully");
+        } else {
+          alert("Case Not Added");
+        }
+      } catch (error) {
+        console.error("Error", error);
+      }
     }
   };
 
@@ -89,13 +171,18 @@ function ReportCrime() {
       </div>
       <div className='report-crime-box container mt-5'>
         <div className='container mt-5'>
-            <input type='text'
-            className='report-crime-textbox ps-3'
-            placeholder='Select a Police Station '
-            name='policestationname'
-            onChange={handleChange}
-            value={data.policestationname}
-            ></input>
+            <select
+                className='report-crime-textbox ps-3'
+                name='policestationname'
+                onChange={handleChange}
+                value={data.policestationname}
+            >
+                <option value="" disabled>Select a Police Station</option>
+                {viewPoliceStation.map((station, index) => (
+                    <option key={index} value={station.policestationname}>{station.policestationname}</option>
+                ))}
+            </select>
+            {errors.policestationname && <div className="text-danger">{errors.policestationname}</div>}
         </div>
         <div className=' text-center '>
             <div className='report-crime-victim  mt-4 pt-2'>
@@ -114,6 +201,8 @@ function ReportCrime() {
               onChange={handleChange}
               value={data.victimname}
               ></input>
+              {errors.victimname && <div className="text-danger">{errors.victimname}</div>}
+
             </div>
             <div className='mt-3'>
               <label>Email</label>
@@ -125,6 +214,8 @@ function ReportCrime() {
               onChange={handleChange}
               value={data.victimemail}
               ></input>
+            {errors.victimemail && <div className="text-danger">{errors.victimemail}</div>}
+
             </div>
           </div>
           <div className='col mt-3'>
@@ -173,6 +264,8 @@ function ReportCrime() {
               onChange={handleChange}
               value={data.incidentdate}
               ></input>
+             {errors.incidentdate && <div className="text-danger">{errors.incidentdate}</div>}
+
             </div>
             <div className='mt-3'>
               <label>Location</label>
@@ -184,6 +277,8 @@ function ReportCrime() {
               onChange={handleChange}
               value={data.incidentlocation}
               ></input>
+             {errors.incidentlocation && <div className="text-danger">{errors.incidentlocation}</div>}
+
             </div>
           </div>
           <div className='col mt-3'>
@@ -197,6 +292,8 @@ function ReportCrime() {
               onChange={handleChange}
               value={data.incidenttime}
               ></input>
+              {errors.incidenttime && <div className="text-danger">{errors.incidenttime}</div>}
+
             </div>
             <div className='mt-3'>
               <label>City</label>
@@ -235,6 +332,8 @@ function ReportCrime() {
                 <option value='vandalism'>Vandalism</option>
                 <option value='fraud'>Fraud</option>
               </select>
+              {errors.crimetype && <div className="text-danger">{errors.crimetype}</div>}
+
             </div>
           </div>
           <div className='col mt-3'>
@@ -265,6 +364,7 @@ function ReportCrime() {
               <input type='file'
               className='report-crime-textbox file_border ps-3 p-1'
               name='audioevidence'
+              onChange={handleChange}
               ></input>
             </div>
             <div className='mt-3'>
@@ -274,6 +374,7 @@ function ReportCrime() {
               <input type='file'
               className='report-crime-textbox file_border ps-3 p-1'
               name='photoevidence'
+              onChange={handleChange}
               ></input>
             </div>
           </div>
@@ -285,6 +386,7 @@ function ReportCrime() {
               <input type='file'
               className='report-crime-textbox file_border ps-3 p-1'
               name='videoevidence'
+              onChange={handleChange}
               ></input>
             </div>
             <div className='mt-3'>
@@ -341,6 +443,8 @@ function ReportCrime() {
               onChange={handleChange}
               value={data.witnesscontact}
               ></input>
+              {errors.witnesscontact && <div className="text-danger">{errors.witnesscontact}</div>}
+
             </div>
             <div className='mt-3'>
               <label>Witness Statement</label>

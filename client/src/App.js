@@ -44,6 +44,9 @@ import PoliceProfile from './Components/Police/PoliceProfile';
 import ViewAllPoliceStation from './Components/Police/ViewAllPoliceStation';
 import ViewProfile_Policestation from './Components/Police/ViewProfile_Policestation';
 import LoginNav from './Components/Navbar/LoginNav';
+import ViewAllCases from './Components/Admin/ViewAllCases';
+import ViewCaseDetails from './Components/Admin/ViewCaseDetails';
+import UpdateCrimeReport from './Components/Citizen/UpdateCrimeReport';
 
 function App() {
   return (
@@ -63,6 +66,7 @@ function App() {
         <Route path='/citizen_home' element={[<UserNavbar/>,<LoginBanner user='citizen' />,<CitizenLandingPage/>]} />
         <Route path='/citizen_profile' element={[<UserNavbar/>,<CitizenProfile/>]} />
         <Route path='/citizen/reportcrime' element={[<UserNavbar/>,<ReportCrime/>]}/>
+        <Route path='/updatecrime/:id' element={[<UserNavbar/>,<UpdateCrimeReport/>]}/>
 
         {/* Police  */}
 
@@ -88,13 +92,15 @@ function App() {
         <Route path='/admin' element={[<LoginNav/>,<AdminLogin/>]} />
         <Route path='/admin_home' element={[<LoginNav/>,<AdminHome/>]} />
         <Route path='/admin-dashboard' element={[<LoginNav/>,<AdminMain data="admindashboard"/>]} />
+        <Route path='/admin-viewallcases' element={[<LoginNav/>,<AdminMain data='adminviewallcasedetails'/>]} />
+        <Route path='/admin_viewcasedetails/:id' element={[<LoginNav/>,<AdminMain data='adminvieweachcasedetails'/>]} />
 
         {/* Admin View Police */}
 
         <Route path='/viewallpolicestation' element={[<LoginNav/>,<AdminMain data="viewallpolicestation"/>]} />
         <Route path='/viewallpolice/:id' element={[<LoginNav/>,<AdminMain data="viewallpoliceprofile"/>]}/>
         <Route path='/viewallpolicereq/:id' element={[<LoginNav/>,<AdminMain data="viewallpolicereqprofile"/>]}/>
-        <Route path='/newpolicestationreq' element={[<LoginNav/>,<AdminMain data="newpolicestationreq"/>]} />
+        <Route path='/newpolicestationreq' element={[<LoginNav />,<AdminMain data="newpolicestationreq"/>]} />
 
 
       </Routes>

@@ -26,6 +26,7 @@ function PoliceLogin() {
                     });
                 }
                 localStorage.setItem('policeId',res.data.data._id)
+                localStorage.setItem('policestationName',res.data.data.policestationname)
                 navigate('/police_home');
             } else if (res.data.status === 405) {
                 if (!isToastVisible) {
@@ -53,8 +54,6 @@ function PoliceLogin() {
         }
       );
     console.log(values);
-    navigate('/police_home');
-
   };
 
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
