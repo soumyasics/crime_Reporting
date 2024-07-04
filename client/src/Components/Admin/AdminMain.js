@@ -7,6 +7,8 @@ import NewPoliceStationReq from '../Police/NewPoliceStationReq'
 import ViewAllPoliceStation from '../Police/ViewAllPoliceStation'
 import ViewProfile_Policestation from '../Police/ViewProfile_Policestation'
 import ViewProfile_PoliceReq from '../Police/ViewProfile_PoliceReq'
+import ViewAllCases from './ViewAllCases'
+import ViewCaseDetails from './ViewCaseDetails'
 
 function AdminMain({data}) {
   return (
@@ -27,6 +29,10 @@ function AdminMain({data}) {
               <ViewProfile_Policestation/>
            ):data === "viewallpolicereqprofile" ?(
               <ViewProfile_PoliceReq/>
+           ):data === "adminviewallcasedetails" ?(
+            <ViewAllCases/>
+           ):data === "adminvieweachcasedetails" ?(
+            <ViewCaseDetails />
            ):
            <AdminDashboard/>
            }

@@ -1,188 +1,46 @@
 import React, { useEffect, useState } from 'react'
-import '../../Assets/Styles/CitizenLogin.css'
-import axiosInstance from '../Constants/BaseUrl'
-function ReportCrime() {
+import CaseDetails from '../Police/CaseDetails'
+import { useParams } from 'react-router-dom';
+import axiosInstance from '../Constants/BaseUrl';
+import { toast } from 'react-toastify';
 
-  const [viewPoliceStation,setViewPoliceStation]=useState([])
+function UpdateCrimeReport() {
+    const [caseDetails, setCaseDetails] = useState({});
+    const { id } = useParams();
 
-  useEffect(() => {
-    axiosInstance.post('/viewPolices')
-        .then(response => {
-            console.log(response);
-            if (response.data.status === 200) {
-                setViewPoliceStation(response.data.data)
-            } else {
-                console.log('No data obtained');
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching furniture data:', error);
-        });
-    }, []); 
-    
-  const [data, setData] = useState({
-    policestationname: '',
-    victimname: '',
-    victimgender: '',
-    victimemail: '',
-    victimaddress: '',
-    incidentdate: '',
-    incidenttime: '',
-    incidentlocation: '',
-    incidentcity: '',
-    crimetype: '',
-    crimeitem: '',
-    witnessname: '',
-    witnesscontact: '',
-    witnessaddress: '',
-    witnessstatement: '',
-    numofsuspect: '',
-    physicaldescription: '',
-    evidencedescription: '',
-    comments: '',
-    audioevidence: null,
-    videoevidence: null,
-    photoevidence: null,
-  });
-
-  const [errors, setErrors] = useState({});
-
-  const handleChange = (event) => {
-    const { name, value, files } = event.target;
-    if (files) {
-      setData(prevData => ({
-        ...prevData,
-        [name]: files[0]
-      }));
-    } else {
-      setData(prevData => ({
-        ...prevData,
-        [name]: value
-      }));
-    }
-    setErrors(prevErrors => ({
-      ...prevErrors,
-      [name]: ''
-    }));
-  };
-
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const validateContact = (contact) => {
-    const contactRegex = /^\d{10}$/;
-    return contactRegex.test(contact);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    let formIsValid = true;
-    let newErrors = {};
-
-    if (!data.policestationname) {
-      newErrors.policestationname = 'Police station name is required';
-      formIsValid = false;
-    }
-
-    if (!data.victimname) {
-      newErrors.victimname = 'Victim name is required';
-      formIsValid = false;
-    }
-
-    if (!data.incidentdate) {
-      newErrors.incidentdate = 'Incident Date is required';
-      formIsValid = false;
-    }
-    if (!data.incidenttime) {
-      newErrors.incidenttime = 'Incident time is required';
-      formIsValid = false;
-    }
-    if (!data.incidentlocation) {
-      newErrors.incidentlocation = 'Incident Location is required';
-      formIsValid = false;
-    }
-    if (!data.crimetype) {
-      newErrors.crimetype = 'Crime Type is required';
-      formIsValid = false;
-    }
-
-    if  (!validateEmail(data.victimemail)) {
-      newErrors.victimemail = 'Invalid email format';
-      formIsValid = false;
-    }
-
-    if (!validateContact(data.witnesscontact)) {
-      newErrors.witnesscontact = 'Invalid contact number';
-      formIsValid = false;
-    }
-
-    setErrors(newErrors);
-
-    if (formIsValid) {
-      const formData = new FormData();
-      formData.append('policestationname', data.policestationname);
-      formData.append('victimname', data.victimname);
-      formData.append('victimgender', data.victimgender);
-      formData.append('victimemail', data.victimemail);
-      formData.append('victimaddress', data.victimaddress);
-      formData.append('incidentdate', data.incidentdate);
-      formData.append('incidenttime', data.incidenttime);
-      formData.append('incidentlocation', data.incidentlocation);
-      formData.append('incidentcity', data.incidentcity);
-      formData.append('crimetype', data.crimetype);
-      formData.append('crimeitem', data.crimeitem);
-      formData.append('witnessname', data.witnessname);
-      formData.append('witnesscontact', data.witnesscontact);
-      formData.append('witnessaddress', data.witnessaddress);
-      formData.append('witnessstatement', data.witnessstatement);
-      formData.append('numofsuspect', data.numofsuspect);
-      formData.append('physicaldescription', data.physicaldescription);
-      formData.append('evidencedescription', data.evidencedescription);
-      formData.append('comments', data.comments);
-      formData.append('audioevidence', data.audioevidence);
-      formData.append('videoevidence', data.videoevidence);
-      formData.append('photoevidence', data.photoevidence);
-
-      try {
-        console.log("data",data);
-        const response = await axiosInstance.post('/addcrime', data, 
-          { headers: {
-          'Content-Type': 'multipart/form-data',
+  useEffect (() => {
+    axiosInstance
+      .post(`/viewCrimeById/${id}`)
+      .then((res) => {
+        if (res.data.status === 200) {
+            setCaseDetails(res.data.data);
         }
-      },)
-        if (response.data.status === 200) {
-          alert("Case Added Successfully");
-        } else {
-          alert("Case Not Added");
-        }
-      } catch (error) {
-        console.error("Error", error);
-      }
-    }
-  };
+      })
+      .catch((err) => {
+        toast.error("Failed to fetch user details");
+      });
+  }, [id]);
 
   return (
-    <div className='mb-5'>
-      <form onSubmit={handleSubmit}>
+    <div>
+        <div className='mb-5'>
+      <form 
+    //   onSubmit={handleSubmit}
+      >
       <div className='text-center text-danger mt-5 mb-5'>
         <h4 className='report-crime-h4'>Report a Crime</h4>
       </div>
       <div className='report-crime-box container mt-5'>
         <div className='container mt-5'>
-            <select
-                className='report-crime-textbox ps-3'
-                name='policestationname'
-                onChange={handleChange}
-                value={data.policestationname}
-            >
-                <option value="" disabled>Select a Police Station</option>
-                {viewPoliceStation.map((station, index) => (
-                    <option key={index} value={station.policestationname}>{station.policestationname}</option>
-                ))}
-            </select>
-            {errors.policestationname && <div className="text-danger">{errors.policestationname}</div>}
+            <input type='text'
+            className='report-crime-textbox ps-3'
+            placeholder='Select a Police Station '
+            name='policestationname'
+            // onChange={handleChange}
+            value={caseDetails.policestationname}
+            ></input>
+            {/* {errors.policestationname && <div className="text-danger">{errors.policestationname}</div>} */}
+
         </div>
         <div className=' text-center '>
             <div className='report-crime-victim  mt-4 pt-2'>
@@ -198,10 +56,10 @@ function ReportCrime() {
               <input type='text'
               className='report-crime-textbox ps-3'
               name='victimname'
-              onChange={handleChange}
-              value={data.victimname}
+            //   onChange={handleChange}
+              value={caseDetails.victimname}
               ></input>
-              {errors.victimname && <div className="text-danger">{errors.victimname}</div>}
+              {/* {errors.victimname && <div className="text-danger">{errors.victimname}</div>} */}
 
             </div>
             <div className='mt-3'>
@@ -211,10 +69,10 @@ function ReportCrime() {
               <input type='email'
               className='report-crime-textbox ps-3'
               name='victimemail'
-              onChange={handleChange}
-              value={data.victimemail}
+            //   onChange={handleChange}
+              value={caseDetails.victimemail}
               ></input>
-            {errors.victimemail && <div className="text-danger">{errors.victimemail}</div>}
+            {/* {errors.victimemail && <div className="text-danger">{errors.victimemail}</div>} */}
 
             </div>
           </div>
@@ -226,8 +84,9 @@ function ReportCrime() {
               <select
               className='report-crime-textbox ps-3'
               name='victimgender'
-              onChange={handleChange}
-              value={data.victimgender}>
+            //   onChange={handleChange}
+              value={caseDetails.victimgender}
+              >
                   <option selected>Open this select menu</option>
                   <option value='male'>Male</option>
                   <option value='female'>Female</option>
@@ -241,8 +100,8 @@ function ReportCrime() {
               <input type='text'
               className='report-crime-textbox ps-3'
               name='victimaddress'
-              onChange={handleChange}
-              value={data.victimaddress}
+            //   onChange={handleChange}
+              value={caseDetails.victimaddress}
               ></input>
             </div>
           </div>
@@ -261,10 +120,10 @@ function ReportCrime() {
               <input type='date'
               className='report-crime-textbox ps-3'
               name='incidentdate'
-              onChange={handleChange}
-              value={data.incidentdate}
+            //   onChange={handleChange}
+              value={caseDetails.incidentdate}
               ></input>
-             {errors.incidentdate && <div className="text-danger">{errors.incidentdate}</div>}
+             {/* {errors.incidentdate && <div className="text-danger">{errors.incidentdate}</div>} */}
 
             </div>
             <div className='mt-3'>
@@ -274,10 +133,10 @@ function ReportCrime() {
               <input type='text'
               className='report-crime-textbox ps-3'
               name='incidentlocation'
-              onChange={handleChange}
-              value={data.incidentlocation}
+            //   onChange={handleChange}
+              value={caseDetails.incidentlocation}
               ></input>
-             {errors.incidentlocation && <div className="text-danger">{errors.incidentlocation}</div>}
+             {/* {errors.incidentlocation && <div className="text-danger">{errors.incidentlocation}</div>} */}
 
             </div>
           </div>
@@ -289,10 +148,10 @@ function ReportCrime() {
               <input type='time'
               className='report-crime-textbox ps-3'
               name='incidenttime'
-              onChange={handleChange}
-              value={data.incidenttime}
+            //   onChange={handleChange}
+              value={caseDetails.incidenttime}
               ></input>
-              {errors.incidenttime && <div className="text-danger">{errors.incidenttime}</div>}
+              {/* {errors.incidenttime && <div className="text-danger">{errors.incidenttime}</div>} */}
 
             </div>
             <div className='mt-3'>
@@ -302,8 +161,8 @@ function ReportCrime() {
               <input type='text'
               className='report-crime-textbox ps-3'
               name='incidentcity'
-              onChange={handleChange}
-              value={data.incidentcity}
+            //   onChange={handleChange}
+              value={caseDetails.incidentcity}
               ></input>
             </div>
           </div>
@@ -322,8 +181,9 @@ function ReportCrime() {
               <select type='text'
               className='report-crime-textbox ps-3'
               name='crimetype'
-              onChange={handleChange}
-              value={data.crimetype}>
+            //   onChange={handleChange}
+              value={caseDetails.crimetype}
+              >
                 <option selected>Open this select menu</option>
                 <option value='theft'>Theft</option>
                 <option value='burglary'>Burglary</option>
@@ -332,7 +192,7 @@ function ReportCrime() {
                 <option value='vandalism'>Vandalism</option>
                 <option value='fraud'>Fraud</option>
               </select>
-              {errors.crimetype && <div className="text-danger">{errors.crimetype}</div>}
+              {/* {errors.crimetype && <div className="text-danger">{errors.crimetype}</div>} */}
 
             </div>
           </div>
@@ -344,8 +204,8 @@ function ReportCrime() {
               <input type='text'
               className='report-crime-textbox ps-3'
               name='crimeitem'
-              onChange={handleChange}
-              value={data.crimeitem}
+            //   onChange={handleChange}
+              value={caseDetails.crimeitem}
               ></input>
             </div>
           </div>
@@ -364,7 +224,6 @@ function ReportCrime() {
               <input type='file'
               className='report-crime-textbox file_border ps-3 p-1'
               name='audioevidence'
-              onChange={handleChange}
               ></input>
             </div>
             <div className='mt-3'>
@@ -374,7 +233,6 @@ function ReportCrime() {
               <input type='file'
               className='report-crime-textbox file_border ps-3 p-1'
               name='photoevidence'
-              onChange={handleChange}
               ></input>
             </div>
           </div>
@@ -386,7 +244,6 @@ function ReportCrime() {
               <input type='file'
               className='report-crime-textbox file_border ps-3 p-1'
               name='videoevidence'
-              onChange={handleChange}
               ></input>
             </div>
             <div className='mt-3'>
@@ -396,8 +253,8 @@ function ReportCrime() {
               <input type='text'
               className='report-crime-textbox ps-3'
               name='evidencedescription'
-              onChange={handleChange}
-              value={data.evidencedescription}
+            //   onChange={handleChange}
+              value={caseDetails.evidencedescription}
               ></input>
             </div>
           </div>
@@ -416,8 +273,8 @@ function ReportCrime() {
               <input type='text'
               className='report-crime-textbox ps-3'
               name='witnessname'
-              onChange={handleChange}
-              value={data.witnessname}
+            //   onChange={handleChange}
+              value={caseDetails.witnessname}
               ></input>
             </div>
             <div className='mt-3'>
@@ -427,8 +284,8 @@ function ReportCrime() {
               <input type='text'
               className='report-crime-textbox ps-3'
               name='witnessaddress'
-              onChange={handleChange}
-              value={data.witnessaddress}
+            //   onChange={handleChange}
+              value={caseDetails.witnessaddress}
               ></input>
             </div>
           </div>
@@ -440,10 +297,10 @@ function ReportCrime() {
               <input type='text'
               className='report-crime-textbox ps-3'
               name='witnesscontact'
-              onChange={handleChange}
-              value={data.witnesscontact}
+            //   onChange={handleChange}
+              value={caseDetails.witnesscontact}
               ></input>
-              {errors.witnesscontact && <div className="text-danger">{errors.witnesscontact}</div>}
+              {/* {errors.witnesscontact && <div className="text-danger">{errors.witnesscontact}</div>} */}
 
             </div>
             <div className='mt-3'>
@@ -453,8 +310,8 @@ function ReportCrime() {
               <input type='text'
               className='report-crime-textbox ps-3'
               name='witnessstatement'
-              onChange={handleChange}
-              value={data.witnessstatement}
+            //   onChange={handleChange}
+              value={caseDetails.witnessstatement}
               ></input>
             </div>
           </div>
@@ -473,8 +330,8 @@ function ReportCrime() {
               <input type='text'
               className='report-crime-textbox ps-3'
               name='numofsuspect'
-              onChange={handleChange}
-              value={data.numofsuspect}
+            //   onChange={handleChange}
+              value={caseDetails.numofsuspect}
               ></input>
             </div>
           </div>
@@ -486,8 +343,8 @@ function ReportCrime() {
               <input type='text'
               className='report-crime-textbox ps-3'
               name='physicaldescription'
-              onChange={handleChange}
-              value={data.physicaldescription}
+            //   onChange={handleChange}
+              value={caseDetails.physicaldescription}
               ></input>
             </div>
           </div>
@@ -505,8 +362,8 @@ function ReportCrime() {
             <input type='text'
             className='report-crime-textbox1 mt-2 ps-3'
             name='comments'
-            onChange={handleChange}
-            value={data.comments}
+            // onChange={handleChange}
+            value={caseDetails.comments}
             ></input>
           </div>
         </div>
@@ -516,7 +373,8 @@ function ReportCrime() {
       </div>
       </form>
     </div>
+    </div>
   )
 }
 
-export default ReportCrime
+export default UpdateCrimeReport
