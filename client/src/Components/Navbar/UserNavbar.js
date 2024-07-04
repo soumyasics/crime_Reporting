@@ -101,8 +101,8 @@ function UserNavbar() {
                   Home
                 </Link>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link" to={'/citizen/reportcrime'} id="text_color_white">
+              <li class="nav-item m-3">
+                <Link to='/citizen/reportcrime' class="nav-link"  id="text_color_white">
                   Crime
                 </Link>
               </li>

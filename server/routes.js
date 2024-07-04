@@ -34,9 +34,10 @@ router.post('/viewpolice/:id',police.viewPoliceById)
 router.post('/addcrime',crime.upload,crime.addCrime)
 router.post('/viewallcrime',crime.viewCrime)
 router.post('/viewCrimeById/:id',crime.viewCrimeById)
-router.post('/editCrimeById/:id',crime.editCaseById) // Not Working
+router.post('/editCrimeById/:id',crime.upload,crime.editCaseById)
 router.post('/acceptCrimeById/:id',crime.acceptCrimeById)
 router.post('/rejectCrimeById/:id',crime.rejectCrimeById)
+router.post('/viewCaseByPolicestation',crime.viewCaseByPolicestation)
 
 
 module.exports=router
