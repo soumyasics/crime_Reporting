@@ -74,6 +74,7 @@ function PoliceProfile() {
       setFormData((prevState) => ({
         ...prevState,
         [name]: value,
+        img:prevState.img||useRouteLoaderData.img
       }));
     }
     setErrors((prevState) => ({
