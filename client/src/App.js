@@ -62,7 +62,7 @@ function App() {
         <Route path='/citizen_register' element={[<LoginNav/>,<CitizenRegistration/>]} />
         <Route path='/citizen_home' element={[<UserNavbar/>,<LoginBanner user='citizen' />,<CitizenLandingPage/>]} />
         <Route path='/citizen_profile' element={[<UserNavbar/>,<CitizenProfile/>]} />
-        <Route path='/citizen/reportcrime' element={[<LandingNavbar/>,<ReportCrime/>]}/>
+        <Route path='/citizen/reportcrime' element={[<UserNavbar/>,<ReportCrime/>]}/>
 
         {/* Police  */}
 
