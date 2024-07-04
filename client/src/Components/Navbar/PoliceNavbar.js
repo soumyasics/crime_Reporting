@@ -21,6 +21,14 @@ function PoliceNavbar() {
         navigate("/");
       };
 
+      useEffect(() => {
+        if (localStorage.getItem('policestationName') == null) {
+          navigate('/');
+        }
+      }, [navigate]);
+        
+        const policestationname=localStorage.getItem('policestationName')
+
   return (
     <div>
       <nav class="navbar navbar-expand-lg navbar_bg">
@@ -69,6 +77,17 @@ function PoliceNavbar() {
                   id="text_color_white"
                 >
                   Profile
+                </Link>
+              </li>
+
+              <li class="nav-item m-3">
+                <Link
+                to={`/policeviewcases`}
+                  class="nav-link"
+                  aria-current="page"
+                  id="text_color_white"
+                >
+                  View All Cases
                 </Link>
               </li>
 

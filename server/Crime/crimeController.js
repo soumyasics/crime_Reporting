@@ -25,6 +25,8 @@ const storage = multer.diskStorage({
   //Add crime
 
   const addCrime = async (req,res) =>{
+
+    console.log(req.file);
     try{
         const {policestationname,victimname,victimgender,victimemail,victimaddress,incidentdate,incidenttime,incidentlocation,incidentcity,crimetype,crimeitem,witnessname,witnesscontact,witnessaddress,witnessstatement,numofsuspect,physicaldescription,evidencedescription,comments}=req.body;
         const newCrime=new crime({
@@ -61,6 +63,7 @@ const storage = multer.diskStorage({
             })
         })
         .catch(err=>{
+            console.log(err);
             return res.json ({
                 status : 500,
                 msg : "Data not inserted",
@@ -239,6 +242,43 @@ const acceptCrimeById = (req, res) => {
   
       }
 
+// View Case By PoliceStation
+const viewCaseByPolicestation = (req, res) => {
+    const { policestationname } = req.body;
+    
+    if (!policestationname) {
+        return res.status(400).json({
+            status: 400,
+            msg: "Police station name is required"
+        });
+    }
+
+    crime.find({ policestationname: policestationname },{adminApproved: false})
+        .exec()
+        .then(data => {
+            if (data.length > 0) {
+                res.status(200).json({
+                    status: 200,
+                    msg: "Data obtained successfully",
+                    data: data
+                });
+            } else {
+                res.status(404).json({
+                    status: 404,
+                    msg: "No Data obtained"
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({
+                status: 500,
+                msg: "Data not obtained",
+                error: err
+            });
+        });
+};
+
+
   module.exports={
     addCrime,
     upload,
@@ -246,5 +286,6 @@ const acceptCrimeById = (req, res) => {
     editCaseById,
     acceptCrimeById,
     rejectCrimeById,
-    viewCrimeById
+    viewCrimeById,
+    viewCaseByPolicestation
   }
