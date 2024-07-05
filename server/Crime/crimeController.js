@@ -78,7 +78,7 @@ const storage = multer.diskStorage({
 
   // View all Cases
 const viewCrime = (req, res) => {
-    crime.find()
+    crime.find({adminApproved:true})
         .exec()
         .then(data => {
             if (data.length > 0) {

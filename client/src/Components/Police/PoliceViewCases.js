@@ -70,11 +70,15 @@ function PoliceViewCases() {
   };
 
   return (
-    <div className='container mb-5'>
+    <div className='container mb-5 police_view_case_main'>
       <div className='container ms-5 mt-5 text-danger'>
         <h4>Recent Cases</h4>
       </div>
       <div>
+        {data.length===0 && (
+          <h1>No Data Found</h1>
+        )}
+        {data.length>0 && (
         <table className="table table-striped border">
           <thead>
             <tr>
@@ -105,6 +109,7 @@ function PoliceViewCases() {
             ))}
           </tbody>
         </table>
+        )}
       </div>
     </div>
   );

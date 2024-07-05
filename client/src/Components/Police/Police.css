@@ -132,6 +132,10 @@
 
 /* Police ViewCases */
 
+.police_view_case_main{
+    min-height:550px;
+}
+
 .policeview-cases-cross{
     background-color: #DF1212;
     color: white;

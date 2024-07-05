@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import '../../Assets/Styles/Scrb.css'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import scrblogin from '../../Assets/Images/scrblogin.png'
+import { toast } from 'react-toastify'
 
 function ScrbLogin() {
 
@@ -55,10 +56,10 @@ function ScrbLogin() {
       console.log(values);
   
       if (username === data.email && pass === data.password) {
-        alert("Logged in Successfully");
+        toast.success("Logged in Successfully");
         navigate("/scrb-dashboard");
       } else {
-        alert("Username or password is incorrect");
+        toast.error("Username or password is incorrect");
       }
     }
   };

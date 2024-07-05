@@ -42,11 +42,9 @@ import ScrbDashboard from './Components/Scrb/ScrbDashboard';
 import ScrbMain from './Components/Scrb/ScrbMain';
 import PoliceProfile from './Components/Police/PoliceProfile';
 import ViewAllPoliceStation from './Components/Police/ViewAllPoliceStation';
-import ViewProfile_Policestation from './Components/Police/ViewProfile_Policestation';
 import LoginNav from './Components/Navbar/LoginNav';
-import ViewAllCases from './Components/Admin/ViewAllCases';
-import ViewCaseDetails from './Components/Admin/ViewCaseDetails';
 import UpdateCrimeReport from './Components/Citizen/UpdateCrimeReport';
+import CitizenAddComplaint from './Components/Citizen/CitizenAddComplaint';
 
 function App() {
   return (
@@ -67,6 +65,8 @@ function App() {
         <Route path='/citizen_profile' element={[<UserNavbar/>,<CitizenProfile/>]} />
         <Route path='/citizen/reportcrime' element={[<UserNavbar/>,<ReportCrime/>]}/>
         <Route path='/updatecrime/:id' element={[<UserNavbar/>,<UpdateCrimeReport/>]}/>
+        <Route path='/addcomplaints' element={[<UserNavbar />,<CitizenAddComplaint />]} />
+
 
         {/* Police  */}
 

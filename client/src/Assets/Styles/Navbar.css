@@ -76,3 +76,8 @@
   border-radius: 20px;
   border-width: 5px ;
 }
+
+/* Police Navbar */
+.police_nav_main{
+  min-width: 100%;
+}
