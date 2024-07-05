@@ -4,7 +4,7 @@ import { IoMdEye } from "react-icons/io";
 import { TiTick } from "react-icons/ti";
 import './Police.css';
 import axiosInstance from '../Constants/BaseUrl';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 function PoliceViewCases() {
   const navigate = useNavigate();
@@ -43,6 +43,7 @@ function PoliceViewCases() {
             caseData._id === caseId ? { ...caseData, adminApproved: true } : caseData
           ));
           navigate("/policeviewcases");
+          window.location.reload();
         } else {
           console.error("Failed to approve");
         }
@@ -58,6 +59,7 @@ function PoliceViewCases() {
         if (res.data.status === 200) {
           console.log("Rejected")
           navigate("/policeviewcases");
+          window.location.reload();
         } else {
           console.error("Failed to reject");
         }
@@ -68,11 +70,15 @@ function PoliceViewCases() {
   };
 
   return (
-    <div className='container mb-5'>
+    <div className='container mb-5 police_view_case_main'>
       <div className='container ms-5 mt-5 text-danger'>
         <h4>Recent Cases</h4>
       </div>
       <div>
+        {data.length===0 && (
+          <h1>No Data Found</h1>
+        )}
+        {data.length>0 && (
         <table className="table table-striped border">
           <thead>
             <tr>
@@ -97,12 +103,13 @@ function PoliceViewCases() {
                 <td>
                   <button className='policeview-cases-cross' onClick={() => handleReject(caseData._id)}><RxCross2 /></button>
                   <button className='policeview-cases-tick ms-3' onClick={() => handleApprove(caseData._id)}><TiTick /></button>
-                  <button className='policeview-cases-eye ms-3'><IoMdEye /></button>
+                  <Link to={`/casedetails/${caseData._id}`}><button className='policeview-cases-eye ms-3'><IoMdEye /></button></Link>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        )}
       </div>
     </div>
   );

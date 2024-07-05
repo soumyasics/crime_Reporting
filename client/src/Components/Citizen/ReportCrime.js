@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../../Assets/Styles/CitizenLogin.css'
 import axiosInstance from '../Constants/BaseUrl'
+import { toast } from 'react-toastify';
 function ReportCrime() {
 
   const [viewPoliceStation,setViewPoliceStation]=useState([])
@@ -153,12 +154,12 @@ function ReportCrime() {
         }
       },)
         if (response.data.status === 200) {
-          alert("Case Added Successfully");
+          toast.success("Case Added Successfully")
         } else {
-          alert("Case Not Added");
+          toast.error("Case Not Added")
         }
       } catch (error) {
-        console.error("Error", error);
+        toast.error("Error", error)
       }
     }
   };

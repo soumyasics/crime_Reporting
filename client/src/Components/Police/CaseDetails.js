@@ -1,7 +1,63 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Police.css'
 import evidence from '../../Assets/Images/evidence.png'
+import { useNavigate, useParams } from 'react-router-dom';
+import axiosInstance from '../Constants/BaseUrl';
+import { toast } from 'react-toastify';
 function CaseDetails() {
+    const [caseDetails, setCaseDetails] = useState({});
+    const { id } = useParams();
+    const [data, setData] = useState([]);
+    const navigate = useNavigate();
+
+  useEffect(() => {
+    axiosInstance
+      .post(`/viewCrimeById/${id}`)
+      .then((res) => {
+        if (res.data.status === 200) {
+            setCaseDetails(res.data.data);
+        }
+      })
+      .catch((err) => {
+        toast.error("Failed to fetch user details");
+      });
+  }, [id]);
+
+
+  const handleApprove = (id) => {
+    axiosInstance.post(`/acceptCrimeById/${id}`)
+      .then((res) => {
+        if (res.data.status === 200) {
+          setData(data.map(caseDetails => 
+            caseDetails._id === id ? { ...caseDetails, adminApproved: true } : caseDetails
+          ));
+          navigate("/police_home");
+          window.location.reload();
+        } else {
+          console.error("Failed to approve");
+        }
+      })
+      .catch((error) => {
+        console.error("Error", error);
+      });
+  };
+
+  const handleReject = (id) => {
+    axiosInstance.post(`/rejectCrimeById/${id}`)
+      .then((res) => {
+        if (res.data.status === 200) {
+          console.log("Rejected")
+          navigate("/police_home");
+          window.location.reload();
+        } else {
+          console.error("Failed to reject");
+        }
+      })
+      .catch((error) => {
+        console.error("Error", error);
+      });
+  };
+
   return (
     <div className='container mt-5 mb-5'>
         <div className=' case-details-h6 text-center pt-3'>
@@ -21,10 +77,10 @@ function CaseDetails() {
                             <div><label>Address </label></div>
                         </div>
                         <div className='col-5 case-details-victim1'>
-                            <div><span>Arthy Prenisha</span></div>
-                            <div><span>Female</span></div>
-                            <div><span>arthy@gmail.com </span></div>
-                            <div><span>Thiruvananthapuram</span></div>   
+                            <div><span>{caseDetails.victimname}</span></div>
+                            <div><span>{caseDetails.victimgender}</span></div>
+                            <div><span>{caseDetails.victimemail} </span></div>
+                            <div><span>{caseDetails.victimaddress}</span></div>   
                         </div>
                         <div className='col-4'></div>
                     </div>
@@ -43,10 +99,10 @@ function CaseDetails() {
                             <div><label>City </label></div>
                         </div>
                         <div className='col-5 case-details-victim1'>
-                            <div><span>Sanju</span></div>
-                            <div><span>10.00 a.m</span></div>
-                            <div><span>Near hify mart </span></div>
-                            <div><span>Kazhakootam</span></div>   
+                            <div><span>{caseDetails.incidentdate}</span></div>
+                            <div><span>{caseDetails.incidenttime}</span></div>
+                            <div><span>{caseDetails.incidentlocation} </span></div>
+                            <div><span>{caseDetails.incidentcity}</span></div>   
                         </div>
                         <div className='col-4'></div>
                     </div>
@@ -56,7 +112,7 @@ function CaseDetails() {
         <div className='row mt-5'>
             <div className='col'>
                 <div className='case-details-span '>
-                    <span>Victim Information</span>
+                    <span>Witness Information</span>
                 </div>
                 <div className='mt-4 container ms-4'>
                     <div className='row'>
@@ -67,12 +123,10 @@ function CaseDetails() {
                             <div><label>Witness Statement  </label></div>
                         </div>
                         <div className='col-5 case-details-victim1'>
-                            <div><span>Lifney Thresh</span></div>
-                            <div><span>9889988998</span></div>
-                            <div><span>Knayakumari </span></div>
-                            <div><span>ENJHJFJRKRKNGTKNKGNNFK
-                                <br></br>JHISHKRNLERFMKLREMLRM.
-                                FWELRM,VRL,DFNV,NE,ṄNRT,ṬṄNE,R̥NGHGKERL</span></div>   
+                            <div><span>{caseDetails.witnessname}</span></div>
+                            <div><span>{caseDetails.witnesscontact}</span></div>
+                            <div><span>{caseDetails.witnessaddress} </span></div>
+                            <div><span>{caseDetails.witnessstatement}</span></div>   
                         </div>
                         <div className='col-4'></div>
                     </div>
@@ -90,8 +144,8 @@ function CaseDetails() {
                             
                         </div>
                         <div className='col-5 case-details-victim1'>
-                            <div><span>Theft</span></div>
-                            <div><span>Theft</span></div>
+                            <div><span>{caseDetails.crimetype}</span></div>
+                            <div><span>{caseDetails.crimeitem}</span></div>
                               
                         </div>
                         <div className='col-4'></div>
@@ -112,9 +166,8 @@ function CaseDetails() {
                             
                         </div>
                         <div className='col-5 case-details-victim1'>
-                            <div><span>2</span></div>
-                            <div><span>THJTYROPKYUJP5;54UJYOLUTOL3UJTOL4
-                                <br></br>OUJJ5TLO45LP4 </span></div> 
+                            <div><span>{caseDetails.numofsuspect}</span></div>
+                            <div><span>{caseDetails.physicaldescription}</span></div> 
                         </div>
                         <div className='col-4'></div>
                     </div>
@@ -136,8 +189,7 @@ function CaseDetails() {
                             <div><span><br></br></span></div>
                             <div><span><br></br></span></div>
                             <div><span><br></br></span></div>
-                            <div className='mt-5 pt-4'><span>nfkrnfjdehnrgtkjdntkjbnrtkjnkjjjwndkejnvfms bxdfm bfk
-                            n fmnvkjejkjfghjrngjkrnfjgnirjolsmljferjglrntkjg</span></div>
+                            <div className='mt-5 pt-4'><span>{caseDetails.evidencedescription}</span></div>
                               
                         </div>
                         <div className='col-4'></div>
@@ -155,16 +207,15 @@ function CaseDetails() {
                         <div className='container ms-4'><label>Comments</label></div>
                     </div>
                     <div className='col-5 case-details-victim1'>
-                        <div><span>NDSHFJR9YU0IU6I0YEU5YIOE5Y<br></br>JEOMLBMNKPYOKT
-                        PTYJK</span></div>
+                        <div><span>{caseDetails.comments}</span></div>
                     </div>
                     <div className='col-4'></div>
                 </div>
             </div>
             <div className='col mt-5 '>
                 <div className='text-center'>
-                    <button className='case-details-acceptbtn'>Accept</button>
-                    <button className='case-details-rejectbtn ms-5'>Reject</button>
+                    <button className='case-details-acceptbtn' onClick={() => handleReject(caseDetails._id)}>Accept</button>
+                    <button className='case-details-rejectbtn ms-5' onClick={() => handleApprove(caseDetails._id)}>Reject</button>
                 </div>
             </div>
         </div>

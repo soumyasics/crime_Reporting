@@ -107,9 +107,9 @@ function UserNavbar() {
                 </Link>
               </li>
               <li class="nav-item m-3">
-                <a class="nav-link" href="#" id="text_color_white">
+                <Link to='/addcomplaints' class="nav-link" href="#" id="text_color_white">
                   Complaints
-                </a>
+                </Link>
               </li>
               <li class="nav-item m-3">
                 <a class="nav-link" href="#" id="text_color_white">

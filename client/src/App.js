@@ -42,11 +42,9 @@ import ScrbDashboard from './Components/Scrb/ScrbDashboard';
 import ScrbMain from './Components/Scrb/ScrbMain';
 import PoliceProfile from './Components/Police/PoliceProfile';
 import ViewAllPoliceStation from './Components/Police/ViewAllPoliceStation';
-import ViewProfile_Policestation from './Components/Police/ViewProfile_Policestation';
 import LoginNav from './Components/Navbar/LoginNav';
-import ViewAllCases from './Components/Admin/ViewAllCases';
-import ViewCaseDetails from './Components/Admin/ViewCaseDetails';
 import UpdateCrimeReport from './Components/Citizen/UpdateCrimeReport';
+import CitizenAddComplaint from './Components/Citizen/CitizenAddComplaint';
 
 function App() {
   return (
@@ -67,6 +65,8 @@ function App() {
         <Route path='/citizen_profile' element={[<UserNavbar/>,<CitizenProfile/>]} />
         <Route path='/citizen/reportcrime' element={[<UserNavbar/>,<ReportCrime/>]}/>
         <Route path='/updatecrime/:id' element={[<UserNavbar/>,<UpdateCrimeReport/>]}/>
+        <Route path='/addcomplaints' element={[<UserNavbar />,<CitizenAddComplaint />]} />
+
 
         {/* Police  */}
 
@@ -74,8 +74,8 @@ function App() {
         <Route path='/police_login' element={[<LoginNav/>,<PoliceLogin/>]} />
         <Route path='/police_forgotpassword' element={[<LoginNav/>,<ForgotPassword activeUser='Police' />]} />
         <Route path='/police_home' element={[<PoliceNavbar/>,<LoginBanner user='police' />,<PoliceLandingPageContent/>,<PoliceRecentCrimes/>]} />
-        <Route path='/policeviewcases' element={[<LandingNavbar/>,<PoliceViewCases/>]} />
-        <Route path='/casedetails' element={[<LandingNavbar/>,<CaseDetails/>]}/>
+        <Route path='/policeviewcases' element={[<PoliceNavbar/>,<PoliceViewCases/>]} />
+        <Route path='/casedetails/:id' element={[<LandingNavbar/>,<CaseDetails/>]}/>
         <Route path='/policeprofile/:id' element={[<PoliceNavbar/>,<PoliceProfile/>]} />
 
 
