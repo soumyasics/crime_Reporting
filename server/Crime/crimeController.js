@@ -253,8 +253,7 @@ const viewCaseByPolicestation = (req, res) => {
         });
     }
 
-    crime.find({ policestationname: policestationname },{adminApproved: false})
-        .exec()
+    crime.find({ policestationname: policestationname, adminApproved: false })        .exec()
         .then(data => {
             if (data.length > 0) {
                 res.status(200).json({
