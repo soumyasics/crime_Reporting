@@ -28,6 +28,7 @@ router.post('/activatePoliceById/:id',police.activatePoliceById)
 router.post('/deactivatePoliceById/:id',police.deactivatePoliceById)
 router.post('/viewPolices',police.viewPolices)
 router.post('/viewpolice/:id',police.viewPoliceById)
+router.post('/viewPoliceByDistrict/:district',police.viewPoliceByDistrict)
 
 
 //Crime Routes

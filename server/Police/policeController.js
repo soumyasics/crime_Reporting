@@ -108,6 +108,34 @@ const viewPolices = (req, res) => {
         });
 };
 
+
+
+// View all Polices
+const viewPoliceByDistrict = (req, res) => {
+    Police.find({adminApproved:true,district:req.params.district})
+        .exec()
+        .then(data => {
+            if (data.length > 0) {
+                res.json({
+                    status: 200,
+                    msg: "Data obtained successfully",
+                    data: data
+                });
+            } else {
+                res.json({
+                    status: 200,
+                    msg: "No Data obtained"
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({
+                status: 500,
+                msg: "Data not obtained",
+                Error: err
+            });
+        });
+};
 // Update Police by ID
 const editPoliceById =async (req, res) => {
     let flag=0
@@ -467,6 +495,7 @@ viewallPolicesforadmin,
 acceptPoliceById,
 rejectPoliceById,
 activatePoliceById,
-deactivatePoliceById
+deactivatePoliceById,
+viewPoliceByDistrict
 
 }
