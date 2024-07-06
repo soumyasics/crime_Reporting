@@ -31,7 +31,7 @@ function PoliceNavbar() {
 
   return (
     <div>
-      <nav class="navbar navbar-expand-lg navbar_bg">
+      <nav class="navbar navbar-expand-lg navbar_bg police_nav_main">
         <div class="container-fluid">
          
         <Link to='/police_home' className="text-decoration-none" >
@@ -71,77 +71,69 @@ function PoliceNavbar() {
 
               <li class="nav-item m-3">
                 <Link
-                to={`/policeprofile/${id}`}
-                  class="nav-link"
-                  aria-current="page"
-                  id="text_color_white"
-                >
-                  Profile
-                </Link>
-              </li>
-
-              <li class="nav-item m-3">
-                <Link
                 to={`/policeviewcases`}
                   class="nav-link"
                   aria-current="page"
                   id="text_color_white"
                 >
-                  View All Cases
+                  New Crime
                 </Link>
               </li>
 
               <li class="nav-item m-3">
                 <Link
-                to={'/'} onClick={handleLogout}
+                to=''
                   class="nav-link"
                   aria-current="page"
                   id="text_color_white"
                 >
-                  Logout
+                  Cases
                 </Link>
               </li>
-              
-             
-              {/* <li class="nav-item">
-                <a class="nav-link" href="#" id="text_color_white">
-                  Complaints
-                </a>
+
+              <li class="nav-item m-3">
+                <Link
+                to={``}
+                  class="nav-link"
+                  aria-current="page"
+                  id="text_color_white"
+                >
+                  Alerts
+                </Link>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" id="text_color_white">
-                  View Alerts
-                </a>
+              <div className='dropdown-center'>
+              <li className="nav-item m-3">
+                <Link
+                  to="#"
+                  className="nav-link "
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  id="text_color_white"
+                >
+                  Settings
+                </Link>
+                <ul className="dropdown-menu landing_dropdown_style" aria-labelledby="navbarDropdown">
+                  <li>
+                    <Link to="" className="dropdown-item">
+                      Change Password
+                    </Link>
+                  </li>
+                 
+                  <li>
+                    <Link to={`/policeprofile/${id}`} className="dropdown-item">
+                      View Profile
+                    </Link>
+                  </li>
+
+                  <li>
+                  <Link to={'/'} onClick={handleLogout} className='dropdown-item'>
+                    Logout
+                  </Link>
+                  </li>
+                </ul>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" id="text_color_white">
-                  Police Station
-                </a>
-              </li> */}
-              <li class="nav-item ">
-               
-                {/* <div class="dropdown-center">
-                  <button
-                    class=" button_bg dropdown-toggle"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    
-                  </button>
-                  <ul class="dropdown-menu dropdown-menu-dark">
-                    <li>
-                      <Link to={'/citizen_profile'} class="dropdown-item" href="#">
-                        Profile
-                      </Link>
-                      <Link to={'/'} onClick={handleLogout} class="dropdown-item" href="#">
-                        Logout
-                      </Link>
-                    </li>
-                   
-                  </ul>
-                </div> */}
-              </li>
+              </div>
             </ul>
           </div>
         </div>

@@ -28,7 +28,7 @@ function ViewCaseDetails() {
             <span>Case No: 203 </span>
         </div>
         <div className='row mt-5'>
-            <div className='col'>
+            <div className='col-md-6 container'>
                 <div className='case-details-span '>
                     <span>Victim Information</span>
                 </div>
@@ -46,11 +46,10 @@ function ViewCaseDetails() {
                             <div><span>{caseDetails.victimemail}</span></div>
                             <div><span>{caseDetails.victimaddress}</span></div>   
                         </div>
-                        <div className='col-4'></div>
                     </div>
                 </div>
             </div>
-            <div className='col'>
+            <div className='col-md-6 container'>
                 <div className='case-details-span '>
                     <span>Incident Details</span>
                 </div>
@@ -74,7 +73,7 @@ function ViewCaseDetails() {
             </div>
         </div>
         <div className='row mt-5'>
-            <div className='col'>
+            <div className='col-md-6 container'>
                 <div className='case-details-span '>
                     <span>Witness Information</span>
                 </div>
@@ -96,7 +95,7 @@ function ViewCaseDetails() {
                     </div>
                 </div>
             </div>
-            <div className='col'>
+            <div className='col-md-6 container'>
                 <div className='case-details-span '>
                     <span>Incident Details</span>
                 </div>
@@ -118,7 +117,7 @@ function ViewCaseDetails() {
             </div>
         </div>
         <div className='row mt-5'>
-            <div className='col'>
+            <div className='col-md-6 container'>
                 <div className='case-details-span '>
                     <span>Victim Information</span>
                 </div>
@@ -130,14 +129,14 @@ function ViewCaseDetails() {
                             
                         </div>
                         <div className='col-5 case-details-victim1'>
-                            <div><span>2{caseDetails.numofsuspect}</span></div>
-                            <div><span>T{caseDetails.physicaldescription} </span></div> 
+                            <div><span>{caseDetails.numofsuspect}</span></div>
+                            <div><span>{caseDetails.physicaldescription} </span></div> 
                         </div>
                         <div className='col-4'></div>
                     </div>
                 </div>
             </div>
-            <div className='col'>
+            <div className='col-md-6 container'>
                 <div className='case-details-span '>
                     <span>Incident Details</span>
                 </div>
@@ -162,7 +161,7 @@ function ViewCaseDetails() {
             </div>
         </div>
         <div className='row'>
-            <div className='col-6 container'>
+            <div className='col-md-6 container'>
                 <div className='case-details-span '>
                     <span>Additional  Information</span>
                 </div>
@@ -176,7 +175,7 @@ function ViewCaseDetails() {
                     <div className='col-4'></div>
                 </div>
             </div>
-            <div className='col-6'></div>
+            <div className='col-md-6'></div>
         </div>
 
     </div>
