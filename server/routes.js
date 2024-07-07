@@ -1,7 +1,7 @@
 const router=require('express').Router()
 const citizen=require('./Citizen/citizenController')
 const police=require('./Police/policeController')
-const crime=require('./Crime/crimeController')
+const crime=require('./Crimes/crimeController')
 
 //citizen routes
 router.post('/registerCitizen', citizen.registerCitizen);//done
@@ -32,13 +32,17 @@ router.post('/viewPoliceByDistrict/:district',police.viewPoliceByDistrict)
 
 
 //Crime Routes
+
 router.post('/addcrime',crime.upload,crime.addCrime)
-router.post('/viewallcrime',crime.viewCrime)
+router.post('/viewallcrime',crime.viewAllCrimes)
 router.post('/viewCrimeById/:id',crime.viewCrimeById)
-router.post('/editCrimeById/:id',crime.upload,crime.editCaseById)
 router.post('/acceptCrimeById/:id',crime.acceptCrimeById)
 router.post('/rejectCrimeById/:id',crime.rejectCrimeById)
-router.post('/viewCaseByPolicestation',crime.viewCaseByPolicestation)
+router.post('/viewCaseByPolicestation',crime.viewCrimeByCitizenId)
+router.post('/viewAprvdCrimeByPolicStationId',crime.viewAprvdCrimeByPolicStationId)
+router.post('/viewAprvdCrimeByPolicStationId',crime.viewAprvdCrimeByPolicStationId)
+router.post('/viewCrimesbyDisrtict',crime.viewCrimesbyDisrtict)
+router.post('/getCaseType',crime.getCaseType)
 
 
 module.exports=router
