@@ -1,11 +1,22 @@
 const mongoose = require('mongoose');
 
+
+const evidenceFileSchema = new mongoose.Schema({
+    filename: String,
+    filetype: String,
+    filepath: String,
+  });
+
+
 const caseSchema = new mongoose.Schema({
   district: {
-    type: String
+    type: String,
+    required:true
   },
-  policeStation: {
-    type: String
+  psId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required:true,
+    ref:'police'
   },
   victimName: {
     type: String
@@ -88,9 +99,16 @@ const caseSchema = new mongoose.Schema({
   others: {
     type: String
   },
-  evidenceFiles: {
-    type: [String]
+  evidenceFiles: [evidenceFileSchema],
+  approvalStatus:{
+    type:String,
+    default:'pending'
+  },
+  citizenId:{
+    type: mongoose.Schema.Types.ObjectId,
+    required:true,
+    ref:'citizens'
   }
 });
 
-module.exports = mongoose.model('Case', caseSchema);
+module.exports = mongoose.model('crimes', caseSchema);
