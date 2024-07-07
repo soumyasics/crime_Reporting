@@ -1,523 +1,755 @@
-import React, { useEffect, useState } from 'react'
-import '../../Assets/Styles/CitizenLogin.css'
-import axiosInstance from '../Constants/BaseUrl'
-import { toast } from 'react-toastify';
+import React, { useEffect, useState } from "react";
+import "../../Assets/Styles/CitizenLogin.css";
+import axiosInstance from "../Constants/BaseUrl";
+import { toast } from "react-toastify";
+import { useFormik } from "formik";
+import { AddCrimeSchema } from "../Constants/Schema";
+
 function ReportCrime() {
+  const [viewPoliceStation, setViewPoliceStation] = useState([]);
+  const [selectedCaseType, setSelectedCaseType] = useState("");
 
-  const [viewPoliceStation,setViewPoliceStation]=useState([])
+  const districts = [
+    "Alappuzha",
+    "Ernakulam",
+    "Idukki",
+    "Kannur",
+    "Kasaragod",
+    "Kollam",
+    "Kottayam",
+    "Kozhikode",
+    "Malappuram",
+    "Palakkad",
+    "Pathanamthitta",
+    "Thiruvananthapuram",
+    "Thrissur",
+    "Wayanad",
+  ];
 
-  useEffect(() => {
-    axiosInstance.post('/viewPolices')
-        .then(response => {
-            console.log(response);
-            if (response.data.status === 200) {
-                setViewPoliceStation(response.data.data)
-            } else {
-                console.log('No data obtained');
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching furniture data:', error);
-        });
-    }, []); 
-    
-  const [data, setData] = useState({
-    policestationname: '',
-    victimname: '',
-    victimgender: '',
-    victimemail: '',
-    victimaddress: '',
-    incidentdate: '',
-    incidenttime: '',
-    incidentlocation: '',
-    incidentcity: '',
-    crimetype: '',
-    crimeitem: '',
-    witnessname: '',
-    witnesscontact: '',
-    witnessaddress: '',
-    witnessstatement: '',
-    numofsuspect: '',
-    physicaldescription: '',
-    evidencedescription: '',
-    comments: '',
-    audioevidence: null,
-    videoevidence: null,
-    photoevidence: null,
-  });
+  const caseTypes = [
+    "Theft",
+    "Assault",
+    "Vandalism",
+    "Missing Person",
+    "Domestic Violence",
+    "Fraud",
+    "Others",
+  ];
 
-  const [errors, setErrors] = useState({});
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      initialValues: {
+        district: "",
+        policeStation: "",
+        victimName: "",
+        victimGender: "",
+        victimEmail: "",
+        victimAddress: "",
+        incidentDate: "",
+        incidentTime: "",
+        incidentLocation: "",
+        incidentCity: "",
+        witnessName: "",
+        witnessContact: "",
+        witnessAddress: "",
+        witnessStatement: "",
+        caseDescription: "",
+        caseType: "",
+        theftStolenItems: "",
+        theftStolenSuspected: "",
+        assaultInjuries: "",
+        assaultMedicalAttention: "",
+        vandalismDescription: "",
+        vandalismCostOfDamage: "",
+        missingPersonName: "",
+        missingPersonDescription: "",
+        domesticViolenceDescription: "",
+        domesticViolenceInjuries: "",
+        fraudDescription: "",
+        fraudFinancialLoss: "",
+        others: "",
+        evidenceFile: null,
+      },
+      validationSchema: AddCrimeSchema,
+      onSubmit: (values) => {
+        console.log(values);
+      },
+    });
 
-  const handleChange = (event) => {
-    const { name, value, files } = event.target;
-    if (files) {
-      setData(prevData => ({
-        ...prevData,
-        [name]: files[0]
-      }));
-    } else {
-      setData(prevData => ({
-        ...prevData,
-        [name]: value
-      }));
-    }
-    setErrors(prevErrors => ({
-      ...prevErrors,
-      [name]: ''
-    }));
+  const handleCaseTypeChange = (e) => {
+    handleChange(e);
+    setSelectedCaseType(e.target.value);
   };
 
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const validateContact = (contact) => {
-    const contactRegex = /^\d{10}$/;
-    return contactRegex.test(contact);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    let formIsValid = true;
-    let newErrors = {};
-
-    if (!data.policestationname) {
-      newErrors.policestationname = 'Police station name is required';
-      formIsValid = false;
-    }
-
-    if (!data.victimname) {
-      newErrors.victimname = 'Victim name is required';
-      formIsValid = false;
-    }
-
-    if (!data.incidentdate) {
-      newErrors.incidentdate = 'Incident Date is required';
-      formIsValid = false;
-    }
-    if (!data.incidenttime) {
-      newErrors.incidenttime = 'Incident time is required';
-      formIsValid = false;
-    }
-    if (!data.incidentlocation) {
-      newErrors.incidentlocation = 'Incident Location is required';
-      formIsValid = false;
-    }
-    if (!data.crimetype) {
-      newErrors.crimetype = 'Crime Type is required';
-      formIsValid = false;
-    }
-
-    if  (!validateEmail(data.victimemail)) {
-      newErrors.victimemail = 'Invalid email format';
-      formIsValid = false;
-    }
-
-    if (!validateContact(data.witnesscontact)) {
-      newErrors.witnesscontact = 'Invalid contact number';
-      formIsValid = false;
-    }
-
-    setErrors(newErrors);
-
-    if (formIsValid) {
-      const formData = new FormData();
-      formData.append('policestationname', data.policestationname);
-      formData.append('victimname', data.victimname);
-      formData.append('victimgender', data.victimgender);
-      formData.append('victimemail', data.victimemail);
-      formData.append('victimaddress', data.victimaddress);
-      formData.append('incidentdate', data.incidentdate);
-      formData.append('incidenttime', data.incidenttime);
-      formData.append('incidentlocation', data.incidentlocation);
-      formData.append('incidentcity', data.incidentcity);
-      formData.append('crimetype', data.crimetype);
-      formData.append('crimeitem', data.crimeitem);
-      formData.append('witnessname', data.witnessname);
-      formData.append('witnesscontact', data.witnesscontact);
-      formData.append('witnessaddress', data.witnessaddress);
-      formData.append('witnessstatement', data.witnessstatement);
-      formData.append('numofsuspect', data.numofsuspect);
-      formData.append('physicaldescription', data.physicaldescription);
-      formData.append('evidencedescription', data.evidencedescription);
-      formData.append('comments', data.comments);
-      formData.append('audioevidence', data.audioevidence);
-      formData.append('videoevidence', data.videoevidence);
-      formData.append('photoevidence', data.photoevidence);
-
-      try {
-        console.log("data",data);
-        const response = await axiosInstance.post('/addcrime', data, 
-          { headers: {
-          'Content-Type': 'multipart/form-data',
-        }
-      },)
-        if (response.data.status === 200) {
-          toast.success("Case Added Successfully")
-        } else {
-          toast.error("Case Not Added")
-        }
-      } catch (error) {
-        toast.error("Error", error)
-      }
-    }
+  const handleFileChange = (e) => {
+    handleChange(e);
+    const files = e.target.files;
+    values.evidenceFiles = files;
   };
 
   return (
-    <div className='mb-5'>
+    <div className="mb-5">
       <form onSubmit={handleSubmit}>
-      <div className='text-center text-danger mt-5 mb-5'>
-        <h4 className='report-crime-h4'>Report a Crime</h4>
-      </div>
-      <div className='report-crime-box container mt-5'>
-        <div className='container mt-5'>
-            <select
-                className='report-crime-textbox ps-3'
-                name='policestationname'
-                onChange={handleChange}
-                value={data.policestationname}
-            >
-                <option value="" disabled>Select a Police Station</option>
-                {viewPoliceStation.map((station, index) => (
-                    <option key={index} value={station.policestationname}>{station.policestationname}</option>
-                ))}
-            </select>
-            {errors.policestationname && <div className="text-danger">{errors.policestationname}</div>}
+        <div className="text-center text-danger mt-5 mb-5">
+          <h4 className="report-crime-h4">Report a Crime</h4>
         </div>
-        <div className=' text-center '>
-            <div className='report-crime-victim  mt-4 pt-2'>
-                <span className='report-crime-victim-span'>Victim Information</span>
+        <div className="report-crime-box container mt-5">
+          <div className="container mt-5">
+            <div className="row">
+              <div className="col-6">
+                <select
+                  className="report-crime-textbox ps-3"
+                  name="district"
+                  value={values.district}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                >
+                  <option>Select District</option>
+                  {districts.map((district, index) => (
+                    <option key={index} value={district}>
+                      {district}
+                    </option>
+                  ))}
+                </select>
+                {touched.district && errors.district && (
+                  <div className="error-message">{errors.district}</div>
+                )}
+              </div>
+              <div className="col-6">
+                <select
+                  className="report-crime-textbox ps-3"
+                  name="policeStation"
+                  value={values.policeStation}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                >
+                  <option>Select Police Station</option>
+                  {viewPoliceStation.map((station, index) => (
+                    <option key={index} value={station}>
+                      {station}
+                    </option>
+                  ))}
+                </select>
+                {touched.policeStation && errors.policeStation && (
+                  <div className="error-message">{errors.policeStation}</div>
+                )}
+              </div>
             </div>
-        </div>
-        <div className='row container'>
-          <div className='col mt-3'>
-            <div>
-              <label>Name</label>
+          </div>
+          <div className=" text-center ">
+            <div className="report-crime-victim  mt-4 pt-2">
+              <span className="report-crime-victim-span">Crime Details</span>
             </div>
-            <div className='mt-2'>
-              <input type='text'
-              className='report-crime-textbox ps-3'
-              name='victimname'
-              onChange={handleChange}
-              value={data.victimname}
-              ></input>
-              {errors.victimname && <div className="text-danger">{errors.victimname}</div>}
+          </div>
+          <div className="row container">
+            <div className="col mt-3">
+              <div>
+                <label>Case Description </label>
+              </div>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  className="report-crime-textbox ps-3"
+                  name="caseDescription"
+                  value={values.caseDescription}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                ></input>
+                {touched.caseDescription && errors.caseDescription && (
+                  <div className="error-message">{errors.caseDescription}</div>
+                )}
+              </div>
+            </div>
+            <div className="col mt-3">
+              <div>
+                <label>Select Type </label>
+              </div>
+              <div className="mt-2">
+                <select
+                  className="report-crime-textbox ps-3"
+                  name="caseType"
+                  value={values.caseType}
+                  onChange={handleCaseTypeChange}
+                  onBlur={handleBlur}
+                >
+                  <option>Select Type</option>
+                  {caseTypes.map((type, index) => (
+                    <option key={index} value={type}>
+                      {type}
+                    </option>
+                  ))}
+                </select>
+                {touched.caseType && errors.caseType && (
+                  <div className="error-message">{errors.caseType}</div>
+                )}
+              </div>
+            </div>
+          </div>
+          {selectedCaseType === "Theft" && (
+            <div className="row container">
+              <div className="col mt-3">
+                <div>
+                  <label>Stolen Items</label>
+                </div>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    className="report-crime-textbox ps-3"
+                    name="theftStolenItems"
+                    value={values.theftStolenItems}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  ></input>
+                  {touched.theftStolenItems && errors.theftStolenItems && (
+                    <div className="error-message">
+                      {errors.theftStolenItems}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="col mt-3">
+                <div>
+                  <label>Suspected Perpetrator (Description)</label>
+                </div>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    className="report-crime-textbox ps-3"
+                    name="theftStolenSuspected"
+                    value={values.theftStolenSuspected}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  ></input>
+                  {touched.theftStolenSuspected &&
+                    errors.theftStolenSuspected && (
+                      <div className="error-message">
+                        {errors.theftStolenSuspected}
+                      </div>
+                    )}
+                </div>
+              </div>
+            </div>
+          )}
+          {selectedCaseType === "Assault" && (
+            <div className="row container">
+              <div className="col mt-3">
+                <div>
+                  <label>Injuries Sustained (Description)</label>
+                </div>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    className="report-crime-textbox ps-3"
+                    name="assaultInjuries"
+                    value={values.assaultInjuries}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  ></input>
+                  {touched.assaultInjuries && errors.assaultInjuries && (
+                    <div className="error-message">
+                      {errors.assaultInjuries}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="col mt-3">
+                <div>
+                  <label>Medical Attention</label>
+                </div>
+                <div className="mt-2">
+                  <select
+                    className="report-crime-textbox ps-3"
+                    name="assaultMedicalAttention"
+                    value={values.assaultMedicalAttention}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  >
+                    <option value="">Select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                  {touched.assaultMedicalAttention &&
+                    errors.assaultMedicalAttention && (
+                      <div className="error-message">
+                        {errors.assaultMedicalAttention}
+                      </div>
+                    )}
+                </div>
+              </div>
+            </div>
+          )}
 
+          {selectedCaseType === "Vandalism" && (
+            <div className="row container">
+              <div className="col mt-3">
+                <div>
+                  <label>Description of Vandalism</label>
+                </div>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    className="report-crime-textbox ps-3"
+                    name="vandalismDescription"
+                    value={values.vandalismDescription}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  ></input>
+                  {touched.vandalismDescription &&
+                    errors.vandalismDescription && (
+                      <div className="error-message">
+                        {errors.vandalismDescription}
+                      </div>
+                    )}
+                </div>
+              </div>
+              <div className="col mt-3">
+                <div>
+                  <label>Cost of Damage</label>
+                </div>
+                <div className="mt-2">
+                  <input
+                    type="number"
+                    className="report-crime-textbox ps-3"
+                    name="vandalismCostOfDamage"
+                    value={values.vandalismCostOfDamage}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  ></input>
+                  {touched.vandalismCostOfDamage &&
+                    errors.vandalismCostOfDamage && (
+                      <div className="error-message">
+                        {errors.vandalismCostOfDamage}
+                      </div>
+                    )}
+                </div>
+              </div>
             </div>
-            <div className='mt-3'>
-              <label>Email</label>
+          )}
+          {selectedCaseType === "Missing Person" && (
+            <div className="row container">
+              <div className="col mt-3">
+                <div>
+                  <label>Missing Person Name</label>
+                </div>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    className="report-crime-textbox ps-3"
+                    name="missingPersonName"
+                    value={values.missingPersonName}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  ></input>
+                  {touched.missingPersonName && errors.missingPersonName && (
+                    <div className="error-message">
+                      {errors.missingPersonName}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="col mt-3">
+                <div>
+                  <label>Missing Person Description</label>
+                </div>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    className="report-crime-textbox ps-3"
+                    name="missingPersonDescription"
+                    value={values.missingPersonDescription}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  ></input>
+                  {touched.missingPersonDescription &&
+                    errors.missingPersonDescription && (
+                      <div className="error-message">
+                        {errors.missingPersonDescription}
+                      </div>
+                    )}
+                </div>
+              </div>
             </div>
-            <div>
-              <input type='email'
-              className='report-crime-textbox ps-3'
-              name='victimemail'
-              onChange={handleChange}
-              value={data.victimemail}
-              ></input>
-            {errors.victimemail && <div className="text-danger">{errors.victimemail}</div>}
+          )}
 
+          {selectedCaseType === "Domestic Violence" && (
+            <div className="row container">
+              <div className="col mt-3">
+                <div>
+                  <label>Description of Violence</label>
+                </div>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    className="report-crime-textbox ps-3"
+                    name="domesticViolenceDescription"
+                    value={values.domesticViolenceDescription}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  ></input>
+                  {touched.domesticViolenceDescription &&
+                    errors.domesticViolenceDescription && (
+                      <div className="error-message">
+                        {errors.domesticViolenceDescription}
+                      </div>
+                    )}
+                </div>
+              </div>
+              <div className="col mt-3">
+                <div>
+                  <label>Injuries Sustained (Description)</label>
+                </div>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    className="report-crime-textbox ps-3"
+                    name="domesticViolenceInjuries"
+                    value={values.domesticViolenceInjuries}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  ></input>
+                  {touched.domesticViolenceInjuries &&
+                    errors.domesticViolenceInjuries && (
+                      <div className="error-message">
+                        {errors.domesticViolenceInjuries}
+                      </div>
+                    )}
+                </div>
+              </div>
             </div>
-          </div>
-          <div className='col mt-3'>
-          <div>
-              <label>Gender</label>
-            </div>
-            <div className='mt-2'>
-              <select
-              className='report-crime-textbox ps-3'
-              name='victimgender'
-              onChange={handleChange}
-              value={data.victimgender}>
-                  <option selected>Open this select menu</option>
-                  <option value='male'>Male</option>
-                  <option value='female'>Female</option>
-                  <option value='others'>Others</option>
-              </select>
-            </div>
-            <div className='mt-3'>
-              <label>Address</label>
-            </div>
-            <div>
-              <input type='text'
-              className='report-crime-textbox ps-3'
-              name='victimaddress'
-              onChange={handleChange}
-              value={data.victimaddress}
-              ></input>
-            </div>
-          </div>
-        </div>
-        <div className=' text-center '>
-            <div className='report-crime-victim  mt-4 pt-2'>
-                <span className='report-crime-victim-span'>Incident Details</span>
-            </div>
-        </div>
-        <div className='row container'>
-          <div className='col mt-3'>
-            <div>
-              <label>Date</label>
-            </div>
-            <div className='mt-2'>
-              <input type='date'
-              className='report-crime-textbox ps-3'
-              name='incidentdate'
-              onChange={handleChange}
-              value={data.incidentdate}
-              ></input>
-             {errors.incidentdate && <div className="text-danger">{errors.incidentdate}</div>}
+          )}
 
+          {selectedCaseType === "Fraud" && (
+            <div className="row container">
+              <div className="col mt-3">
+                <div>
+                  <label>Description of Fraud</label>
+                </div>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    className="report-crime-textbox ps-3"
+                    name="fraudDescription"
+                    value={values.fraudDescription}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  ></input>
+                  {touched.fraudDescription && errors.fraudDescription && (
+                    <div className="error-message">
+                      {errors.fraudDescription}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="col mt-3">
+                <div>
+                  <label>Financial Loss (Amount)</label>
+                </div>
+                <div className="mt-2">
+                  <input
+                    type="number"
+                    className="report-crime-textbox ps-3"
+                    name="fraudFinancialLoss"
+                    value={values.fraudFinancialLoss}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  ></input>
+                  {touched.fraudFinancialLoss && errors.fraudFinancialLoss && (
+                    <div className="error-message">
+                      {errors.fraudFinancialLoss}
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
-            <div className='mt-3'>
-              <label>Location</label>
-            </div>
-            <div>
-              <input type='text'
-              className='report-crime-textbox ps-3'
-              name='incidentlocation'
-              onChange={handleChange}
-              value={data.incidentlocation}
-              ></input>
-             {errors.incidentlocation && <div className="text-danger">{errors.incidentlocation}</div>}
+          )}
 
+          {selectedCaseType === "Others" && (
+            <div className="row container">
+              <div className="col mt-3">
+                <div>
+                  <label>Description</label>
+                </div>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    className="report-crime-textbox ps-3"
+                    name="others"
+                    value={values.others}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  ></input>
+                  {touched.others && errors.others && (
+                    <div className="error-message">{errors.others}</div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+          <div className="text-center ">
+            <div className="report-crime-victim mt-4 pt-2">
+              <span className="report-crime-victim-span">
+                Victim Information
+              </span>
             </div>
           </div>
-          <div className='col mt-3'>
-          <div>
-              <label>Time</label>
+          <div className="row container">
+            <div className="col mt-3">
+              <div>
+                <label>Name</label>
+              </div>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  className="report-crime-textbox ps-3"
+                  name="victimName"
+                  value={values.victimName}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                ></input>
+                {touched.victimName && errors.victimName && (
+                  <div className="error-message">{errors.victimName}</div>
+                )}
+              </div>
+              <div className="mt-3">
+                <label>Email</label>
+              </div>
+              <div>
+                <input
+                  type="email"
+                  className="report-crime-textbox ps-3"
+                  name="victimEmail"
+                  value={values.victimEmail}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                ></input>
+                {touched.victimEmail && errors.victimEmail && (
+                  <div className="error-message">{errors.victimEmail}</div>
+                )}
+              </div>
             </div>
-            <div className='mt-2'>
-              <input type='time'
-              className='report-crime-textbox ps-3'
-              name='incidenttime'
-              onChange={handleChange}
-              value={data.incidenttime}
-              ></input>
-              {errors.incidenttime && <div className="text-danger">{errors.incidenttime}</div>}
+            <div className="col mt-3">
+              <div>
+                <label>Gender</label>
+              </div>
+              <div className="mt-2">
+                <select
+                  className="report-crime-textbox ps-3"
+                  name="victimGender"
+                  value={values.victimGender}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                >
+                  <option>Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="others">Others</option>
+                </select>
+                {touched.victimGender && errors.victimGender && (
+                  <div className="error-message">{errors.victimGender}</div>
+                )}
+              </div>
+              <div className="mt-3">
+                <label>Address</label>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  className="report-crime-textbox ps-3"
+                  name="victimAddress"
+                  value={values.victimAddress}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                ></input>
+                {touched.victimAddress && errors.victimAddress && (
+                  <div className="error-message">{errors.victimAddress}</div>
+                )}
+              </div>
+            </div>
+          </div>
+          <div className=" text-center ">
+            <div className="report-crime-victim  mt-4 pt-2">
+              <span className="report-crime-victim-span">Incident Details</span>
+            </div>
+          </div>
+          <div className="row container">
+            <div className="col mt-3">
+              <div>
+                <label>Date</label>
+              </div>
+              <div className="mt-2">
+                <input
+                  type="date"
+                  className="report-crime-textbox ps-3"
+                  name="incidentDate"
+                  value={values.incidentDate}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                ></input>
+                {touched.incidentDate && errors.incidentDate && (
+                  <div className="error-message">{errors.incidentDate}</div>
+                )}
+              </div>
+              <div className="mt-3">
+                <label>Location</label>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  className="report-crime-textbox ps-3"
+                  name="incidentLocation"
+                  value={values.incidentLocation}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                ></input>
+                {touched.incidentLocation && errors.incidentLocation && (
+                  <div className="error-message">{errors.incidentLocation}</div>
+                )}
+              </div>
+            </div>
+            <div className="col mt-3">
+              <div>
+                <label>Time</label>
+              </div>
+              <div className="mt-2">
+                <input
+                  type="time"
+                  className="report-crime-textbox ps-3"
+                  name="incidentTime"
+                  value={values.incidentTime}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                ></input>
+                {touched.incidentTime && errors.incidentTime && (
+                  <div className="error-message">{errors.incidentTime}</div>
+                )}
+              </div>
+              <div className="mt-3">
+                <label>City</label>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  className="report-crime-textbox ps-3"
+                  name="incidentCity"
+                  value={values.incidentCity}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                ></input>
+                {touched.incidentCity && errors.incidentCity && (
+                  <div className="error-message">{errors.incidentCity}</div>
+                )}
+              </div>
+            </div>
+          </div>
+          <div className=" text-center ">
+            <div className="report-crime-victim  mt-4 pt-2">
+              <span className="report-crime-victim-span">Evidence Details</span>
+            </div>
+          </div>
+          <div className="row container">
+          <div className="col mt-3">
+              <div>
+                <label>Evidence Upload</label>
+              </div>
+              <div className="mt-2">
+                <input
+                  type="file"
+                  className="report-crime-textbox ps-3"
+                  name="evidenceFile"
+                  onChange={handleFileChange}
+                  onBlur={handleBlur}
+                ></input>
+                {touched.evidenceFile && errors.evidenceFile && (
+                  <div className="error-message">{errors.evidenceFile}</div>
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="text-center">
+            <div className="report-crime-victim mt-4 pt-2">
+              <span className="report-crime-victim-span">Witness Details</span>
+            </div>
+          </div>
+          <div className="row container">
+            <div className="col mt-3">
+              <div>
+                <label>Witness Name</label>
+              </div>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  className="report-crime-textbox ps-3"
+                  name="witnessName"
+                  value={values.witnessName}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {touched.witnessName && errors.witnessName && (
+                  <div className="error-message">{errors.witnessName}</div>
+                )}
+              </div>
+              <div className="mt-3">
+                <label>Address</label>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  className="report-crime-textbox ps-3"
+                  name="witnessAddress"
+                  value={values.witnessAddress}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {touched.witnessAddress && errors.witnessAddress && (
+                  <div className="error-message">{errors.witnessAddress}</div>
+                )}
+              </div>
+            </div>
+            <div className="col mt-3">
+              <div>
+                <label>Contact</label>
+              </div>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  className="report-crime-textbox ps-3"
+                  name="witnessContact"
+                  value={values.witnessContact}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {touched.witnessContact && errors.witnessContact && (
+                  <div className="error-message">{errors.witnessContact}</div>
+                )}
+              </div>
+              <div className="mt-3">
+                <label>Witness Statement</label>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  className="report-crime-textbox ps-3"
+                  name="witnessStatement"
+                  value={values.witnessStatement}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {touched.witnessStatement && errors.witnessStatement && (
+                  <div className="error-message">{errors.witnessStatement}</div>
+                )}
+              </div>
+            </div>
+          </div>
 
-            </div>
-            <div className='mt-3'>
-              <label>City</label>
-            </div>
-            <div>
-              <input type='text'
-              className='report-crime-textbox ps-3'
-              name='incidentcity'
-              onChange={handleChange}
-              value={data.incidentcity}
-              ></input>
-            </div>
+          <div className="text-center mt-5">
+            <button type="submit" className="report-crime-crimebtn">
+              Add Crime
+            </button>
           </div>
         </div>
-        <div className=' text-center '>
-            <div className='report-crime-victim  mt-4 pt-2'>
-                <span className='report-crime-victim-span'>Crime  Details</span>
-            </div>
-        </div>
-        <div className='row container'>
-          <div className='col mt-3'>
-            <div>
-              <label>Select Type </label>
-            </div>
-            <div className='mt-2'>
-              <select type='text'
-              className='report-crime-textbox ps-3'
-              name='crimetype'
-              onChange={handleChange}
-              value={data.crimetype}>
-                <option selected>Open this select menu</option>
-                <option value='theft'>Theft</option>
-                <option value='burglary'>Burglary</option>
-                <option value='robbery'>Robbery</option>
-                <option value='assault'>Assault</option>
-                <option value='vandalism'>Vandalism</option>
-                <option value='fraud'>Fraud</option>
-              </select>
-              {errors.crimetype && <div className="text-danger">{errors.crimetype}</div>}
-
-            </div>
-          </div>
-          <div className='col mt-3'>
-          <div>
-              <label>Item Stolen  </label>
-            </div>
-            <div className='mt-2'>
-              <input type='text'
-              className='report-crime-textbox ps-3'
-              name='crimeitem'
-              onChange={handleChange}
-              value={data.crimeitem}
-              ></input>
-            </div>
-          </div>
-        </div>
-        <div className=' text-center '>
-            <div className='report-crime-victim  mt-4 pt-2'>
-                <span className='report-crime-victim-span'>Evidence Details</span>
-            </div>
-        </div>
-        <div className='row container'>
-          <div className='col mt-3'>
-            <div>
-              <label>Upload Audio</label>
-            </div>
-            <div className='mt-2'>
-              <input type='file'
-              className='report-crime-textbox file_border ps-3 p-1'
-              name='audioevidence'
-              onChange={handleChange}
-              ></input>
-            </div>
-            <div className='mt-3'>
-              <label>Upload Photos</label>
-            </div>
-            <div>
-              <input type='file'
-              className='report-crime-textbox file_border ps-3 p-1'
-              name='photoevidence'
-              onChange={handleChange}
-              ></input>
-            </div>
-          </div>
-          <div className='col mt-3'>
-          <div>
-              <label>Upload Video</label>
-            </div>
-            <div className='mt-2'>
-              <input type='file'
-              className='report-crime-textbox file_border ps-3 p-1'
-              name='videoevidence'
-              onChange={handleChange}
-              ></input>
-            </div>
-            <div className='mt-3'>
-              <label>Description</label>
-            </div>
-            <div>
-              <input type='text'
-              className='report-crime-textbox ps-3'
-              name='evidencedescription'
-              onChange={handleChange}
-              value={data.evidencedescription}
-              ></input>
-            </div>
-          </div>
-        </div>
-        <div className=' text-center '>
-            <div className='report-crime-victim  mt-4 pt-2'>
-                <span className='report-crime-victim-span'>Witness Details</span>
-            </div>
-        </div>
-        <div className='row container'>
-          <div className='col mt-3'>
-            <div>
-              <label>Witness Name</label>
-            </div>
-            <div className='mt-2'>
-              <input type='text'
-              className='report-crime-textbox ps-3'
-              name='witnessname'
-              onChange={handleChange}
-              value={data.witnessname}
-              ></input>
-            </div>
-            <div className='mt-3'>
-              <label>Address</label>
-            </div>
-            <div>
-              <input type='text'
-              className='report-crime-textbox ps-3'
-              name='witnessaddress'
-              onChange={handleChange}
-              value={data.witnessaddress}
-              ></input>
-            </div>
-          </div>
-          <div className='col mt-3'>
-          <div>
-              <label>Contact</label>
-            </div>
-            <div className='mt-2'>
-              <input type='text'
-              className='report-crime-textbox ps-3'
-              name='witnesscontact'
-              onChange={handleChange}
-              value={data.witnesscontact}
-              ></input>
-              {errors.witnesscontact && <div className="text-danger">{errors.witnesscontact}</div>}
-
-            </div>
-            <div className='mt-3'>
-              <label>Witness Statement</label>
-            </div>
-            <div>
-              <input type='text'
-              className='report-crime-textbox ps-3'
-              name='witnessstatement'
-              onChange={handleChange}
-              value={data.witnessstatement}
-              ></input>
-            </div>
-          </div>
-        </div>
-        <div className=' text-center '>
-            <div className='report-crime-victim  mt-4 pt-2'>
-                <span className='report-crime-victim-span'>Suspect Information</span>
-            </div>
-        </div>
-        <div className='row container'>
-          <div className='col mt-3'>
-            <div>
-              <label>No of Supects</label>
-            </div>
-            <div className='mt-2'>
-              <input type='text'
-              className='report-crime-textbox ps-3'
-              name='numofsuspect'
-              onChange={handleChange}
-              value={data.numofsuspect}
-              ></input>
-            </div>
-          </div>
-          <div className='col mt-3'>
-          <div>
-              <label>Physical Description</label>
-            </div>
-            <div className='mt-2'>
-              <input type='text'
-              className='report-crime-textbox ps-3'
-              name='physicaldescription'
-              onChange={handleChange}
-              value={data.physicaldescription}
-              ></input>
-            </div>
-          </div>
-        </div>
-        <div className=' text-center '>
-            <div className='report-crime-victim  mt-4 pt-2'>
-                <span className='report-crime-victim-span'>Additional Inforamtion</span>
-            </div>
-        </div>
-        <div className='container mt-4'>
-          <div>
-            <label>Comments</label>
-          </div>
-          <div>
-            <input type='text'
-            className='report-crime-textbox1 mt-2 ps-3'
-            name='comments'
-            onChange={handleChange}
-            value={data.comments}
-            ></input>
-          </div>
-        </div>
-        <div className='text-center mt-5'>
-          <button type='submit' className='report-crime-crimebtn'>Add Crime</button>
-        </div>
-      </div>
       </form>
     </div>
-  )
+  );
 }
 
-export default ReportCrime
+export default ReportCrime;
