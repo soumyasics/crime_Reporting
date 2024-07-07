@@ -74,8 +74,10 @@ function App() {
         <Route path='/police_login' element={[<LoginNav/>,<PoliceLogin/>]} />
         <Route path='/police_forgotpassword' element={[<LoginNav/>,<ForgotPassword activeUser='Police' />]} />
         <Route path='/police_home' element={[<PoliceNavbar/>,<LoginBanner user='police' />,<PoliceLandingPageContent/>,<PoliceRecentCrimes/>]} />
-        <Route path='/policeviewcases' element={[<PoliceNavbar/>,<PoliceViewCases/>]} />
-        <Route path='/casedetails/:id' element={[<LandingNavbar/>,<CaseDetails/>]}/>
+        <Route path='/policeviewcases' element={[<PoliceNavbar/>,<PoliceViewCases type='request' />]} />
+        <Route path='/policeviewApprovedcases' element={[<PoliceNavbar/>,<PoliceViewCases type='view' />]} />
+        <Route path='/casedetails/:id' element={[<PoliceNavbar/>,<CaseDetails type='request' />]}/>
+        <Route path='/approvedcasedetails/:id' element={[<PoliceNavbar/>,<CaseDetails type='view' />]}/>
         <Route path='/policeprofile/:id' element={[<PoliceNavbar/>,<PoliceProfile/>]} />
 
 

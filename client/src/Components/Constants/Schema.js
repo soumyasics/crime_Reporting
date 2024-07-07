@@ -149,7 +149,7 @@ export const AddCrimeSchema = yup.object().shape({
     .min(2, "Enter minimum 2 characters")
     .max(Infinity, "Maximum 20 characters are allowed")
     .required("Required"),
-  policeStation: yup
+    psId: yup
     .string()
     .min(2, "Enter minimum 2 characters")
     .max(Infinity, "Maximum 20 characters are allowed")
@@ -255,7 +255,7 @@ export const AddCrimeSchema = yup.object().shape({
     .string()
     // .required("Other case details are required")
     ,
-    evidenceFile: yup
+    files: yup
     .array()
     .of(
       yup

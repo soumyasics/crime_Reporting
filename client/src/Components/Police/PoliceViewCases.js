@@ -1,28 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { IoMdEye } from "react-icons/io";
 import { TiTick } from "react-icons/ti";
-import './Police.css';
-import axiosInstance from '../Constants/BaseUrl';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import "./Police.css";
+import axiosInstance from "../Constants/BaseUrl";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { type } from "@testing-library/user-event/dist/type";
 
-function PoliceViewCases() {
+function PoliceViewCases({type}) {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+  const pId = localStorage.getItem("policeId");
 
   useEffect(() => {
-    const policestationname = localStorage.getItem('policestationName');
+    const policestationname = localStorage.getItem("policestationName");
     if (!policestationname) {
-      navigate('/');
+      navigate("/");
     } else {
       getData(policestationname);
     }
   }, [navigate]);
 
   const getData = (policestationname) => {
-    console.log(policestationname)
-    axiosInstance.post('/viewCaseByPolicestation', { policestationname })
+    console.log(policestationname);
+    if(type=='request'){
+      axiosInstance
+      .post(`/viewPendingCrimeByPolicStationId/${pId}`)
       .then((res) => {
+        console.log(res);
         if (res.data.status === 200) {
           setData(res.data.data || []);
         } else if (res.data.status === 404) {
@@ -33,15 +38,37 @@ function PoliceViewCases() {
       .catch((err) => {
         console.log("Error", err);
       });
+    }else{
+      axiosInstance
+      .post(`/viewAprvdCrimeByPolicStationId/${pId}`)
+      .then((res) => {
+        console.log(res);
+        if (res.data.status === 200) {
+          setData(res.data.data || []);
+        } else if (res.data.status === 404) {
+          setData([]);
+          console.log("No data found for this police station");
+        }
+      })
+      .catch((err) => {
+        console.log("Error", err);
+      });
+    }
+    
   };
 
   const handleApprove = (caseId) => {
-    axiosInstance.post(`/acceptCrimeById/${caseId}`)
+    axiosInstance
+      .post(`/acceptCrimeById/${caseId}`)
       .then((res) => {
         if (res.data.status === 200) {
-          setData(data.map(caseData => 
-            caseData._id === caseId ? { ...caseData, adminApproved: true } : caseData
-          ));
+          setData(
+            data.map((caseData) =>
+              caseData._id === caseId
+                ? { ...caseData, adminApproved: true }
+                : caseData
+            )
+          );
           navigate("/policeviewcases");
           window.location.reload();
         } else {
@@ -54,10 +81,11 @@ function PoliceViewCases() {
   };
 
   const handleReject = (caseId) => {
-    axiosInstance.post(`/rejectCrimeById/${caseId}`)
+    axiosInstance
+      .post(`/rejectCrimeById/${caseId}`)
       .then((res) => {
         if (res.data.status === 200) {
-          console.log("Rejected")
+          console.log("Rejected");
           navigate("/policeviewcases");
           window.location.reload();
         } else {
@@ -70,45 +98,67 @@ function PoliceViewCases() {
   };
 
   return (
-    <div className='container mb-5 police_view_case_main'>
-      <div className='container ms-5 mt-5 text-danger'>
+    <div className="container mb-5 police_view_case_main">
+      <div className="container ms-5 mt-5 text-danger">
         <h4>Recent Cases</h4>
       </div>
       <div>
-        {data.length===0 && (
-          <h1>No Data Found</h1>
-        )}
-        {data.length>0 && (
-        <table className="table table-striped border">
-          <thead>
-            <tr>
-              <th>Victim Name</th>
-              <th>Type of Crime</th>
-              <th>Witness Name</th>
-              <th>Date</th>
-              <th>Location</th>
-              <th>No of Suspects</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((caseData) => (
-              <tr key={caseData._id}>
-                <td>{caseData.victimname}</td>
-                <td>{caseData.crimetype}</td>
-                <td>{caseData.witnessname}</td>
-                <td>{caseData.incidentdate}</td>
-                <td>{caseData.incidentlocation}</td>
-                <td>{caseData.numofsuspect}</td>
-                <td>
-                  <button className='policeview-cases-cross' onClick={() => handleReject(caseData._id)}><RxCross2 /></button>
-                  <button className='policeview-cases-tick ms-3' onClick={() => handleApprove(caseData._id)}><TiTick /></button>
-                  <Link to={`/casedetails/${caseData._id}`}><button className='policeview-cases-eye ms-3'><IoMdEye /></button></Link>
-                </td>
+        {data.length === 0 && <h1>No Data Found</h1>}
+        {data.length > 0 && (
+          <table className="table table-striped border">
+            <thead>
+              <tr>
+                <th>Victim Name</th>
+                <th>Type of Crime</th>
+                <th>Witness Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Location</th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {data.map((caseData) => (
+                <tr key={caseData._id}>
+                  <td>{caseData.victimName}</td>
+                  <td>{caseData.caseType}</td>
+                  <td>{caseData.witnessName}</td>
+                  <td>{caseData.incidentDate}</td>
+                  <td>{caseData.incidentTime}</td>
+                  <td>{caseData.incidentLocation}</td>
+                  {type == "request" ? (
+                    <td>
+                      <button
+                        className="policeview-cases-cross"
+                        onClick={() => handleReject(caseData._id)}
+                      >
+                        <RxCross2 />
+                      </button>
+                      <button
+                        className="policeview-cases-tick ms-3"
+                        onClick={() => handleApprove(caseData._id)}
+                      >
+                        <TiTick />
+                      </button>
+                      <Link to={`/casedetails/${caseData._id}`}>
+                        <button className="policeview-cases-eye ms-3">
+                          <IoMdEye />
+                        </button>
+                      </Link>
+                    </td>
+                  ) : type == "view" ? (
+                    <Link to={`/approvedcasedetails/${caseData._id}`}>
+                      <button className="policeview-cases-eye ms-3">
+                        <IoMdEye />
+                      </button>
+                    </Link>
+                  ) : (
+                    ""
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
         )}
       </div>
     </div>
