@@ -36,7 +36,7 @@ function ReportCrime() {
     "Others",
   ];
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit, setFieldValue } =
     useFormik({
       initialValues: {
         district: "",
@@ -68,7 +68,7 @@ function ReportCrime() {
         fraudDescription: "",
         fraudFinancialLoss: "",
         others: "",
-        evidenceFile: null,
+        evidenceFile: [],
       },
       validationSchema: AddCrimeSchema,
       onSubmit: (values) => {
@@ -82,14 +82,28 @@ function ReportCrime() {
   };
 
   const handleFileChange = (e) => {
-    handleChange(e);
-    const files = e.target.files;
-    values.evidenceFiles = files;
+    const files = Array.from(e.target.files);
+    setFieldValue("evidenceFile", files);
   };
+
+  useEffect(()=>{
+    axiosInstance
+      .post(`/viewPoliceByDistrict/${values.district}`)
+      .then((res) => {
+        console.log(res);
+        if (res.data.status === 200) {
+          setViewPoliceStation(res.data.data||[]);
+        }
+      })
+      .catch((err) => {
+        console.log("Failed to fetch user details");
+      });
+  },[values.district])
+
 
   return (
     <div className="mb-5">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e)=>{handleSubmit(e)}}>
         <div className="text-center text-danger mt-5 mb-5">
           <h4 className="report-crime-h4">Report a Crime</h4>
         </div>
@@ -125,8 +139,8 @@ function ReportCrime() {
                 >
                   <option>Select Police Station</option>
                   {viewPoliceStation.map((station, index) => (
-                    <option key={index} value={station}>
-                      {station}
+                    <option key={index} value={station._id}>
+                      {station.policestationname}
                     </option>
                   ))}
                 </select>
@@ -199,12 +213,9 @@ function ReportCrime() {
                     value={values.theftStolenItems}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.theftStolenItems && errors.theftStolenItems && (
-                    <div className="error-message">
-                      {errors.theftStolenItems}
-                    </div>
-                  )}
+                  
                 </div>
               </div>
               <div className="col mt-3">
@@ -219,13 +230,9 @@ function ReportCrime() {
                     value={values.theftStolenSuspected}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.theftStolenSuspected &&
-                    errors.theftStolenSuspected && (
-                      <div className="error-message">
-                        {errors.theftStolenSuspected}
-                      </div>
-                    )}
+                 
                 </div>
               </div>
             </div>
@@ -244,12 +251,9 @@ function ReportCrime() {
                     value={values.assaultInjuries}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.assaultInjuries && errors.assaultInjuries && (
-                    <div className="error-message">
-                      {errors.assaultInjuries}
-                    </div>
-                  )}
+                  
                 </div>
               </div>
               <div className="col mt-3">
@@ -263,17 +267,13 @@ function ReportCrime() {
                     value={values.assaultMedicalAttention}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    required
                   >
                     <option value="">Select</option>
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
                   </select>
-                  {touched.assaultMedicalAttention &&
-                    errors.assaultMedicalAttention && (
-                      <div className="error-message">
-                        {errors.assaultMedicalAttention}
-                      </div>
-                    )}
+                  
                 </div>
               </div>
             </div>
@@ -293,13 +293,9 @@ function ReportCrime() {
                     value={values.vandalismDescription}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.vandalismDescription &&
-                    errors.vandalismDescription && (
-                      <div className="error-message">
-                        {errors.vandalismDescription}
-                      </div>
-                    )}
+                
                 </div>
               </div>
               <div className="col mt-3">
@@ -314,13 +310,9 @@ function ReportCrime() {
                     value={values.vandalismCostOfDamage}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.vandalismCostOfDamage &&
-                    errors.vandalismCostOfDamage && (
-                      <div className="error-message">
-                        {errors.vandalismCostOfDamage}
-                      </div>
-                    )}
+
                 </div>
               </div>
             </div>
@@ -339,12 +331,9 @@ function ReportCrime() {
                     value={values.missingPersonName}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.missingPersonName && errors.missingPersonName && (
-                    <div className="error-message">
-                      {errors.missingPersonName}
-                    </div>
-                  )}
+             
                 </div>
               </div>
               <div className="col mt-3">
@@ -359,13 +348,9 @@ function ReportCrime() {
                     value={values.missingPersonDescription}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.missingPersonDescription &&
-                    errors.missingPersonDescription && (
-                      <div className="error-message">
-                        {errors.missingPersonDescription}
-                      </div>
-                    )}
+             
                 </div>
               </div>
             </div>
@@ -385,13 +370,9 @@ function ReportCrime() {
                     value={values.domesticViolenceDescription}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.domesticViolenceDescription &&
-                    errors.domesticViolenceDescription && (
-                      <div className="error-message">
-                        {errors.domesticViolenceDescription}
-                      </div>
-                    )}
+           
                 </div>
               </div>
               <div className="col mt-3">
@@ -406,13 +387,9 @@ function ReportCrime() {
                     value={values.domesticViolenceInjuries}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.domesticViolenceInjuries &&
-                    errors.domesticViolenceInjuries && (
-                      <div className="error-message">
-                        {errors.domesticViolenceInjuries}
-                      </div>
-                    )}
+           
                 </div>
               </div>
             </div>
@@ -432,12 +409,9 @@ function ReportCrime() {
                     value={values.fraudDescription}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.fraudDescription && errors.fraudDescription && (
-                    <div className="error-message">
-                      {errors.fraudDescription}
-                    </div>
-                  )}
+                
                 </div>
               </div>
               <div className="col mt-3">
@@ -452,12 +426,9 @@ function ReportCrime() {
                     value={values.fraudFinancialLoss}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.fraudFinancialLoss && errors.fraudFinancialLoss && (
-                    <div className="error-message">
-                      {errors.fraudFinancialLoss}
-                    </div>
-                  )}
+                
                 </div>
               </div>
             </div>
@@ -477,10 +448,9 @@ function ReportCrime() {
                     value={values.others}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.others && errors.others && (
-                    <div className="error-message">{errors.others}</div>
-                  )}
+                
                 </div>
               </div>
             </div>
@@ -505,6 +475,7 @@ function ReportCrime() {
                   value={values.victimName}
                   onChange={handleChange}
                   onBlur={handleBlur}
+                  
                 ></input>
                 {touched.victimName && errors.victimName && (
                   <div className="error-message">{errors.victimName}</div>
@@ -652,16 +623,17 @@ function ReportCrime() {
                 <label>Evidence Upload</label>
               </div>
               <div className="mt-2">
-                <input
-                  type="file"
-                  className="report-crime-textbox ps-3"
-                  name="evidenceFile"
-                  onChange={handleFileChange}
-                  onBlur={handleBlur}
-                ></input>
-                {touched.evidenceFile && errors.evidenceFile && (
-                  <div className="error-message">{errors.evidenceFile}</div>
-                )}
+              <input
+  type="file"
+  className="report-crime-textbox ps-3"
+  name="evidenceFile"
+  multiple
+  onChange={handleFileChange}
+  onBlur={handleBlur}
+/>
+{touched.evidenceFile && errors.evidenceFile && (
+  <div className="error-message">{errors.evidenceFile}</div>
+)}
               </div>
             </div>
           </div>

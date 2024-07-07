@@ -52,11 +52,11 @@ a{
 /* Report Crime */
 
 .report-crime-h4{
-  font-weight: bold
+  font-weight: bold 
 }
 .report-crime-box{
   width: 100%;
-  min-height: 230vh;
+  /* min-height: 230vh; */
   top: 321px;
   left: 124px;
   gap: 0px;
