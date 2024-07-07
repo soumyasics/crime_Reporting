@@ -82,7 +82,7 @@ function PoliceNavbar() {
 
               <li class="nav-item m-3">
                 <Link
-                to=''
+                to='/policeviewApprovedcases'
                   class="nav-link"
                   aria-current="page"
                   id="text_color_white"

@@ -149,7 +149,7 @@ export const AddCrimeSchema = yup.object().shape({
     .min(2, "Enter minimum 2 characters")
     .max(Infinity, "Maximum 20 characters are allowed")
     .required("Required"),
-  policeStation: yup
+    psId: yup
     .string()
     .min(2, "Enter minimum 2 characters")
     .max(Infinity, "Maximum 20 characters are allowed")
@@ -216,53 +216,55 @@ export const AddCrimeSchema = yup.object().shape({
     .max(20, "Maximum 20 characters are allowed")
     .required("Required"),
   theftStolenItems: yup
-    .string()
-    .required("Stolen items description is required"),
+    .string(),
+    // .required("Stolen items description is required"),
   theftStolenSuspected: yup
-    .string()
-    .required("Suspected stolen items description is required"),
+    .string(),
+    // .required("Suspected stolen items description is required"),
   assaultInjuries: yup
-    .string()
-    .required("Assault injuries description is required"),
+    .string(),
+    // .required("Assault injuries description is required"),
   assaultMedicalAttention: yup
-    .string()
-    .required("Medical attention description is required"),
+    .string(),
+    // .required("Medical attention description is required"),
   vandalismDescription: yup
-    .string()
-    .required("Vandalism description is required"),
+    .string(),
+    // .required("Vandalism description is required"),
   vandalismCostOfDamage: yup
-    .string()
-    .required("Cost of damage is required"),
+    .string(),
+    // .required("Cost of damage is required"),
   missingPersonName: yup
-    .string()
-    .required("Missing person's name is required"),
+    .string(),
+    // .required("Missing person's name is required"),
   missingPersonDescription: yup
-    .string()
-    .required("Description of the missing person is required"),
+    .string(),
+    // .required("Description of the missing person is required"),
   domesticViolenceDescription: yup
-    .string()
-    .required("Domestic violence description is required"),
+    .string(),
+    // .required("Domestic violence description is required"),
   domesticViolenceInjuries: yup
-    .string()
-    .required("Domestic violence injuries description is required"),
+    .string(),
+    // .required("Domestic violence injuries description is required"),
   fraudDescription: yup
-    .string()
-    .required("Fraud description is required"),
+    .string(),
+    // .required("Fraud description is required"),
   fraudFinancialLoss: yup
-    .string()
-    .required("Financial loss description is required"),
+    .string(),
+    // .required("Financial loss description is required"),
   others: yup
     .string()
-    .required("Other case details are required"),
-  evidenceFile: yup
-    .mixed()
-    .test(
-      "fileType",
-      "Unsupported File Format. Supported formats: JPEG, PNG, GIF, MP3, MP4",
-      (value) =>
-        !value ||
-        ["image/jpeg", "image/png", "image/gif", "audio/mpeg", "video/mp4"].includes(
-          value.type
+    // .required("Other case details are required")
+    ,
+    files: yup
+    .array()
+    .of(
+      yup
+        .mixed()
+        .test(
+          "fileType",
+          "Unsupported File Format. Supported formats: JPEG, PNG, GIF, MP3, MP4",
+          (value) =>
+            !value || ["image/jpeg", "image/png", "image/gif", "audio/mpeg", "video/mp4"].includes(value.type)
         )
     )
     .required("Evidence file is required"),
