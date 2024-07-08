@@ -2,79 +2,62 @@ import React, { useEffect, useState } from "react";
 import "../../Assets/Styles/CitizenLogin.css";
 import axiosInstance from "../Constants/BaseUrl";
 import { toast } from "react-toastify";
-import { useFormik } from "formik";
-import { AddCrimeSchema } from "../Constants/Schema";
 
 function ReportCrime() {
+  const [formData, setFormData] = useState({
+    district: "",
+    psId: "",
+    victimName: "",
+    victimGender: "",
+    victimEmail: "",
+    victimAddress: "",
+    incidentDate: "",
+    incidentTime: "",
+    incidentLocation: "",
+    incidentCity: "",
+    witnessName: "",
+    witnessContact: "",
+    witnessAddress: "",
+    witnessStatement: "",
+    caseDescription: "",
+    caseType: "",
+    theftStolenItems: "",
+    theftStolenSuspected: "",
+    assaultInjuries: "",
+    assaultMedicalAttention: "",
+    vandalismDescription: "",
+    vandalismCostOfDamage: "",
+    missingPersonName: "",
+    missingPersonDescription: "",
+    domesticViolenceDescription: "",
+    domesticViolenceInjuries: "",
+    fraudDescription: "",
+    fraudFinancialLoss: "",
+    others: "",
+    files: [],
+    citizenId: localStorage.getItem('citizenToken')
+  });
+
   const [viewPoliceStation, setViewPoliceStation] = useState([]);
   const [selectedCaseType, setSelectedCaseType] = useState("");
+  const [CaseTypeSuggestions, setCaseTypeSuggestions] = useState([]);
+  const [image, setImage] = useState([]);
 
   const districts = [
-    "Alappuzha",
-    "Ernakulam",
-    "Idukki",
-    "Kannur",
-    "Kasaragod",
-    "Kollam",
-    "Kottayam",
-    "Kozhikode",
-    "Malappuram",
-    "Palakkad",
-    "Pathanamthitta",
-    "Thiruvananthapuram",
-    "Thrissur",
-    "Wayanad",
+    "Alappuzha", "Ernakulam", "Idukki", "Kannur", "Kasaragod", "Kollam",
+    "Kottayam", "Kozhikode", "Malappuram", "Palakkad", "Pathanamthitta",
+    "Thiruvananthapuram", "Thrissur", "Wayanad"
   ];
 
   const caseTypes = [
-    "Theft",
-    "Assault",
-    "Vandalism",
-    "Missing Person",
-    "Domestic Violence",
-    "Fraud",
-    "Others",
+    "Theft", "Assault", "Vandalism", "Missing Person", "Domestic Violence",
+    "Fraud", "Others"
   ];
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useFormik({
-      initialValues: {
-        district: "",
-        policeStation: "",
-        victimName: "",
-        victimGender: "",
-        victimEmail: "",
-        victimAddress: "",
-        incidentDate: "",
-        incidentTime: "",
-        incidentLocation: "",
-        incidentCity: "",
-        witnessName: "",
-        witnessContact: "",
-        witnessAddress: "",
-        witnessStatement: "",
-        caseDescription: "",
-        caseType: "",
-        theftStolenItems: "",
-        theftStolenSuspected: "",
-        assaultInjuries: "",
-        assaultMedicalAttention: "",
-        vandalismDescription: "",
-        vandalismCostOfDamage: "",
-        missingPersonName: "",
-        missingPersonDescription: "",
-        domesticViolenceDescription: "",
-        domesticViolenceInjuries: "",
-        fraudDescription: "",
-        fraudFinancialLoss: "",
-        others: "",
-        evidenceFile: null,
-      },
-      validationSchema: AddCrimeSchema,
-      onSubmit: (values) => {
-        console.log(values);
-      },
-    });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleCaseTypeChange = (e) => {
     handleChange(e);
@@ -82,10 +65,72 @@ function ReportCrime() {
   };
 
   const handleFileChange = (e) => {
-    handleChange(e);
-    const files = e.target.files;
-    values.evidenceFiles = files;
+    setImage([...e.target.files]);
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const data = new FormData();
+    Object.keys(formData).forEach(key => {
+      if (key !== "files") {
+        data.append(key, formData[key]);
+      }
+    });
+    image.forEach((file) => {
+      data.append("files", file);
+    });
+
+    axiosInstance
+      .post("/addcrime", data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        if(res.data.ststus==200){
+          toast.success("Crime reported successfully");
+        }
+        
+      })
+      .catch((err) => {
+        console.log("Failed to report crime", err);
+        toast.error("Failed to report crime");
+      });
+  };
+
+  useEffect(() => {
+    if (formData.district) {
+      axiosInstance
+        .post(`/viewPoliceByDistrict/${formData.district}`)
+        .then((res) => {
+          console.log(res);
+          if (res.data.status === 200) {
+            setViewPoliceStation(res.data.data || []);
+          }
+        })
+        .catch((err) => {
+          console.log("Failed to fetch police stations", err);
+        });
+    }
+  }, [formData.district]);
+
+  useEffect(() => {
+    if (formData.caseDescription) {
+      axiosInstance
+        .post(`/getCaseType`, { caseDescription: formData.caseDescription })
+        .then((res) => {
+          console.log(res);
+          if (res.data.status === 200) {
+            setCaseTypeSuggestions(res.data.data || []);
+          }
+        })
+        .catch((err) => {
+          console.log("Failed to fetch case type suggestions", err);
+        });
+    }
+  }, [formData.caseDescription]);
 
   return (
     <div className="mb-5">
@@ -100,9 +145,9 @@ function ReportCrime() {
                 <select
                   className="report-crime-textbox ps-3"
                   name="district"
-                  value={values.district}
+                  value={formData.district}
                   onChange={handleChange}
-                  onBlur={handleBlur}
+                  required
                 >
                   <option>Select District</option>
                   {districts.map((district, index) => (
@@ -111,28 +156,22 @@ function ReportCrime() {
                     </option>
                   ))}
                 </select>
-                {touched.district && errors.district && (
-                  <div className="error-message">{errors.district}</div>
-                )}
               </div>
               <div className="col-6">
                 <select
                   className="report-crime-textbox ps-3"
-                  name="policeStation"
-                  value={values.policeStation}
+                  name="psId"
+                  value={formData.psId}
                   onChange={handleChange}
-                  onBlur={handleBlur}
+                  required
                 >
                   <option>Select Police Station</option>
                   {viewPoliceStation.map((station, index) => (
-                    <option key={index} value={station}>
-                      {station}
+                    <option key={index} value={station._id}>
+                      {station.policestationname}
                     </option>
                   ))}
                 </select>
-                {touched.policeStation && errors.policeStation && (
-                  <div className="error-message">{errors.policeStation}</div>
-                )}
               </div>
             </div>
           </div>
@@ -151,13 +190,10 @@ function ReportCrime() {
                   type="text"
                   className="report-crime-textbox ps-3"
                   name="caseDescription"
-                  value={values.caseDescription}
+                  value={formData.caseDescription}
                   onChange={handleChange}
-                  onBlur={handleBlur}
+                  required
                 ></input>
-                {touched.caseDescription && errors.caseDescription && (
-                  <div className="error-message">{errors.caseDescription}</div>
-                )}
               </div>
             </div>
             <div className="col mt-3">
@@ -168,9 +204,9 @@ function ReportCrime() {
                 <select
                   className="report-crime-textbox ps-3"
                   name="caseType"
-                  value={values.caseType}
+                  value={formData.caseType}
                   onChange={handleCaseTypeChange}
-                  onBlur={handleBlur}
+                  required
                 >
                   <option>Select Type</option>
                   {caseTypes.map((type, index) => (
@@ -179,9 +215,15 @@ function ReportCrime() {
                     </option>
                   ))}
                 </select>
-                {touched.caseType && errors.caseType && (
-                  <div className="error-message">{errors.caseType}</div>
-                )}
+              </div>
+              <div className="d-flex">
+                {CaseTypeSuggestions.length
+                  ? CaseTypeSuggestions.map((e, i) => (
+                      <p key={i} className="bg-danger rounded p-1 px-2 text-light mx-1 mt-2">
+                        {e}
+                      </p>
+                    ))
+                  : ""}
               </div>
             </div>
           </div>
@@ -196,15 +238,10 @@ function ReportCrime() {
                     type="text"
                     className="report-crime-textbox ps-3"
                     name="theftStolenItems"
-                    value={values.theftStolenItems}
+                    value={formData.theftStolenItems}
                     onChange={handleChange}
-                    onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.theftStolenItems && errors.theftStolenItems && (
-                    <div className="error-message">
-                      {errors.theftStolenItems}
-                    </div>
-                  )}
                 </div>
               </div>
               <div className="col mt-3">
@@ -216,16 +253,10 @@ function ReportCrime() {
                     type="text"
                     className="report-crime-textbox ps-3"
                     name="theftStolenSuspected"
-                    value={values.theftStolenSuspected}
+                    value={formData.theftStolenSuspected}
                     onChange={handleChange}
-                    onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.theftStolenSuspected &&
-                    errors.theftStolenSuspected && (
-                      <div className="error-message">
-                        {errors.theftStolenSuspected}
-                      </div>
-                    )}
                 </div>
               </div>
             </div>
@@ -241,86 +272,59 @@ function ReportCrime() {
                     type="text"
                     className="report-crime-textbox ps-3"
                     name="assaultInjuries"
-                    value={values.assaultInjuries}
+                    value={formData.assaultInjuries}
                     onChange={handleChange}
-                    onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.assaultInjuries && errors.assaultInjuries && (
-                    <div className="error-message">
-                      {errors.assaultInjuries}
-                    </div>
-                  )}
                 </div>
               </div>
               <div className="col mt-3">
                 <div>
-                  <label>Medical Attention</label>
+                  <label>Medical Attention Received (Details)</label>
                 </div>
                 <div className="mt-2">
-                  <select
+                  <input
+                    type="text"
                     className="report-crime-textbox ps-3"
                     name="assaultMedicalAttention"
-                    value={values.assaultMedicalAttention}
+                    value={formData.assaultMedicalAttention}
                     onChange={handleChange}
-                    onBlur={handleBlur}
-                  >
-                    <option value="">Select</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                  </select>
-                  {touched.assaultMedicalAttention &&
-                    errors.assaultMedicalAttention && (
-                      <div className="error-message">
-                        {errors.assaultMedicalAttention}
-                      </div>
-                    )}
+                    required
+                  ></input>
                 </div>
               </div>
             </div>
           )}
-
           {selectedCaseType === "Vandalism" && (
             <div className="row container">
               <div className="col mt-3">
                 <div>
-                  <label>Description of Vandalism</label>
+                  <label>Damage Description</label>
                 </div>
                 <div className="mt-2">
                   <input
                     type="text"
                     className="report-crime-textbox ps-3"
                     name="vandalismDescription"
-                    value={values.vandalismDescription}
+                    value={formData.vandalismDescription}
                     onChange={handleChange}
-                    onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.vandalismDescription &&
-                    errors.vandalismDescription && (
-                      <div className="error-message">
-                        {errors.vandalismDescription}
-                      </div>
-                    )}
                 </div>
               </div>
               <div className="col mt-3">
                 <div>
-                  <label>Cost of Damage</label>
+                  <label>Estimated Cost of Damage</label>
                 </div>
                 <div className="mt-2">
                   <input
                     type="number"
                     className="report-crime-textbox ps-3"
                     name="vandalismCostOfDamage"
-                    value={values.vandalismCostOfDamage}
+                    value={formData.vandalismCostOfDamage}
                     onChange={handleChange}
-                    onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.vandalismCostOfDamage &&
-                    errors.vandalismCostOfDamage && (
-                      <div className="error-message">
-                        {errors.vandalismCostOfDamage}
-                      </div>
-                    )}
                 </div>
               </div>
             </div>
@@ -329,140 +333,104 @@ function ReportCrime() {
             <div className="row container">
               <div className="col mt-3">
                 <div>
-                  <label>Missing Person Name</label>
+                  <label>Missing Person's Name</label>
                 </div>
                 <div className="mt-2">
                   <input
                     type="text"
                     className="report-crime-textbox ps-3"
                     name="missingPersonName"
-                    value={values.missingPersonName}
+                    value={formData.missingPersonName}
                     onChange={handleChange}
-                    onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.missingPersonName && errors.missingPersonName && (
-                    <div className="error-message">
-                      {errors.missingPersonName}
-                    </div>
-                  )}
                 </div>
               </div>
               <div className="col mt-3">
                 <div>
-                  <label>Missing Person Description</label>
+                  <label>Missing Person's Description</label>
                 </div>
                 <div className="mt-2">
                   <input
                     type="text"
                     className="report-crime-textbox ps-3"
                     name="missingPersonDescription"
-                    value={values.missingPersonDescription}
+                    value={formData.missingPersonDescription}
                     onChange={handleChange}
-                    onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.missingPersonDescription &&
-                    errors.missingPersonDescription && (
-                      <div className="error-message">
-                        {errors.missingPersonDescription}
-                      </div>
-                    )}
                 </div>
               </div>
             </div>
           )}
-
           {selectedCaseType === "Domestic Violence" && (
             <div className="row container">
               <div className="col mt-3">
                 <div>
-                  <label>Description of Violence</label>
+                  <label>Incident Description</label>
                 </div>
                 <div className="mt-2">
                   <input
                     type="text"
                     className="report-crime-textbox ps-3"
                     name="domesticViolenceDescription"
-                    value={values.domesticViolenceDescription}
+                    value={formData.domesticViolenceDescription}
                     onChange={handleChange}
-                    onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.domesticViolenceDescription &&
-                    errors.domesticViolenceDescription && (
-                      <div className="error-message">
-                        {errors.domesticViolenceDescription}
-                      </div>
-                    )}
                 </div>
               </div>
               <div className="col mt-3">
                 <div>
-                  <label>Injuries Sustained (Description)</label>
+                  <label>Injuries Sustained</label>
                 </div>
                 <div className="mt-2">
                   <input
                     type="text"
                     className="report-crime-textbox ps-3"
                     name="domesticViolenceInjuries"
-                    value={values.domesticViolenceInjuries}
+                    value={formData.domesticViolenceInjuries}
                     onChange={handleChange}
-                    onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.domesticViolenceInjuries &&
-                    errors.domesticViolenceInjuries && (
-                      <div className="error-message">
-                        {errors.domesticViolenceInjuries}
-                      </div>
-                    )}
                 </div>
               </div>
             </div>
           )}
-
           {selectedCaseType === "Fraud" && (
             <div className="row container">
               <div className="col mt-3">
                 <div>
-                  <label>Description of Fraud</label>
+                  <label>Fraud Description</label>
                 </div>
                 <div className="mt-2">
                   <input
                     type="text"
                     className="report-crime-textbox ps-3"
                     name="fraudDescription"
-                    value={values.fraudDescription}
+                    value={formData.fraudDescription}
                     onChange={handleChange}
-                    onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.fraudDescription && errors.fraudDescription && (
-                    <div className="error-message">
-                      {errors.fraudDescription}
-                    </div>
-                  )}
                 </div>
               </div>
               <div className="col mt-3">
                 <div>
-                  <label>Financial Loss (Amount)</label>
+                  <label>Estimated Financial Loss</label>
                 </div>
                 <div className="mt-2">
                   <input
                     type="number"
                     className="report-crime-textbox ps-3"
                     name="fraudFinancialLoss"
-                    value={values.fraudFinancialLoss}
+                    value={formData.fraudFinancialLoss}
                     onChange={handleChange}
-                    onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.fraudFinancialLoss && errors.fraudFinancialLoss && (
-                    <div className="error-message">
-                      {errors.fraudFinancialLoss}
-                    </div>
-                  )}
                 </div>
               </div>
             </div>
           )}
-
           {selectedCaseType === "Others" && (
             <div className="row container">
               <div className="col mt-3">
@@ -474,18 +442,16 @@ function ReportCrime() {
                     type="text"
                     className="report-crime-textbox ps-3"
                     name="others"
-                    value={values.others}
+                    value={formData.others}
                     onChange={handleChange}
-                    onBlur={handleBlur}
+                    required
                   ></input>
-                  {touched.others && errors.others && (
-                    <div className="error-message">{errors.others}</div>
-                  )}
                 </div>
               </div>
             </div>
           )}
-          <div className="text-center ">
+
+<div className="text-center ">
             <div className="report-crime-victim mt-4 pt-2">
               <span className="report-crime-victim-span">
                 Victim Information
@@ -502,13 +468,11 @@ function ReportCrime() {
                   type="text"
                   className="report-crime-textbox ps-3"
                   name="victimName"
-                  value={values.victimName}
+                  value={formData.victimName}
                   onChange={handleChange}
-                  onBlur={handleBlur}
+                  required
                 ></input>
-                {touched.victimName && errors.victimName && (
-                  <div className="error-message">{errors.victimName}</div>
-                )}
+                
               </div>
               <div className="mt-3">
                 <label>Email</label>
@@ -518,13 +482,11 @@ function ReportCrime() {
                   type="email"
                   className="report-crime-textbox ps-3"
                   name="victimEmail"
-                  value={values.victimEmail}
+                  value={formData.victimEmail}
                   onChange={handleChange}
-                  onBlur={handleBlur}
+                  required
                 ></input>
-                {touched.victimEmail && errors.victimEmail && (
-                  <div className="error-message">{errors.victimEmail}</div>
-                )}
+              
               </div>
             </div>
             <div className="col mt-3">
@@ -535,18 +497,16 @@ function ReportCrime() {
                 <select
                   className="report-crime-textbox ps-3"
                   name="victimGender"
-                  value={values.victimGender}
+                  value={formData.victimGender}
                   onChange={handleChange}
-                  onBlur={handleBlur}
+                  required
                 >
                   <option>Select Gender</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                   <option value="others">Others</option>
                 </select>
-                {touched.victimGender && errors.victimGender && (
-                  <div className="error-message">{errors.victimGender}</div>
-                )}
+                
               </div>
               <div className="mt-3">
                 <label>Address</label>
@@ -556,13 +516,11 @@ function ReportCrime() {
                   type="text"
                   className="report-crime-textbox ps-3"
                   name="victimAddress"
-                  value={values.victimAddress}
+                  value={formData.victimAddress}
                   onChange={handleChange}
-                  onBlur={handleBlur}
+                  required
                 ></input>
-                {touched.victimAddress && errors.victimAddress && (
-                  <div className="error-message">{errors.victimAddress}</div>
-                )}
+              
               </div>
             </div>
           </div>
@@ -581,13 +539,11 @@ function ReportCrime() {
                   type="date"
                   className="report-crime-textbox ps-3"
                   name="incidentDate"
-                  value={values.incidentDate}
+                  value={formData.incidentDate}
                   onChange={handleChange}
-                  onBlur={handleBlur}
+                  required
                 ></input>
-                {touched.incidentDate && errors.incidentDate && (
-                  <div className="error-message">{errors.incidentDate}</div>
-                )}
+                
               </div>
               <div className="mt-3">
                 <label>Location</label>
@@ -597,13 +553,11 @@ function ReportCrime() {
                   type="text"
                   className="report-crime-textbox ps-3"
                   name="incidentLocation"
-                  value={values.incidentLocation}
+                  value={formData.incidentLocation}
                   onChange={handleChange}
-                  onBlur={handleBlur}
+                  required
                 ></input>
-                {touched.incidentLocation && errors.incidentLocation && (
-                  <div className="error-message">{errors.incidentLocation}</div>
-                )}
+             
               </div>
             </div>
             <div className="col mt-3">
@@ -615,13 +569,11 @@ function ReportCrime() {
                   type="time"
                   className="report-crime-textbox ps-3"
                   name="incidentTime"
-                  value={values.incidentTime}
+                  value={formData.incidentTime}
                   onChange={handleChange}
-                  onBlur={handleBlur}
+                  required
                 ></input>
-                {touched.incidentTime && errors.incidentTime && (
-                  <div className="error-message">{errors.incidentTime}</div>
-                )}
+              
               </div>
               <div className="mt-3">
                 <label>City</label>
@@ -631,13 +583,11 @@ function ReportCrime() {
                   type="text"
                   className="report-crime-textbox ps-3"
                   name="incidentCity"
-                  value={values.incidentCity}
+                  value={formData.incidentCity}
                   onChange={handleChange}
-                  onBlur={handleBlur}
+                  required
                 ></input>
-                {touched.incidentCity && errors.incidentCity && (
-                  <div className="error-message">{errors.incidentCity}</div>
-                )}
+              
               </div>
             </div>
           </div>
@@ -646,25 +596,22 @@ function ReportCrime() {
               <span className="report-crime-victim-span">Evidence Details</span>
             </div>
           </div>
-          <div className="row container">
-          <div className="col mt-3">
-              <div>
-                <label>Evidence Upload</label>
-              </div>
-              <div className="mt-2">
+
+          <div className="container mt-5">
+            <div className="row">
+              <div className="col-6">
+                <label htmlFor="file">Upload Files</label>
                 <input
                   type="file"
-                  className="report-crime-textbox ps-3"
-                  name="evidenceFile"
+                  name="files"
+                  multiple
                   onChange={handleFileChange}
-                  onBlur={handleBlur}
-                ></input>
-                {touched.evidenceFile && errors.evidenceFile && (
-                  <div className="error-message">{errors.evidenceFile}</div>
-                )}
+                  required
+                />
               </div>
             </div>
           </div>
+
           <div className="text-center">
             <div className="report-crime-victim mt-4 pt-2">
               <span className="report-crime-victim-span">Witness Details</span>
@@ -680,13 +627,11 @@ function ReportCrime() {
                   type="text"
                   className="report-crime-textbox ps-3"
                   name="witnessName"
-                  value={values.witnessName}
+                  value={formData.witnessName}
                   onChange={handleChange}
-                  onBlur={handleBlur}
+                  required
                 />
-                {touched.witnessName && errors.witnessName && (
-                  <div className="error-message">{errors.witnessName}</div>
-                )}
+              
               </div>
               <div className="mt-3">
                 <label>Address</label>
@@ -696,13 +641,11 @@ function ReportCrime() {
                   type="text"
                   className="report-crime-textbox ps-3"
                   name="witnessAddress"
-                  value={values.witnessAddress}
+                  value={formData.witnessAddress}
                   onChange={handleChange}
-                  onBlur={handleBlur}
+                  required
                 />
-                {touched.witnessAddress && errors.witnessAddress && (
-                  <div className="error-message">{errors.witnessAddress}</div>
-                )}
+               
               </div>
             </div>
             <div className="col mt-3">
@@ -714,13 +657,11 @@ function ReportCrime() {
                   type="text"
                   className="report-crime-textbox ps-3"
                   name="witnessContact"
-                  value={values.witnessContact}
+                  value={formData.witnessContact}
                   onChange={handleChange}
-                  onBlur={handleBlur}
+                  required
                 />
-                {touched.witnessContact && errors.witnessContact && (
-                  <div className="error-message">{errors.witnessContact}</div>
-                )}
+               
               </div>
               <div className="mt-3">
                 <label>Witness Statement</label>
@@ -730,21 +671,24 @@ function ReportCrime() {
                   type="text"
                   className="report-crime-textbox ps-3"
                   name="witnessStatement"
-                  value={values.witnessStatement}
+                  value={formData.witnessStatement}
                   onChange={handleChange}
-                  onBlur={handleBlur}
+                  required
                 />
-                {touched.witnessStatement && errors.witnessStatement && (
-                  <div className="error-message">{errors.witnessStatement}</div>
-                )}
+                
               </div>
             </div>
           </div>
 
-          <div className="text-center mt-5">
-            <button type="submit" className="report-crime-crimebtn">
-              Add Crime
-            </button>
+
+          <div className="container mt-5">
+            <div className="row">
+              <div className="col text-center">
+                <button className="btn btn-danger mb-3" type="submit">
+                  Report Crime
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </form>

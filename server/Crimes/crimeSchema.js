@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 
 
 const evidenceFileSchema = new mongoose.Schema({
-    filename: String,
-    filetype: String,
-    filepath: String,
+    // filename: String,
+    // filetype: String,
+    // filepath: String,
+    file:Object
   });
 
 

@@ -19,15 +19,16 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).array("files", 5)
 // Add a new crime
 const addCrime = async (req, res) => {
+    console.log('req',req);
     try {
         // Handle file upload using Multer
 
 
         // Prepare evidence files array from uploaded files
         const evidenceFiles = req.files.map((file) => ({
-            filename: file.originalname,
-            filetype: file.mimetype,
-            filepath: file.path,
+            file: file
+            // filetype: file.mimetype,
+            // filepath: file.path,
         }));
 
         const newCrime = new Crime({
