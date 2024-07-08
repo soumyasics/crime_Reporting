@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import axiosInstance from '../Constants/BaseUrl';
-import { Link } from 'react-router-dom';
+import axiosInstance from '../Constants/BaseUrl'
 import { IoEyeSharp } from "react-icons/io5";
+import { TiTick } from "react-icons/ti";
+import { RxCross2 } from "react-icons/rx";
+import { Link } from 'react-router-dom';
 
-function ViewAllCases() {
-    const[data,setData]=useState([])
+
+function ViewAllCitizen() {
+    const [data,setData]=useState([])
     const getData=()=>{
-        axiosInstance.post("/viewallcrime")
-        .then((res) => {
+        axiosInstance.post('/viewCitizens')
+        .then((res)=>{
             console.log(res);
             if(res.data.status === 200){
                 setData(res.data.data || [])
@@ -20,16 +23,17 @@ function ViewAllCases() {
             console.log("Error",err);
         })
     }
-        useEffect (() => {
+
+    useEffect (() => {
         getData()
         },[])
+
   return (
-    <div>
-<div className='container'>
-            <div className=' text-center mt-5 text-danger'>
-                <h5>View All Cases</h5>
-            </div>
-            <div>
+    <div className='container'>
+        <div className=' text-center mt-5 text-danger'>
+                <h5>View All Citizens</h5>
+        </div>
+        <div>
                 {data.length === 0 && (
                     <h1>No Data Found</h1>
                 )}
@@ -38,32 +42,32 @@ function ViewAllCases() {
                     <thead className='text-center newpolice-stationreq-thead'>
                         <tr className=''>
                         <th scope="col">Sl/No</th>
-                        <th scope="col">PoliceStation Name</th>
-                        <th scope="col">Victim Name</th>
-                        <th scope="col">Type of Crime</th>
-                        <th scope="col">Witness Name</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Location</th>
-                        <th scope="col">View Details</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">State</th>
+                        <th scope="col">Nationalty</th>
+                        <th scope="col">Pincode</th>
+                        <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody className='text-center'>
-                        {data.map ((caseview,index) => (
+                        {data.map ((citizenview,index) => (
                             <tr>
                             <th>{index +1}</th>
-                            <td>{caseview.district}</td>
-                            <td>{caseview.victimName}</td>
-                            <td>{caseview.caseType}</td>
-                            <td>{caseview.witnessName}</td>
-                            <td>{caseview.incidentDate.slice(0,10)}</td>
-                            <td>{caseview.incidentLocation}</td>
+                            <td>{citizenview.firstname} {citizenview.lastname}</td>
+                            <td>{citizenview.gender}</td>
+                            <td>{citizenview.contact}</td>
+                            <td>{citizenview.state}</td>
+                            <td>{citizenview.nationality}</td>
+                            <td>{citizenview.pincode}</td>
                             <td >
-                                <Link to={`/admin_viewcasedetails/${caseview._id}`}>
+                                <Link to={`/viewcitizenprofile/${citizenview._id}`}>
                                 <button className='viewallpolicest_icon'>
                                     <IoEyeSharp/>
                                 </button>
                                 </Link>
-                                                              
+                                
                             </td>
                         </tr>
                         ))}
@@ -73,9 +77,8 @@ function ViewAllCases() {
                 )}
                 
             </div>
-        </div>
     </div>
   )
 }
 
-export default ViewAllCases
+export default ViewAllCitizen
