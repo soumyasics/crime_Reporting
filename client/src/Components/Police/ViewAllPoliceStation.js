@@ -82,7 +82,7 @@ function ViewAllPoliceStation() {
                     <table  class="table table-bordered table-striped mt-4">
                     <thead className='text-center newpolice-stationreq-thead'>
                         <tr className=''>
-                        <th scope="col">S/No</th>
+                        <th scope="col">Sl/No</th>
                         <th scope="col">PoliceStation Name</th>
                         <th scope="col">Station Incharge</th>
                         <th scope="col">PoliceStation Code</th>

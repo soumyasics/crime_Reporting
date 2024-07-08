@@ -9,6 +9,8 @@ import ViewProfile_Policestation from '../Police/ViewProfile_Policestation'
 import ViewProfile_PoliceReq from '../Police/ViewProfile_PoliceReq'
 import ViewAllCases from './ViewAllCases'
 import ViewCaseDetails from './ViewCaseDetails'
+import ViewAllCitizen from './ViewAllCitizen'
+import ViewCitizenProfile from './ViewCitizenProfile'
 
 function AdminMain({data}) {
   return (
@@ -33,6 +35,10 @@ function AdminMain({data}) {
             <ViewAllCases/>
            ):data === "adminvieweachcasedetails" ?(
             <ViewCaseDetails />
+           ):data === "viewcitizenprofile" ?(
+            <ViewCitizenProfile />
+           ):data === "viewallcitizen" ?(
+            <ViewAllCitizen />
            ):
            <AdminDashboard/>
            }

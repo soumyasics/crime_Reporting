@@ -45,6 +45,11 @@ import ViewAllPoliceStation from './Components/Police/ViewAllPoliceStation';
 import LoginNav from './Components/Navbar/LoginNav';
 import UpdateCrimeReport from './Components/Citizen/UpdateCrimeReport';
 import CitizenAddComplaint from './Components/Citizen/CitizenAddComplaint';
+import AddCaseUpdate from './Components/Police/AddCaseUpdate';
+import ViewCrimeReport from './Components/Citizen/ViewCrimeReport';
+import ViewCrimeDetails from './Components/Citizen/ViewCrimeDetails';
+import CrimeReportwithStatus from './Components/Citizen/CrimeReportwithStatus';
+import ViewCrimeStatus from './Components/Citizen/ViewCrimeStatus';
 
 function App() {
   return (
@@ -66,6 +71,10 @@ function App() {
         <Route path='/citizen/reportcrime' element={[<UserNavbar/>,<ReportCrime/>]}/>
         <Route path='/updatecrime/:id' element={[<UserNavbar/>,<UpdateCrimeReport/>]}/>
         <Route path='/addcomplaints' element={[<UserNavbar />,<CitizenAddComplaint />]} />
+        <Route path='/viewcrimestatus' element={[<UserNavbar />,<ViewCrimeReport />]} />
+        <Route path='/viewcrimedetails/:id' element={[<UserNavbar />,<ViewCrimeDetails />]} />
+        <Route path='/crimestatus' element={[<UserNavbar />,<CrimeReportwithStatus />]} />
+        <Route path='/viewcrimereportstatus/:id' element={[<UserNavbar />,<ViewCrimeStatus />]} />
 
 
         {/* Police  */}
@@ -79,6 +88,7 @@ function App() {
         <Route path='/casedetails/:id' element={[<PoliceNavbar/>,<CaseDetails type='request' />]}/>
         <Route path='/approvedcasedetails/:id' element={[<PoliceNavbar/>,<CaseDetails type='view' />]}/>
         <Route path='/policeprofile/:id' element={[<PoliceNavbar/>,<PoliceProfile/>]} />
+        <Route path='/addcaseupdate' element={[<PoliceNavbar/>,<AddCaseUpdate />]}/>
 
 
         {/* Scrb  */}
@@ -104,6 +114,9 @@ function App() {
         <Route path='/viewallpolicereq/:id' element={[<LoginNav/>,<AdminMain data="viewallpolicereqprofile"/>]}/>
         <Route path='/newpolicestationreq' element={[<LoginNav />,<AdminMain data="newpolicestationreq"/>]} />
 
+        {/* Admin View Citizen */}
+        <Route path='/viewcitizens' element={[<LoginNav/>,<AdminMain data="viewallcitizen"/>]} />
+        <Route path='/viewcitizenprofile/:id' element={[<LoginNav/>,<AdminMain data="viewcitizenprofile"/>]} />
 
       </Routes>
     </div>

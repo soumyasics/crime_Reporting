@@ -43,6 +43,7 @@ router.post('/viewPendingCrimeByPolicStationId/:id',crime.viewPendingCrimeByPoli
 router.post('/viewAprvdCrimeByPolicStationId/:id',crime.viewAprvdCrimeByPolicStationId)
 router.post('/viewCrimesbyDisrtict',crime.viewCrimesbyDisrtict)
 router.post('/getCaseType',crime.getCaseType)
+router.post('/viewcrimeByCitizenId/:id',crime.viewCrimeByCitizenId)
 
 
 module.exports=router

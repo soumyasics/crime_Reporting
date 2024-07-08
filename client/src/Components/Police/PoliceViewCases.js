@@ -123,7 +123,7 @@ function PoliceViewCases({type}) {
                   <td>{caseData.victimName}</td>
                   <td>{caseData.caseType}</td>
                   <td>{caseData.witnessName}</td>
-                  <td>{caseData.incidentDate}</td>
+                  <td>{caseData.incidentDate.slice(0, 10)}</td>
                   <td>{caseData.incidentTime}</td>
                   <td>{caseData.incidentLocation}</td>
                   {type == "request" ? (
@@ -148,7 +148,7 @@ function PoliceViewCases({type}) {
                     </td>
                   ) : type == "view" ? (
                     <Link to={`/approvedcasedetails/${caseData._id}`}>
-                      <button className="policeview-cases-eye ms-3">
+                      <button className="policeview-cases-eye1 ms-3">
                         <IoMdEye />
                       </button>
                     </Link>
