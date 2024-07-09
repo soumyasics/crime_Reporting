@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../Assets/Images/logos.png";
+import logo from "../../Assets/Images/logo.png";
 import axiosInstance from "../Constants/BaseUrl";
 
 function UserNavbar() {
@@ -163,7 +163,8 @@ function UserNavbar() {
                   View Crime
                 </Link>
               </li> */}
-              <li class="nav-item m-3">
+
+              {/* <li class="nav-item m-3">
                 <Link to='/addcomplaints' class="nav-link" href="#" id="text_color_white">
                   Complaints
                 </Link>
@@ -177,7 +178,8 @@ function UserNavbar() {
                 <a class="nav-link" href="#" id="text_color_white">
                   Police Station
                 </a>
-              </li>
+              </li> */}
+              
               <li class="nav-item m-3">
                
                 <div class="dropdown-center">

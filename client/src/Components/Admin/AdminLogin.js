@@ -43,6 +43,7 @@ function AdminLogin() {
       if(mail== data.email && pass==data.password){
         toast.success("Logged in Successfully");
         Navigate("/admin_home")
+        localStorage.setItem('adminId',1)
       }
       else{
         toast.error("Username or password is incorrect")

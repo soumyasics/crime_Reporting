@@ -1,14 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../Assets/Styles/Navbar.css";
 import logo from "../../Assets/Images/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function AdminNavbar() {
+
+  const navigate = useNavigate(); 
+
+  useEffect(() => {
+    if (localStorage.getItem("adminId") == null) {
+      navigate("/");
+    }
+  });
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar_bg">
         <div className="container-fluid">
-          <Link to='/' className="text-decoration-none">
+          <Link to='/admin_home' className="text-decoration-none">
             <div className="navbar_logo">
               <img src={logo} className="img-fluid" alt="logo" />
               <div>
@@ -34,7 +48,7 @@ function AdminNavbar() {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0" id="text_color_white">
               <li className="nav-item m-3">
                 <Link
-                  to='/'
+                  to='/admin_home'
                   className="nav-link"
                   aria-current="page"
                   id="text_color_white"
@@ -78,6 +92,7 @@ function AdminNavbar() {
               <li className="nav-item m-3">
                 <Link
                   to='/'
+                  onClick={handleLogout}
                   className="nav-link"
                   aria-current="page"
                   id="text_color_white"

@@ -44,7 +44,7 @@ function ScrbDashboard() {
         <div className='row pt-4'>
 
           <div className='col-12 col-sm-6 col-md-3 mb-4'>
-            <div className='scrb-dash-revenue-box pt-5  '>
+            <div className='admin-dash-revenue-box pt-3  '>
               <div className='text-center'>
                 <span className='scrb-dash-span'>Citizen</span>
               </div>
@@ -56,7 +56,7 @@ function ScrbDashboard() {
           </div>
 
           <div className='col-12 col-sm-6 col-md-3 mb-4'>
-            <div className='scrb-dash-revenue-box pt-5 '>
+            <div className='admin-dash-revenue-box pt-3 '>
               <div className='text-center'>
                 <span className='scrb-dash-span'>Police Station</span>
               </div>
@@ -68,7 +68,7 @@ function ScrbDashboard() {
           </div>
 
           <div className='col-12 col-sm-6 col-md-3 mb-4'>
-            <div className='scrb-dash-revenue-box pt-5 '>
+            <div className='admin-dash-revenue-box pt-3 '>
               <div className='text-center'>
                <span className='scrb-dash-span'></span>
               </div>
@@ -80,7 +80,7 @@ function ScrbDashboard() {
           </div>
 
           <div className='col-12 col-sm-6 col-md-3 mb-4'>
-            <div className='scrb-dash-revenue-box pt-5 text-center'>
+            <div className='admin-dash-revenue-box pt-3 text-center'>
               <div>
                 <span className='scrb-dash-span'>Crimes</span>
               </div>

@@ -99,18 +99,18 @@ function App() {
         <Route path='/scrb_login' element={[<LoginNav/>,<ScrbLogin/>,<Footer2/>]} />
         <Route path='/scrb-forgetpswd' element={[<LoginNav/>,<ScrbForgetpswd/>,<Footer2/>]}/>
         <Route path='/scrb-sidebar' element={[<LandingNavbar/>,<ScrbSidebar/>,<Footer2/>]} />
-        <Route path='/scrb-dashboard' element={[<LoginNav/>,<ScrbMain data="scrbdashboard"/>,<Footer2/>]}/>
-        <Route path='/scrb-viewNotification' element={[<LoginNav/>,<ScrbMain data="scrbviewnotification"/>,<Footer2/>]} />
-        <Route path='/scrb-viewNotificationdetails' element={[<LoginNav/>,<ScrbMain data="scrbviewnotificationdetails"/>,<Footer2/>]} />
-        <Route path='/scrb-vieweachNotification' element={[<LoginNav/>,<ScrbMain data="scrbvieweachnotification"/>,<Footer2/>]} />
+        <Route path='/scrb-dashboard' element={[<ScrbMain data="scrbdashboard"/>,<Footer2/>]}/>
+        <Route path='/scrb-viewNotification' element={[<ScrbMain data="scrbviewnotification"/>,<Footer2/>]} />
+        <Route path='/scrb-viewNotificationdetails' element={[<ScrbMain data="scrbviewnotificationdetails"/>,<Footer2/>]} />
+        <Route path='/scrb-vieweachNotification' element={[<ScrbMain data="scrbvieweachnotification"/>,<Footer2/>]} />
 
         {/* Scrb View Cases */}
-        <Route path='/scrb_viewallcases' element={[<LoginNav/>,<ScrbMain data='scrbviewallcasedetails'/>,<Footer2/>]} />
-        <Route path='/scrb_viewcasedetails/:id' element={[<LoginNav/>,<ScrbMain data='scrbvieweachcasedetails'/>,<Footer2/>]} />
+        <Route path='/scrb_viewallcases' element={[<ScrbMain data='scrbviewallcasedetails'/>,<Footer2/>]} />
+        <Route path='/scrb_viewcasedetails/:id' element={[<ScrbMain data='scrbvieweachcasedetails'/>,<Footer2/>]} />
 
         {/* Scrb View Police Station */}
-        <Route path='/scrb-viewallpolicestation' element={[<LoginNav/>,<ScrbMain data="scrb-viewallpolicestation"/>,<Footer2/>]} />
-        <Route path='/scrb-viewallpolice/:id' element={[<LoginNav/>,<ScrbMain data="scrb-viewallpoliceprofile"/>,<Footer2/>]}/>
+        <Route path='/scrb-viewallpolicestation' element={[<ScrbMain data="scrb-viewallpolicestation"/>,<Footer2/>]} />
+        <Route path='/scrb-viewallpolice/:id' element={[<ScrbMain data="scrb-viewallpoliceprofile"/>,<Footer2/>]}/>
         
 
         {/* Admin  */}

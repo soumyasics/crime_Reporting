@@ -19,15 +19,14 @@ function AdminSidebar() {
     <div>
       <div className="admin-sidebar-background">
         <div className="pt-5 ms-5 admin-sidebar-h4">
-          <Link to="/admin-dashboard" className="admin-dash-link"><h5 className="pt-5"><MdDashboard/> Dashboard</h5></Link>
-          <Link to='/admin-viewNotification' className="admin-dash-link"><h5 className="pt-4"><IoIosNotifications/> Crime Alerts</h5></Link>
-          <Link to='/admin_viewallpolicestation' className="admin-dash-link"><h5 className="pt-4"><FaBuildingShield/> Police Station</h5></Link>
-          <Link to='/newpolicestationreq' className="admin-dash-link"><h5 className="pt-4"><FaBuildingShield/> Police Station Request</h5></Link>
-          <Link to='/viewcitizens' className="admin-dash-link"><h5 className="pt-4"><MdLocalPolice /> Citizen Details</h5></Link>
-          <Link to='/admin_viewallcases' className="admin-dash-link"><h5 className="pt-4"><FaPoll/> Complaints</h5></Link>
-          <Link to='' className="admin-dash-link"><h5 className="pt-4"><FaLock/> Change Password</h5></Link>
-          <Link to='' className="admin-dash-link"><h5 className="pt-4"><RiGitRepositoryFill/> Case Report</h5></Link>
-          <Link to='/' className="admin-dash-link"><h5 className="pt-4"><MdOutlineLogout/> Logout</h5></Link>
+          <Link to="/admin-dashboard" className="admin-dash-link"><h5 className="pt-5 fw-light"><MdDashboard/> Dashboard</h5></Link>
+          <Link to='/admin-viewNotification' className="admin-dash-link"><h5 className="pt-4 fw-light"><IoIosNotifications/> Crime Alerts</h5></Link>
+          <Link to='/admin_viewallpolicestation' className="admin-dash-link"><h5 className="pt-4 fw-light"><FaBuildingShield/> Police Station</h5></Link>
+          <Link to='/newpolicestationreq' className="admin-dash-link"><h5 className="pt-4 fw-light"><FaBuildingShield/> Police Station Request</h5></Link>
+          <Link to='/viewcitizens' className="admin-dash-link"><h5 className="pt-4 fw-light"><MdLocalPolice /> Citizen Details</h5></Link>
+          <Link to='/admin_viewallcases' className="admin-dash-link"><h5 className="pt-4 fw-light"><FaPoll/> Complaints</h5></Link>
+          <Link to='' className="admin-dash-link"><h5 className="pt-4 fw-light"><FaLock/> Change Password</h5></Link>
+          <Link to='' className="admin-dash-link"><h5 className="pt-4 fw-light"><RiGitRepositoryFill/> Case Report</h5></Link>
         </div>
       </div>
     </div>

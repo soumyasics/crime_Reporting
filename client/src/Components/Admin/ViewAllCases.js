@@ -38,12 +38,12 @@ function ViewAllCases() {
                         <h5>View All Cases</h5>
                     </div>
                     <div className='col-md-3'>
-                        <div className="search-box">
+                        {/* <div className="search-box">
                         <input type="text" placeholder="Search all Cases" />
                         <button type="submit">
                             <FaSearch />
                         </button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
