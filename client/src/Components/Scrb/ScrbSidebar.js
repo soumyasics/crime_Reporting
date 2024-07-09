@@ -9,18 +9,32 @@ import { MdLock } from "react-icons/md";
 import { PiNotepadFill } from "react-icons/pi";
 import { FaPoll } from "react-icons/fa";
 import { MdOutlineLogout } from "react-icons/md";
+
+import { PiBuildingOfficeFill } from "react-icons/pi";
+import { FaFileLines } from "react-icons/fa6";
+import { FaBell } from "react-icons/fa";
+import { MdNotificationAdd } from "react-icons/md";
+import { IoSearch } from "react-icons/io5";
 function ScrbSidebar() {
   return (
     <div>
       <div className='scrb-sidebar-backgroundcolor'>
         <div className="pt-5 ms-5 ">
-            <Link className='scrb-sidebar-h5'><h5 className="pt-5"><MdDashboard/> Dashboard</h5></Link>
-            <Link className='scrb-sidebar-h5'><h5 className="pt-4"><IoIosNotifications/> Crime Alerts</h5></Link>
+            <Link  to='/scrb-dashboard' className='scrb-sidebar-h5'><h5 className="pt-5"><MdDashboard/> Dashboard</h5></Link>
+            {/* <Link className='scrb-sidebar-h5'><h5 className="pt-4"><IoIosNotifications/> Crime Alerts</h5></Link>
             <Link className='scrb-sidebar-h5'><h5 className="pt-4"><FaCalendarAlt/> Date  of Crime</h5></Link>
             <Link className='scrb-sidebar-h5'><h5 className="pt-4"><FaSearch/> Search</h5></Link>
             <Link className='scrb-sidebar-h5'><h5 className="pt-4"><MdLock/> Change Password</h5></Link>
             <Link className='scrb-sidebar-h5'><h5 className="pt-4"><PiNotepadFill/> Privacy Policy</h5></Link>
             <Link className='scrb-sidebar-h5'><h5 className="pt-4"><FaPoll/> Reports</h5></Link>
+             */}
+
+
+            <Link to='/scrb-viewallpolicestation' className='scrb-sidebar-h5'><h5 className="pt-4"><PiBuildingOfficeFill /> Police Station</h5></Link>
+            <Link to='/scrb_viewallcases'className='scrb-sidebar-h5'><h5 className="pt-4"><FaFileLines /> Crimes</h5></Link>
+            <Link className='scrb-sidebar-h5'><h5 className="pt-4"><FaBell /> Generate Crime Alerts</h5></Link>
+            <Link to='/scrb-viewNotification' className='scrb-sidebar-h5'><h5 className="pt-4"><MdNotificationAdd /> View Crime Alerts</h5></Link>
+            <Link className='scrb-sidebar-h5'><h5 className="pt-4"><IoSearch /> Search</h5></Link>
             <Link className='scrb-sidebar-h5'><h5 className="pt-4"><MdOutlineLogout/> Logout</h5></Link>
         </div>
       </div>

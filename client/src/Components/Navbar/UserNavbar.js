@@ -169,9 +169,9 @@ function UserNavbar() {
                 </Link>
               </li>
               <li class="nav-item m-3">
-                <a class="nav-link" href="#" id="text_color_white">
+                <Link class="nav-link" to='/viewnotification' id="text_color_white">
                   View Alerts
-                </a>
+                </Link>
               </li>
               <li class="nav-item m-3">
                 <a class="nav-link" href="#" id="text_color_white">

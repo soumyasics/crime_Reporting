@@ -30,6 +30,10 @@ function ViewAllCitizen() {
 
   return (
     <div className='container'>
+        <div className='pt-5'>
+          <h4 className='admin-dash-h4'>Welcome Admin</h4>
+          <p className='admin-dash-para'>All System are running smoothly</p>
+        </div>
         <div className=' text-center mt-5 text-danger'>
                 <h5>View All Citizens</h5>
         </div>

@@ -99,6 +99,10 @@ function PoliceViewCases({type}) {
 
   return (
     <div className="container mb-5 police_view_case_main">
+      <div className='pt-5'>
+          <h4 className='admin-dash-h4'>Welcome Admin</h4>
+          <p className='admin-dash-para'>All System are running smoothly</p>
+        </div>
       <div className="container ms-5 mt-5 text-danger">
         <h4>Recent Cases</h4>
       </div>

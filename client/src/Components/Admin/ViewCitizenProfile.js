@@ -21,7 +21,14 @@ function ViewCitizenProfile() {
   }, [id]);
 
   return (
+    <div>
+      <div className='pt-5'>
+          <h4 className='admin-dash-h4'>Welcome Admin</h4>
+          <p className='admin-dash-para'>All System are running smoothly</p>
+        </div>
+  
     <div className="container citizen_profile_body">
+      
       <form>
         <div className='text-center p-4 text-danger'>
         <h2>{userDetails.firstname} {userDetails.lastname}</h2>
@@ -44,7 +51,7 @@ function ViewCitizenProfile() {
               className="form-control user_inp"
               id="dob"
               name="dob"
-              value={userDetails.dob.slice(0,10) || ''}
+              value={userDetails.dob || ''}
               readOnly
             />
           </div>
@@ -127,6 +134,7 @@ function ViewCitizenProfile() {
           </div>
         </div>
       </form>
+    </div>
     </div>
   );
 }

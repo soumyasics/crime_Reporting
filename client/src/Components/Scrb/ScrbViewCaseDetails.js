@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import axiosInstance from '../Constants/BaseUrl';
-import { Modal } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
 import evidenceIcon from '../../Assets/Images/evidence.png';
+// import './Police.css';
+import { useParams, Link } from 'react-router-dom';
+import axiosInstance from '../Constants/BaseUrl';
 import { toast } from 'react-toastify';
+import { Modal } from 'react-bootstrap';
 import { imageUrl } from '../Constants/Image_Url';
 
-function ViewCrimeStatus() {
+function ScrbViewCaseDetails() {
     const [caseDetails, setCaseDetails] = useState({
-        evidenceFiles: [{ file: { filename: "" } }],
-        incidentDate: '',
+        evidenceFiles: [{ file: { filename: '' } }],
+        incidentDate: ''
       });
       const [showModal, setShowModal] = useState(false);
       const [selectedEvidence, setSelectedEvidence] = useState(null);
       const { id } = useParams();
-      const navigate = useNavigate();
     
       useEffect(() => {
         axiosInstance
@@ -25,7 +25,7 @@ function ViewCrimeStatus() {
             }
           })
           .catch((err) => {
-            toast.error("Failed to fetch user details");
+            toast.error('Failed to fetch case details');
           });
       }, [id]);
     
@@ -42,20 +42,20 @@ function ViewCrimeStatus() {
       const getMediaElement = (file) => {
         if (!file || !file.filename) return <p>File not found.</p>;
     
-        const fileExtension = file.filename.split(".").pop().toLowerCase();
+        const fileExtension = file.filename.split('.').pop().toLowerCase();
         const fileUrl = `${imageUrl}/${file.filename}`;
     
-        if (["jpg", "jpeg", "png", "gif"].includes(fileExtension)) {
-          return <img src={fileUrl} alt="Evidence" className="img-fluid" />;
-        } else if (["mp4", "webm", "ogg"].includes(fileExtension)) {
+        if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension)) {
+          return <img src={fileUrl} alt='Evidence' className='img-fluid' />;
+        } else if (['mp4', 'webm', 'ogg'].includes(fileExtension)) {
           return (
-            <video controls className="img-fluid">
+            <video controls className='img-fluid'>
               <source src={fileUrl} type={`video/${fileExtension}`} />
             </video>
           );
-        } else if (["mp3", "wav", "ogg"].includes(fileExtension)) {
+        } else if (['mp3', 'wav', 'ogg'].includes(fileExtension)) {
           return (
-            <audio controls className="w-100">
+            <audio controls className='w-100'>
               <source src={fileUrl} type={`audio/${fileExtension}`} />
             </audio>
           );
@@ -63,19 +63,22 @@ function ViewCrimeStatus() {
           return <p>Unsupported file type.</p>;
         }
       };
-
   return (
-    <div>
-        <div className="container mt-5 mb-5">
-      <div className="case-details-h6 text-center pt-3">
+    <div className='container'>
+        <div className='pt-5'>
+          <h4 className='scrb-dash-h4'>Welcome SCRB</h4>
+          <p className='scrb-dash-para'>All System are running smoothly</p>
+        </div>
+        <div className='container mt-5 mb-5'>
+      <div className='case-details-h6 text-center pt-3'>
         <span>Case No: 203 </span>
       </div>
-      <div className="row mt-5">
-        <div className="col">
-          <div className="case-details-span">
+      <div className='row mt-5'>
+        <div className='col'>
+          <div className='case-details-span'>
             <span>Victim Information</span>
           </div>
-          <div className="mt-4 container ms-4">
+          <div className='mt-4 container ms-4'>
           <div className="row">
             <table className="case-details-table">
                 <tbody>
@@ -116,11 +119,11 @@ function ViewCrimeStatus() {
             </div>
           </div>
         </div>
-        <div className="col">
-          <div className="case-details-span">
+        <div className='col'>
+          <div className='case-details-span'>
             <span>Incident Details</span>
           </div>
-          <div className="mt-4 container ms-4">
+          <div className='mt-4 container ms-4'>
           <div className="row">
             <table className="case-details-table">
                 <tbody>
@@ -162,13 +165,13 @@ function ViewCrimeStatus() {
           </div>
         </div>
       </div>
-      <div className="row mt-5">
-        <div className="col">
-          <div className="case-details-span">
+      <div className='row mt-5'>
+        <div className='col'>
+          <div className='case-details-span'>
             <span>Witness Information</span>
           </div>
-          <div className="mt-4 container ms-4">
-          <div className="row">
+          <div className='mt-4 container ms-4'>
+            <div className="row">
             <table className="case-details-table">
                 <tbody>
                 <tr>
@@ -208,12 +211,12 @@ function ViewCrimeStatus() {
             </div>
           </div>
         </div>
-        <div className="col">
-          <div className="case-details-span">
+        <div className='col'>
+          <div className='case-details-span'>
             <span>Case Details</span>
           </div>
-          <div className="mt-4 container ms-4">
-          <div className="row">
+          <div className='mt-4 container ms-4'>
+            <div className="row">
             <table className="case-details-table">
                 <tbody>
                 <tr>
@@ -235,11 +238,10 @@ function ViewCrimeStatus() {
                 </tbody>
             </table>
             </div>
+            
           </div>
         </div>
       </div>
-
-      
       <div className='row mt-5'>
         <div className='col'>
           <div className='case-details-span'>
@@ -339,73 +341,45 @@ function ViewCrimeStatus() {
             </div>
             
             </div>
+
           </div>
         </div>
-
-        <div className="col">
-          <div className="case-details-span">
-            <span>Evidence Files</span>
+        <div className='col'>
+          <div className='case-details-span'>
+            <span>Case Evidence</span>
           </div>
-          <div className="container ms-4 mt-4">
-            <div className="row">
-              {caseDetails.evidenceFiles.map((evidence, index) => (
-                <div className="col-md-4" key={index}>
-                  <div className="card mb-4 shadow-sm">
-                    <div className="card-body text-center">
+          <div className='mt-4 container ms-4'>
+            <div className='row'>
+              <div className='col'>
+                {caseDetails.evidenceFiles.map((evidence, index) => (
+                  <div key={index} className='mb-3'>
+                    <div className='evidence-item'>
                       <img
                         src={evidenceIcon}
-                        alt="Evidence Icon"
-                        style={{ width: '50px', height: '50px' }}
+                        alt='Evidence Icon'
+                        className='evidence-icon'
+                        onClick={() => handleViewEvidence(evidence)}
                       />
-                      <Link 
-                        onClick={() => handleViewEvidence(evidence.file)}
-                      >
-                        View 
-                      </Link>
+                      <span className='evidence-label'>{evidence.label}</span>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
-        
       </div>
-      <div className='row'>
-        <div className='col-6'></div>
-        <div className='col-6 text-center'>
-            <div className='req_status_citizen'>
-              <h4>Request Status : { }
-                {caseDetails.approvalStatus === "approved" && (
-                      <label className='text-success font_style_status'>{caseDetails.approvalStatus}</label>
-                )}
-                {caseDetails.approvalStatus === "pending" && (
-                      <label className='text-warning font_style_status'>{caseDetails.approvalStatus}</label>
-                )}
-                {caseDetails.approvalStatus === "rejected" && (
-                      <label className='text-danger font_style_status'>{caseDetails.approvalStatus}</label>
-                )}
-            </h4>
-            </div>
-            </div>
-        </div>
-
-      <Modal show={showModal} onHide={handleCloseModal}>
+      <Modal show={showModal} onHide={handleCloseModal} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Evidence File</Modal.Title>
+          <Modal.Title>View Evidence</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {selectedEvidence && getMediaElement(selectedEvidence)}
+          {selectedEvidence ? getMediaElement(selectedEvidence.file) : <p>No evidence selected.</p>}
         </Modal.Body>
-        <Modal.Footer>
-          <button className="btn btn-secondary" onClick={handleCloseModal}>
-            Close
-          </button>
-        </Modal.Footer>
       </Modal>
     </div>
     </div>
   )
 }
 
-export default ViewCrimeStatus
+export default ScrbViewCaseDetails
