@@ -20,11 +20,11 @@ function AdminSidebar() {
       <div className="admin-sidebar-background">
         <div className="pt-5 ms-5 admin-sidebar-h4">
           <Link to="/admin-dashboard" className="admin-dash-link"><h5 className="pt-5"><MdDashboard/> Dashboard</h5></Link>
-          <Link to='' className="admin-dash-link"><h5 className="pt-4"><IoIosNotifications/> Crime Alerts</h5></Link>
-          <Link to='/viewallpolicestation' className="admin-dash-link"><h5 className="pt-4"><FaBuildingShield/> Police Station</h5></Link>
+          <Link to='/admin-viewNotification' className="admin-dash-link"><h5 className="pt-4"><IoIosNotifications/> Crime Alerts</h5></Link>
+          <Link to='/admin_viewallpolicestation' className="admin-dash-link"><h5 className="pt-4"><FaBuildingShield/> Police Station</h5></Link>
           <Link to='/newpolicestationreq' className="admin-dash-link"><h5 className="pt-4"><FaBuildingShield/> Police Station Request</h5></Link>
           <Link to='/viewcitizens' className="admin-dash-link"><h5 className="pt-4"><MdLocalPolice /> Citizen Details</h5></Link>
-          <Link to='/admin-viewallcases' className="admin-dash-link"><h5 className="pt-4"><FaPoll/> Complaints</h5></Link>
+          <Link to='/admin_viewallcases' className="admin-dash-link"><h5 className="pt-4"><FaPoll/> Complaints</h5></Link>
           <Link to='' className="admin-dash-link"><h5 className="pt-4"><FaLock/> Change Password</h5></Link>
           <Link to='' className="admin-dash-link"><h5 className="pt-4"><RiGitRepositoryFill/> Case Report</h5></Link>
           <Link to='/' className="admin-dash-link"><h5 className="pt-4"><MdOutlineLogout/> Logout</h5></Link>

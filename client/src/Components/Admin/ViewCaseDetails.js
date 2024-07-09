@@ -65,7 +65,13 @@ function ViewCaseDetails() {
   };
 
   return (
+    <div className='container'>
+      <div className='pt-5'>
+          <h4 className='admin-dash-h4'>Welcome Admin</h4>
+          <p className='admin-dash-para'>All System are running smoothly</p>
+        </div>
     <div className='container mt-5 mb-5'>
+      
       <div className='case-details-h6 text-center pt-3'>
         <span>Case No: 203 </span>
       </div>
@@ -373,6 +379,7 @@ function ViewCaseDetails() {
           {selectedEvidence ? getMediaElement(selectedEvidence.file) : <p>No evidence selected.</p>}
         </Modal.Body>
       </Modal>
+    </div>
     </div>
   );
 }

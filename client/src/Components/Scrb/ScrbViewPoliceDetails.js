@@ -6,8 +6,8 @@ import station from '../../Assets/Images/policestation.png';
 import { useFormik } from 'formik';
 import { PoliceRegistrationSchema } from '../Constants/Schema';
 
-function ViewProfile_Policestation() {
-  const [userDetails, setUserDetails] = useState({});
+function ScrbViewPoliceDetails() {
+    const [userDetails, setUserDetails] = useState({});
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -73,14 +73,13 @@ function ViewProfile_Policestation() {
     validationSchema: PoliceRegistrationSchema,
     enableReinitialize: true,
   });
-
   return (
     <div className='container'>
-       <div className='pt-5'>
-          <h4 className='admin-dash-h4'>Welcome Admin</h4>
-          <p className='admin-dash-para'>All System are running smoothly</p>
+        <div className='pt-5'>
+          <h4 className='scrb-dash-h4'>Welcome SCRB</h4>
+          <p className='scrb-dash-para'>All System are running smoothly</p>
         </div>
-    <div className='viewprofile_policestation'>
+        <div className='viewprofile_policestation'>
       <div className="citizen_profile">
         <div className="container citizen_profile_body">
           <form>
@@ -197,7 +196,7 @@ function ViewProfile_Policestation() {
       </div>
     </div>
     </div>
-  );
+  )
 }
 
-export default ViewProfile_Policestation;
+export default ScrbViewPoliceDetails

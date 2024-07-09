@@ -3,10 +3,10 @@ import axiosInstance from '../Constants/BaseUrl';
 import { IoEyeSharp } from "react-icons/io5";
 import { TiTick } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
-import './Police.css';
+// import './Police.css';
 import { Link } from 'react-router-dom';
 
-function ViewAllPoliceStation() {
+function ScrbViewAllPoliceStation() {
     const[data,setData]=useState([])
     const getData=()=>{
         axiosInstance.post("/viewPolices")
@@ -70,10 +70,10 @@ function ViewAllPoliceStation() {
         }
   return (
     <div>
-            <div className='container'>
-            <div className='pt-5'>
-          <h4 className='admin-dash-h4'>Welcome Admin</h4>
-          <p className='admin-dash-para'>All System are running smoothly</p>
+        <div className='container'>
+        <div className='pt-5'>
+          <h4 className='scrb-dash-h4'>Welcome SCRB</h4>
+          <p className='scrb-dash-para'>All System are running smoothly</p>
         </div>
             <div className=' text-center mt-5 text-danger'>
                 <h5>View All Police Station</h5>
@@ -103,7 +103,7 @@ function ViewAllPoliceStation() {
                             <td>{policestationview.policestationcode}</td>
                             <td>{policestationview.district}</td>
                             <td >
-                                <Link to={`/admin_viewallpolice/${policestationview._id}`}>
+                                <Link to={`/scrb-viewallpolice/${policestationview._id}`}>
                                 <button className='viewallpolicest_icon'>
                                     <IoEyeSharp/>
                                 </button>
@@ -132,4 +132,4 @@ function ViewAllPoliceStation() {
   )
 }
 
-export default ViewAllPoliceStation
+export default ScrbViewAllPoliceStation

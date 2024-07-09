@@ -1,34 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import axiosInstance from '../Constants/BaseUrl';
-import { Modal } from 'react-bootstrap';
-import evidenceIcon from '../../Assets/Images/evidence.png';
-import { toast } from 'react-toastify';
+import React, { useState } from 'react'
+import { useParams } from 'react-router-dom';
 import { imageUrl } from '../Constants/Image_Url';
 
-function ViewCrimeStatus() {
+function ViewEachNotification() {
     const [caseDetails, setCaseDetails] = useState({
-        evidenceFiles: [{ file: { filename: "" } }],
-        incidentDate: '',
+        evidenceFiles: [{ file: { filename: '' } }],
+        incidentDate: ''
       });
       const [showModal, setShowModal] = useState(false);
       const [selectedEvidence, setSelectedEvidence] = useState(null);
       const { id } = useParams();
-      const navigate = useNavigate();
-    
-      useEffect(() => {
-        axiosInstance
-          .post(`/viewCrimeById/${id}`)
-          .then((res) => {
-            if (res.data.status === 200) {
-              setCaseDetails(res.data.data);
-            }
-          })
-          .catch((err) => {
-            toast.error("Failed to fetch user details");
-          });
-      }, [id]);
-    
+
       const handleViewEvidence = (evidence) => {
         setSelectedEvidence(evidence);
         setShowModal(true);
@@ -42,20 +24,20 @@ function ViewCrimeStatus() {
       const getMediaElement = (file) => {
         if (!file || !file.filename) return <p>File not found.</p>;
     
-        const fileExtension = file.filename.split(".").pop().toLowerCase();
+        const fileExtension = file.filename.split('.').pop().toLowerCase();
         const fileUrl = `${imageUrl}/${file.filename}`;
     
-        if (["jpg", "jpeg", "png", "gif"].includes(fileExtension)) {
-          return <img src={fileUrl} alt="Evidence" className="img-fluid" />;
-        } else if (["mp4", "webm", "ogg"].includes(fileExtension)) {
+        if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension)) {
+          return <img src={fileUrl} alt='Evidence' className='img-fluid' />;
+        } else if (['mp4', 'webm', 'ogg'].includes(fileExtension)) {
           return (
-            <video controls className="img-fluid">
+            <video controls className='img-fluid'>
               <source src={fileUrl} type={`video/${fileExtension}`} />
             </video>
           );
-        } else if (["mp3", "wav", "ogg"].includes(fileExtension)) {
+        } else if (['mp3', 'wav', 'ogg'].includes(fileExtension)) {
           return (
-            <audio controls className="w-100">
+            <audio controls className='w-100'>
               <source src={fileUrl} type={`audio/${fileExtension}`} />
             </audio>
           );
@@ -65,17 +47,21 @@ function ViewCrimeStatus() {
       };
 
   return (
-    <div>
-        <div className="container mt-5 mb-5">
-      <div className="case-details-h6 text-center pt-3">
-        <span>Case No: 203 </span>
+    <div className='container'>
+      <div className='pt-5'>
+          <h4 className='admin-dash-h4'>Welcome Admin</h4>
+          <p className='admin-dash-para'>All System are running smoothly</p>
+        </div>
+        <div className='container mt-5 mb-5'>
+      <div className='case-details-h6 text-center pt-3'>
+        <span>Police Station Name </span>
       </div>
-      <div className="row mt-5">
-        <div className="col">
-          <div className="case-details-span">
+      <div className='row mt-5'>
+        <div className='col'>
+          <div className='case-details-span'>
             <span>Victim Information</span>
           </div>
-          <div className="mt-4 container ms-4">
+          <div className='mt-4 container ms-4'>
           <div className="row">
             <table className="case-details-table">
                 <tbody>
@@ -84,7 +70,7 @@ function ViewCrimeStatus() {
                     <label>Name</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.victimName}</span>
+                    {/* <span>{caseDetails.victimName}</span> */}
                     </td>
                 </tr>
                 <tr>
@@ -92,7 +78,7 @@ function ViewCrimeStatus() {
                     <label>Gender</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.victimGender}</span>
+                    {/* <span>{caseDetails.victimGender}</span> */}
                     </td>
                 </tr>
                 <tr>
@@ -100,7 +86,7 @@ function ViewCrimeStatus() {
                     <label>Email</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.victimEmail}</span>
+                    {/* <span>{caseDetails.victimEmail}</span> */}
                     </td>
                 </tr>
                 <tr>
@@ -108,7 +94,7 @@ function ViewCrimeStatus() {
                     <label>Address</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.victimAddress}</span>
+                    {/* <span>{caseDetails.victimAddress}</span> */}
                     </td>
                 </tr>
                 </tbody>
@@ -116,11 +102,11 @@ function ViewCrimeStatus() {
             </div>
           </div>
         </div>
-        <div className="col">
-          <div className="case-details-span">
+        <div className='col'>
+          <div className='case-details-span'>
             <span>Incident Details</span>
           </div>
-          <div className="mt-4 container ms-4">
+          <div className='mt-4 container ms-4'>
           <div className="row">
             <table className="case-details-table">
                 <tbody>
@@ -129,7 +115,7 @@ function ViewCrimeStatus() {
                     <label>Date</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.incidentDate.slice(0, 10)}</span>
+                    {/* <span>{caseDetails.incidentDate.slice(0, 10)}</span> */}
                     </td>
                 </tr>
                 <tr>
@@ -137,7 +123,7 @@ function ViewCrimeStatus() {
                     <label>Time</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.incidentTime}</span>
+                    {/* <span>{caseDetails.incidentTime}</span> */}
                     </td>
                 </tr>
                 <tr>
@@ -145,7 +131,7 @@ function ViewCrimeStatus() {
                     <label>Location</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.incidentLocation}</span>
+                    {/* <span>{caseDetails.incidentLocation}</span> */}
                     </td>
                 </tr>
                 <tr>
@@ -153,7 +139,7 @@ function ViewCrimeStatus() {
                     <label>City</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.incidentCity}</span>
+                    {/* <span>{caseDetails.incidentCity}</span> */}
                     </td>
                 </tr>
                 </tbody>
@@ -162,13 +148,13 @@ function ViewCrimeStatus() {
           </div>
         </div>
       </div>
-      <div className="row mt-5">
-        <div className="col">
-          <div className="case-details-span">
+      <div className='row mt-5'>
+        <div className='col'>
+          <div className='case-details-span'>
             <span>Witness Information</span>
           </div>
-          <div className="mt-4 container ms-4">
-          <div className="row">
+          <div className='mt-4 container ms-4'>
+            <div className="row">
             <table className="case-details-table">
                 <tbody>
                 <tr>
@@ -176,7 +162,7 @@ function ViewCrimeStatus() {
                     <label>Name</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.witnessName}</span>
+                    {/* <span>{caseDetails.witnessName}</span> */}
                     </td>
                 </tr>
                 <tr>
@@ -184,7 +170,7 @@ function ViewCrimeStatus() {
                     <label>Contact</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.witnessContact}</span>
+                    {/* <span>{caseDetails.witnessContact}</span> */}
                     </td>
                 </tr>
                 <tr>
@@ -192,7 +178,7 @@ function ViewCrimeStatus() {
                     <label>Address</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.witnessAddress}</span>
+                    {/* <span>{caseDetails.witnessAddress}</span> */}
                     </td>
                 </tr>
                 <tr>
@@ -200,7 +186,7 @@ function ViewCrimeStatus() {
                     <label>Statement</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.witnessStatement}</span>
+                    {/* <span>{caseDetails.witnessStatement}</span> */}
                     </td>
                 </tr>
                 </tbody>
@@ -208,12 +194,12 @@ function ViewCrimeStatus() {
             </div>
           </div>
         </div>
-        <div className="col">
-          <div className="case-details-span">
+        <div className='col'>
+          <div className='case-details-span'>
             <span>Case Details</span>
           </div>
-          <div className="mt-4 container ms-4">
-          <div className="row">
+          <div className='mt-4 container ms-4'>
+            <div className="row">
             <table className="case-details-table">
                 <tbody>
                 <tr>
@@ -221,7 +207,7 @@ function ViewCrimeStatus() {
                     <label>Crime Type</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.caseType}</span>
+                    {/* <span>{caseDetails.caseType}</span> */}
                     </td>
                 </tr>
                 <tr>
@@ -229,17 +215,16 @@ function ViewCrimeStatus() {
                     <label>Description</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.caseDescription}</span>
+                    {/* <span>{caseDetails.caseDescription}</span> */}
                     </td>
                 </tr>
                 </tbody>
             </table>
             </div>
+            
           </div>
         </div>
       </div>
-
-      
       <div className='row mt-5'>
         <div className='col'>
           <div className='case-details-span'>
@@ -248,7 +233,7 @@ function ViewCrimeStatus() {
           <div className='mt-4 container ms-4'>
           <div className='row'>
             <div className='col-8 case-details-victim'>
-                <table>
+                {/* <table>
                 <tbody>
                     {caseDetails.caseType === 'Theft' && (
                     <>
@@ -333,79 +318,51 @@ function ViewCrimeStatus() {
                     </>
                     )}
                 </tbody>
-                </table>
+                </table> */}
             </div>
             <div className='col-4 case-details-victim1'>
             </div>
             
             </div>
+
           </div>
         </div>
-
-        <div className="col">
-          <div className="case-details-span">
-            <span>Evidence Files</span>
+        <div className='col'>
+          <div className='case-details-span'>
+            <span>Case Evidence</span>
           </div>
-          <div className="container ms-4 mt-4">
-            <div className="row">
-              {caseDetails.evidenceFiles.map((evidence, index) => (
-                <div className="col-md-4" key={index}>
-                  <div className="card mb-4 shadow-sm">
-                    <div className="card-body text-center">
+          <div className='mt-4 container ms-4'>
+            <div className='row'>
+              <div className='col'>
+                {/* {caseDetails.evidenceFiles.map((evidence, index) => (
+                  <div key={index} className='mb-3'>
+                    <div className='evidence-item'>
                       <img
                         src={evidenceIcon}
-                        alt="Evidence Icon"
-                        style={{ width: '50px', height: '50px' }}
+                        alt='Evidence Icon'
+                        className='evidence-icon'
+                        onClick={() => handleViewEvidence(evidence)}
                       />
-                      <Link 
-                        onClick={() => handleViewEvidence(evidence.file)}
-                      >
-                        View 
-                      </Link>
+                      <span className='evidence-label'>{evidence.label}</span>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))} */}
+              </div>
             </div>
           </div>
         </div>
-        
       </div>
-      <div className='row'>
-        <div className='col-6'></div>
-        <div className='col-6 text-center'>
-            <div className='req_status_citizen'>
-              <h4>Request Status : { }
-                {caseDetails.approvalStatus === "approved" && (
-                      <label className='text-success font_style_status'>{caseDetails.approvalStatus}</label>
-                )}
-                {caseDetails.approvalStatus === "pending" && (
-                      <label className='text-warning font_style_status'>{caseDetails.approvalStatus}</label>
-                )}
-                {caseDetails.approvalStatus === "rejected" && (
-                      <label className='text-danger font_style_status'>{caseDetails.approvalStatus}</label>
-                )}
-            </h4>
-            </div>
-            </div>
-        </div>
-
-      <Modal show={showModal} onHide={handleCloseModal}>
+      {/* <Modal show={showModal} onHide={handleCloseModal} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Evidence File</Modal.Title>
+          <Modal.Title>View Evidence</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {selectedEvidence && getMediaElement(selectedEvidence)}
+          {selectedEvidence ? getMediaElement(selectedEvidence.file) : <p>No evidence selected.</p>}
         </Modal.Body>
-        <Modal.Footer>
-          <button className="btn btn-secondary" onClick={handleCloseModal}>
-            Close
-          </button>
-        </Modal.Footer>
-      </Modal>
+      </Modal> */}
     </div>
     </div>
   )
 }
 
-export default ViewCrimeStatus
+export default ViewEachNotification

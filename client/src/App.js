@@ -50,6 +50,8 @@ import ViewCrimeReport from './Components/Citizen/ViewCrimeReport';
 import ViewCrimeDetails from './Components/Citizen/ViewCrimeDetails';
 import CrimeReportwithStatus from './Components/Citizen/CrimeReportwithStatus';
 import ViewCrimeStatus from './Components/Citizen/ViewCrimeStatus';
+import CitizenViewNotification from './Components/Citizen/CitizenViewNotification';
+import AdminNavbar from './Components/Navbar/AdminNavbar';
 
 function App() {
   return (
@@ -58,70 +60,91 @@ function App() {
       {/* <Navbar/> */}
     <div className="App">
       <Routes>
-        <Route path='/' element={[<LandingNavbar/>,<Home/>]} />
-        <Route path='/about' element={[<LandingNavbar/>,<About/>,<Services/>]} />
+        <Route path='/' element={[<LandingNavbar/>,<Home/>,<Footer/>,<Footer2/>]} />
+        <Route path='/about' element={[<LandingNavbar/>,<About/>,<Services/>,<Footer/>,<Footer2/>]} />
 
         {/* Citizen  */}
 
-        <Route path='/citizen_login' element={[<LoginNav/>,<CitizenLogin/>]} />
-        <Route path='/citizen_forgotpassword' element={[<LoginNav/>,<ForgotPassword activeUser='Citizen' />]} />
-        <Route path='/citizen_register' element={[<LoginNav/>,<CitizenRegistration/>]} />
-        <Route path='/citizen_home' element={[<UserNavbar/>,<LoginBanner user='citizen' />,<CitizenLandingPage/>]} />
-        <Route path='/citizen_profile' element={[<UserNavbar/>,<CitizenProfile/>]} />
-        <Route path='/citizen/reportcrime' element={[<UserNavbar/>,<ReportCrime/>]}/>
-        <Route path='/updatecrime/:id' element={[<UserNavbar/>,<UpdateCrimeReport/>]}/>
-        <Route path='/addcomplaints' element={[<UserNavbar />,<CitizenAddComplaint />]} />
-        <Route path='/viewcrimestatus' element={[<UserNavbar />,<ViewCrimeReport />]} />
-        <Route path='/viewcrimedetails/:id' element={[<UserNavbar />,<ViewCrimeDetails />]} />
-        <Route path='/crimestatus' element={[<UserNavbar />,<CrimeReportwithStatus />]} />
-        <Route path='/viewcrimereportstatus/:id' element={[<UserNavbar />,<ViewCrimeStatus />]} />
+        <Route path='/citizen_login' element={[<LoginNav/>,<CitizenLogin/>,<Footer/>,<Footer2/>]} />
+        <Route path='/citizen_forgotpassword' element={[<LoginNav/>,<ForgotPassword activeUser='Citizen' />,<Footer/>,<Footer2/>]} />
+        <Route path='/citizen_register' element={[<LoginNav/>,<CitizenRegistration/>,<Footer/>,<Footer2/>]} />
+        <Route path='/citizen_home' element={[<UserNavbar/>,<LoginBanner user='citizen' />,<CitizenLandingPage/>,<Footer/>,<Footer2/>]} />
+        <Route path='/citizen_profile' element={[<UserNavbar/>,<CitizenProfile/>,<Footer/>,<Footer2/>]} />
+        <Route path='/citizen/reportcrime' element={[<UserNavbar/>,<ReportCrime/>,<Footer/>,<Footer2/>]}/>
+        <Route path='/updatecrime/:id' element={[<UserNavbar/>,<UpdateCrimeReport/>,<Footer/>,<Footer2/>]}/>
+        <Route path='/addcomplaints' element={[<UserNavbar />,<CitizenAddComplaint />,<Footer/>,<Footer2/>]} />
+        <Route path='/viewcrimestatus' element={[<UserNavbar />,<ViewCrimeReport />,<Footer/>,<Footer2/>]} />
+        <Route path='/viewcrimedetails/:id' element={[<UserNavbar />,<ViewCrimeDetails />,<Footer/>,<Footer2/>]} />
+        <Route path='/crimestatus' element={[<UserNavbar />,<CrimeReportwithStatus />,<Footer/>,<Footer2/>]} />
+        <Route path='/viewcrimereportstatus/:id' element={[<UserNavbar />,<ViewCrimeStatus />,<Footer/>,<Footer2/>]} />
+        <Route path='/viewnotification' element={[<UserNavbar/>,<CitizenViewNotification/>,<Footer/>,<Footer2/>]} />
 
 
         {/* Police  */}
 
-        <Route path='/police_register' element={[<LoginNav/>,<PoliceRegister/>]} />
-        <Route path='/police_login' element={[<LoginNav/>,<PoliceLogin/>]} />
-        <Route path='/police_forgotpassword' element={[<LoginNav/>,<ForgotPassword activeUser='Police' />]} />
-        <Route path='/police_home' element={[<PoliceNavbar/>,<LoginBanner user='police' />,<PoliceLandingPageContent/>,<PoliceRecentCrimes/>]} />
-        <Route path='/policeviewcases' element={[<PoliceNavbar/>,<PoliceViewCases type='request' />]} />
-        <Route path='/policeviewApprovedcases' element={[<PoliceNavbar/>,<PoliceViewCases type='view' />]} />
-        <Route path='/casedetails/:id' element={[<PoliceNavbar/>,<CaseDetails type='request' />]}/>
-        <Route path='/approvedcasedetails/:id' element={[<PoliceNavbar/>,<CaseDetails type='view' />]}/>
-        <Route path='/policeprofile/:id' element={[<PoliceNavbar/>,<PoliceProfile/>]} />
-        <Route path='/addcaseupdate' element={[<PoliceNavbar/>,<AddCaseUpdate />]}/>
+        <Route path='/police_register' element={[<LoginNav/>,<PoliceRegister/>,<Footer/>,<Footer2/>]} />
+        <Route path='/police_login' element={[<LoginNav/>,<PoliceLogin/>,<Footer/>,<Footer2/>]} />
+        <Route path='/police_forgotpassword' element={[<LoginNav/>,<ForgotPassword activeUser='Police' />,<Footer/>,<Footer2/>]} />
+        <Route path='/police_home' element={[<PoliceNavbar/>,<LoginBanner user='police' />,<PoliceLandingPageContent/>,<PoliceRecentCrimes/>,<Footer/>,<Footer2/>]} />
+        <Route path='/policeviewcases' element={[<PoliceNavbar/>,<PoliceViewCases type='request' />,<Footer/>,<Footer2/>]} />
+        <Route path='/policeviewApprovedcases' element={[<PoliceNavbar/>,<PoliceViewCases type='view' />,<Footer/>,<Footer2/>]} />
+        <Route path='/casedetails/:id' element={[<PoliceNavbar/>,<CaseDetails type='request' />,<Footer/>,<Footer2/>]}/>
+        <Route path='/approvedcasedetails/:id' element={[<PoliceNavbar/>,<CaseDetails type='view' />,<Footer/>,<Footer2/>]}/>
+        <Route path='/policeprofile/:id' element={[<PoliceNavbar/>,<PoliceProfile/>,<Footer/>,<Footer2/>]} />
+        <Route path='/addcaseupdate' element={[<PoliceNavbar/>,<AddCaseUpdate />,<Footer/>,<Footer2/>]}/>
 
 
         {/* Scrb  */}
 
-        <Route path='/scrb_login' element={[<LoginNav/>,<ScrbLogin/>]} />
-        <Route path='/scrb-forgetpswd' element={[<LoginNav/>,<ScrbForgetpswd/>]}/>
-        <Route path='/scrb-sidebar' element={[<LandingNavbar/>,<ScrbSidebar/>]} />
-        <Route path='/scrb-dashboard' element={[<LoginNav/>,<ScrbMain data="scrbdashboard"/>]}/>
+        <Route path='/scrb_login' element={[<LoginNav/>,<ScrbLogin/>,<Footer2/>]} />
+        <Route path='/scrb-forgetpswd' element={[<LoginNav/>,<ScrbForgetpswd/>,<Footer2/>]}/>
+        <Route path='/scrb-sidebar' element={[<LandingNavbar/>,<ScrbSidebar/>,<Footer2/>]} />
+        <Route path='/scrb-dashboard' element={[<LoginNav/>,<ScrbMain data="scrbdashboard"/>,<Footer2/>]}/>
+        <Route path='/scrb-viewNotification' element={[<LoginNav/>,<ScrbMain data="scrbviewnotification"/>,<Footer2/>]} />
+        <Route path='/scrb-viewNotificationdetails' element={[<LoginNav/>,<ScrbMain data="scrbviewnotificationdetails"/>,<Footer2/>]} />
+        <Route path='/scrb-vieweachNotification' element={[<LoginNav/>,<ScrbMain data="scrbvieweachnotification"/>,<Footer2/>]} />
 
+        {/* Scrb View Cases */}
+        <Route path='/scrb_viewallcases' element={[<LoginNav/>,<ScrbMain data='scrbviewallcasedetails'/>,<Footer2/>]} />
+        <Route path='/scrb_viewcasedetails/:id' element={[<LoginNav/>,<ScrbMain data='scrbvieweachcasedetails'/>,<Footer2/>]} />
+
+        {/* Scrb View Police Station */}
+        <Route path='/scrb-viewallpolicestation' element={[<LoginNav/>,<ScrbMain data="scrb-viewallpolicestation"/>,<Footer2/>]} />
+        <Route path='/scrb-viewallpolice/:id' element={[<LoginNav/>,<ScrbMain data="scrb-viewallpoliceprofile"/>,<Footer2/>]}/>
+        
 
         {/* Admin  */}
 
-        <Route path='/admin' element={[<LoginNav/>,<AdminLogin/>]} />
-        <Route path='/admin_home' element={[<LoginNav/>,<AdminHome/>]} />
-        <Route path='/admin-dashboard' element={[<LoginNav/>,<AdminMain data="admindashboard"/>]} />
-        <Route path='/admin-viewallcases' element={[<LoginNav/>,<AdminMain data='adminviewallcasedetails'/>]} />
-        <Route path='/admin_viewcasedetails/:id' element={[<LoginNav/>,<AdminMain data='adminvieweachcasedetails'/>]} />
+        <Route path='/admin' element={[<LoginNav/>,<AdminLogin/>,<Footer2/>]} />
+        <Route path='/admin_home' element={[<AdminNavbar/>,<AdminHome/>,<Footer2/>]} />
+        <Route path='/admin-dashboard' element={[<AdminNavbar/>,<AdminMain data="admindashboard"/>,<Footer2/>]} />
+        <Route path='/admin-addprivacypolicy' element={[<AdminNavbar/>,<AdminMain data="addprivacypolicy"/>,<Footer2/>]} />
+        <Route path='/admin-editprivacypolicy' element={[<AdminNavbar/>,<AdminMain data="editprivacypolicy"/>,<Footer2/>]} />
+        <Route path='/admin-viewprivacypolicy' element={[<AdminNavbar/>,<AdminMain data="viewprivacypolicy"/>,<Footer2/>]} />
+        <Route path='/admin-viewNotification' element={[<AdminNavbar/>,<AdminMain data="adminviewnotification"/>,<Footer2/>]} />
+        <Route path='/admin-viewNotificationDetails' element={[<AdminNavbar/>,<AdminMain data="adminviewnotificationdetail"/>,<Footer2/>]} />
+        <Route path='/admin-vieweachNotification' element={[<AdminNavbar/>,<AdminMain data="adminvieweachnotification"/>,<Footer2/>]} />
+
+
+        {/* Admin View Cases */}
+        <Route path='/admin_viewallcases' element={[<AdminNavbar/>,<AdminMain data='adminviewallcasedetails'/>,<Footer2/>]} />
+        <Route path='/admin_viewcasedetails/:id' element={[<AdminNavbar/>,<AdminMain data='adminvieweachcasedetails'/>,<Footer2/>]} />
 
         {/* Admin View Police */}
 
-        <Route path='/viewallpolicestation' element={[<LoginNav/>,<AdminMain data="viewallpolicestation"/>]} />
-        <Route path='/viewallpolice/:id' element={[<LoginNav/>,<AdminMain data="viewallpoliceprofile"/>]}/>
-        <Route path='/viewallpolicereq/:id' element={[<LoginNav/>,<AdminMain data="viewallpolicereqprofile"/>]}/>
-        <Route path='/newpolicestationreq' element={[<LoginNav />,<AdminMain data="newpolicestationreq"/>]} />
+        <Route path='/admin_viewallpolicestation' element={[<AdminNavbar/>,<AdminMain data="viewallpolicestation"/>,<Footer2/>]} />
+        <Route path='/admin_viewallpolice/:id' element={[<AdminNavbar/>,<AdminMain data="viewallpoliceprofile"/>,<Footer2/>]}/>
+        <Route path='/viewallpolicereq/:id' element={[<AdminNavbar/>,<AdminMain data="viewallpolicereqprofile"/>,<Footer2/>]}/>
+        <Route path='/newpolicestationreq' element={[<AdminNavbar />,<AdminMain data="newpolicestationreq"/>,<Footer2/>]} />
 
         {/* Admin View Citizen */}
-        <Route path='/viewcitizens' element={[<LoginNav/>,<AdminMain data="viewallcitizen"/>]} />
-        <Route path='/viewcitizenprofile/:id' element={[<LoginNav/>,<AdminMain data="viewcitizenprofile"/>]} />
+        <Route path='/viewcitizens' element={[<AdminNavbar/>,<AdminMain data="viewallcitizen"/>,<Footer2/>]} />
+        <Route path='/viewcitizenprofile/:id' element={[<AdminNavbar/>,<AdminMain data="viewcitizenprofile"/>,<Footer2/>]} />
 
       </Routes>
     </div>
-    <Footer/>
-    <Footer2/>
+    {/* <Footer/>
+    <Footer2/> */}
     </BrowserRouter>
     
   );

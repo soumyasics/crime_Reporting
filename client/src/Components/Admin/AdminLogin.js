@@ -4,6 +4,7 @@ import img from '../../Assets/Images/adminlogin.png'
 import { Link, useNavigate } from "react-router-dom";
 import { FiEyeOff } from "react-icons/fi";
 import { FiEye } from "react-icons/fi";
+import { toast } from "react-toastify";
 function AdminLogin() {
 
   const[data,setData]=useState({
@@ -40,11 +41,11 @@ function AdminLogin() {
       const values={ email : data.email, password : data.password};
       console.log(values);
       if(mail== data.email && pass==data.password){
-        alert("Logged in Successfully");
+        toast.success("Logged in Successfully");
         Navigate("/admin_home")
       }
       else{
-        alert("Username or password is incorrect")
+        toast.error("Username or password is incorrect")
       }
     }
 

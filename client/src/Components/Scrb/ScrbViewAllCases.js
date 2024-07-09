@@ -5,7 +5,7 @@ import { IoEyeSharp } from "react-icons/io5";
 import { FaSearch } from 'react-icons/fa';
 import '../../Assets/Styles/Searchbox.css'
 
-function ViewAllCases() {
+function ScrbViewAllCases() {
     const[data,setData]=useState([])
     const getData=()=>{
         axiosInstance.post("/viewallcrime")
@@ -27,13 +27,13 @@ function ViewAllCases() {
         },[])
   return (
     <div>
-    <div className='container'>
-            <div className='pt-5'>
-            <h4 className='admin-dash-h4'>Welcome Admin</h4>
-            <p className='admin-dash-para'>All System are running smoothly</p>
-            </div>
+        <div className='container'>
+        <div className='pt-5'>
+          <h4 className='scrb-dash-h4'>Welcome SCRB</h4>
+          <p className='scrb-dash-para'>All System are running smoothly</p>
+        </div>
             <div className=' text-center mt-5 text-danger'>
-                <div className='row'>
+            <div className='row'>
                     <div className='col-md-9'>
                         <h5>View All Cases</h5>
                     </div>
@@ -76,7 +76,7 @@ function ViewAllCases() {
                             <td>{caseview.incidentDate.slice(0,10)}</td>
                             <td>{caseview.incidentLocation}</td>
                             <td >
-                                <Link to={`/admin_viewcasedetails/${caseview._id}`}>
+                                <Link to={`/scrb_viewcasedetails/${caseview._id}`}>
                                 <button className='viewallpolicest_icon'>
                                     <IoEyeSharp/>
                                 </button>
@@ -96,4 +96,4 @@ function ViewAllCases() {
   )
 }
 
-export default ViewAllCases
+export default ScrbViewAllCases
