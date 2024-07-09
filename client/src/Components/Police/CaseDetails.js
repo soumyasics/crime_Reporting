@@ -139,36 +139,43 @@ function CaseDetails({type}) {
             <span>Victim Information</span>
           </div>
           <div className="mt-4 container ms-4">
-            <div className="row">
-              <div className="col-3 case-details-victim">
-                <div>
-                  <label>Name </label>
-                </div>
-                <div>
-                  <label>Gender </label>
-                </div>
-                <div>
-                  <label>Email </label>
-                </div>
-                <div>
-                  <label>Address </label>
-                </div>
-              </div>
-              <div className="col-5 case-details-victim1">
-                <div>
-                  <span>{caseDetails.victimName}</span>
-                </div>
-                <div>
-                  <span>{caseDetails.victimGender}</span>
-                </div>
-                <div>
-                  <span>{caseDetails.victimEmail} </span>
-                </div>
-                <div>
-                  <span>{caseDetails.victimAddress}</span>
-                </div>
-              </div>
-              <div className="col-4"></div>
+          <div className="row">
+            <table className="case-details-table">
+                <tbody>
+                <tr>
+                    <td className="case-details-victim">
+                    <label>Name</label>
+                    </td>
+                    <td className="case-details-victim1">
+                    <span>{caseDetails.victimName}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td className="case-details-victim">
+                    <label>Gender</label>
+                    </td>
+                    <td className="case-details-victim1">
+                    <span>{caseDetails.victimGender}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td className="case-details-victim">
+                    <label>Email</label>
+                    </td>
+                    <td className="case-details-victim1">
+                    <span>{caseDetails.victimEmail}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td className="case-details-victim">
+                    <label>Address</label>
+                    </td>
+                    <td className="case-details-victim1">
+                    <span>{caseDetails.victimAddress}</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
             </div>
           </div>
         </div>
@@ -177,36 +184,43 @@ function CaseDetails({type}) {
             <span>Incident Details</span>
           </div>
           <div className="mt-4 container ms-4">
-            <div className="row">
-              <div className="col-3 case-details-victim">
-                <div>
-                  <label>Date </label>
-                </div>
-                <div>
-                  <label>Time </label>
-                </div>
-                <div>
-                  <label>Location </label>
-                </div>
-                <div>
-                  <label>City </label>
-                </div>
-              </div>
-              <div className="col-5 case-details-victim1">
-                <div>
-                  <span>{caseDetails.incidentDate.slice(0,10)}</span>
-                </div>
-                <div>
-                  <span>{caseDetails.incidentTime}</span>
-                </div>
-                <div>
-                  <span>{caseDetails.incidentLocation} </span>
-                </div>
-                <div>
-                  <span>{caseDetails.incidentCity}</span>
-                </div>
-              </div>
-              <div className="col-4"></div>
+          <div className="row">
+            <table className="case-details-table">
+                <tbody>
+                <tr>
+                    <td className="case-details-victim">
+                    <label>Date</label>
+                    </td>
+                    <td className="case-details-victim1">
+                    <span>{caseDetails.incidentDate.slice(0, 10)}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td className="case-details-victim">
+                    <label>Time</label>
+                    </td>
+                    <td className="case-details-victim1">
+                    <span>{caseDetails.incidentTime}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td className="case-details-victim">
+                    <label>Location</label>
+                    </td>
+                    <td className="case-details-victim1">
+                    <span>{caseDetails.incidentLocation}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td className="case-details-victim">
+                    <label>City</label>
+                    </td>
+                    <td className="case-details-victim1">
+                    <span>{caseDetails.incidentCity}</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
             </div>
           </div>
         </div>
@@ -217,36 +231,43 @@ function CaseDetails({type}) {
             <span>Witness Information</span>
           </div>
           <div className="mt-4 container ms-4">
-            <div className="row">
-              <div className="col-3 case-details-victim">
-                <div>
-                  <label>Name</label>
-                </div>
-                <div>
-                  <label>Contact </label>
-                </div>
-                <div>
-                  <label>Address </label>
-                </div>
-                <div>
-                  <label>Statement </label>
-                </div>
-              </div>
-              <div className="col-5 case-details-victim1">
-                <div>
-                  <span>{caseDetails.witnessName}</span>
-                </div>
-                <div>
-                  <span>{caseDetails.witnessContact}</span>
-                </div>
-                <div>
-                  <span>{caseDetails.witnessAddress} </span>
-                </div>
-                <div>
-                  <span>{caseDetails.witnessStatement}</span>
-                </div>
-              </div>
-              <div className="col-4"></div>
+          <div className="row">
+            <table className="case-details-table">
+                <tbody>
+                <tr>
+                    <td className="case-details-victim">
+                    <label>Name</label>
+                    </td>
+                    <td className="case-details-victim1">
+                    <span>{caseDetails.witnessName}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td className="case-details-victim">
+                    <label>Contact</label>
+                    </td>
+                    <td className="case-details-victim1">
+                    <span>{caseDetails.witnessContact}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td className="case-details-victim">
+                    <label>Address</label>
+                    </td>
+                    <td className="case-details-victim1">
+                    <span>{caseDetails.witnessAddress}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td className="case-details-victim">
+                    <label>Statement</label>
+                    </td>
+                    <td className="case-details-victim1">
+                    <span>{caseDetails.witnessStatement}</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
             </div>
           </div>
         </div>
@@ -255,32 +276,32 @@ function CaseDetails({type}) {
             <span>Case Details</span>
           </div>
           <div className="mt-4 container ms-4">
-            <div className="row">
-              <div className="col-3 case-details-victim">
-                <div>
-                  <label> Crime Type </label>
-                </div>
-                <div>
-                  <label>Description </label>
-                </div>
-              </div>
-              <div className="col-5 case-details-victim1">
-                <div>
-                  <span>{caseDetails.caseType}</span>
-                </div>
-                <div>
-                  <span>{caseDetails.caseDescription}</span>
-                </div>
-              </div>
-              <div className="col-4"></div>
+          <div className="row">
+            <table className="case-details-table">
+                <tbody>
+                <tr>
+                    <td className="case-details-victim">
+                    <label>Crime Type</label>
+                    </td>
+                    <td className="case-details-victim1">
+                    <span>{caseDetails.caseType}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td className="case-details-victim">
+                    <label>Description</label>
+                    </td>
+                    <td className="case-details-victim1">
+                    <span>{caseDetails.caseDescription}</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
             </div>
           </div>
         </div>
       </div>
-      
-
-
-
+    
       <div className="row mt-5">
 
       <div className="col">
@@ -288,174 +309,98 @@ function CaseDetails({type}) {
             <span>Case Information</span>
           </div>
           <div className="mt-4 container ms-4">
-            <div className="row">
-              <div className="col-3 case-details-victim">
-                {caseDetails.caseType == "Theft" ? (
-                  <>
-                    <div>
-                      <label>Stolen Items</label>
-                    </div>
-                    <div>
-                      <label>Suspected Perpetrator (Description)</label>
-                    </div>
-                  </>
-                ) : (
-                  ""
-                )}
-                {caseDetails.caseType == "Assault" ? (
-                  <>
-                    <div>
-                      <label>Injuries Sustained (Description)</label>
-                    </div>
-                    <div>
-                      <label>Medical Attention</label>
-                    </div>
-                  </>
-                ) : (
-                  ""
-                )}
-                {caseDetails.caseType == "Vandalism" ? (
-                  <>
-                    <div>
-                      <label>Description of Damage</label>
-                    </div>
-                    <div>
-                      <label>Estimated Cost of Damage</label>
-                    </div>
-                  </>
-                ) : (
-                  ""
-                )}
-                {caseDetails.caseType == "Missing Person" ? (
-                  <>
-                    <div>
-                      <label>Missing Person Name</label>
-                    </div>
-                    <div>
-                      <label>Description of Missing Person</label>
-                    </div>
-                  </>
-                ) : (
-                  ""
-                )}
-                {caseDetails.caseType == "Domestic Violence" ? (
-                  <>
-                    <div>
-                      <label>Describe the Incident</label>
-                    </div>
-                    <div>
-                      <label>Injuries Sustained (if any)</label>
-                    </div>
-                  </>
-                ) : (
-                  ""
-                )}
-                {caseDetails.caseType == "Fraud" ? (
-                  <>
-                    <div>
-                      <label>Description of Fraud</label>
-                    </div>
-                    <div>
-                      <label>Estimated Financial Loss</label>
-                    </div>
-                  </>
-                ) : (
-                  ""
-                )}
-                {caseDetails.caseType == "Others" ? (
-                  <>
-                    <div>
-                      <label>Case Description</label>
-                    </div>
-                  </>
-                ) : (
-                  ""
-                )}
-              </div>
-              <div className="col-5 case-details-victim1">
-                {caseDetails.caseType == "Theft" ? (
-                  <>
-                    <div>
-                      <label>{caseDetails.theftStolenItems}</label>
-                    </div>
-                    <div>
-                      <label>{caseDetails.theftStolenSuspected}</label>
-                    </div>
-                  </>
-                ) : (
-                  ""
-                )}
-                {caseDetails.caseType == "Assault" ? (
-                  <>
-                    <div>
-                      <label>{caseDetails.assaultInjuries}</label>
-                    </div>
-                    <div>
-                      <label>{caseDetails.assaultMedicalAttention}</label>
-                    </div>
-                  </>
-                ) : (
-                  ""
-                )}
-                {caseDetails.caseType == "Vandalism" ? (
-                  <>
-                    <div>
-                      <label>{caseDetails.vandalismDescription}</label>
-                    </div>
-                    <div>
-                      <label>{caseDetails.vandalismCostOfDamage}</label>
-                    </div>
-                  </>
-                ) : (
-                  ""
-                )}
-                {caseDetails.caseType == "Missing Person" ? (
-                  <>
-                    <div>
-                      <label>{caseDetails.missingPersonName}</label>
-                    </div>
-                    <div>
-                      <label>{caseDetails.missingPersonDescription}</label>
-                    </div>
-                  </>
-                ) : (
-                  ""
-                )}
-                {caseDetails.caseType == "Domestic Violence" ? (
-                  <>
-                    <div>
-                      <label>{caseDetails.domesticViolenceDescription}</label>
-                    </div>
-                    <div>
-                      <label>{caseDetails.domesticViolenceInjuries}</label>
-                    </div>
-                  </>
-                ) : (
-                  ""
-                )}
-                {caseDetails.caseType == "Fraud" ? (
-                  <>
-                    <div>
-                      <label>{caseDetails.fraudDescription}</label>
-                    </div>
-                    <div>
-                      <label>{caseDetails.fraudFinancialLoss}</label>
-                    </div>
-                  </>
-                ) : (
-                  ""
-                )}
-                {caseDetails.caseType == "Others" ? (
-                  <>
-                    <div>
-                      <label>{caseDetails.others}</label>
-                    </div>
-                  </>
-                ) : (
-                  ""
-                )}
-              </div>
-              <div className="col-4"></div>
+          <div className='row'>
+            <div className='col-8 case-details-victim'>
+                <table>
+                <tbody>
+                    {caseDetails.caseType === 'Theft' && (
+                    <>
+                        <tr>
+                        <td><label>Stolen Items</label></td>
+                        <td><span className="case-details-victim1">{caseDetails.theftStolenItems}</span></td>
+                        </tr>
+                        <tr>
+                        <td><label>Suspected Perpetrator (Description)</label></td>
+                        <td><span className="case-details-victim1">{caseDetails.theftStolenSuspected}</span></td>
+                        </tr>
+                    </>
+                    )}
+                    {caseDetails.caseType === 'Assault' && (
+                    <>
+                        <tr>
+                        <td><label>Injuries Sustained (Description)</label></td>
+                        <td><span className="case-details-victim1">{caseDetails.assaultInjuries}</span></td>
+                        </tr>
+                        <tr>
+                        <td><label>Medical Attention</label></td>
+                        <td><span className="case-details-victim1">{caseDetails.assaultMedicalAttention}</span></td>
+                        </tr>
+                    </>
+                    )}
+                    {caseDetails.caseType === 'Vandalism' && (
+                    <>
+                        <tr>
+                        <td><label>Description of Damage</label></td>
+                        <td><span className="case-details-victim1">{caseDetails.vandalismDescription}</span></td>
+                        </tr>
+                        <tr>
+                        <td><label>Estimated Cost of Damage</label></td>
+                        <td><span className="case-details-victim1">{caseDetails.vandalismCostOfDamage}</span></td>
+                        </tr>
+                    </>
+                    )}
+                    {caseDetails.caseType === 'Missing Person' && (
+                    <>
+                        <tr>
+                        <td><label>Missing Person Name</label></td>
+                        <td><span className="case-details-victim1">{caseDetails.missingPersonName}</span></td>
+                        </tr>
+                        <tr>
+                        <td><label>Description of Missing Person</label></td>
+                        <td><span className="case-details-victim1">{caseDetails.missingPersonDescription}</span></td>
+                        </tr>
+                    </>
+                    )}
+                    {caseDetails.caseType === 'Domestic Violence' && (
+                    <>
+                        <tr>
+                        <td><label>Describe the Incident</label></td>
+                        <td><span className="case-details-victim1">{caseDetails.domesticViolenceDescription}</span></td>
+                        </tr>
+                        <tr>
+                        <td><label>Injuries Sustained (if any)</label></td>
+                        <td><span className="case-details-victim1">{caseDetails.domesticViolenceInjuries}</span></td>
+                        </tr>
+                    </>
+                    )}
+                    {caseDetails.caseType === 'Fraud' && (
+                    <>
+                        <tr>
+                        <td><label>Description of Fraud</label></td>
+                        <td><span className="case-details-victim1">{caseDetails.fraudDescription}</span></td>
+                        </tr>
+                        <tr>
+                        <td><label>Amount of Money Involved</label></td>
+                        <td><span className="case-details-victim1">{caseDetails.fraudFinancialLoss}</span></td>
+                        </tr>
+                    </>
+                    )}
+                    {caseDetails.caseType === 'Others' && (
+                    <>
+                        <tr>
+                        <td colSpan="2"><label>Case Description</label></td>
+                        </tr>
+                        <tr>
+                        <td colSpan="2"><span className="case-details-victim1">{caseDetails.others}</span></td>
+                        </tr>
+                    </>
+                    )}
+                </tbody>
+                </table>
+            </div>
+            <div className='col-4 case-details-victim1'>
+            </div>
+            
             </div>
           </div>
           </div>
@@ -502,12 +447,13 @@ function CaseDetails({type}) {
           Reject
         </button>
       </div>:<div className="text-center mt-4">
+        <Link to='/addcaseupdate'>
         <button
           className="btn btn-danger me-2"
           
         >
           Add Updates
-        </button>
+        </button></Link>
         
       </div>
       }

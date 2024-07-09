@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import axiosInstance from '../Constants/BaseUrl';
 import { Link } from 'react-router-dom';
 import { IoEyeSharp } from "react-icons/io5";
+import { FaSearch } from 'react-icons/fa';
+import '../../Assets/Styles/Searchbox.css'
 
 function ViewAllCases() {
     const[data,setData]=useState([])
@@ -25,9 +27,25 @@ function ViewAllCases() {
         },[])
   return (
     <div>
-<div className='container'>
+    <div className='container'>
+            <div className='pt-5'>
+            <h4 className='admin-dash-h4'>Welcome Admin</h4>
+            <p className='admin-dash-para'>All System are running smoothly</p>
+            </div>
             <div className=' text-center mt-5 text-danger'>
-                <h5>View All Cases</h5>
+                <div className='row'>
+                    <div className='col-md-9'>
+                        <h5>View All Cases</h5>
+                    </div>
+                    <div className='col-md-3'>
+                        {/* <div className="search-box">
+                        <input type="text" placeholder="Search all Cases" />
+                        <button type="submit">
+                            <FaSearch />
+                        </button>
+                        </div> */}
+                    </div>
+                </div>
             </div>
             <div>
                 {data.length === 0 && (
@@ -37,7 +55,7 @@ function ViewAllCases() {
                     <table  class="table table-bordered table-striped mt-4">
                     <thead className='text-center newpolice-stationreq-thead'>
                         <tr className=''>
-                        <th scope="col">S/No</th>
+                        <th scope="col">Sl/No</th>
                         <th scope="col">PoliceStation Name</th>
                         <th scope="col">Victim Name</th>
                         <th scope="col">Type of Crime</th>
@@ -51,12 +69,12 @@ function ViewAllCases() {
                         {data.map ((caseview,index) => (
                             <tr>
                             <th>{index +1}</th>
-                            <td>{caseview.policestationname}</td>
-                            <td>{caseview.victimname}</td>
-                            <td>{caseview.crimetype}</td>
-                            <td>{caseview.witnessname}</td>
-                            <td>{caseview.incidentdate}</td>
-                            <td>{caseview.incidentlocation}</td>
+                            <td>{caseview.district}</td>
+                            <td>{caseview.victimName}</td>
+                            <td>{caseview.caseType}</td>
+                            <td>{caseview.witnessName}</td>
+                            <td>{caseview.incidentDate.slice(0,10)}</td>
+                            <td>{caseview.incidentLocation}</td>
                             <td >
                                 <Link to={`/admin_viewcasedetails/${caseview._id}`}>
                                 <button className='viewallpolicest_icon'>

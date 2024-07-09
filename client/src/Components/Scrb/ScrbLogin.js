@@ -58,6 +58,7 @@ function ScrbLogin() {
       if (username === data.email && pass === data.password) {
         toast.success("Logged in Successfully");
         navigate("/scrb-dashboard");
+        localStorage.setItem('scrbId',1)
       } else {
         toast.error("Username or password is incorrect");
       }

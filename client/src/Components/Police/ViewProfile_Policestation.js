@@ -75,6 +75,11 @@ function ViewProfile_Policestation() {
   });
 
   return (
+    <div className='container'>
+       <div className='pt-5'>
+          <h4 className='admin-dash-h4'>Welcome Admin</h4>
+          <p className='admin-dash-para'>All System are running smoothly</p>
+        </div>
     <div className='viewprofile_policestation'>
       <div className="citizen_profile">
         <div className="container citizen_profile_body">
@@ -190,6 +195,7 @@ function ViewProfile_Policestation() {
           </form>
         </div>
       </div>
+    </div>
     </div>
   );
 }

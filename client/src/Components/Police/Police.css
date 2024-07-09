@@ -167,6 +167,18 @@
     font-weight: bold;
 }
 
+.policeview-cases-eye1{
+    background-color: #0E6DDC;
+    color: white;
+    border: none;
+    height: 30px;
+    width: 30px;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
 /* Case Details */
 
 .case-details-h6{

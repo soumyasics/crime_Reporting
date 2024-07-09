@@ -99,6 +99,10 @@ function PoliceViewCases({type}) {
 
   return (
     <div className="container mb-5 police_view_case_main">
+      <div className='pt-5'>
+          <h4 className='admin-dash-h4'>Welcome Admin</h4>
+          <p className='admin-dash-para'>All System are running smoothly</p>
+        </div>
       <div className="container ms-5 mt-5 text-danger">
         <h4>Recent Cases</h4>
       </div>
@@ -123,7 +127,7 @@ function PoliceViewCases({type}) {
                   <td>{caseData.victimName}</td>
                   <td>{caseData.caseType}</td>
                   <td>{caseData.witnessName}</td>
-                  <td>{caseData.incidentDate}</td>
+                  <td>{caseData.incidentDate.slice(0, 10)}</td>
                   <td>{caseData.incidentTime}</td>
                   <td>{caseData.incidentLocation}</td>
                   {type == "request" ? (
@@ -148,7 +152,7 @@ function PoliceViewCases({type}) {
                     </td>
                   ) : type == "view" ? (
                     <Link to={`/approvedcasedetails/${caseData._id}`}>
-                      <button className="policeview-cases-eye ms-3">
+                      <button className="policeview-cases-eye1 ms-3">
                         <IoMdEye />
                       </button>
                     </Link>

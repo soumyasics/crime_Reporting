@@ -55,3 +55,18 @@
     font-size: larger;
     font-family: 'Poppins', sans-serif;
 }
+
+/* Citizen View Case Status */
+.req_status_citizen{
+    border: 3px solid rgba(0, 0, 0, 0.282);
+    padding: 20px;
+    align-items: center;
+    border-radius: 20px;
+    font-family: 'Poppins',sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.font_style_status{
+    font-weight: 900;
+}

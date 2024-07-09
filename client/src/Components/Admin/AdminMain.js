@@ -9,6 +9,14 @@ import ViewProfile_Policestation from '../Police/ViewProfile_Policestation'
 import ViewProfile_PoliceReq from '../Police/ViewProfile_PoliceReq'
 import ViewAllCases from './ViewAllCases'
 import ViewCaseDetails from './ViewCaseDetails'
+import ViewAllCitizen from './ViewAllCitizen'
+import ViewCitizenProfile from './ViewCitizenProfile'
+import ViewNotifications from './ViewNotifications'
+import ViewNotificationDetails from './ViewNotificationDetails'
+import ViewEachNotification from './ViewEachNotification'
+import AddPrivacyPolicy from './AddPrivacyPolicy'
+import EditPrivacyPolicy from './EditPrivacyPolicy'
+import ViewPrivacyPolicy from './ViewPrivacyPolicy'
 
 function AdminMain({data}) {
   return (
@@ -33,7 +41,23 @@ function AdminMain({data}) {
             <ViewAllCases/>
            ):data === "adminvieweachcasedetails" ?(
             <ViewCaseDetails />
-           ):
+           ):data === "viewcitizenprofile" ?(
+            <ViewCitizenProfile />
+           ):data === "viewallcitizen" ?(
+            <ViewAllCitizen />
+           ):data === "adminviewnotification" ?(
+            <ViewNotifications />
+           ):data === "adminviewnotificationdetail" ?(
+            <ViewNotificationDetails />
+           ):data === "adminvieweachnotification" ?(
+            <ViewEachNotification />
+           ):data==="addprivacypolicy"?(
+              <AddPrivacyPolicy/>
+           ):data==="editprivacypolicy"?(
+            <EditPrivacyPolicy />
+          ):data==="viewprivacypolicy"?(
+            <ViewPrivacyPolicy />
+          ):
            <AdminDashboard/>
            }
           </div>

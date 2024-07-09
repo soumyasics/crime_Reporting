@@ -75,7 +75,14 @@ function ViewProfile_PoliceReq() {
   });
 
   return (
-    <div className='viewprofile_policereq'>
+    <div className='container'>
+      <div className='pt-5'>
+          <h4 className='admin-dash-h4'>Welcome Admin</h4>
+          <p className='admin-dash-para'>All System are running smoothly</p>
+        </div>
+
+    <div className='viewprofile_policereq container'>
+      
       <div className="citizen_profile">
         <div className="container citizen_profile_body">
           <form>
@@ -190,6 +197,7 @@ function ViewProfile_PoliceReq() {
           </form>
         </div>
       </div>
+    </div>
     </div>
   );
 }

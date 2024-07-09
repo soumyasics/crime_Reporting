@@ -102,25 +102,84 @@ function UserNavbar() {
                 </Link>
               </li>
               <li class="nav-item m-3">
+
+              <div className="dropdown-center" >
+              <li className="nav-item">
+                <Link
+                  to="#"
+                  className="nav-link "
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  id="text_color_white"
+                >
+                  Crime
+                </Link>
+                <ul className="dropdown-menu landing_dropdown_style" aria-labelledby="navbarDropdown">
+                  <li>
+                  <Link to='/citizen/reportcrime' class="nav-link"  id="text_color_black">
+                        Add Crime
+                      </Link>
+                      <Link to='/crimestatus' class="nav-link"  id="text_color_black">
+                        View Crime Status
+                      </Link>
+                      <Link to='/viewcrimestatus' class="nav-link"  id="text_color_black">
+                        View Crime
+                      </Link>
+                  </li>
+                </ul>
+              </li>
+              </div>
+               
+                {/* <div class="dropdown-center">
+                  <button
+                    class=" button_bg dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  > Crime
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-dark">
+                    <li>
+                      <Link to='/citizen/reportcrime' class="nav-link"  id="text_color_white">
+                        Add Crime
+                      </Link>
+                      <Link to='/viewcrimestatus' class="nav-link"  id="text_color_white">
+                        View Crime
+                      </Link>
+                    </li>
+                   
+                  </ul>
+                </div> */}
+              </li>
+
+              {/* <li class="nav-item m-3">
                 <Link to='/citizen/reportcrime' class="nav-link"  id="text_color_white">
                   Crime
                 </Link>
               </li>
               <li class="nav-item m-3">
+                <Link to='/viewcrimestatus' class="nav-link"  id="text_color_white">
+                  View Crime
+                </Link>
+              </li> */}
+
+              {/* <li class="nav-item m-3">
                 <Link to='/addcomplaints' class="nav-link" href="#" id="text_color_white">
                   Complaints
                 </Link>
               </li>
               <li class="nav-item m-3">
-                <a class="nav-link" href="#" id="text_color_white">
+                <Link class="nav-link" to='/viewnotification' id="text_color_white">
                   View Alerts
-                </a>
+                </Link>
               </li>
               <li class="nav-item m-3">
                 <a class="nav-link" href="#" id="text_color_white">
                   Police Station
                 </a>
-              </li>
+              </li> */}
+              
               <li class="nav-item m-3">
                
                 <div class="dropdown-center">
