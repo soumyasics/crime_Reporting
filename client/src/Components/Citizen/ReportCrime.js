@@ -89,8 +89,10 @@ function ReportCrime() {
       })
       .then((res) => {
         console.log(res);
-        if(res.data.ststus==200){
+        if(res.data.status==200){
           toast.success("Crime reported successfully");
+        }else{
+          toast.warning("Something went wrong");
         }
         
       })

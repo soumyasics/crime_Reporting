@@ -58,9 +58,9 @@ function App() {
 
         {/* Citizen  */}
 
-        <Route path='/citizen_login' element={[<LoginNav/>,<CitizenLogin/>]} />
-        <Route path='/citizen_forgotpassword' element={[<LoginNav/>,<ForgotPassword activeUser='Citizen' />]} />
-        <Route path='/citizen_register' element={[<LoginNav/>,<CitizenRegistration/>]} />
+        <Route path='/citizen_login' element={[<LandingNavbar/>,<CitizenLogin/>]} />
+        <Route path='/citizen_forgotpassword' element={[<LandingNavbar/>,<ForgotPassword activeUser='Citizen' />]} />
+        <Route path='/citizen_register' element={[<LandingNavbar/>,<CitizenRegistration/>]} />
         <Route path='/citizen_home' element={[<UserNavbar/>,<LoginBanner user='citizen' />,<CitizenLandingPage/>]} />
         <Route path='/citizen_profile' element={[<UserNavbar/>,<CitizenProfile/>]} />
         <Route path='/citizen/reportcrime' element={[<UserNavbar/>,<ReportCrime/>]}/>
@@ -70,9 +70,9 @@ function App() {
 
         {/* Police  */}
 
-        <Route path='/police_register' element={[<LoginNav/>,<PoliceRegister/>]} />
-        <Route path='/police_login' element={[<LoginNav/>,<PoliceLogin/>]} />
-        <Route path='/police_forgotpassword' element={[<LoginNav/>,<ForgotPassword activeUser='Police' />]} />
+        <Route path='/police_register' element={[<LandingNavbar/>,<PoliceRegister/>]} />
+        <Route path='/police_login' element={[<LandingNavbar/>,<PoliceLogin/>]} />
+        <Route path='/police_forgotpassword' element={[<LandingNavbar/>,<ForgotPassword activeUser='Police' />]} />
         <Route path='/police_home' element={[<PoliceNavbar/>,<LoginBanner user='police' />,<PoliceLandingPageContent/>,<PoliceRecentCrimes/>]} />
         <Route path='/policeviewcases' element={[<PoliceNavbar/>,<PoliceViewCases type='request' />]} />
         <Route path='/policeviewApprovedcases' element={[<PoliceNavbar/>,<PoliceViewCases type='view' />]} />
@@ -83,8 +83,8 @@ function App() {
 
         {/* Scrb  */}
 
-        <Route path='/scrb_login' element={[<LoginNav/>,<ScrbLogin/>]} />
-        <Route path='/scrb-forgetpswd' element={[<LoginNav/>,<ScrbForgetpswd/>]}/>
+        <Route path='/scrb_login' element={[<LandingNavbar/>,<ScrbLogin/>]} />
+        <Route path='/scrb-forgetpswd' element={[<LandingNavbar/>,<ScrbForgetpswd/>]}/>
         <Route path='/scrb-sidebar' element={[<LandingNavbar/>,<ScrbSidebar/>]} />
         <Route path='/scrb-dashboard' element={[<LoginNav/>,<ScrbMain data="scrbdashboard"/>]}/>
 
