@@ -164,12 +164,12 @@ function UserNavbar() {
                 </Link>
               </li> */}
 
-              {/* <li class="nav-item m-3">
+              <li class="nav-item m-3">
                 <Link to='/addcomplaints' class="nav-link" href="#" id="text_color_white">
                   Complaints
                 </Link>
               </li>
-              <li class="nav-item m-3">
+              {/* <li class="nav-item m-3">
                 <Link class="nav-link" to='/viewnotification' id="text_color_white">
                   View Alerts
                 </Link>
