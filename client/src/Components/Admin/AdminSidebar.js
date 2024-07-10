@@ -24,7 +24,8 @@ function AdminSidebar() {
           <Link to='/admin_viewallpolicestation' className="admin-dash-link"><h5 className="pt-4 fw-light"><FaBuildingShield/> Police Station</h5></Link>
           <Link to='/newpolicestationreq' className="admin-dash-link"><h5 className="pt-4 fw-light"><FaBuildingShield/> Police Station Request</h5></Link>
           <Link to='/viewcitizens' className="admin-dash-link"><h5 className="pt-4 fw-light"><MdLocalPolice /> Citizen Details</h5></Link>
-          <Link to='/admin_viewallcases' className="admin-dash-link"><h5 className="pt-4 fw-light"><FaPoll/> Complaints</h5></Link>
+          <Link to='/admin_viewallcases' className="admin-dash-link"><h5 className="pt-4 fw-light"><FaPoll/> Cases</h5></Link>
+          <Link to='/admin-viewcomplaints' className="admin-dash-link"><h5 className="pt-4 fw-light"><FaPoll/> Complaints</h5></Link>
           <Link to='' className="admin-dash-link"><h5 className="pt-4 fw-light"><FaLock/> Change Password</h5></Link>
           <Link to='' className="admin-dash-link"><h5 className="pt-4 fw-light"><RiGitRepositoryFill/> Case Report</h5></Link>
         </div>

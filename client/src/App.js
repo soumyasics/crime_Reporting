@@ -124,6 +124,7 @@ function App() {
         <Route path='/admin-viewNotification' element={[<AdminNavbar/>,<AdminMain data="adminviewnotification"/>,<Footer2/>]} />
         <Route path='/admin-viewNotificationDetails' element={[<AdminNavbar/>,<AdminMain data="adminviewnotificationdetail"/>,<Footer2/>]} />
         <Route path='/admin-vieweachNotification' element={[<AdminNavbar/>,<AdminMain data="adminvieweachnotification"/>,<Footer2/>]} />
+        <Route path='/admin-viewcomplaints' element={[<AdminNavbar/>,<AdminMain data="adminviewcomplaints"/>,<Footer2/>]} />
 
 
         {/* Admin View Cases */}
