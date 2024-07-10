@@ -2,6 +2,7 @@ const router=require('express').Router()
 const citizen=require('./Citizen/citizenController')
 const police=require('./Police/policeController')
 const crime=require('./Crimes/crimeController')
+const complaints=require('./complaints/complaintController')
 
 //citizen routes
 router.post('/registerCitizen', citizen.registerCitizen);//done
@@ -44,6 +45,14 @@ router.post('/viewAprvdCrimeByPolicStationId/:id',crime.viewAprvdCrimeByPolicSta
 router.post('/viewCrimesbyDisrtict',crime.viewCrimesbyDisrtict)
 router.post('/getCaseType',crime.getCaseType)
 router.post('/viewcrimeByCitizenId/:id',crime.viewCrimeByCitizenId)
+
+
+//complaints
+router.post('/addComplaint',complaints.addcomplaint)
+router.post('/viewAllComplaints',complaints.viewAllcomplaints)
+router.post('/viewComplaintById/:id',complaints.viewcomplaintById)
+router.post('/deleteComplaintById/:id',complaints.deletecomplaintById)
+router.post('/viewcomplaintByCitizenId/:id',complaints.viewcomplaintByCitizenId)
 
 
 module.exports=router
