@@ -70,7 +70,11 @@ function ViewAllPoliceStation() {
         }
   return (
     <div>
-        <div className='container'>
+            <div className='container'>
+            <div className='pt-5'>
+          <h4 className='admin-dash-h4'>Welcome Admin</h4>
+          <p className='admin-dash-para'>All System are running smoothly</p>
+        </div>
             <div className=' text-center mt-5 text-danger'>
                 <h5>View All Police Station</h5>
             </div>
@@ -82,7 +86,7 @@ function ViewAllPoliceStation() {
                     <table  class="table table-bordered table-striped mt-4">
                     <thead className='text-center newpolice-stationreq-thead'>
                         <tr className=''>
-                        <th scope="col">S/No</th>
+                        <th scope="col">Sl/No</th>
                         <th scope="col">PoliceStation Name</th>
                         <th scope="col">Station Incharge</th>
                         <th scope="col">PoliceStation Code</th>
@@ -99,7 +103,7 @@ function ViewAllPoliceStation() {
                             <td>{policestationview.policestationcode}</td>
                             <td>{policestationview.district}</td>
                             <td >
-                                <Link to={`/viewallpolice/${policestationview._id}`}>
+                                <Link to={`/admin_viewallpolice/${policestationview._id}`}>
                                 <button className='viewallpolicest_icon'>
                                     <IoEyeSharp/>
                                 </button>

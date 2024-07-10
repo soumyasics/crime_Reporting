@@ -134,27 +134,49 @@ function CitizenRegistration() {
                 </div>
 
                 <div className="col-6 d-flex justify-content-between mt-2">
-                  <label>Gender</label>
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="gender"
-                    value="male"
-                    checked={values.gender === "male"}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                  <label>Male</label>
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name="gender"
-                    value="female"
-                    checked={values.gender === "female"}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                  <label>Female</label>
+                  {/* <label>Gender</label> */}
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="gender"
+                      value="male"
+                      checked={values.gender === "male"}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    <label className="form-check-label">
+                      Male
+                    </label>
+                  </div>
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="gender"
+                      value="female"
+                      checked={values.gender === "female"}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    <label className="form-check-label">
+                      Female
+                    </label>
+                  </div>
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="gender"
+                      value="others"
+                      checked={values.gender === "others"}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+        <label className="form-check-label">
+          Others
+        </label>
+      </div>
                   {errors.gender && touched.gender && (
                     <span className="text-danger">{errors.gender}</span>
                   )}

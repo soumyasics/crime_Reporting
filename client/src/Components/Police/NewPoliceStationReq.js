@@ -74,6 +74,10 @@ const getData=()=>{
   return (
     <div>
         <div className='container'>
+        <div className='pt-5'>
+          <h4 className='admin-dash-h4'>Welcome Admin</h4>
+          <p className='admin-dash-para'>All System are running smoothly</p>
+        </div>
             <div className=' text-center mt-5 text-danger'>
                 <h5>New Police Station Request</h5>
             </div>
@@ -85,7 +89,7 @@ const getData=()=>{
                     <table  class="table table-bordered table-striped mt-4">
                     <thead className='text-center newpolice-stationreq-thead'>
                         <tr className=''>
-                        <th scope="col">S/No</th>
+                        <th scope="col">Sl/No</th>
                         <th scope="col">PoliceStation Name</th>
                         <th scope="col">Station Incharge</th>
                         <th scope="col">PoliceStation Code</th>

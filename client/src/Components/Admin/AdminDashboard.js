@@ -24,6 +24,13 @@ function AdminDashboard() {
     else
     setPoliceStation([])
     });
+    axiosInstance.post("/viewallcrime").then((response) => {
+      console.log(response);
+      if(response.data.data!=null)
+        setCrimes(response.data.data)
+    else
+    setCrimes([])
+    });
   },[]);
 
   return (
@@ -36,7 +43,7 @@ function AdminDashboard() {
         <div className='row pt-4'>
 
           <div className='col-12 col-sm-6 col-md-3 mb-4'>
-            <div className='admin-dash-revenue-box pt-5  '>
+            <div className='admin-dash-revenue-box pt-3  '>
               <div className='text-center'>
                 <span className='admin-dash-span'>Citizen</span>
               </div>
@@ -48,7 +55,7 @@ function AdminDashboard() {
           </div>
 
           <div className='col-12 col-sm-6 col-md-3 mb-4'>
-            <div className='admin-dash-revenue-box pt-5 '>
+            <div className='admin-dash-revenue-box pt-3 '>
               <div className='text-center'>
                 <span className='admin-dash-span'>Police Station</span>
               </div>
@@ -60,7 +67,7 @@ function AdminDashboard() {
           </div>
 
           <div className='col-12 col-sm-6 col-md-3 mb-4'>
-            <div className='admin-dash-revenue-box pt-5 '>
+            <div className='admin-dash-revenue-box pt-3 '>
               <div className='text-center'>
                <span className='admin-dash-span'>Complaints</span>
               </div>
@@ -72,12 +79,12 @@ function AdminDashboard() {
           </div>
 
           <div className='col-12 col-sm-6 col-md-3 mb-4'>
-            <div className='admin-dash-revenue-box pt-5 text-center'>
+            <div className='admin-dash-revenue-box pt-3 text-center'>
               <div>
                 <span className='admin-dash-span'>Crimes</span>
               </div>
               <div className='pt-5 ms-4'>
-                <span className='admin-dash-span'>0</span>
+                <span className='admin-dash-span'>{(crimes.length)>0?crimes.length:0}</span>
                 <span className='admin-dash-span ms-5'>Active</span>
               </div>
             </div>
