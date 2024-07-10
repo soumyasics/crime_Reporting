@@ -143,11 +143,7 @@ function PoliceProfile() {
   };
 
   return (
-    <div className="citizen_profile container">
-      <div className='pt-5'>
-          <h4 className='admin-dash-h4'>Welcome Admin</h4>
-          <p className='admin-dash-para'>All System are running smoothly</p>
-        </div>
+    <div className="citizen_profile">
       <div className="citizen_profile_head navbar_bg">
         <div className="container citizen_profile_title d-flex justify-content-between">
           <div className="citizen_profile_name">

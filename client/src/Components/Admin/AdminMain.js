@@ -17,6 +17,7 @@ import ViewEachNotification from './ViewEachNotification'
 import AddPrivacyPolicy from './AddPrivacyPolicy'
 import EditPrivacyPolicy from './EditPrivacyPolicy'
 import ViewPrivacyPolicy from './ViewPrivacyPolicy'
+import ViewComplaints from './ViewComplaints'
 
 function AdminMain({data}) {
   return (
@@ -57,6 +58,8 @@ function AdminMain({data}) {
             <EditPrivacyPolicy />
           ):data==="viewprivacypolicy"?(
             <ViewPrivacyPolicy />
+          ):data==="adminviewcomplaints"?(
+            <ViewComplaints />
           ):
            <AdminDashboard/>
            }

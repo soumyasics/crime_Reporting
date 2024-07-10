@@ -3,6 +3,7 @@ const citizen=require('./Citizen/citizenController')
 const police=require('./Police/policeController')
 const crime=require('./Crimes/crimeController')
 const complaints=require('./complaints/complaintController')
+const privacy =require('./Privacypolicy/privacyController')
 
 //citizen routes
 router.post('/registerCitizen', citizen.registerCitizen);//done
@@ -53,6 +54,12 @@ router.post('/viewAllComplaints',complaints.viewAllcomplaints)
 router.post('/viewComplaintById/:id',complaints.viewcomplaintById)
 router.post('/deleteComplaintById/:id',complaints.deletecomplaintById)
 router.post('/viewcomplaintByCitizenId/:id',complaints.viewcomplaintByCitizenId)
+
+
+// Privacy Policy
+router.post('/addprivacypolicy',privacy.addPrivacy)
+router.post('/editprivacypolicy/:id',privacy.updatePrivacy)
+router.post('/viewpolicy',privacy.viewAllpolicy)
 
 
 module.exports=router
