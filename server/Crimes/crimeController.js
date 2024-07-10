@@ -389,6 +389,28 @@ const viewCrimeByCitizenId = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+const searchCrime=async(req,res)=>{
+    try {
+        let query = {};
+    
+        if (req.body.type) {
+          query.caseType = req.body.type;
+        }
+        if (req.body.district) {
+          query.district = req.body.district;
+        }
+        if (req.body.psId) {
+          query.psId = req.body.psId;
+        }
+    
+        const cases = await Crime.find(query);
+        res.json(cases);
+      } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server Error' });
+      }
+}
 module.exports = {
     addCrime,
     deleteCrimeById,
@@ -401,5 +423,6 @@ module.exports = {
     viewCrimeByCitizenId,
     viewCrimesbyDisrtict,
     upload,
-    getCaseType
+    getCaseType,
+    searchCrime
 };

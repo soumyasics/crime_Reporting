@@ -4,6 +4,7 @@ const police=require('./Police/policeController')
 const crime=require('./Crimes/crimeController')
 const complaints=require('./complaints/complaintController')
 const privacy =require('./Privacypolicy/privacyController')
+const Notifications =require('./Notifications/notificationController')
 
 //citizen routes
 router.post('/registerCitizen', citizen.registerCitizen);//done
@@ -46,6 +47,7 @@ router.post('/viewAprvdCrimeByPolicStationId/:id',crime.viewAprvdCrimeByPolicSta
 router.post('/viewCrimesbyDisrtict',crime.viewCrimesbyDisrtict)
 router.post('/getCaseType',crime.getCaseType)
 router.post('/viewcrimeByCitizenId/:id',crime.viewCrimeByCitizenId)
+router.post('/searchCrime',crime.searchCrime)
 
 
 //complaints
@@ -61,5 +63,13 @@ router.post('/addprivacypolicy',privacy.addPrivacy)
 router.post('/editprivacypolicy/:id',privacy.updatePrivacy)
 router.post('/viewpolicy',privacy.viewAllpolicy)
 
+//Notifications
+router.post('/addNotification',Notifications.addNotification)
+router.post('/viewAllNotifications',Notifications.viewAllNotifications)
+router.post('/viewNotificationByCitizenId/:id',Notifications.viewNotificationByCitizenId)
+router.post('/viewNotificationById/:id',Notifications.viewNotificationById)
+router.post('/viewNotificationByPliceId/:id',Notifications.viewNotificationByPliceId)
+router.post('/viewNotificationsByFilter/:id',Notifications.viewNotificationsByFilter)
+router.post('/deleteNotificationById/:id',Notifications.deleteNotificationById)
 
 module.exports=router
