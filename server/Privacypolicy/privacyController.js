@@ -50,7 +50,7 @@ const updatePrivacy = (req, res) => {
 };
 
 const viewAllpolicy = (req, res) => {
-    privacy.find()
+    privacy.find({_id: req.params.id})
         .exec()
         .then((data) => {
             res.status(200).json({
