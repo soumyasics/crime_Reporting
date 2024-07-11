@@ -69,7 +69,7 @@ function ViewAllCases() {
                         {data.map ((caseview,index) => (
                             <tr>
                             <th>{index +1}</th>
-                            <td>{caseview.district}</td>
+                            <td>{caseview.psId.policestationname}</td>
                             <td>{caseview.victimName}</td>
                             <td>{caseview.caseType}</td>
                             <td>{caseview.witnessName}</td>
