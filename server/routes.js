@@ -72,4 +72,9 @@ router.post('/viewNotificationByPliceId/:id',Notifications.viewNotificationByPli
 router.post('/viewNotificationsByFilter/:id',Notifications.viewNotificationsByFilter)
 router.post('/deleteNotificationById/:id',Notifications.deleteNotificationById)
 
+
+//For SCRB
+router.post('/viewCaseTypesbyFilter',crime.viewCaseTypesbyFilter)
+router.post('/viewPSbyDisrtictFilter',crime.viewPSbyDisrtictFilter)
+
 module.exports=router
