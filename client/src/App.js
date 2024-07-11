@@ -52,6 +52,7 @@ import CrimeReportwithStatus from './Components/Citizen/CrimeReportwithStatus';
 import ViewCrimeStatus from './Components/Citizen/ViewCrimeStatus';
 import CitizenViewNotification from './Components/Citizen/CitizenViewNotification';
 import AdminNavbar from './Components/Navbar/AdminNavbar';
+import ContactUs from './Components/Common/ContactUs';
 
 function App() {
   return (
@@ -62,6 +63,7 @@ function App() {
       <Routes>
         <Route path='/' element={[<LandingNavbar/>,<Home/>,<Footer/>,<Footer2/>]} />
         <Route path='/about' element={[<LandingNavbar/>,<About/>,<Services/>,<Footer/>,<Footer2/>]} />
+        <Route path='/contact' element={[<LandingNavbar/>,<ContactUs/>,<Footer/>,<Footer2/>]} />
 
         {/* Citizen  */}
 

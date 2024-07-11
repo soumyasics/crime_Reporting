@@ -101,7 +101,7 @@ function ScrbGenerateCrimeAlert() {
                             <select className="form-select text-black" onChange={(e) => setSelectedDistrict(e.target.value)}>
                                 <option value="">Select District</option>
                                 {district.map(district => (
-                                    <option key={district._id} value={district._id}>{district.district}</option>
+                                    <option value={district.district}>{district.district}</option>
                                 ))}
                             </select>
                         </div>
@@ -109,7 +109,7 @@ function ScrbGenerateCrimeAlert() {
                             <select className="form-select" onChange={(e) => setSelectedPoliceStation(e.target.value)}>
                                 <option value="">Select Police Station</option>
                                 {policeStations.map(station => (
-                                    <option key={station._id} value={station._id}>{station.psId.policestationname}</option>
+                                    <option value={station.psId.policestationname}>{station.psId.policestationname}</option>
                                 ))}
                             </select>
                         </div>
@@ -117,7 +117,7 @@ function ScrbGenerateCrimeAlert() {
                             <select className="form-select" onChange={(e) => setSelectedCaseType(e.target.value)}>
                                 <option value="">Case Type</option>
                                 {caseTypes.map(caseType => (
-                                    <option key={caseType._id} value={caseType._id}>{caseType.caseType}</option>
+                                    <option value={caseType.caseType}>{caseType.caseType}</option>
                                 ))}
                             </select>
                         </div>
@@ -149,7 +149,7 @@ function ScrbGenerateCrimeAlert() {
                             </thead>
                             <tbody className='text-center'>
                                 {data.map((caseview, index) => (
-                                    <tr key={caseview._id}>
+                                    <tr>
                                         <th>{index + 1}</th>
                                         <td>{caseview.psId.policestationname}</td>
                                         <td>{caseview.victimName}</td>

@@ -47,6 +47,11 @@ function LandingNavbar() {
                   About Us
                 </Link>
               </li>
+              <li className="nav-item m-3">
+                <Link to="/contact" className="nav-link" id="text_color_white">
+                  Contact Us
+                </Link>
+              </li>
               
               <div className="dropdown-center" >
               <li className="nav-item m-3">
