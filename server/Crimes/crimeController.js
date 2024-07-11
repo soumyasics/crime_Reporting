@@ -348,6 +348,49 @@ const viewCrimesbyDisrtict = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+const viewCaseTypesbyFilter = async (req, res) => {
+    try {
+
+        const crime = await Crime.find({ psId: req.body.psId,district: req.body.district,approvalStatus:'approved' },{caseType:1})
+        .populate('psId')
+        if (!crime) {
+            return res.json({
+                status: 404,
+                msg: "Crime not found",
+                data: null
+            });
+        }
+        res.json({
+            status: 200,
+            msg: "Crime data obtained successfully",
+            data: crime
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+const viewPSbyDisrtictFilter = async (req, res) => {
+    try {
+
+        const crime = await Crime.find({ district: req.body.district,approvalStatus:'approved' },{psId:1}).populate('psId')
+        if (!crime) {
+            return res.json({
+                status: 404,
+                msg: "Crime not found",
+                data: null
+            });
+        }
+        res.json({
+            status: 200,
+            msg: "Crime data obtained successfully",
+            data: crime
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
 const viewPendingCrimeByPolicStationId = async (req, res) => {
     try {
         const { id } = req.params;
@@ -424,5 +467,7 @@ module.exports = {
     viewCrimesbyDisrtict,
     upload,
     getCaseType,
-    searchCrime
+    searchCrime,
+    viewCaseTypesbyFilter,
+    viewPSbyDisrtictFilter
 };
