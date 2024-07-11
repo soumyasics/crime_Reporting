@@ -9,6 +9,7 @@ import ScrbViewAllPoliceStation from './ScrbViewAllPoliceStation'
 import ScrbViewPoliceDetails from './ScrbViewPoliceDetails'
 import ScrbViewAllCases from './ScrbViewAllCases'
 import ScrbViewCaseDetails from './ScrbViewCaseDetails'
+import ScrbGenerateCrimeAlert from './ScrbGenerateCrimeAlert'
 
 function ScrbMain({data}) {
   return (
@@ -35,6 +36,8 @@ function ScrbMain({data}) {
               <ScrbViewNotificationDetail />
             ):data === "scrbvieweachnotification" ?(
               <ScrbViewEachNotification />
+            ):data === "scrb-generatealert" ?(
+              <ScrbGenerateCrimeAlert />
             ):(
            <AdminDashboard/>
            )}

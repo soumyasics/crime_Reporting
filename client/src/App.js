@@ -112,6 +112,8 @@ function App() {
         <Route path='/scrb-viewallpolicestation' element={[<ScrbMain data="scrb-viewallpolicestation"/>,<Footer2/>]} />
         <Route path='/scrb-viewallpolice/:id' element={[<ScrbMain data="scrb-viewallpoliceprofile"/>,<Footer2/>]}/>
         
+        {/* Scrb Generate Crime Alert */}
+        <Route path='/scrb-generatealert' element={[<ScrbMain data="scrb-generatealert"/>,<Footer2/>]}/>
 
         {/* Admin  */}
 
