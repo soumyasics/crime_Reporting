@@ -93,7 +93,7 @@ function App() {
         <Route path='/casedetails/:id' element={[<PoliceNavbar/>,<CaseDetails type='request' />,<Footer/>,<Footer2/>]}/>
         <Route path='/approvedcasedetails/:id' element={[<PoliceNavbar/>,<CaseDetails type='view' />,<Footer/>,<Footer2/>]}/>
         <Route path='/policeprofile/:id' element={[<PoliceNavbar/>,<PoliceProfile/>,<Footer/>,<Footer2/>]} />
-        <Route path='/addcaseupdate' element={[<PoliceNavbar/>,<AddCaseUpdate />,<Footer/>,<Footer2/>]}/>
+        <Route path='/addcaseupdate/:id' element={[<PoliceNavbar/>,<AddCaseUpdate />,<Footer/>,<Footer2/>]}/>
 
 
         {/* Scrb  */}

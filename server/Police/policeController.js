@@ -1,4 +1,5 @@
 const Police= require("./policeSchema")
+const PoliceCase = require('./CaseUpdates/policeCases')
 const secret = 'police';
 const jwt=require('jsonwebtoken')
 const multer=require('multer')
@@ -480,6 +481,81 @@ const acceptPoliceById = (req, res) => {
   
       }
 
+//Add case update
+const addPoliceCase = (req, res) => {
+    const newPoliceCase = new PoliceCase({
+        crimeId: req.body.crimeId,
+        date: req.body.date,
+        officeInCharge: req.body.officeInCharge,
+        status: req.body.status,
+        description: req.body.description,
+    });
+
+    newPoliceCase.save()
+        .then(data => {
+            res.json({
+                status:200,
+                msg:"Data added successfully",
+                data:data
+            })
+        })
+        .catch(error => {
+            res.status(500).json({
+                 msg: "Error adding police case",
+                 Error: error 
+            });
+        });
+};
+
+// View all police cases
+const viewPoliceCases = (req, res) => {
+    PoliceCase.find()
+        .populate("crimeId")
+        .then(data => {
+            res.json({
+                status:200,
+                msg: "Data obtained Successfully",
+                data:data
+            })
+        })
+        .catch(error => {
+            res.json({
+                status:500,
+                msg: "No Data obtained",
+                Error:error
+            })
+        });
+};
+
+
+//view police case By Id 
+const viewPoliceCaseById = (req, res) => {
+    const caseId = req.params.id;
+    PoliceCase.findById(caseId)
+        .populate("crimeId")
+        .then(data => {
+            if (!data) {
+                return res.json({
+                    status: 404,
+                    message: "Police case not found"
+                });
+            }
+            res.json({
+                status: 200,
+                message: "Police case found",
+                data: data
+            });
+        })
+        .catch(error => {
+            res.json({
+                status: 500,
+                message: "Error fetching police case",
+                error: error
+            });
+        });
+};
+
+
 module.exports={
     registerPolice,
     viewPolices,
@@ -496,6 +572,9 @@ acceptPoliceById,
 rejectPoliceById,
 activatePoliceById,
 deactivatePoliceById,
-viewPoliceByDistrict
+viewPoliceByDistrict,
 
+    addPoliceCase,
+    viewPoliceCases,
+    viewPoliceCaseById,
 }

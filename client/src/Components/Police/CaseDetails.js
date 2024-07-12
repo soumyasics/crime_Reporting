@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import evidenceIcon from "../../Assets/Images/evidence.png"; // Adjusted import path for evidence icon
-import "./Police.css";
+import evidenceIcon from "../../Assets/Images/evidence.png"; 
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../Constants/BaseUrl";
 import { toast } from "react-toastify";
@@ -17,12 +16,15 @@ function CaseDetails({type}) {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
+
   useEffect(() => {
     axiosInstance
       .post(`/viewCrimeById/${id}`)
       .then((res) => {
         if (res.data.status === 200) {
           setCaseDetails(res.data.data);
+          localStorage.setItem("crimeId", res.data.data._id);
+          console.log(res.data.data._id)
         }
       })
       .catch((err) => {
@@ -125,6 +127,15 @@ function CaseDetails({type}) {
       );
     } else {
       return <p>Unsupported file type.</p>;
+    }
+  };
+
+  const handleAddUpdates = () => {
+    const caseId = localStorage.getItem("crimId");
+    if (caseId) {
+      navigate(`/addcaseupdate/${caseId}`);
+    } else {
+      toast.error("Case ID not found.");
     }
   };
 
@@ -447,13 +458,12 @@ function CaseDetails({type}) {
           Reject
         </button>
       </div>:<div className="text-center mt-4">
-        <Link to='/addcaseupdate'>
-        <button
-          className="btn btn-danger me-2"
-          
-        >
+            <button
+              className="btn btn-danger me-3"
+              onClick={handleAddUpdates}
+            >
           Add Updates
-        </button></Link>
+        </button>
         
       </div>
       }
