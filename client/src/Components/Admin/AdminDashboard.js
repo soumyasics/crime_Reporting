@@ -31,6 +31,13 @@ function AdminDashboard() {
     else
     setCrimes([])
     });
+    axiosInstance.post("/viewAllComplaints").then((response) => {
+      console.log(response);
+      if(response.data.data!=null)
+        setComplaints(response.data.data)
+    else
+    setComplaints([])
+    });
   },[]);
 
   return (
@@ -72,7 +79,7 @@ function AdminDashboard() {
                <span className='admin-dash-span'>Complaints</span>
               </div>
               <div className='pt-5 ms-4'>
-                <span className='admin-dash-span'>0</span>
+                <span className='admin-dash-span'>{(complaints.length)>0?complaints.length:0}</span>
                 <span className='admin-dash-span ms-5'>Active</span>
               </div>
             </div>

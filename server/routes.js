@@ -61,7 +61,9 @@ router.post('/viewcomplaintByCitizenId/:id',complaints.viewcomplaintByCitizenId)
 // Privacy Policy
 router.post('/addprivacypolicy',privacy.addPrivacy)
 router.post('/editprivacypolicy/:id',privacy.updatePrivacy)
-router.post('/viewpolicy/:id',privacy.viewAllpolicy)
+router.post('/viewpolicy/:id',privacy.viewPolicyById)
+router.post('/viewprivacypolicy',privacy.viewAllpolicy)
+
 
 //Notifications
 router.post('/addNotification',Notifications.addNotification)
