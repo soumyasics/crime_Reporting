@@ -52,6 +52,7 @@ import CrimeReportwithStatus from './Components/Citizen/CrimeReportwithStatus';
 import ViewCrimeStatus from './Components/Citizen/ViewCrimeStatus';
 import CitizenViewNotification from './Components/Citizen/CitizenViewNotification';
 import AdminNavbar from './Components/Navbar/AdminNavbar';
+import ContactUs from './Components/Common/ContactUs';
 
 function App() {
   return (
@@ -62,6 +63,7 @@ function App() {
       <Routes>
         <Route path='/' element={[<LandingNavbar/>,<Home/>,<Footer/>,<Footer2/>]} />
         <Route path='/about' element={[<LandingNavbar/>,<About/>,<Services/>,<Footer/>,<Footer2/>]} />
+        <Route path='/contact' element={[<LandingNavbar/>,<ContactUs/>,<Footer/>,<Footer2/>]} />
 
         {/* Citizen  */}
 
@@ -112,6 +114,8 @@ function App() {
         <Route path='/scrb-viewallpolicestation' element={[<ScrbMain data="scrb-viewallpolicestation"/>,<Footer2/>]} />
         <Route path='/scrb-viewallpolice/:id' element={[<ScrbMain data="scrb-viewallpoliceprofile"/>,<Footer2/>]}/>
         
+        {/* Scrb Generate Crime Alert */}
+        <Route path='/scrb-generatealert' element={[<ScrbMain data="scrb-generatealert"/>,<Footer2/>]}/>
 
         {/* Admin  */}
 

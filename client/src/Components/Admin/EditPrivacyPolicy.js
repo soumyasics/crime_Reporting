@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import '../../Assets/Styles/PrivacyPolicy.css';
 import axiosInstance from '../Constants/BaseUrl';
+import { toast } from 'react-toastify';
 
 function EditPrivacyPolicy() {
   const [content, setContent] = useState('');
+  const id = "668e2d8930ef662c4c9d6610";
+
+  useEffect(() => {
+    getData();
+  }, [id]);
 
   const getData = () => {
-    axiosInstance.post('/viewpolicy')
+    axiosInstance.get(`/viewpolicy/${id}`)
       .then((res) => {
         if (res.data.status === 200) {
           setContent(res.data.data || '');
@@ -15,25 +20,30 @@ function EditPrivacyPolicy() {
         }
       })
       .catch((err) => {
-        console.log('error', err);
+        console.error('Error fetching data:', err);
       });
   };
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   const handleContentChange = (e) => {
     setContent(e.target.value);
   };
 
   const handleUpdate = () => {
-    
-    console.log('Content updated:', content);
+    axiosInstance.post(`/editprivacypolicy/${id}`, { content })
+      .then((res) => {
+        if (res.data.status === 200) {
+          toast.success("Updated Successfully");
+        } else {
+          toast.warning(res.data.msg);
+        }
+      })
+      .catch((err) => {
+        toast.error("Update failed");
+        console.error('Error updating data:', err);
+      });
   };
 
   const handleCancel = () => {
-    
     getData();
   };
 
@@ -41,7 +51,7 @@ function EditPrivacyPolicy() {
     <div className="container">
       <div className="pt-5">
         <h4 className="admin-dash-h4">Welcome Admin</h4>
-        <p className="admin-dash-para">All systems are running smoothly</p>
+        <p className="admin-dash-para">All System are running smoothly</p>
       </div>
       <div className="privacy_policy_form_container container-fluid">
         <div className="row">
@@ -49,7 +59,7 @@ function EditPrivacyPolicy() {
             <label className="privacy_policy_label" htmlFor="content">Content</label>
           </div>
           <div className="col-md-1">
-            <label className="privacy_policy_label" htmlFor="content">:</label>
+            <label className="privacy_policy_label">:</label>
           </div>
           <div className="col-md-9">
             <textarea
@@ -57,7 +67,7 @@ function EditPrivacyPolicy() {
               value={content}
               onChange={handleContentChange}
               className="privacy_policy_content-textarea text-justify"
-            ></textarea>
+            />
             <button type="button" onClick={handleUpdate} className="btn btn-success m-3">Update</button>
             <button type="button" onClick={handleCancel} className="btn btn-danger m-3">Cancel</button>
           </div>
