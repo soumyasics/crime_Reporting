@@ -5,6 +5,7 @@ const crime=require('./Crimes/crimeController')
 const complaints=require('./complaints/complaintController')
 const privacy =require('./Privacypolicy/privacyController')
 const Notifications =require('./Notifications/notificationController')
+const PoliceCase =require ('./Police/policeController')
 
 //citizen routes
 router.post('/registerCitizen', citizen.registerCitizen);//done
@@ -33,8 +34,13 @@ router.post('/viewPolices',police.viewPolices)
 router.post('/viewpolice/:id',police.viewPoliceById)
 router.post('/viewPoliceByDistrict/:district',police.viewPoliceByDistrict)
 
+router.post('/addpolicecases',PoliceCase.addPoliceCase)
+router.post('/viewpolicecases',PoliceCase.viewPoliceCases)
+router.post('/viewpolicecase/:id',PoliceCase.viewPoliceCaseById)
+
 
 //Crime Routes
+
 
 router.post('/addcrime',crime.upload,crime.addCrime)
 router.post('/viewallcrime',crime.viewAllCrimes)
@@ -61,7 +67,9 @@ router.post('/viewcomplaintByCitizenId/:id',complaints.viewcomplaintByCitizenId)
 // Privacy Policy
 router.post('/addprivacypolicy',privacy.addPrivacy)
 router.post('/editprivacypolicy/:id',privacy.updatePrivacy)
-router.post('/viewpolicy/:id',privacy.viewAllpolicy)
+router.post('/viewpolicy/:id',privacy.viewPolicyById)
+router.post('/viewprivacypolicy',privacy.viewAllpolicy)
+
 
 //Notifications
 router.post('/addNotification',Notifications.addNotification)

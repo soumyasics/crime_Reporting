@@ -4,23 +4,26 @@ import { toast } from 'react-toastify';
 
 function EditPrivacyPolicy() {
   const [content, setContent] = useState('');
-  const id = "668e2d8930ef662c4c9d6610";
+  const id = localStorage.getItem('PolicyId');
 
   useEffect(() => {
-    getData();
+    if (id) {
+      getData();
+    }
   }, [id]);
-
+  console.log(id)
   const getData = () => {
-    axiosInstance.get(`/viewpolicy/${id}`)
+    axiosInstance.post(`/viewpolicy/${id}`)
       .then((res) => {
         if (res.data.status === 200) {
-          setContent(res.data.data || '');
+          setContent(res.data.data.content || '');
         } else {
           setContent('');
         }
       })
       .catch((err) => {
         console.error('Error fetching data:', err);
+        setContent('');
       });
   };
 
@@ -28,13 +31,15 @@ function EditPrivacyPolicy() {
     setContent(e.target.value);
   };
 
-  const handleUpdate = () => {
+  const handleUpdate = (event) => {
+    event.preventDefault();
+
     axiosInstance.post(`/editprivacypolicy/${id}`, { content })
       .then((res) => {
         if (res.data.status === 200) {
-          toast.success("Updated Successfully");
+          toast.success("Privacy Policy updated successfully");
         } else {
-          toast.warning(res.data.msg);
+          toast.warning(res.data.message);
         }
       })
       .catch((err) => {
@@ -51,27 +56,30 @@ function EditPrivacyPolicy() {
     <div className="container">
       <div className="pt-5">
         <h4 className="admin-dash-h4">Welcome Admin</h4>
-        <p className="admin-dash-para">All System are running smoothly</p>
+        <p className="admin-dash-para">All systems are running smoothly</p>
       </div>
       <div className="privacy_policy_form_container container-fluid">
-        <div className="row">
-          <div className="col-md-2">
-            <label className="privacy_policy_label" htmlFor="content">Content</label>
+        <form onSubmit={handleUpdate}>
+          <div className="row">
+            <div className="col-md-2">
+              <label className="privacy_policy_label" htmlFor="content">Content</label>
+            </div>
+            <div className="col-md-1">
+              <label className="privacy_policy_label">:</label>
+            </div>
+            <div className="col-md-9">
+              <textarea
+                id="content"
+                value={content}
+                onChange={handleContentChange}
+                className="privacy_policy_content-textarea text-justify"
+                required
+              />
+              <button type="submit" className="btn btn-success m-3">Update</button>
+              <button type="button" onClick={handleCancel} className="btn btn-danger m-3">Cancel</button>
+            </div>
           </div>
-          <div className="col-md-1">
-            <label className="privacy_policy_label">:</label>
-          </div>
-          <div className="col-md-9">
-            <textarea
-              id="content"
-              value={content}
-              onChange={handleContentChange}
-              className="privacy_policy_content-textarea text-justify"
-            />
-            <button type="button" onClick={handleUpdate} className="btn btn-success m-3">Update</button>
-            <button type="button" onClick={handleCancel} className="btn btn-danger m-3">Cancel</button>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
   );
