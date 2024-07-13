@@ -8,6 +8,12 @@ const caseSchema = new Schema(
             ref: "crimes",
             required:true
             },
+            citizenId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "citizens",
+                required:true
+                },
+                
            date:{
               type: Date,
               required: true,

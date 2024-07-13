@@ -18,6 +18,8 @@ import AddPrivacyPolicy from './AddPrivacyPolicy'
 import EditPrivacyPolicy from './EditPrivacyPolicy'
 import ViewPrivacyPolicy from './ViewPrivacyPolicy'
 import ViewComplaints from './ViewComplaints'
+import ViewCaseReport from './ViewCaseReport'
+import ViewCaseUpdateDetail from './ViewCaseUpdateDetail'
 
 function AdminMain({data}) {
   return (
@@ -60,6 +62,10 @@ function AdminMain({data}) {
             <ViewPrivacyPolicy />
           ):data==="adminviewcomplaints"?(
             <ViewComplaints />
+          ):data==="anminviewcasereport"?(
+            <ViewCaseReport />
+          ):data==="adminviewcasereportdetails"?(
+            <ViewCaseUpdateDetail />
           ):
            <AdminDashboard/>
            }

@@ -105,6 +105,8 @@ function App() {
         <Route path='/scrb-viewNotification' element={[<ScrbMain data="scrbviewnotification"/>,<Footer2/>]} />
         <Route path='/scrb-viewNotificationdetails' element={[<ScrbMain data="scrbviewnotificationdetails"/>,<Footer2/>]} />
         <Route path='/scrb-vieweachNotification' element={[<ScrbMain data="scrbvieweachnotification"/>,<Footer2/>]} />
+        <Route path='/scrb-viewcasereport' element={[<ScrbMain data="scrbviewcasereport"/>,<Footer2/>]} />
+        <Route path='/scrb-viewcasereportdetail/:id' element={[<ScrbMain data="scrbviewcasereportdetail"/>,<Footer2/>]} />
 
         {/* Scrb View Cases */}
         <Route path='/scrb_viewallcases' element={[<ScrbMain data='scrbviewallcasedetails'/>,<Footer2/>]} />
@@ -129,6 +131,8 @@ function App() {
         <Route path='/admin-viewNotificationDetails' element={[<AdminNavbar/>,<AdminMain data="adminviewnotificationdetail"/>,<Footer2/>]} />
         <Route path='/admin-vieweachNotification' element={[<AdminNavbar/>,<AdminMain data="adminvieweachnotification"/>,<Footer2/>]} />
         <Route path='/admin-viewcomplaints' element={[<AdminNavbar/>,<AdminMain data="adminviewcomplaints"/>,<Footer2/>]} />
+        <Route path='/admin-viewcasereport' element={[<AdminNavbar/>,<AdminMain data="anminviewcasereport"/>,<Footer2/>]} />
+        <Route path='/admin-viewcasereportdetails/:id' element={[<AdminNavbar/>,<AdminMain data="adminviewcasereportdetails"/>,<Footer2/>]} />
 
 
         {/* Admin View Cases */}

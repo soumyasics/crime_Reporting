@@ -24,7 +24,9 @@ function CaseDetails({type}) {
         if (res.data.status === 200) {
           setCaseDetails(res.data.data);
           localStorage.setItem("crimeId", res.data.data._id);
+          localStorage.setItem("citizenToken", res.data.data.citizenId._id);
           console.log(res.data.data._id)
+          console.log("h",res.data.data.citizenId._id)
         }
       })
       .catch((err) => {
@@ -131,13 +133,15 @@ function CaseDetails({type}) {
   };
 
   const handleAddUpdates = () => {
-    const caseId = localStorage.getItem("crimId");
+    const caseId = caseDetails._id; 
+    localStorage.setItem("crimeId", caseId); 
     if (caseId) {
-      navigate(`/addcaseupdate/${caseId}`);
+      navigate(`/addcaseupdate/${caseId}`); 
     } else {
       toast.error("Case ID not found.");
     }
   };
+  
 
   return (
     <div className="container mt-5 mb-5">
