@@ -27,7 +27,7 @@ function AdminSidebar() {
           <Link to='/admin_viewallcases' className="admin-dash-link"><h5 className="pt-4 fw-light"><FaPoll/> Cases</h5></Link>
           <Link to='/admin-viewcomplaints' className="admin-dash-link"><h5 className="pt-4 fw-light"><FaPoll/> Complaints</h5></Link>
           {/* <Link to='' className="admin-dash-link"><h5 className="pt-4 fw-light"><FaLock/> Change Password</h5></Link> */}
-          <Link to='' className="admin-dash-link"><h5 className="pt-4 fw-light"><RiGitRepositoryFill/> Case Report</h5></Link>
+          <Link to='/admin-viewcasereport' className="admin-dash-link"><h5 className="pt-4 fw-light"><RiGitRepositoryFill/> Case Report</h5></Link>
         </div>
       </div>
     </div>

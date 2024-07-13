@@ -12,11 +12,24 @@ function AddCaseUpdate() {
   });
 
   const [crimeId, setCrimeId] = useState('');
+  const [citizenId, setCitizenId] = useState('');
+  const [policeId, setPoliceId] = useState('');
 
   useEffect(() => {
     const id = localStorage.getItem('crimeId');
     if (id) {
       setCrimeId(id);
+      console.log("id",id)
+    }
+    const cid = localStorage.getItem('citizenToken');
+    if (cid) {
+      setCitizenId(cid);
+      console.log("cid",cid)
+    }
+    const pid = localStorage.getItem('policeId');
+    if (pid) {
+      setPoliceId(pid);
+      console.log("pid",pid)
     }
   }, []);
 
@@ -28,16 +41,16 @@ function AddCaseUpdate() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const data = { ...caseData, crimeId };
+    const data = { ...caseData, crimeId, citizenId, policeId };
 
     axiosInstance.post('/addpolicecases', data)
       .then(res => {
         console.log(res.data);
-        toast.success("Case Updated Successfully")
+        toast.success("Case Updated Successfully");
       })
       .catch(error => {
         console.error('Error adding police case:', error);
-        toast.error("Failed to update case")
+        toast.error("Failed to update case");
       });
   };
 
