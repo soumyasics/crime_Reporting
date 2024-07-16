@@ -114,11 +114,11 @@ function PoliceNavbar() {
                   Settings
                 </Link>
                 <ul className="dropdown-menu landing_dropdown_style" aria-labelledby="navbarDropdown">
-                  <li>
+                  {/* <li>
                     <Link to="/police_forgotpassword" className="dropdown-item">
                       Change Password
                     </Link>
-                  </li>
+                  </li> */}
                  
                   <li>
                     <Link to={`/policeprofile/${id}`} className="dropdown-item">

@@ -13,11 +13,12 @@ import ScrbGenerateCrimeAlert from './ScrbGenerateCrimeAlert'
 import LoginNav from '../Navbar/LoginNav'
 import ScrbViewCaseUpdate from './ScrbViewCaseUpdate'
 import ScrbViewCaseUpdaateDetails from './ScrbViewCaseUpdaateDetails'
+import ScrbNavbar from './ScrbNavbar'
 
 function ScrbMain({data}) {
   return (
     <div>
-      <div><LoginNav/>
+      <div><ScrbNavbar/>
       <div className='row'>
           <div className='col-3'>
               <ScrbSidebar/>

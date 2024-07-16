@@ -109,7 +109,7 @@ function ScrbViewAllPoliceStation() {
                                 </button>
                                 </Link>
                                 
-                                {policestationview.isActive ?(
+                                {/* {policestationview.isActive ?(
                                     <button  className='ms-4 viewpolicestation_cross_icon' onClick={()=>handleDeactivate(policestationview._id)}>
                                     <RxCross2/>
                                     </button>
@@ -117,7 +117,7 @@ function ScrbViewAllPoliceStation() {
                                     <button className='ms-4 viewpolicestation_tick_icon' onClick={()=>handleActivate(policestationview._id)}>
                                     <TiTick  />
                                     </button>
-                                )}                               
+                                )}                                */}
                             </td>
                         </tr>
                         ))}
