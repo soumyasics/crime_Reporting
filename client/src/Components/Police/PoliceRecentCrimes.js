@@ -1,14 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../Assets/Styles/PoliceRecentCrimes.css";
 import Recent_crime1_img1 from "../../Assets/Images/Recent_Crime1.png";
 import Recent_crime2_img2 from "../../Assets/Images/Recent_Crime2.png";
 import Recent_crime3_img3 from "../../Assets/Images/Recent_Crime3.png";
 import Recent_crime4_img4 from "../../Assets/Images/Recent_Crime4.png";
+import axiosInstance from "../Constants/BaseUrl";
 function PoliceRecentCrimes() {
+
+  const [data, setData] = useState([]);
+  const pId = localStorage.getItem("policeId");
+
+  useEffect(()=>{
+    axiosInstance
+      .post(`/viewAprvdCrimeByPolicStationId/${pId}`)
+      .then((res) => {
+        console.log(res);
+        if (res.data.status === 200) {
+          setData(res.data.data || []);
+        } else if (res.data.status === 404) {
+          setData([]);
+          console.log("No data found for this police station");
+        }
+      })
+      .catch((err) => {
+        console.log("Error", err);
+      });
+  },[])
+
+  console.log(data);
+
   return (
     <div className="container mb-4">
       <div className="police-recent-crimes">
-        <p>Recent Crimes</p>
+        <p>Swift Justice: Act Now to Catch the Criminal!</p>
       </div>
       <div className="row ">
         <div class="card-group">
@@ -70,12 +94,12 @@ function PoliceRecentCrimes() {
           </div>
         </div>
       </div>
-      <div>
+      {/* <div>
         <div className="text-end mt-4 pe-4" >
         <button type="submit" className='button_bg'>View All</button>
 
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

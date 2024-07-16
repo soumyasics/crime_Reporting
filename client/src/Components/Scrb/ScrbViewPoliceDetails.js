@@ -169,7 +169,7 @@ function ScrbViewPoliceDetails() {
                       value={values.email}
                     />
                   </div>
-                  <div className="col-12 mt-2 text-center">
+                  {/* <div className="col-12 mt-2 text-center">
                     {userDetails.isActive ? (
                       <button
                         type="button"
@@ -187,7 +187,7 @@ function ScrbViewPoliceDetails() {
                         Activate
                       </button>
                     )}
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

@@ -8,7 +8,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { type } from "@testing-library/user-event/dist/type";
 
 function PoliceViewCases({type}) {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
   const [data, setData] = useState([]);
   const pId = localStorage.getItem("policeId");
 
@@ -112,6 +112,8 @@ function PoliceViewCases({type}) {
           <table className="table table-striped border">
             <thead>
               <tr>
+                {type=='view'?<th>Crime Id</th>:''}
+                
                 <th>Victim Name</th>
                 <th>Type of Crime</th>
                 <th>Witness Name</th>
@@ -124,6 +126,7 @@ function PoliceViewCases({type}) {
             <tbody>
               {data.map((caseData) => (
                 <tr key={caseData._id}>
+                  {type=='view'?<td>ID{caseData._id.slice(19,24)}</td>:''}
                   <td>{caseData.victimName}</td>
                   <td>{caseData.caseType}</td>
                   <td>{caseData.witnessName}</td>

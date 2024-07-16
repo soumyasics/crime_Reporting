@@ -2,36 +2,64 @@ import React, { useState, useEffect } from 'react';
 import '../../Assets/Styles/AddCaseUpdate.css'; 
 import axiosInstance from '../Constants/BaseUrl';
 import { toast } from 'react-toastify';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function AddCaseUpdate() {
   const [caseData, setCaseData] = useState({
     date: '',
     officeInCharge: '',
     status: '',
+    crimeId:'',
     description: ''
   });
 
-  const [crimeId, setCrimeId] = useState('');
+  const {id}=useParams()
+
+  const [data,setData]=useState({})
+  const navigate=useNavigate();
+
+
+  // const [crimeId, setCrimeId] = useState('');
   const [citizenId, setCitizenId] = useState('');
   const [policeId, setPoliceId] = useState('');
+  const [officer, setOfficer] = useState('');
 
-  useEffect(() => {
-    const id = localStorage.getItem('crimeId');
-    if (id) {
-      setCrimeId(id);
-      console.log("id",id)
-    }
-    const cid = localStorage.getItem('citizenToken');
-    if (cid) {
-      setCitizenId(cid);
-      console.log("cid",cid)
-    }
-    const pid = localStorage.getItem('policeId');
-    if (pid) {
-      setPoliceId(pid);
-      console.log("pid",pid)
-    }
-  }, []);
+  // useEffect(() => {
+  //   const id = localStorage.getItem('crimeId');
+  //   if (id) {
+  //     setCrimeId(id);
+  //     console.log("id",id)
+  //   }
+  //   const cid = localStorage.getItem('citizenToken');
+  //   if (cid) {
+  //     setCitizenId(cid);
+  //     console.log("cid",cid)
+  //   }
+  //   const pid = localStorage.getItem('policeId');
+  //   if (pid) {
+  //     setPoliceId(pid);
+  //     console.log("pid",pid)
+  //   }
+  // }, []);
+
+  useEffect(()=>{
+    axiosInstance.post(`/viewCrimeById/${id}`)
+      .then(res => {
+        console.log(res);
+        setCitizenId(res.data.data.citizenId._id);
+        setPoliceId(res.data.data.psId._id);
+        setOfficer(res.data.data.psId.stationchargeofficers)
+        // toast.success("Case Updated Successfully");
+      })
+      .catch(error => {
+        console.error('Error adding police case:', error);
+        toast.error("Failed to update case");
+      });
+  },[id])
+
+  // console.log('crime',id);
+  // console.log('psId',policeId);
+  // console.log('cit',citizenId);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,12 +69,15 @@ function AddCaseUpdate() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const data = { ...caseData, crimeId, citizenId, policeId };
+    const data = { ...caseData, citizenId, policeId,officeInCharge:officer,crimeId:id };
+
 
     axiosInstance.post('/addpolicecases', data)
       .then(res => {
         console.log(res.data);
+
         toast.success("Case Updated Successfully");
+        navigate(-1)
       })
       .catch(error => {
         console.error('Error adding police case:', error);
@@ -71,6 +102,7 @@ function AddCaseUpdate() {
               <input 
                 type='text' 
                 className='form-control'
+                value={`ID${id.slice(19,24)}`}
               />
             </div>
           </div>
@@ -84,7 +116,7 @@ function AddCaseUpdate() {
                 type='text' 
                 className='form-control'
                 name='officeInCharge'
-                value={caseData.officeInCharge}
+                value={officer}
                 onChange={handleChange}
               />
             </div>

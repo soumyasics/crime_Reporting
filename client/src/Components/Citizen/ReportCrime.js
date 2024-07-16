@@ -68,6 +68,43 @@ function ReportCrime() {
     setImage([...e.target.files]);
   };
 
+  const resetForm = () => {
+    setFormData({
+      district: "",
+      psId: "",
+      victimName: "",
+      victimGender: "",
+      victimEmail: "",
+      victimAddress: "",
+      incidentDate: "",
+      incidentTime: "",
+      incidentLocation: "",
+      incidentCity: "",
+      witnessName: "",
+      witnessContact: "",
+      witnessAddress: "",
+      witnessStatement: "",
+      caseDescription: "",
+      caseType: "",
+      theftStolenItems: "",
+      theftStolenSuspected: "",
+      assaultInjuries: "",
+      assaultMedicalAttention: "",
+      vandalismDescription: "",
+      vandalismCostOfDamage: "",
+      missingPersonName: "",
+      missingPersonDescription: "",
+      domesticViolenceDescription: "",
+      domesticViolenceInjuries: "",
+      fraudDescription: "",
+      fraudFinancialLoss: "",
+      others: "",
+      files: [],
+      citizenId: localStorage.getItem('citizenToken')
+    });
+    setImage([]);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -91,6 +128,7 @@ function ReportCrime() {
         console.log(res);
         if(res.data.status==200){
           toast.success("Crime reported successfully");
+          resetForm();
         }else{
           toast.warning("Something went wrong");
         }
@@ -656,7 +694,7 @@ function ReportCrime() {
               </div>
               <div className="mt-2">
                 <input
-                  type="text"
+                  type="number"
                   className="report-crime-textbox ps-3"
                   name="witnessContact"
                   value={formData.witnessContact}

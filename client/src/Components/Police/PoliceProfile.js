@@ -156,7 +156,7 @@ function PoliceProfile() {
         <form onSubmit={handleSubmit}>
           <div className='row'>
             <div className='col-6'>
-              <img src={station} className='img-fluid' alt="station" />
+              <img src={station} className='img-fluid' alt="station" style={{height:'300px'}} />
             </div>
             <div className='col-6'>
               <div className="row">

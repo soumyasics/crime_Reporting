@@ -1,17 +1,28 @@
 import React, { useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import "../../Assets/Styles/Navbar.css";
+import { Link, useNavigate } from 'react-router-dom';
 import logo from "../../Assets/Images/logo.png";
 
-function LoginNav() {
 
-  
+function ScrbNavbar() {
+
+    const navigate = useNavigate(); 
+
+  useEffect(() => {
+    if (localStorage.getItem("scrbId") == null) {
+      navigate("/");
+    }
+  });
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
 
   return (
     <div>
-        <nav className="navbar navbar-expand-lg navbar_bg">
+      <nav className="navbar navbar-expand-lg navbar_bg">
         <div className="container-fluid">
-          <Link to='/' className="text-decoration-none">
+          <Link to='/scrb-dashboard' className="text-decoration-none">
             <div className="navbar_logo">
               <img src={logo} className="img-fluid" alt="logo" />
               <div>
@@ -37,24 +48,19 @@ function LoginNav() {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0" id="text_color_white">
               <li className="nav-item m-3">
                 <Link
-                  to='/'
+                  to='/scrb-dashboard'
                   className="nav-link"
                   aria-current="page"
                   id="text_color_white"
                 >
-                  Home
+                  Dashboard
                 </Link>
               </li>
 
-              <li className="nav-item m-3">
-                <Link to="/about" className="nav-link" id="text_color_white">
-                  About Us
-                </Link>
-              </li>
               
               <li className="nav-item m-3">
-                <Link to="" className="nav-link" id="text_color_white">
-                  Contact Us
+                <Link to="/" className="nav-link" id="text_color_white" onClick={handleLogout}>
+                 Logout
                 </Link>
               </li>
               
@@ -66,4 +72,4 @@ function LoginNav() {
   )
 }
 
-export default LoginNav
+export default ScrbNavbar
