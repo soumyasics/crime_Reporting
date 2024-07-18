@@ -454,6 +454,38 @@ const searchCrime=async(req,res)=>{
         res.status(500).json({ message: 'Server Error' });
       }
 }
+
+
+const getTotalCrimesByDistrict = async (req,res) => {
+    try {
+      const result = await Crime.aggregate([
+        {
+          $group: {
+            _id: "$district",
+            totalCrimes: { $sum: 1 }
+          }
+        },
+        {
+          $project: {
+            _id: 0,
+            district: "$_id",
+            totalCrimes: 1
+          }
+        }
+      ]);
+  
+      return res.json({
+        status:200,
+        data:result,
+        msg:'data obtained'
+      });
+    } catch (error) {
+      console.error("Error finding total crimes by district: ", error);
+      throw error;
+    }
+  };
+  
+ 
 module.exports = {
     addCrime,
     deleteCrimeById,
@@ -469,5 +501,6 @@ module.exports = {
     getCaseType,
     searchCrime,
     viewCaseTypesbyFilter,
-    viewPSbyDisrtictFilter
+    viewPSbyDisrtictFilter,
+    getTotalCrimesByDistrict
 };
