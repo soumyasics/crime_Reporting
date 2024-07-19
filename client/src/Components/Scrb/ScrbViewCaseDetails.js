@@ -8,7 +8,7 @@ import { Modal } from 'react-bootstrap';
 import { imageUrl } from '../Constants/Image_Url';
 
 function ScrbViewCaseDetails() {
-    const [caseDetails, setCaseDetails] = useState({
+     const [caseDetails, setCaseDetails] = useState({
         evidenceFiles: [{ file: { filename: '' } }],
         incidentDate: ''
       });
@@ -71,7 +71,7 @@ function ScrbViewCaseDetails() {
         </div>
         <div className='container mt-5 mb-5'>
       <div className='case-details-h6 text-center pt-3'>
-        <span>Case No: 203 </span>
+      <span>Case No: ID{caseDetails._id.slice(19,24)} </span>
       </div>
       <div className='row mt-5'>
         <div className='col'>

@@ -8,82 +8,75 @@ import { Modal } from 'react-bootstrap';
 import { imageUrl } from '../Constants/Image_Url';
 
 function ScrbViewCaseUpdaateDetails() {
-    const [caseDetails, setCaseDetails] = useState({
-        evidenceFiles: [{ file: { filename: '' } }],
-        incidentDate: ''
-      });
-      const [showModal, setShowModal] = useState(false);
-      const [selectedEvidence, setSelectedEvidence] = useState(null);
-      const { id } = useParams();
-    
-      useEffect(() => {
-        axiosInstance
-          .post(`/viewpolicecase/${id}`)
-          .then((res) => {
-            if (res.data.status === 200) {
-              setCaseDetails(res.data.data);
-            }
-          })
-          .catch((err) => {
-            toast.error('Failed to fetch case details');
-          });
-      }, [id]);
-    
-      const handleViewEvidence = (evidence) => {
-        setSelectedEvidence(evidence);
-        setShowModal(true);
-      };
-    
-      const handleCloseModal = () => {
-        setShowModal(false);
-        setSelectedEvidence(null);
-      };
-    
-      const getMediaElement = (file) => {
-        if (!file || !file.filename) return <p>File not found.</p>;
-    
-        const fileExtension = file.filename.split('.').pop().toLowerCase();
-        const fileUrl = `${imageUrl}/${file.filename}`;
-    
-        if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension)) {
-          return <img src={fileUrl} alt='Evidence' className='img-fluid' />;
-        } else if (['mp4', 'webm', 'ogg'].includes(fileExtension)) {
-          return (
-            <video controls className='img-fluid'>
-              <source src={fileUrl} type={`video/${fileExtension}`} />
-            </video>
-          );
-        } else if (['mp3', 'wav', 'ogg'].includes(fileExtension)) {
-          return (
-            <audio controls className='w-100'>
-              <source src={fileUrl} type={`audio/${fileExtension}`} />
-            </audio>
-          );
-        } else {
-          return <p>Unsupported file type.</p>;
+  const [caseDetails, setCaseDetails] = useState({
+    evidenceFiles: [{ file: { filename: '' } }],
+    incidentDate: '',_id:''
+  });
+  const [showModal, setShowModal] = useState(false);
+  const [selectedEvidence, setSelectedEvidence] = useState(null);
+  const { id } = useParams();
+
+  useEffect(() => {
+    axiosInstance
+      .post(`/viewCrimeById/${id}`)
+      .then((res) => {
+        if (res.data.status === 200) {
+          setCaseDetails(res.data.data);
         }
-      };
+      })
+      .catch((err) => {
+        toast.error('Failed to fetch case details');
+      });
+  }, [id]);
+
+  const handleViewEvidence = (evidence) => {
+    setSelectedEvidence(evidence);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedEvidence(null);
+  };
+
+  const getMediaElement = (file) => {
+    if (!file || !file.filename) return <p>File not found.</p>;
+
+    const fileExtension = file.filename.split('.').pop().toLowerCase();
+    const fileUrl = `${imageUrl}/${file.filename}`;
+
+    if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension)) {
+      return <img src={fileUrl} alt='Evidence' className='img-fluid' />;
+    } else if (['mp4', 'webm', 'ogg'].includes(fileExtension)) {
+      return (
+        <video controls className='img-fluid'>
+          <source src={fileUrl} type={`video/${fileExtension}`} />
+        </video>
+      );
+    } else if (['mp3', 'wav', 'ogg'].includes(fileExtension)) {
+      return (
+        <audio controls className='w-100'>
+          <source src={fileUrl} type={`audio/${fileExtension}`} />
+        </audio>
+      );
+    } else {
+      return <p>Unsupported file type.</p>;
+    }
+  };
+
+  console.log(caseDetails);
   return (
-    <div>
-        <div className='container'>
+    <div className='container'>
         <div className='pt-5'>
           <h4 className='scrb-dash-h4'>Welcome SCRB</h4>
           <p className='scrb-dash-para'>All System are running smoothly</p>
         </div>
         <div className='container mt-5 mb-5'>
+          <div className='w-100 d-flex justify-content-end mb-2'>
+            <button className='btn btn-danger'>View Updates</button>
+          </div>
       <div className='case-details-h6 text-center pt-3'>
-        <span>Case No: 203 </span>
-      </div>
-      <div className='row'>
-        <div className='col text-center'>
-        <div className='case-details-span mt-5'>
-            <span>Updated Details</span>
-        </div>
-            <span className='case-details-victim'>Office Incharge: </span><span className='case-details-victim1'>{caseDetails.officeInCharge}</span><br/>
-            <span className='case-details-victim'>Date of Update: </span><span className='case-details-victim1'>{caseDetails.date?.slice(0,10)}</span><br/>
-            <span className='case-details-victim'>Current Status: </span><span className='case-details-victim1'>{caseDetails.status}</span><br/>
-            <span className='case-details-victim'>Description: </span><span className='case-details-victim1'>{caseDetails.description}</span><br/>
-        </div>
+      <span>Case No: ID{caseDetails._id.slice(19,24)} </span>
       </div>
       <div className='row mt-5'>
         <div className='col'>
@@ -99,7 +92,7 @@ function ScrbViewCaseUpdaateDetails() {
                     <label>Name</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.crimeId?.victimName}</span>
+                    <span>{caseDetails.victimName}</span>
                     </td>
                 </tr>
                 <tr>
@@ -107,7 +100,7 @@ function ScrbViewCaseUpdaateDetails() {
                     <label>Gender</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.crimeId?.victimGender}</span>
+                    <span>{caseDetails.victimGender}</span>
                     </td>
                 </tr>
                 <tr>
@@ -115,7 +108,7 @@ function ScrbViewCaseUpdaateDetails() {
                     <label>Email</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.crimeId?.victimEmail}</span>
+                    <span>{caseDetails.victimEmail}</span>
                     </td>
                 </tr>
                 <tr>
@@ -123,7 +116,7 @@ function ScrbViewCaseUpdaateDetails() {
                     <label>Address</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.crimeId?.victimAddress}</span>
+                    <span>{caseDetails.victimAddress}</span>
                     </td>
                 </tr>
                 </tbody>
@@ -144,7 +137,7 @@ function ScrbViewCaseUpdaateDetails() {
                     <label>Date</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.crimeId?.incidentDate.slice(0, 10)}</span>
+                    <span>{caseDetails.incidentDate.slice(0, 10)}</span>
                     </td>
                 </tr>
                 <tr>
@@ -152,7 +145,7 @@ function ScrbViewCaseUpdaateDetails() {
                     <label>Time</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.crimeId?.incidentTime}</span>
+                    <span>{caseDetails.incidentTime}</span>
                     </td>
                 </tr>
                 <tr>
@@ -160,7 +153,7 @@ function ScrbViewCaseUpdaateDetails() {
                     <label>Location</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.crimeId?.incidentLocation}</span>
+                    <span>{caseDetails.incidentLocation}</span>
                     </td>
                 </tr>
                 <tr>
@@ -168,7 +161,7 @@ function ScrbViewCaseUpdaateDetails() {
                     <label>City</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.crimeId?.incidentCity}</span>
+                    <span>{caseDetails.incidentCity}</span>
                     </td>
                 </tr>
                 </tbody>
@@ -191,7 +184,7 @@ function ScrbViewCaseUpdaateDetails() {
                     <label>Name</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.crimeId?.witnessName}</span>
+                    <span>{caseDetails.witnessName}</span>
                     </td>
                 </tr>
                 <tr>
@@ -199,7 +192,7 @@ function ScrbViewCaseUpdaateDetails() {
                     <label>Contact</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.crimeId?.witnessContact}</span>
+                    <span>{caseDetails.witnessContact}</span>
                     </td>
                 </tr>
                 <tr>
@@ -207,7 +200,7 @@ function ScrbViewCaseUpdaateDetails() {
                     <label>Address</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.crimeId?.witnessAddress}</span>
+                    <span>{caseDetails.witnessAddress}</span>
                     </td>
                 </tr>
                 <tr>
@@ -215,7 +208,7 @@ function ScrbViewCaseUpdaateDetails() {
                     <label>Statement</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.crimeId?.witnessStatement}</span>
+                    <span>{caseDetails.witnessStatement}</span>
                     </td>
                 </tr>
                 </tbody>
@@ -236,7 +229,7 @@ function ScrbViewCaseUpdaateDetails() {
                     <label>Crime Type</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.crimeId?.caseType}</span>
+                    <span>{caseDetails.caseType}</span>
                     </td>
                 </tr>
                 <tr>
@@ -244,7 +237,7 @@ function ScrbViewCaseUpdaateDetails() {
                     <label>Description</label>
                     </td>
                     <td className="case-details-victim1">
-                    <span>{caseDetails.crimeId?.caseDescription}</span>
+                    <span>{caseDetails.caseDescription}</span>
                     </td>
                 </tr>
                 </tbody>
@@ -264,85 +257,85 @@ function ScrbViewCaseUpdaateDetails() {
             <div className='col-8 case-details-victim'>
                 <table>
                 <tbody>
-                    {caseDetails.crimeId?.caseType === 'Theft' && (
+                    {caseDetails.caseType === 'Theft' && (
                     <>
                         <tr>
                         <td><label>Stolen Items</label></td>
-                        <td><span className="case-details-victim1">{caseDetails.crimeId?.theftStolenItems}</span></td>
+                        <td><span className="case-details-victim1">{caseDetails.theftStolenItems}</span></td>
                         </tr>
                         <tr>
                         <td><label>Suspected Perpetrator (Description)</label></td>
-                        <td><span className="case-details-victim1">{caseDetails.crimeId?.theftStolenSuspected}</span></td>
+                        <td><span className="case-details-victim1">{caseDetails.theftStolenSuspected}</span></td>
                         </tr>
                     </>
                     )}
-                    {caseDetails.crimeId?.caseType === 'Assault' && (
+                    {caseDetails.caseType === 'Assault' && (
                     <>
                         <tr>
                         <td><label>Injuries Sustained (Description)</label></td>
-                        <td><span className="case-details-victim1">{caseDetails.crimeId?.assaultInjuries}</span></td>
+                        <td><span className="case-details-victim1">{caseDetails.assaultInjuries}</span></td>
                         </tr>
                         <tr>
                         <td><label>Medical Attention</label></td>
-                        <td><span className="case-details-victim1">{caseDetails.crimeId?.assaultMedicalAttention}</span></td>
+                        <td><span className="case-details-victim1">{caseDetails.assaultMedicalAttention}</span></td>
                         </tr>
                     </>
                     )}
-                    {caseDetails.crimeId?.caseType === 'Vandalism' && (
+                    {caseDetails.caseType === 'Vandalism' && (
                     <>
                         <tr>
                         <td><label>Description of Damage</label></td>
-                        <td><span className="case-details-victim1">{caseDetails.crimeId?.vandalismDescription}</span></td>
+                        <td><span className="case-details-victim1">{caseDetails.vandalismDescription}</span></td>
                         </tr>
                         <tr>
                         <td><label>Estimated Cost of Damage</label></td>
-                        <td><span className="case-details-victim1">{caseDetails.crimeId?.vandalismCostOfDamage}</span></td>
+                        <td><span className="case-details-victim1">{caseDetails.vandalismCostOfDamage}</span></td>
                         </tr>
                     </>
                     )}
-                    {caseDetails.crimeId?.caseType === 'Missing Person' && (
+                    {caseDetails.caseType === 'Missing Person' && (
                     <>
                         <tr>
                         <td><label>Missing Person Name</label></td>
-                        <td><span className="case-details-victim1">{caseDetails.crimeId?.missingPersonName}</span></td>
+                        <td><span className="case-details-victim1">{caseDetails.missingPersonName}</span></td>
                         </tr>
                         <tr>
                         <td><label>Description of Missing Person</label></td>
-                        <td><span className="case-details-victim1">{caseDetails.crimeId?.missingPersonDescription}</span></td>
+                        <td><span className="case-details-victim1">{caseDetails.missingPersonDescription}</span></td>
                         </tr>
                     </>
                     )}
-                    {caseDetails.crimeId?.caseType === 'Domestic Violence' && (
+                    {caseDetails.caseType === 'Domestic Violence' && (
                     <>
                         <tr>
                         <td><label>Describe the Incident</label></td>
-                        <td><span className="case-details-victim1">{caseDetails.crimeId?.domesticViolenceDescription}</span></td>
+                        <td><span className="case-details-victim1">{caseDetails.domesticViolenceDescription}</span></td>
                         </tr>
                         <tr>
                         <td><label>Injuries Sustained (if any)</label></td>
-                        <td><span className="case-details-victim1">{caseDetails.crimeId?.domesticViolenceInjuries}</span></td>
+                        <td><span className="case-details-victim1">{caseDetails.domesticViolenceInjuries}</span></td>
                         </tr>
                     </>
                     )}
-                    {caseDetails.crimeId?.caseType === 'Fraud' && (
+                    {caseDetails.caseType === 'Fraud' && (
                     <>
                         <tr>
                         <td><label>Description of Fraud</label></td>
-                        <td><span className="case-details-victim1">{caseDetails.crimeId?.fraudDescription}</span></td>
+                        <td><span className="case-details-victim1">{caseDetails.fraudDescription}</span></td>
                         </tr>
                         <tr>
                         <td><label>Amount of Money Involved</label></td>
-                        <td><span className="case-details-victim1">{caseDetails.crimeId?.fraudFinancialLoss}</span></td>
+                        <td><span className="case-details-victim1">{caseDetails.fraudFinancialLoss}</span></td>
                         </tr>
                     </>
                     )}
-                    {caseDetails.crimeId?.caseType === 'Others' && (
+                    {caseDetails.caseType === 'Others' && (
                     <>
                         <tr>
                         <td colSpan="2"><label>Case Description</label></td>
                         </tr>
                         <tr>
-                        <td colSpan="2"><span className="case-details-victim1">{caseDetails.crimeId?.others}</span></td>
+                        <td colSpan="2"><span className="case-details-victim1">{caseDetails.others}</span></td>
                         </tr>
                     </>
                     )}
@@ -363,7 +356,7 @@ function ScrbViewCaseUpdaateDetails() {
           <div className='mt-4 container ms-4'>
             <div className='row'>
               <div className='col'>
-                {caseDetails.crimeId?.evidenceFiles.map((evidence, index) => (
+                {caseDetails.evidenceFiles.map((evidence, index) => (
                   <div key={index} className='mb-3'>
                     <div className='evidence-item'>
                       <img
@@ -389,7 +382,6 @@ function ScrbViewCaseUpdaateDetails() {
           {selectedEvidence ? getMediaElement(selectedEvidence.file) : <p>No evidence selected.</p>}
         </Modal.Body>
       </Modal>
-    </div>
     </div>
     </div>
   )

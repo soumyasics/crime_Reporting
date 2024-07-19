@@ -8,7 +8,7 @@ import '../../Assets/Styles/Searchbox.css'
 function ScrbViewCaseUpdate() {
     const[data,setData]=useState([])
     const getData=()=>{
-        axiosInstance.post("/viewpolicecases")
+        axiosInstance.post("/viewallcrime")
         .then((res) => {
             console.log(res);
             if(res.data.status === 200){
@@ -36,14 +36,14 @@ function ScrbViewCaseUpdate() {
                     <div className='col-md-9'>
                         <h5>View All Cases</h5>
                     </div>
-                    <div className='col-md-3'>
+                    {/* <div className='col-md-3'>
                         <div className="search-box">
                         <input type="text" placeholder="Search all Cases" />
                         <button type="submit">
                             <FaSearch />
                         </button>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div>
@@ -60,7 +60,6 @@ function ScrbViewCaseUpdate() {
                         <th scope="col">Type of Crime</th>
                         <th scope="col">Witness Name</th>
                         <th scope="col">Date</th>
-                        <th scope="col">Status</th>
                         <th scope="col">View Details</th>
                         </tr>
                     </thead>
@@ -68,12 +67,11 @@ function ScrbViewCaseUpdate() {
                         {data.map ((caseview,index) => (
                             <tr>
                             <th>{index +1}</th>
-                            <td>{caseview.crimeId.district}</td>
-                            <td>{caseview.crimeId.victimName}</td>
-                            <td>{caseview.crimeId.caseType}</td>
-                            <td>{caseview.crimeId.witnessName}</td>
-                            <td>{caseview.date.slice(0,10)}</td>
-                            <td>{caseview.status}</td>
+                            <td>{caseview.district}</td>
+                            <td>{caseview.victimName}</td>
+                            <td>{caseview.caseType}</td>
+                            <td>{caseview.witnessName}</td>
+                            <td>{caseview.incidentDate.slice(0,10)}</td>
                             <td >
                                 <Link to={`/scrb-viewcasereportdetail/${caseview._id}`}>
                                 <button className='viewallpolicest_icon'>

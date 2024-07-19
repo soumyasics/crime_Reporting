@@ -53,6 +53,7 @@ import ViewCrimeStatus from './Components/Citizen/ViewCrimeStatus';
 import CitizenViewNotification from './Components/Citizen/CitizenViewNotification';
 import AdminNavbar from './Components/Navbar/AdminNavbar';
 import ContactUs from './Components/Common/ContactUs';
+import CitizenViewPolice from './Components/Citizen/CitizenViewPolice';
 
 function App() {
   return (
@@ -80,6 +81,7 @@ function App() {
         <Route path='/crimestatus' element={[<UserNavbar />,<CrimeReportwithStatus />,<Footer/>,<Footer2/>]} />
         <Route path='/viewcrimereportstatus/:id' element={[<UserNavbar />,<ViewCrimeStatus />,<Footer/>,<Footer2/>]} />
         <Route path='/viewnotification' element={[<UserNavbar/>,<CitizenViewNotification/>,<Footer/>,<Footer2/>]} />
+        <Route path='/user_view_police' element={[<UserNavbar/>,<CitizenViewPolice/>,<Footer/>,<Footer2/>]} />
 
 
         {/* Police  */}

@@ -6,49 +6,50 @@ import { useFormik } from "formik";
 import { CitizenRegistrationSchema } from "../Constants/Schema";
 import { toast } from "react-toastify";
 
+const districts = [
+  "Alappuzha", "Ernakulam", "Idukki", "Kannur", "Kasaragod", "Kollam",
+  "Kottayam", "Kozhikode", "Malappuram", "Palakkad", "Pathanamthitta",
+  "Thiruvananthapuram", "Thrissur", "Wayanad"
+];
+
 function CitizenRegistration() {
-
-  const navigate=useNavigate();
-
+  const navigate = useNavigate();
   const today = new Date().toISOString().split('T')[0];
 
   const onSubmit = (e) => {
     // e.preventDefault();
-
     const { confirmPassword, ...dataToSend } = values;
 
-    axiosInstance.post('/registerCitizen',dataToSend)
-    .then((res)=>{
-      console.log('woking',res);
-      if (res.data.status==200) {
-        axiosInstance.post('/loginCitizen', {email:dataToSend.email,password:dataToSend.password})
+    axiosInstance.post('/registerCitizen', dataToSend)
       .then((res) => {
         console.log('working', res);
-        if (res.data.status === 200) {
-          localStorage.setItem('citizenToken', res.data.data._id);
-          toast.success("Registation Successful");
-          navigate('/citizen_login');
+        if (res.data.status == 200) {
+          axiosInstance.post('/loginCitizen', { email: dataToSend.email, password: dataToSend.password })
+            .then((res) => {
+              console.log('working', res);
+              if (res.data.status === 200) {
+                localStorage.setItem('citizenToken', res.data.data._id);
+                toast.success("Registration Successful");
+                navigate('/citizen_login');
+              } else if (res.data.status === 405) {
+                toast.warning(res.data.msg);
+              } else {
+                toast.error('Registration Failed');
+              }
+            })
+            .catch((err) => {
+              toast.error('Login Failed');
+            });
 
-        } else if (res.data.status === 405) {
-          toast.warning(res.data.msg);
+        } else if (res.data.status == 409) {
+          toast.warning(res.data.msg)
         } else {
-          toast.error('Registation Failed');
+          toast.error('Registration Failed')
         }
       })
       .catch((err) => {
-        toast.error('Login Failed');
-      });
-       
-      }else if(res.data.status==409){
-        toast.warning(res.data.msg)
-
-      }else{
         toast.error('Registration Failed')
-      }
-    })
-    .catch((err)=>{
-      toast.error('Registration Failed')
-    })
+      })
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -64,10 +65,11 @@ function CitizenRegistration() {
         housename: "",
         street: "",
         state: "",
+        district: "", // new field
         nationality: "",
         pincode: "",
         gender: "",
-        confirmPassword:''
+        confirmPassword: ""
       },
       validationSchema: CitizenRegistrationSchema,
       onSubmit,
@@ -89,11 +91,11 @@ function CitizenRegistration() {
                 <div className="col-6">
                   <input
                     type="text"
-                    class="form-control user_inp "
+                    className="form-control user_inp"
                     id="firstname"
                     placeholder="First Name"
                     name="firstname"
-                    value={values.name}
+                    value={values.firstname}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
@@ -105,7 +107,7 @@ function CitizenRegistration() {
                 <div className="col-6">
                   <input
                     type="text"
-                    class="form-control user_inp "
+                    className="form-control user_inp"
                     id="exampleFormControlInput1"
                     placeholder="Second Name"
                     name="lastname"
@@ -120,7 +122,7 @@ function CitizenRegistration() {
                 <div className="col-6 mt-2">
                   <input
                     type="email"
-                    class="form-control user_inp "
+                    className="form-control user_inp"
                     id="exampleFormControlInput1"
                     placeholder="Email"
                     name="email"
@@ -134,7 +136,6 @@ function CitizenRegistration() {
                 </div>
 
                 <div className="col-6 d-flex justify-content-between mt-2">
-                  {/* <label>Gender</label> */}
                   <div className="form-check">
                     <input
                       className="form-check-input"
@@ -173,10 +174,10 @@ function CitizenRegistration() {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
-        <label className="form-check-label">
-          Others
-        </label>
-      </div>
+                    <label className="form-check-label">
+                      Others
+                    </label>
+                  </div>
                   {errors.gender && touched.gender && (
                     <span className="text-danger">{errors.gender}</span>
                   )}
@@ -186,7 +187,7 @@ function CitizenRegistration() {
                   <label>Date of Birth</label>
                   <input
                     type="date"
-                    class="form-control user_inp "
+                    className="form-control user_inp"
                     id="exampleFormControlInput1"
                     name="dob"
                     value={values.dob}
@@ -201,7 +202,7 @@ function CitizenRegistration() {
                 <div className="col-6 mt-2">
                   <input
                     type="number"
-                    class="form-control user_inp "
+                    className="form-control user_inp"
                     id="exampleFormControlInput1"
                     placeholder="Contact"
                     name="contact"
@@ -216,7 +217,7 @@ function CitizenRegistration() {
                 <div className="col-6 mt-2">
                   <input
                     type="text"
-                    class="form-control user_inp "
+                    className="form-control user_inp"
                     id="exampleFormControlInput1"
                     placeholder="Aadhaar"
                     name="aadhar"
@@ -231,7 +232,7 @@ function CitizenRegistration() {
                 <div className="col-6 mt-2">
                   <input
                     type="text"
-                    class="form-control user_inp "
+                    className="form-control user_inp"
                     id="exampleFormControlInput1"
                     placeholder="House Name"
                     name="housename"
@@ -246,7 +247,7 @@ function CitizenRegistration() {
                 <div className="col-6 mt-2">
                   <input
                     type="text"
-                    class="form-control user_inp "
+                    className="form-control user_inp"
                     id="exampleFormControlInput1"
                     placeholder="Street Name"
                     name="street"
@@ -261,7 +262,7 @@ function CitizenRegistration() {
                 <div className="col-6 mt-2">
                   <input
                     type="text"
-                    class="form-control user_inp "
+                    className="form-control user_inp"
                     id="exampleFormControlInput1"
                     placeholder="State"
                     value={values.state}
@@ -274,9 +275,29 @@ function CitizenRegistration() {
                   )}
                 </div>
                 <div className="col-6 mt-2">
+                  <select
+                    className="form-control user_inp"
+                    id="district"
+                    value={values.district}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    name="district"
+                  >
+                    <option value="">Select District</option>
+                    {districts.map((district) => (
+                      <option key={district} value={district}>
+                        {district}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.district && touched.district && (
+                    <span className="text-danger">{errors.district}</span>
+                  )}
+                </div>
+                <div className="col-6 mt-2">
                   <input
                     type="text"
-                    class="form-control user_inp "
+                    className="form-control user_inp"
                     id="exampleFormControlInput1"
                     placeholder="Nationality"
                     value={values.nationality}
@@ -291,7 +312,7 @@ function CitizenRegistration() {
                 <div className="col-6 mt-2">
                   <input
                     type="number"
-                    class="form-control user_inp "
+                    className="form-control user_inp"
                     id="pincode"
                     placeholder="Pincode"
                     value={values.pincode}
@@ -306,7 +327,7 @@ function CitizenRegistration() {
                 <div className="col-6 mt-2">
                   <input
                     type="password"
-                    class="form-control user_inp "
+                    className="form-control user_inp"
                     id="exampleFormControlInput1"
                     placeholder="Password"
                     value={values.password}
@@ -321,7 +342,7 @@ function CitizenRegistration() {
                 <div className="col-6 mt-2">
                   <input
                     type="password"
-                    class="form-control user_inp "
+                    className="form-control user_inp"
                     id="exampleFormControlInput1"
                     placeholder="Confirm Password"
                     onChange={handleChange}

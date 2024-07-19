@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../../Assets/Styles/AdminHome.css'
 import axiosInstance from '../Constants/BaseUrl';
+import AdminPieChart from './AdminPieChart';
 
 function AdminDashboard() {
 
@@ -97,6 +98,9 @@ function AdminDashboard() {
             </div>
           </div>
         </div>
+
+      <AdminPieChart/>
+
       </div>
     </div>
   )

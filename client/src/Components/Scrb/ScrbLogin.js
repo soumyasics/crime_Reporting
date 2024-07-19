@@ -106,7 +106,7 @@ function ScrbLogin() {
                     </div>
 
                     <div className='mt-4 scrb-login-forgetlink'>
-                      <Link to='/scrb-forgetpswd' className='scrb-login-linkforget'>Forget Password</Link>
+                      {/* <Link to='/scrb-forgetpswd' className='scrb-login-linkforget'>Forget Password</Link> */}
                     </div>
                   </div>
                   <div className='col-3'></div>

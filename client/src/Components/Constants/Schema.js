@@ -67,6 +67,11 @@ export const CitizenRegistrationSchema = yup.object().shape({
     .min(2, "Enter minimum 2 characters")
     .max(20, "Maximum 20 characters are allowed")
     .required("Required"),
+  district: yup
+    .string()
+    .min(2, "Enter minimum 2 characters")
+    .max(20, "Maximum 20 characters are allowed")
+    .required("Required"),
   nationality: yup
     .string()
     .matches(/^[a-zA-Z\s]+$/, "Only letters are allowed")

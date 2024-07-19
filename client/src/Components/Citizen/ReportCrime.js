@@ -647,7 +647,9 @@ function ReportCrime() {
                   multiple
                   onChange={handleFileChange}
                   required
-                />
+                /><br/>
+<label htmlFor="file"><small className="text-warning" >( Supported Formats - jpg, jpeg, mp4, mp3. Accepts only 5 files )</small></label>
+
               </div>
             </div>
           </div>
