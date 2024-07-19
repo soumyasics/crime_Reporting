@@ -583,6 +583,31 @@ const viewPoliceCaseByCitizenId = (req, res) => {
 };
 
 
+const viewPoliceCaseByCrimeId = (req, res) => {
+    const crimeId = req.params.id;
+    PoliceCase.findOne({ crimeId: crimeId })
+        .populate("citizenId")
+        .then(data => {
+            if (!data) {
+                return res.status(404).json({
+                    status: 404,
+                    message: "Police case not found"
+                });
+            }
+            res.status(200).json({
+                status: 200,
+                message: "Police case found",
+                data: data
+            });
+        })
+        .catch(error => {
+            res.status(500).json({
+                status: 500,
+                message: "Error fetching police case",
+                error: error
+            });
+        });
+};
 
 module.exports={
     registerPolice,
@@ -605,5 +630,6 @@ viewPoliceByDistrict,
     addPoliceCase,
     viewPoliceCases,
     viewPoliceCaseById,
-    viewPoliceCaseByCitizenId
+    viewPoliceCaseByCitizenId,
+    viewPoliceCaseByCrimeId
 }
