@@ -67,9 +67,9 @@ function App() {
 
         {/* Citizen  */}
 
-        <Route path='/citizen_login' element={[<LoginNav/>,<CitizenLogin/>,<Footer/>,<Footer2/>]} />
-        <Route path='/citizen_forgotpassword' element={[<LoginNav/>,<ForgotPassword activeUser='Citizen' />,<Footer/>,<Footer2/>]} />
-        <Route path='/citizen_register' element={[<LoginNav/>,<CitizenRegistration/>,<Footer/>,<Footer2/>]} />
+        <Route path='/citizen_login' element={[<LandingNavbar/>,<CitizenLogin/>,<Footer/>,<Footer2/>]} />
+        <Route path='/citizen_forgotpassword' element={[<LandingNavbar/>,<ForgotPassword activeUser='Citizen' />,<Footer/>,<Footer2/>]} />
+        <Route path='/citizen_register' element={[<LandingNavbar/>,<CitizenRegistration/>,<Footer/>,<Footer2/>]} />
         <Route path='/citizen_home' element={[<UserNavbar/>,<LoginBanner user='citizen' />,<CitizenLandingPage/>,<Footer/>,<Footer2/>]} />
         <Route path='/citizen_profile' element={[<UserNavbar/>,<CitizenProfile/>,<Footer/>,<Footer2/>]} />
         <Route path='/citizen/reportcrime' element={[<UserNavbar/>,<ReportCrime/>,<Footer/>,<Footer2/>]}/>
@@ -84,9 +84,9 @@ function App() {
 
         {/* Police  */}
 
-        <Route path='/police_register' element={[<LoginNav/>,<PoliceRegister/>,<Footer/>,<Footer2/>]} />
-        <Route path='/police_login' element={[<LoginNav/>,<PoliceLogin/>,<Footer/>,<Footer2/>]} />
-        <Route path='/police_forgotpassword' element={[<LoginNav/>,<ForgotPassword activeUser='Police' />,<Footer/>,<Footer2/>]} />
+        <Route path='/police_register' element={[<LandingNavbar/>,<PoliceRegister/>,<Footer/>,<Footer2/>]} />
+        <Route path='/police_login' element={[<LandingNavbar/>,<PoliceLogin/>,<Footer/>,<Footer2/>]} />
+        <Route path='/police_forgotpassword' element={[<LandingNavbar/>,<ForgotPassword activeUser='Police' />,<Footer/>,<Footer2/>]} />
         <Route path='/police_home' element={[<PoliceNavbar/>,<LoginBanner user='police' />,<PoliceLandingPageContent/>,<PoliceRecentCrimes/>,<Footer/>,<Footer2/>]} />
         <Route path='/policeviewcases' element={[<PoliceNavbar/>,<PoliceViewCases type='request' />,<Footer/>,<Footer2/>]} />
         <Route path='/policeviewApprovedcases' element={[<PoliceNavbar/>,<PoliceViewCases type='view' />,<Footer/>,<Footer2/>]} />
@@ -98,8 +98,8 @@ function App() {
 
         {/* Scrb  */}
 
-        <Route path='/scrb_login' element={[<LoginNav/>,<ScrbLogin/>,<Footer2/>]} />
-        <Route path='/scrb-forgetpswd' element={[<LoginNav/>,<ScrbForgetpswd/>,<Footer2/>]}/>
+        <Route path='/scrb_login' element={[<LandingNavbar/>,<ScrbLogin/>,<Footer2/>]} />
+        <Route path='/scrb-forgetpswd' element={[<LandingNavbar/>,<ScrbForgetpswd/>,<Footer2/>]}/>
         <Route path='/scrb-sidebar' element={[<LandingNavbar/>,<ScrbSidebar/>,<Footer2/>]} />
         <Route path='/scrb-dashboard' element={[<ScrbMain data="scrbdashboard"/>,<Footer2/>]}/>
         <Route path='/scrb-viewNotification' element={[<ScrbMain data="scrbviewnotification"/>,<Footer2/>]} />

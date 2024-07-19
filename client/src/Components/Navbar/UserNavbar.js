@@ -165,6 +165,11 @@ function UserNavbar() {
               </li> */}
 
               <li class="nav-item m-3">
+                <Link to='/user_view_police' class="nav-link" href="#" id="text_color_white">
+                  Police Stations
+                </Link>
+              </li>
+              <li class="nav-item m-3">
                 <Link to='/addcomplaints' class="nav-link" href="#" id="text_color_white">
                   Complaints
                 </Link>
