@@ -55,6 +55,7 @@ router.post('/viewCrimesbyDisrtict',crime.viewCrimesbyDisrtict)
 router.post('/getCaseType',crime.getCaseType)
 router.post('/viewcrimeByCitizenId/:id',crime.viewCrimeByCitizenId)
 router.post('/searchCrime',crime.searchCrime)
+router.post('/getTotalCrimesByDistrict',crime.getTotalCrimesByDistrict)
 
 
 //complaints
