@@ -46,7 +46,7 @@ const userSchema=mongoose.Schema({
         required:true
 
     },
-    state:{
+    district:{
         type:String,
         required:true
 

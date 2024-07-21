@@ -485,7 +485,82 @@ const getTotalCrimesByDistrict = async (req,res) => {
     }
   };
   
- 
+
+  // View a districts where crime occurs
+const viewdistrcitswithCrime = async (req, res) => {
+    try {
+      
+        const crime = await Crime.find({ approvalStatus: 'approved' },{district:1})
+        if (!crime) {
+            return res.json({
+                status: 404,
+                msg: "Crime not found",
+                data: null
+            });
+        }
+        res.json({
+            status: 200,
+            msg: "Crime data obtained successfully",
+            data: crime
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+  // View a districts where crime occurs
+const viewCrimesByDistrict = async (req, res) => {
+    try {
+      
+        const crime = await Crime.find({ approvalStatus: 'approved' ,district:req.params.district})
+        if (!crime) {
+            return res.json({
+                status: 404,
+                msg: "Crime not found",
+                data: null
+            });
+        }
+        res.json({
+            status: 200,
+            msg: "Crime data obtained successfully",
+            data: crime
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+const getCrimeTypeCountsByDistrict = async (req, res) => {
+    try {
+        const { district } = req.params;
+    
+        const crimeCounts = await Crime.aggregate([
+          {
+            $match: { district } 
+          },
+          {
+            $group: {
+              _id: "$caseType", 
+              count: { $sum: 1 } 
+            }
+          },
+          {
+            $project: {
+              _id: 0, 
+              type: "$_id", 
+              count: 1 
+            }
+          }        
+        ]);
+    
+        res.status(200).json({
+          status: 200,
+          msg: "Crime type counts retrieved successfully",
+          data: crimeCounts
+        });
+      } catch (error) {
+        res.status(500).json({ message: error.message });
+      }
+  };
+  
 module.exports = {
     addCrime,
     deleteCrimeById,
@@ -502,5 +577,8 @@ module.exports = {
     searchCrime,
     viewCaseTypesbyFilter,
     viewPSbyDisrtictFilter,
-    getTotalCrimesByDistrict
+    getTotalCrimesByDistrict,
+    viewdistrcitswithCrime,
+    viewCrimesByDistrict,
+    getCrimeTypeCountsByDistrict
 };
