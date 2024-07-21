@@ -73,7 +73,7 @@ function ScrbViewCaseUpdaateDetails() {
         </div>
         <div className='container mt-5 mb-5'>
           <div className='w-100 d-flex justify-content-end mb-2'>
-            <button className='btn btn-danger'>View Updates</button>
+            <Link to={`/scrb-view_case_updates/${caseDetails._id}`}><button className='btn btn-danger'>View Updates</button></Link>
           </div>
       <div className='case-details-h6 text-center pt-3'>
       <span>Case No: ID{caseDetails._id.slice(19,24)} </span>

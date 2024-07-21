@@ -54,6 +54,7 @@ import CitizenViewNotification from './Components/Citizen/CitizenViewNotificatio
 import AdminNavbar from './Components/Navbar/AdminNavbar';
 import ContactUs from './Components/Common/ContactUs';
 import CitizenViewPolice from './Components/Citizen/CitizenViewPolice';
+import PoliceViewCaseUpdates from './Components/Police/PoliceViewCaseUpdates';
 
 function App() {
   return (
@@ -96,6 +97,7 @@ function App() {
         <Route path='/approvedcasedetails/:id' element={[<PoliceNavbar/>,<CaseDetails type='view' />,<Footer/>,<Footer2/>]}/>
         <Route path='/policeprofile/:id' element={[<PoliceNavbar/>,<PoliceProfile/>,<Footer/>,<Footer2/>]} />
         <Route path='/addcaseupdate/:id' element={[<PoliceNavbar/>,<AddCaseUpdate />,<Footer/>,<Footer2/>]}/>
+        <Route path='/police_view_updates/:id' element={[<PoliceNavbar/>,<PoliceViewCaseUpdates />,<Footer/>,<Footer2/>]}/>
 
 
         {/* Scrb  */}
@@ -120,6 +122,7 @@ function App() {
         
         {/* Scrb Generate Crime Alert */}
         <Route path='/scrb-generatealert' element={[<ScrbMain data="scrb-generatealert"/>,<Footer2/>]}/>
+        <Route path='/scrb-view_case_updates/:id' element={[<ScrbMain data="scrb-view-case-updates"/>,<Footer2/>]}/>
 
         {/* Admin  */}
 

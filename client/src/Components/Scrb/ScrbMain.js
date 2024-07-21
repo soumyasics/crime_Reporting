@@ -14,6 +14,7 @@ import LoginNav from '../Navbar/LoginNav'
 import ScrbViewCaseUpdate from './ScrbViewCaseUpdate'
 import ScrbViewCaseUpdaateDetails from './ScrbViewCaseUpdaateDetails'
 import ScrbNavbar from './ScrbNavbar'
+import ScrbViewCaseUpdates from './ScrbViewCaseUpdates'
 
 function ScrbMain({data}) {
   return (
@@ -46,6 +47,8 @@ function ScrbMain({data}) {
               <ScrbViewCaseUpdate />
             ):data === "scrbviewcasereportdetail" ?(
               <ScrbViewCaseUpdaateDetails />
+            ):data === "scrb-view-case-updates" ?(
+              <ScrbViewCaseUpdates />
             ):(
            <AdminDashboard/>
            )}
