@@ -88,5 +88,7 @@ router.post('/deleteNotificationById/:id',Notifications.deleteNotificationById)
 router.post('/viewCaseTypesbyFilter',crime.viewCaseTypesbyFilter)
 router.post('/viewPSbyDisrtictFilter',crime.viewPSbyDisrtictFilter)
 router.post('/viewdistrcitswithCrime',crime.viewdistrcitswithCrime)
+router.post('/viewCrimesByDistrict/:district',crime.viewCrimesByDistrict)
+router.post('/getCrimeTypeCountsByDistrict/:district',crime.getCrimeTypeCountsByDistrict)
 
 module.exports=router
