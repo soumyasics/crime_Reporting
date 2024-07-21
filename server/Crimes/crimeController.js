@@ -485,6 +485,28 @@ const getTotalCrimesByDistrict = async (req,res) => {
     }
   };
   
+
+  // View a districts where crime occurs
+const viewdistrcitswithCrime = async (req, res) => {
+    try {
+      
+        const crime = await Crime.find({ approvalStatus: 'approved' },{district:1})
+        if (!crime) {
+            return res.json({
+                status: 404,
+                msg: "Crime not found",
+                data: null
+            });
+        }
+        res.json({
+            status: 200,
+            msg: "Crime data obtained successfully",
+            data: crime
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
  
 module.exports = {
     addCrime,
@@ -502,5 +524,6 @@ module.exports = {
     searchCrime,
     viewCaseTypesbyFilter,
     viewPSbyDisrtictFilter,
-    getTotalCrimesByDistrict
+    getTotalCrimesByDistrict,
+    viewdistrcitswithCrime
 };

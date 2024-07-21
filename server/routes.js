@@ -87,5 +87,6 @@ router.post('/deleteNotificationById/:id',Notifications.deleteNotificationById)
 //For SCRB
 router.post('/viewCaseTypesbyFilter',crime.viewCaseTypesbyFilter)
 router.post('/viewPSbyDisrtictFilter',crime.viewPSbyDisrtictFilter)
+router.post('/viewdistrcitswithCrime',crime.viewdistrcitswithCrime)
 
 module.exports=router
