@@ -533,6 +533,27 @@ const viewCrimesByDistrict = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+// View a districts where crime occurs
+const viewCrimesByDistrictPSIDAndType = async (req, res) => {
+    try {
+      
+        const crime = await Crime.find({ approvalStatus: 'approved' ,district:req.body.district,psId:req.body.psId,caseType:req.body.caseType})
+        if (!crime) {
+            return res.json({
+                status: 404,
+                msg: "Crime not found",
+                data: null
+            });
+        }
+        res.json({
+            status: 200,
+            msg: "Crime data obtained successfully",
+            data: crime
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
 const getCrimeTypeCountsByDistrict = async (req, res) => {
     try {
         const { district } = req.params;
@@ -585,5 +606,6 @@ module.exports = {
     getTotalCrimesByDistrict,
     viewdistrcitswithCrime,
     viewCrimesByDistrict,
-    getCrimeTypeCountsByDistrict
+    getCrimeTypeCountsByDistrict,
+    viewCrimesByDistrictPSIDAndType
 };

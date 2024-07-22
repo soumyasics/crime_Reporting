@@ -90,5 +90,6 @@ router.post('/viewPSbyDisrtictFilter',crime.viewPSbyDisrtictFilter)
 router.post('/viewdistrcitswithCrime',crime.viewdistrcitswithCrime)
 router.post('/viewCrimesByDistrict/:district',crime.viewCrimesByDistrict)
 router.post('/getCrimeTypeCountsByDistrict/:district',crime.getCrimeTypeCountsByDistrict)
+router.post('/viewCrimesByDistrictPSIDAndType',crime.viewCrimesByDistrictPSIDAndType)
 
 module.exports=router
