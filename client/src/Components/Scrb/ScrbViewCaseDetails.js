@@ -10,7 +10,7 @@ import { imageUrl } from '../Constants/Image_Url';
 function ScrbViewCaseDetails() {
      const [caseDetails, setCaseDetails] = useState({
         evidenceFiles: [{ file: { filename: '' } }],
-        incidentDate: ''
+        incidentDate: '',_id:''
       });
       const [showModal, setShowModal] = useState(false);
       const [selectedEvidence, setSelectedEvidence] = useState(null);
@@ -20,6 +20,7 @@ function ScrbViewCaseDetails() {
         axiosInstance
           .post(`/viewCrimeById/${id}`)
           .then((res) => {
+            console.log(res);
             if (res.data.status === 200) {
               setCaseDetails(res.data.data);
             }
