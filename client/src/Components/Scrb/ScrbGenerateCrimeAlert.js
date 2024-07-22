@@ -162,7 +162,7 @@ function ScrbGenerateCrimeAlert() {
               >
                 <option value="">Case Type</option>
                 {caseTypes.map((caseType) => (
-                  <option value={caseType.caseType}>{caseType.caseType}</option>
+                  <option value={caseType}>{caseType}</option>
                 ))}
               </select>
             </div>
