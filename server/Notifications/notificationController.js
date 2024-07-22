@@ -1,7 +1,7 @@
 const Notification = require('./notificationSchema'); 
 const addNotification = (req, res) => {
   const notification = new Notification({
-    citizenId: req.body.citizenId,
+    target: req.body.target,
     psId: req.body.psId,
     date: new Date(),
     caseType: req.body.caseType,

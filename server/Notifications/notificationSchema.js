@@ -3,10 +3,7 @@ const { Schema } = mongoose;
 const nSchema = new Schema(
     {
 
-        citizenId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "citizens"
-        },
+     
         psId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "police"
@@ -23,7 +20,13 @@ const nSchema = new Schema(
         district: {
             type: String,
 
+        },
+        target:{
+            type: String,
+            default:'all',
+            enum:['all','users','police']
         }
+
 
     })
 const complaint = mongoose.model("notifications", nSchema);
