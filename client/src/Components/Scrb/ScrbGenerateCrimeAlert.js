@@ -45,18 +45,6 @@ function ScrbGenerateCrimeAlert() {
       });
   };
 
-  // const getDistricts = () => {
-  //     axiosInstance.post("/viewallcrime")
-  //     .then((res) => {
-  //         if (res.data.status === 200) {
-  //             setDistrict(res.data.data || []);
-  //         }
-  //     })
-  //     .catch((err) => {
-  //         console.log("Error", err);
-  //     });
-  // };
-
   const getPoliceStations = () => {
     axiosInstance
       .post(`/viewPoliceByDistrict/${selectedDistrict}`)
@@ -65,7 +53,7 @@ function ScrbGenerateCrimeAlert() {
         if (res.data.status === 200) {
           setPoliceStations(res.data.data || []);
           axiosInstance
-            .post("/viewCrimesbyDisrtict",{district:selectedDistrict})
+            .post("/viewCrimesbyDisrtict", { district: selectedDistrict })
             .then((res) => {
               console.log(res);
               if (res.data.status === 200) {
@@ -85,13 +73,49 @@ function ScrbGenerateCrimeAlert() {
   };
 
   const getCaseTypes = () => {
-    console.log('psId',selectedPoliceStation);
+    console.log("psId", selectedPoliceStation);
     axiosInstance
-      .post("/viewCaseTypesbyFilter",{psId:selectedPoliceStation,district:selectedDistrict})
+      .post("/viewCaseTypesbyFilter", {
+        psId: selectedPoliceStation,
+        district: selectedDistrict,
+      })
       .then((res) => {
         console.log(res);
         if (res.data.status === 200) {
           setCaseTypes(res.data.data || []);
+          axiosInstance
+            .post(`/viewAprvdCrimeByPolicStationId/${selectedPoliceStation}`)
+            .then((res) => {
+              console.log(res);
+              if (res.data.status === 200) {
+                setData(res.data.data || []);
+              } else {
+                setData([]);
+              }
+            })
+            .catch((err) => {
+              console.log("Error", err);
+            });
+        }
+      })
+      .catch((err) => {
+        console.log("Error", err);
+      });
+  };
+
+  const getCrimeByType = () => {
+    axiosInstance
+      .post("/viewCrimesByDistrictPSIDAndType", {
+        psId: selectedPoliceStation,
+        district: selectedDistrict,
+        caseType: selectedCaseType,
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.data.status === 200) {
+          setData(res.data.data || []);
+        } else {
+          setData([]);
         }
       })
       .catch((err) => {
@@ -101,13 +125,15 @@ function ScrbGenerateCrimeAlert() {
 
   useEffect(() => {
     getData();
-    // getDistricts();
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     getCaseTypes();
+  }, [selectedPoliceStation]);
 
-  },[selectedPoliceStation])
+  useEffect(() => {
+    getCrimeByType();
+  }, [selectedCaseType]);
 
   useEffect(() => {
     if (selectedDistrict) {
@@ -172,7 +198,33 @@ function ScrbGenerateCrimeAlert() {
               Filtered Case Details({data.length})
             </div>
             <div className="col-md-6">
-              <button className="btn btn-danger">Generate Alert</button>
+              <div class="dropdown">
+                <button
+                  class="btn btn-danger dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Generate Alert
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      Action
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      Another action
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      Something else here
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

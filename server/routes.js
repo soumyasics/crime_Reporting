@@ -43,7 +43,6 @@ router.post('/viewPoliceCaseByCrimeId/:id',PoliceCase.viewPoliceCaseByCrimeId)//
 
 //Crime Routes
 
-
 router.post('/addcrime',crime.upload,crime.addCrime)
 router.post('/viewallcrime',crime.viewAllCrimes)
 router.post('/viewCrimeById/:id',crime.viewCrimeById)
