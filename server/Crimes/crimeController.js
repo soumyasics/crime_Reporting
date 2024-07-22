@@ -348,28 +348,33 @@ const viewCrimesbyDisrtict = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
-
 const viewCaseTypesbyFilter = async (req, res) => {
     try {
+        const crime = await Crime.find(
+            { psId: req.body.psId, district: req.body.district, approvalStatus: 'approved' },
+            { caseType: 1 }
+        ).populate('psId');
 
-        const crime = await Crime.find({ psId: req.body.psId,district: req.body.district,approvalStatus:'approved' },{caseType:1})
-        .populate('psId')
-        if (!crime) {
+        if (!crime || crime.length === 0) {
             return res.json({
                 status: 404,
                 msg: "Crime not found",
                 data: null
             });
         }
+
+        const uniqueCaseTypes = [...new Set(crime.map(c => c.caseType))];
+
         res.json({
             status: 200,
             msg: "Crime data obtained successfully",
-            data: crime
+            data: uniqueCaseTypes
         });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
+
 
 const viewPSbyDisrtictFilter = async (req, res) => {
     try {
