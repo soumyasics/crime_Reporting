@@ -9,7 +9,7 @@ import { imageUrl } from '../Constants/Image_Url';
 function ViewCrimeStatus() {
     const [caseDetails, setCaseDetails] = useState({
         evidenceFiles: [{ file: { filename: "" } }],
-        incidentDate: '',
+        incidentDate: '',_id:''
       });
       const [showModal, setShowModal] = useState(false);
       const [selectedEvidence, setSelectedEvidence] = useState(null);
@@ -40,7 +40,7 @@ function ViewCrimeStatus() {
       };
     
       const getMediaElement = (file) => {
-        if (!file || !file.filename) return <p>File not found.</p>;
+        if (!file || !file.filename) return <p>File not found.</p>; 
     
         const fileExtension = file.filename.split(".").pop().toLowerCase();
         const fileUrl = `${imageUrl}/${file.filename}`;
@@ -68,7 +68,7 @@ function ViewCrimeStatus() {
     <div>
         <div className="container mt-5 mb-5">
       <div className="case-details-h6 text-center pt-3">
-        <span>Case No: 203 </span>
+        <span>Case No: ID{caseDetails._id.slice(19,24)} </span>
       </div>
       <div className="row mt-5">
         <div className="col">

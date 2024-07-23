@@ -38,11 +38,10 @@ router.post('/addpolicecases',PoliceCase.addPoliceCase)
 router.post('/viewpolicecases',PoliceCase.viewPoliceCases)
 router.post('/viewpolicecase/:id',PoliceCase.viewPoliceCaseById)
 router.post('/viewpolicecaseByCitizenId/:id',PoliceCase.viewPoliceCaseByCitizenId)
-router.post('/viewPoliceCaseByCrimeId/:id',PoliceCase.viewPoliceCaseByCrimeId)
+router.post('/viewPoliceCaseByCrimeId/:id',PoliceCase.viewPoliceCaseByCrimeId)//new
 
 
 //Crime Routes
-
 
 router.post('/addcrime',crime.upload,crime.addCrime)
 router.post('/viewallcrime',crime.viewAllCrimes)

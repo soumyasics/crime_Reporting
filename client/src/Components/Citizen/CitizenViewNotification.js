@@ -1,6 +1,8 @@
-import React from 'react'
 import '../../Assets/Styles/Notification.css'
 import { GoAlertFill } from "react-icons/go";
+import React, { useEffect, useState } from "react";
+import axiosInstance from "../Constants/BaseUrl";
+import { useParams } from "react-router-dom";
 
 
 const notifications = [
@@ -10,6 +12,30 @@ const notifications = [
   ];
 
 function CitizenViewNotification() {
+
+  const [data, setData] = useState([]);
+
+  const id=localStorage.getItem('citizenToken')
+
+  const getData = () => {
+    axiosInstance
+      .post(`/viewNotificationByCitizenId/${id}`)
+      .then((res) => {
+        console.log(res);
+        if (res.data.status === 200) {
+          setData(res.data.data || []);
+        } else {
+          setData([]);
+        }
+      })
+      .catch((err) => {
+        console.log("Error", err);
+      });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+  
   return (
     <div className='notification_main_div'>
         <div className="notifications-table">
@@ -21,8 +47,8 @@ function CitizenViewNotification() {
             className={`notification-row ${notification.isHighPriority ? 'high-priority' : ''}`}
             >
             <div className="notification-icon"><GoAlertFill /></div>
-            <div className="notification-message">{notification.message}</div>
-            <button className="view-details-btn">View Details</button>
+            <div className="notification-message">High Crime Alert! The crime rate in Downtown is currently high. Stay alert and report any suspicious activity immediately</div>
+            {/* <button className="view-details-btn">View Details</button> */}
             <div className="notification-date">{notification.date}</div>
             </div> 
         ))}

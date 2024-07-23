@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axiosInstance from '../Constants/BaseUrl';
+import ScrbBarChart from './ScrbBarChart';
 
 function ScrbDashboard() {
 
@@ -91,6 +92,9 @@ function ScrbDashboard() {
             </div>
           </div>
         </div>
+
+        <ScrbBarChart/>
+
       </div>
     </div>
   )

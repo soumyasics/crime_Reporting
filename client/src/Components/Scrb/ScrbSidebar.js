@@ -50,7 +50,7 @@ function ScrbSidebar() {
             <Link to="/scrb-generatealert" className='scrb-sidebar-h5'><h5 className="pt-4 fw-light"><FaBell /> Generate Crime Alerts</h5></Link>
             <Link to='/scrb-viewNotification' className='scrb-sidebar-h5'><h5 className="pt-4 fw-light"><MdNotificationAdd /> View Crime Alerts</h5></Link>
             <Link to='/scrb-viewcasereport' className='scrb-sidebar-h5'><h5 className="pt-4 fw-light"><TbFileReport /> Case Report</h5></Link>
-            <Link className='scrb-sidebar-h5'><h5 className="pt-4 fw-light"><IoSearch /> Search</h5></Link>
+            {/* <Link className='scrb-sidebar-h5'><h5 className="pt-4 fw-light"><IoSearch /> Search</h5></Link> */}
             <Link to='/' className='scrb-sidebar-h5' onClick={handleLogout} ><h5 className="pt-4 fw-light"><MdOutlineLogout/> Logout</h5></Link>
         </div>
       </div>

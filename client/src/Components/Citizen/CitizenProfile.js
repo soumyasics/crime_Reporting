@@ -66,7 +66,7 @@ function CitizenProfile() {
     password: userDetails.password || '',
     housename: userDetails.housename || '',
     street: userDetails.street || '',
-    state: userDetails.state || '',
+    district: userDetails.district || '',
     nationality: userDetails.nationality || '',
     pincode: userDetails.pincode || '',
     gender: userDetails.gender || '',
@@ -225,15 +225,15 @@ function CitizenProfile() {
               <input
                 type="text"
                 className="form-control user_inp"
-                id="state"
-                placeholder="State"
-                value={values.state}
+                id="district"
+                placeholder="District"
+                value={values.district}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                name="state"
+                name="district"
               />
-              {errors.state && touched.state && (
-                <span className="text-danger">{errors.state}</span>
+              {errors.district && touched.district && (
+                <span className="text-danger">{errors.district}</span>
               )}
             </div>
             <div className="col-6 mt-2">

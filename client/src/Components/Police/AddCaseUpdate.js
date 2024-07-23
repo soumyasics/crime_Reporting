@@ -80,7 +80,7 @@ function AddCaseUpdate() {
         navigate(-1)
       })
       .catch(error => {
-        console.error('Error adding police case:', error);
+        console.log('Error adding police case:', error);
         toast.error("Failed to update case");
       });
   };
@@ -133,6 +133,7 @@ function AddCaseUpdate() {
                 name='date'
                 value={caseData.date}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>
@@ -148,6 +149,7 @@ function AddCaseUpdate() {
                 name='status'
                 value={caseData.status}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>
@@ -163,6 +165,7 @@ function AddCaseUpdate() {
                 name='description'
                 value={caseData.description}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>

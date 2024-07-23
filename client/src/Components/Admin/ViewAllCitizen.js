@@ -49,7 +49,7 @@ function ViewAllCitizen() {
                         <th scope="col">Name</th>
                         <th scope="col">Gender</th>
                         <th scope="col">Contact</th>
-                        <th scope="col">State</th>
+                        <th scope="col">District</th>
                         <th scope="col">Nationalty</th>
                         <th scope="col">Pincode</th>
                         <th scope="col">Action</th>
@@ -62,7 +62,7 @@ function ViewAllCitizen() {
                             <td>{citizenview.firstname} {citizenview.lastname}</td>
                             <td>{citizenview.gender}</td>
                             <td>{citizenview.contact}</td>
-                            <td>{citizenview.state}</td>
+                            <td>{citizenview.district}</td>
                             <td>{citizenview.nationality}</td>
                             <td>{citizenview.pincode}</td>
                             <td >

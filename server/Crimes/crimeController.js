@@ -537,7 +537,7 @@ const viewCrimesByDistrict = async (req, res) => {
 const viewCrimesByDistrictPSIDAndType = async (req, res) => {
     try {
       
-        const crime = await Crime.find({ approvalStatus: 'approved' ,district:req.body.district,psId:req.body.psId,caseType:req.body.caseType})
+        const crime = await Crime.find({ approvalStatus: 'approved' ,district:req.body.district,psId:req.body.psId,caseType:req.body.caseType}).populate('psId')
         if (!crime) {
             return res.json({
                 status: 404,

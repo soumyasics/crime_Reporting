@@ -62,7 +62,7 @@ export const CitizenRegistrationSchema = yup.object().shape({
     .min(2, "Enter minimum 2 characters")
     .max(20, "Maximum 20 characters are allowed")
     .required("Required"),
-  state: yup
+  district: yup
     .string()
     .min(2, "Enter minimum 2 characters")
     .max(20, "Maximum 20 characters are allowed")
@@ -125,11 +125,7 @@ export const PoliceRegistrationSchema = yup.object().shape({
     .min(2, "Enter minimum 2 characters")
     .max(Infinity, "Maximum 20 characters are allowed")
     .required("Required"),
-  state: yup
-    .string()
-    .min(2, "Enter minimum 2 characters")
-    .max(20, "Maximum 20 characters are allowed")
-    .required("Required"),
+
   password: yup
     .string()
     .matches(
