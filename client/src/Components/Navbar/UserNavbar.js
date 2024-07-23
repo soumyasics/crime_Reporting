@@ -124,7 +124,7 @@ function UserNavbar() {
                         View Crime Status
                       </Link>
                       <Link to='/viewcrimestatus' class="nav-link"  id="text_color_black">
-                        Recent Crime
+                        Nearby Cases
                       </Link>
                   </li>
                 </ul>
