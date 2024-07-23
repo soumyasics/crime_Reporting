@@ -56,7 +56,7 @@ function AdminNavbar() {
                   Home
                 </Link>
               </li>
-              <div className="dropdown-center" >
+              {/* <div className="dropdown-center" >
               <li className="nav-item m-3">
                 <Link
                   to="#"
@@ -88,7 +88,7 @@ function AdminNavbar() {
                   </li>
                 </ul>
               </li>
-              </div>
+              </div> */}
               <li className="nav-item m-3">
                 <Link
                   to='/'

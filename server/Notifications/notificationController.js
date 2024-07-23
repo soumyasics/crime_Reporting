@@ -28,7 +28,7 @@ const addNotification = (req, res) => {
 
 const viewAllNotifications = (req, res) => {
   Notification.find()
-    .populate('citizenId psId')
+    .populate('psId')
     .exec()
     .then(notifications => {
       res.status(200).json({

@@ -585,7 +585,7 @@ const viewPoliceCaseByCitizenId = (req, res) => {
 
 const viewPoliceCaseByCrimeId = (req, res) => {
     const crimeId = req.params.id;
-    PoliceCase.findOne({ crimeId: crimeId })
+    PoliceCase.find({ crimeId: crimeId })
         .populate("citizenId")
         .then(data => {
             if (!data) {
