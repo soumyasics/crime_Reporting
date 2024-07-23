@@ -40,7 +40,7 @@ function ViewCrimeReport() {
 
   useEffect(()=>{
     axiosInstance
-      .post(`/viewCrimesbyDisrtict`,{district:user.district}) 
+      .post(`/viewCrimesByDistrict/${user.district}`) 
       .then((res) => {
         console.log(res);
         if (res.data.status === 200) {
