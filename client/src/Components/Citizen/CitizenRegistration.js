@@ -64,7 +64,6 @@ function CitizenRegistration() {
         password: "",
         housename: "",
         street: "",
-        state: "",
         district: "", // new field
         nationality: "",
         pincode: "",
@@ -259,21 +258,7 @@ function CitizenRegistration() {
                     <span className="text-danger">{errors.street}</span>
                   )}
                 </div>
-                <div className="col-6 mt-2">
-                  <input
-                    type="text"
-                    className="form-control user_inp"
-                    id="exampleFormControlInput1"
-                    placeholder="State"
-                    value={values.state}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    name="state"
-                  />
-                  {errors.state && touched.state && (
-                    <span className="text-danger">{errors.state}</span>
-                  )}
-                </div>
+
                 <div className="col-6 mt-2">
                   <select
                     className="form-control user_inp"

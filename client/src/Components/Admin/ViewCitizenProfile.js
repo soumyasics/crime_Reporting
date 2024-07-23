@@ -103,10 +103,10 @@ function ViewCitizenProfile() {
             <input
               type="text"
               className="form-control user_inp"
-              id="state"
-              placeholder="State"
-              name="state"
-              value={userDetails.state || ''}
+              id="district"
+              placeholder="District"
+              name="district"
+              value={userDetails.district || ''}
               readOnly
             />
           </div>

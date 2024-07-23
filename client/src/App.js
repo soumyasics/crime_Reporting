@@ -55,6 +55,7 @@ import AdminNavbar from './Components/Navbar/AdminNavbar';
 import ContactUs from './Components/Common/ContactUs';
 import CitizenViewPolice from './Components/Citizen/CitizenViewPolice';
 import PoliceViewCaseUpdates from './Components/Police/PoliceViewCaseUpdates';
+import PoliceViewAlerts from './Components/Police/PoliceViewAlerts';
 
 function App() {
   return (
@@ -98,6 +99,7 @@ function App() {
         <Route path='/policeprofile/:id' element={[<PoliceNavbar/>,<PoliceProfile/>,<Footer/>,<Footer2/>]} />
         <Route path='/addcaseupdate/:id' element={[<PoliceNavbar/>,<AddCaseUpdate />,<Footer/>,<Footer2/>]}/>
         <Route path='/police_view_updates/:id' element={[<PoliceNavbar/>,<PoliceViewCaseUpdates />,<Footer/>,<Footer2/>]}/>
+        <Route path='/police_view_alerts' element={[<PoliceNavbar/>,<PoliceViewAlerts />,<Footer/>,<Footer2/>]}/>
 
 
         {/* Scrb  */}
@@ -107,7 +109,7 @@ function App() {
         <Route path='/scrb-sidebar' element={[<LandingNavbar/>,<ScrbSidebar/>,<Footer2/>]} />
         <Route path='/scrb-dashboard' element={[<ScrbMain data="scrbdashboard"/>,<Footer2/>]}/>
         <Route path='/scrb-viewNotification' element={[<ScrbMain data="scrbviewnotification"/>,<Footer2/>]} />
-        <Route path='/scrb-viewNotificationdetails' element={[<ScrbMain data="scrbviewnotificationdetails"/>,<Footer2/>]} />
+        <Route path='/scrb-viewNotificationdetails/:id' element={[<ScrbMain data="scrbviewnotificationdetails"/>,<Footer2/>]} />
         <Route path='/scrb-vieweachNotification' element={[<ScrbMain data="scrbvieweachnotification"/>,<Footer2/>]} />
         <Route path='/scrb-viewcasereport' element={[<ScrbMain data="scrbviewcasereport"/>,<Footer2/>]} />
         <Route path='/scrb-viewcasereportdetail/:id' element={[<ScrbMain data="scrbviewcasereportdetail"/>,<Footer2/>]} />
@@ -133,7 +135,7 @@ function App() {
         <Route path='/admin-editprivacypolicy' element={[<AdminNavbar/>,<AdminMain data="editprivacypolicy"/>,<Footer2/>]} />
         <Route path='/admin-viewprivacypolicy' element={[<AdminNavbar/>,<AdminMain data="viewprivacypolicy"/>,<Footer2/>]} />
         <Route path='/admin-viewNotification' element={[<AdminNavbar/>,<AdminMain data="adminviewnotification"/>,<Footer2/>]} />
-        <Route path='/admin-viewNotificationDetails' element={[<AdminNavbar/>,<AdminMain data="adminviewnotificationdetail"/>,<Footer2/>]} />
+        <Route path='/admin-viewNotificationDetails/:id' element={[<AdminNavbar/>,<AdminMain data="adminviewnotificationdetail"/>,<Footer2/>]} />
         <Route path='/admin-vieweachNotification' element={[<AdminNavbar/>,<AdminMain data="adminvieweachnotification"/>,<Footer2/>]} />
         <Route path='/admin-viewcomplaints' element={[<AdminNavbar/>,<AdminMain data="adminviewcomplaints"/>,<Footer2/>]} />
         <Route path='/admin-viewcasereport' element={[<AdminNavbar/>,<AdminMain data="anminviewcasereport"/>,<Footer2/>]} />
@@ -150,6 +152,7 @@ function App() {
         <Route path='/admin_viewallpolice/:id' element={[<AdminNavbar/>,<AdminMain data="viewallpoliceprofile"/>,<Footer2/>]}/>
         <Route path='/viewallpolicereq/:id' element={[<AdminNavbar/>,<AdminMain data="viewallpolicereqprofile"/>,<Footer2/>]}/>
         <Route path='/newpolicestationreq' element={[<AdminNavbar />,<AdminMain data="newpolicestationreq"/>,<Footer2/>]} />
+        <Route path='/admin-view_case_updates/:id' element={[<AdminNavbar />,<AdminMain data="admin-view-case-updates"/>,<Footer2/>]} />
 
         {/* Admin View Citizen */}
         <Route path='/viewcitizens' element={[<AdminNavbar/>,<AdminMain data="viewallcitizen"/>,<Footer2/>]} />

@@ -124,7 +124,7 @@ function UserNavbar() {
                         View Crime Status
                       </Link>
                       <Link to='/viewcrimestatus' class="nav-link"  id="text_color_black">
-                        View Crime
+                        Recent Crime
                       </Link>
                   </li>
                 </ul>
@@ -174,16 +174,12 @@ function UserNavbar() {
                   Complaints
                 </Link>
               </li>
-              {/* <li class="nav-item m-3">
+              <li class="nav-item m-3">
                 <Link class="nav-link" to='/viewnotification' id="text_color_white">
                   View Alerts
                 </Link>
               </li>
-              <li class="nav-item m-3">
-                <a class="nav-link" href="#" id="text_color_white">
-                  Police Station
-                </a>
-              </li> */}
+       
               
               <li class="nav-item m-3">
                

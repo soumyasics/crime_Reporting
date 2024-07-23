@@ -129,6 +129,7 @@ function ScrbBarChart() {
               textAnchor="start"
               interval={0}
               dy={10}
+              fontSize={12}
             />
             <YAxis />
             <Tooltip />

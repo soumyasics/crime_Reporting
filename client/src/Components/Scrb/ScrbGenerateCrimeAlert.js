@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axiosInstance from "../Constants/BaseUrl";
 import { Link } from "react-router-dom";
 import { IoEyeSharp } from "react-icons/io5";
+import { toast } from "react-toastify";
 
 function ScrbGenerateCrimeAlert() {
   const [data, setData] = useState([]);
@@ -11,6 +12,7 @@ function ScrbGenerateCrimeAlert() {
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [selectedPoliceStation, setSelectedPoliceStation] = useState("");
   const [selectedCaseType, setSelectedCaseType] = useState("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const district = [
     "Alappuzha",
@@ -144,6 +146,36 @@ function ScrbGenerateCrimeAlert() {
     getData();
   }, [selectedDistrict]);
 
+  useEffect(() => {
+    if (selectedPoliceStation && selectedDistrict && selectedCaseType) {
+      setIsButtonDisabled(false);
+    } else {
+      setIsButtonDisabled(true);
+    }
+  }, [selectedPoliceStation, selectedDistrict, selectedCaseType]);
+
+  const submit = (target) => {
+    console.log(target);
+    axiosInstance
+      .post("/addNotification", {
+        target: target,
+        psId: selectedPoliceStation,
+        district: selectedDistrict,
+        caseType: selectedCaseType,
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.data.status === 200) {
+          toast.success(`Alert sent to ${target}`);
+        } else {
+          setData([]);
+        }
+      })
+      .catch((err) => {
+        console.log("Error", err);
+      });
+  };
+
   return (
     <div>
       <div className="container">
@@ -198,30 +230,46 @@ function ScrbGenerateCrimeAlert() {
               Filtered Case Details({data.length})
             </div>
             <div className="col-md-6">
-              <div class="dropdown">
+              <div className="dropdown">
                 <button
-                  class="btn btn-danger dropdown-toggle"
+                  className="btn btn-danger dropdown-toggle"
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
+                  disabled={isButtonDisabled}
                 >
                   Generate Alert
                 </button>
-                <ul class="dropdown-menu">
+                <ul className="dropdown-menu">
                   <li>
-                    <a class="dropdown-item" href="#">
-                      Action
-                    </a>
+                    <Link
+                      className="dropdown-item"
+                      onClick={() => {
+                        submit("all");
+                      }}
+                    >
+                      All
+                    </Link>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
-                      Another action
-                    </a>
+                    <Link
+                      className="dropdown-item"
+                      onClick={() => {
+                        submit("police");
+                      }}
+                    >
+                      Police Station
+                    </Link>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
-                      Something else here
-                    </a>
+                    <Link
+                      className="dropdown-item"
+                      onClick={() => {
+                        submit("users");
+                      }}
+                    >
+                      Users
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -246,7 +294,7 @@ function ScrbGenerateCrimeAlert() {
               </thead>
               <tbody className="text-center">
                 {data.map((caseview, index) => (
-                  <tr>
+                  <tr key={index}>
                     <th>{index + 1}</th>
                     <td>{caseview.psId.policestationname}</td>
                     <td>{caseview.victimName}</td>
