@@ -81,6 +81,7 @@ router.post('/viewNotificationById/:id',Notifications.viewNotificationById)
 router.post('/viewNotificationByPliceId/:id',Notifications.viewNotificationByPliceId)
 router.post('/viewNotificationsByFilter/:id',Notifications.viewNotificationsByFilter)
 router.post('/deleteNotificationById/:id',Notifications.deleteNotificationById)
+router.post('/viewAllNotificationsforCitizen/:id',Notifications.viewAllNotificationsforCitizen)
 
 
 //For SCRB
