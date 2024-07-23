@@ -1,4 +1,5 @@
 const Notification = require('./notificationSchema'); 
+const Citizen=require('../Citizen/citizenSchema')
 const addNotification = (req, res) => {
   const notification = new Notification({
     target: req.body.target,
@@ -153,6 +154,43 @@ const viewNotificationsByFilter = (req, res) => {
     });
 };
 
+const viewAllNotificationsforCitizen = async (req, res) => {
+  try {
+    const citizenId = req.params.id;
+
+    // Find the citizen by ID to get their district
+    const citizen = await Citizen.findById(citizenId);
+    if (!citizen) {
+      return res.status(404).json({
+        status: 404,
+        message: "Citizen not found",
+      });
+    }
+
+    // Find notifications for the citizen's district
+    const notifications = await Notification.find({
+      district: citizen.district,
+      target: { $in: ['all', 'users'] }
+    })
+      .populate('psId')
+      .exec();
+
+    res.status(200).json({
+      status: 200,
+      message: "Notifications retrieved successfully",
+      data: notifications,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      status: 500,
+      message: "Error retrieving notifications",
+      error: err,
+    });
+  }
+};
+
+
 module.exports = {
   addNotification,
   viewAllNotifications,
@@ -160,5 +198,6 @@ module.exports = {
   deleteNotificationById,
   viewNotificationByCitizenId,
   viewNotificationsByFilter,
-  viewNotificationByPliceId
+  viewNotificationByPliceId,
+  viewAllNotificationsforCitizen
 };
