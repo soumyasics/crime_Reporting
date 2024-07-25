@@ -497,7 +497,7 @@ function CaseDetails({ type }) {
 
         <div className="col">
           <div className="case-details-span">
-            <span>Incident Details</span>
+            <span>Evidence Details</span>
           </div>
           <div className="mt-4 container ms-4">
             <div className="row">

@@ -46,7 +46,7 @@ function ScrbSidebar() {
 
 
             <Link to='/scrb-viewallpolicestation' className='scrb-sidebar-h5'><h5 className="pt-4 fw-light"><PiBuildingOfficeFill /> Police Station</h5></Link>
-            <Link to='/scrb_viewallcases'className='scrb-sidebar-h5'><h5 className="pt-4 fw-light"><FaFileLines /> Crimes</h5></Link>
+            {/* <Link to='/scrb_viewallcases'className='scrb-sidebar-h5'><h5 className="pt-4 fw-light"><FaFileLines /> Crimes</h5></Link> */}
             <Link to="/scrb-generatealert" className='scrb-sidebar-h5'><h5 className="pt-4 fw-light"><FaBell /> Generate Crime Alerts</h5></Link>
             <Link to='/scrb-viewNotification' className='scrb-sidebar-h5'><h5 className="pt-4 fw-light"><MdNotificationAdd /> View Crime Alerts</h5></Link>
             <Link to='/scrb-viewcasereport' className='scrb-sidebar-h5'><h5 className="pt-4 fw-light"><TbFileReport /> Case Report</h5></Link>
