@@ -6,6 +6,12 @@ import axiosInstance from "../Constants/BaseUrl";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
+const districts = [
+  "Alappuzha", "Ernakulam", "Idukki", "Kannur", "Kasaragod", "Kollam",
+  "Kottayam", "Kozhikode", "Malappuram", "Palakkad", "Pathanamthitta",
+  "Thiruvananthapuram", "Thrissur", "Wayanad"
+];
+
 function CitizenProfile() { 
   const [userDetails, setUserDetails] = useState({});
   const navigate = useNavigate();
@@ -222,16 +228,21 @@ function CitizenProfile() {
               )}
             </div>
             <div className="col-6 mt-2">
-              <input
-                type="text"
+              <select
                 className="form-control user_inp"
                 id="district"
-                placeholder="District"
+                name="district"
                 value={values.district}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                name="district"
-              />
+              >
+                <option value="">Select District</option>
+                {districts.map((district) => (
+                  <option key={district} value={district}>
+                    {district}
+                  </option>
+                ))}
+              </select>
               {errors.district && touched.district && (
                 <span className="text-danger">{errors.district}</span>
               )}

@@ -54,6 +54,7 @@ function ViewCaseReport() {
             <tr className="">
               <th scope="col">Sl/No</th>
               <th scope="col">PoliceStation Name</th>
+              <th scope="col">District</th>
               <th scope="col">Victim Name</th>
               <th scope="col">Type of Crime</th>
               <th scope="col">Witness Name</th>
@@ -65,6 +66,7 @@ function ViewCaseReport() {
             {data.map((caseview, index) => (
               <tr>
                 <th>{index + 1}</th>
+                <td>{caseview.psId.policestationname}</td>
                 <td>{caseview.district}</td>
                 <td>{caseview.victimName}</td>
                 <td>{caseview.caseType}</td>

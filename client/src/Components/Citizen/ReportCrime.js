@@ -575,14 +575,15 @@ function ReportCrime() {
                 <label>Date</label>
               </div>
               <div className="mt-2">
-                <input
-                  type="date"
-                  className="report-crime-textbox ps-3"
-                  name="incidentDate"
-                  value={formData.incidentDate}
-                  onChange={handleChange}
-                  required
-                ></input>
+              <input
+  type="date"
+  className="report-crime-textbox ps-3"
+  name="incidentDate"
+  value={formData.incidentDate}
+  onChange={handleChange}
+  max={new Date().toISOString().split("T")[0]} // Sets the max attribute to today's date
+  required
+></input>
                 
               </div>
               <div className="mt-3">

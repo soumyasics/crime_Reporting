@@ -442,7 +442,8 @@ function ViewCaseUpdateDetail() {
                         className="evidence-icon"
                         onClick={() => handleViewEvidence(evidence)}
                       />
-                      <span className="evidence-label">{evidence.label}</span>
+                      <span onClick={() => handleViewEvidence(evidence)}
+                      className="evidence-label mx-2 text-decoration-underline">Link</span>
                     </div>
                   </div>
                 ))}

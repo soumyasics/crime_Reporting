@@ -5,6 +5,12 @@ import axiosInstance from '../Constants/BaseUrl';
 import { toast } from 'react-toastify';
 import station from '../../Assets/Images/policestation.png';
 
+const districts = [
+  "Alappuzha", "Ernakulam", "Idukki", "Kannur", "Kasaragod", "Kollam",
+  "Kottayam", "Kozhikode", "Malappuram", "Palakkad", "Pathanamthitta",
+  "Thiruvananthapuram", "Thrissur", "Wayanad"
+];
+
 function PoliceProfile() {
   const [userDetails, setUserDetails] = useState({});
   const [formData, setFormData] = useState({
@@ -74,7 +80,7 @@ function PoliceProfile() {
       setFormData((prevState) => ({
         ...prevState,
         [name]: value,
-        img:prevState.img||formData.img
+        img: prevState.img || formData.img,
       }));
     }
     setErrors((prevState) => ({
@@ -156,7 +162,7 @@ function PoliceProfile() {
         <form onSubmit={handleSubmit}>
           <div className='row'>
             <div className='col-6'>
-              <img src={station} className='img-fluid' alt="station" style={{height:'300px'}} />
+              <img src={station} className='img-fluid' alt="station" style={{ height: '300px' }} />
             </div>
             <div className='col-6'>
               <div className="row">
@@ -245,15 +251,20 @@ function PoliceProfile() {
                   )}
                 </div>
                 <div className="col-6 mt-2">
-                  <input
-                    type="text"
+                  <select
                     className="form-control user_inp"
                     id="district"
-                    placeholder="District"
+                    name="district"
                     value={formData.district}
                     onChange={handleChange}
-                    name="district"
-                  />
+                  >
+                    <option value="">Select District</option>
+                    {districts.map((district) => (
+                      <option key={district} value={district}>
+                        {district}
+                      </option>
+                    ))}
+                  </select>
                   {errors.district && (
                     <span className="text-danger">{errors.district}</span>
                   )}
@@ -286,4 +297,4 @@ function PoliceProfile() {
   );
 }
 
-export default PoliceProfile
+export default PoliceProfile;
