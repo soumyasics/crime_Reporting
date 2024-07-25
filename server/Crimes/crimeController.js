@@ -281,7 +281,7 @@ const viewCrimeById = async (req, res) => {
 };
 // View all crimes
 const viewAllCrimes = (req, res) => {
-    Crime.find().populate('psId')
+    Crime.find({approvalStatus:'approved'}).populate('psId')
         .exec()
         .then(data => {
             if (data.length > 0) {
@@ -331,7 +331,7 @@ const viewAprvdCrimeByPolicStationId = async (req, res) => {
 const viewCrimesbyDisrtict = async (req, res) => {
     try {
 
-        const crime = await Crime.find({ district: req.body.district }).populate('psId').populate('citizenId')
+        const crime = await Crime.find({ district: req.body.district ,approvalStatus:'approved'}).populate('psId').populate('citizenId')
         if (!crime) {
             return res.json({
                 status: 404,
@@ -465,6 +465,11 @@ const getTotalCrimesByDistrict = async (req,res) => {
     try {
       const result = await Crime.aggregate([
         {
+            $match: {
+             approvalStatus:'approved'
+            }
+          },
+        {
           $group: {
             _id: "$district",
             totalCrimes: { $sum: 1 }
@@ -559,6 +564,11 @@ const getCrimeTypeCountsByDistrict = async (req, res) => {
         const { district } = req.params;
     
         const crimeCounts = await Crime.aggregate([
+            {
+                $match: {
+                 approvalStatus:'approved'
+                }
+              },
           {
             $match: { district } 
           },
