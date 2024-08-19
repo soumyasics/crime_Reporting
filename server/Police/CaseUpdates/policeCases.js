@@ -34,6 +34,6 @@ const caseSchema = new Schema(
             required:true
 
         }
-    })
+    },{timestamps:true})
 const complaint = mongoose.model("policecases", caseSchema);
 module.exports = complaint;
