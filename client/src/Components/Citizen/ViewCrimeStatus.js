@@ -13,6 +13,7 @@ function ViewCrimeStatus() {
       });
       const [showModal, setShowModal] = useState(false);
       const [selectedEvidence, setSelectedEvidence] = useState(null);
+      const [caseUpdate,setCaseUpdate]=useState('')
       const { id } = useParams();
       const navigate = useNavigate();
     
@@ -24,6 +25,19 @@ function ViewCrimeStatus() {
             
             if (res.data.status === 200) {
               setCaseDetails(res.data.data);
+            }
+          })
+          .catch((err) => {
+            toast.error("Failed to fetch user details");
+          });
+
+        axiosInstance
+          .post(`/viewPoliceCaseByCrimeIdForCitizen/${id}`)
+          .then((res) => {
+            console.log(res);
+            
+            if (res.data.status === 200) {
+              setCaseUpdate(res.data.data[0]);
             }
           })
           .catch((err) => {
@@ -377,8 +391,8 @@ function ViewCrimeStatus() {
         <div className='col-6'></div>
         <div className='col-6 text-center'>
             <div className='req_status_citizen'>
-              <h4>Request Status : { }
-                {caseDetails.approvalStatus === "approved" && (
+              <h4>Status : { }
+                {/* {caseDetails.approvalStatus === "approved" && (
                       <label className='text-success font_style_status'>{caseDetails.approvalStatus}</label>
                 )}
                 {caseDetails.approvalStatus === "pending" && (
@@ -386,7 +400,8 @@ function ViewCrimeStatus() {
                 )}
                 {caseDetails.approvalStatus === "rejected" && (
                       <label className='text-danger font_style_status'>{caseDetails.approvalStatus}</label>
-                )}
+                )} */}
+                {caseUpdate?.status?caseUpdate.status:caseDetails.approvalStatus}
             </h4>
             </div>
             </div>

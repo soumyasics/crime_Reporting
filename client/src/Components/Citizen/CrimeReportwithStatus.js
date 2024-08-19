@@ -75,6 +75,9 @@ function CrimeReportwithStatus() {
                                         {caseData.approvalStatus === "rejected" && (
                                             <label className='text-danger approval_status'>{caseData.approvalStatus}</label>
                                         )}
+                                        {caseData.approvalStatus === "closed" && (
+                                            <label className='text-danger approval_status'>{caseData.approvalStatus}</label>
+                                        )}
                                     </td>
                                 </tr>
                             ))}
