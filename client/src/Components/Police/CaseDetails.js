@@ -22,6 +22,8 @@ function CaseDetails({ type }) {
     axiosInstance
       .post(`/viewCrimeById/${id}`)
       .then((res) => {
+        console.log(res);
+        
         if (res.data.status === 200) {
           setCaseDetails(res.data.data);
           localStorage.setItem("crimeId", res.data.data._id);
@@ -539,9 +541,12 @@ function CaseDetails({ type }) {
         </div>
       ) : (
         <div className="text-center mt-4">
-          <button className="btn btn-danger me-3" onClick={handleAddUpdates}>
+          {
+            caseDetails.approvalStatus!='closed'? <button className="btn btn-danger me-3" onClick={handleAddUpdates}>
             Add Updates
-          </button>
+          </button>:''
+          }
+         
           <Link to={`/police_view_updates/${caseDetails._id}`}><button className="btn btn-danger me-3">View Updates</button></Link>
         </div>
       )}

@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
     },
   }); 
 
-  const crimeSchema = require("../Crimes/crimeSchema");
+//   const crimeSchema = require("../Crimes/crimeSchema");
 
   
   const upload = multer({ storage: storage }).single("idProof");
