@@ -11,6 +11,9 @@ const storage = multer.diskStorage({
       cb(null, file.originalname);
     },
   }); 
+
+  const crimeSchema = require("../Crimes/crimeSchema");
+
   
   const upload = multer({ storage: storage }).single("idProof");
 const registerPolice = async (req, res) => {
@@ -482,31 +485,61 @@ const acceptPoliceById = (req, res) => {
       }
 
 //Add case update
-const addPoliceCase = (req, res) => {
-    const newPoliceCase = new PoliceCase({
-        crimeId: req.body.crimeId,
-        citizenId:req.body.citizenId,
-        date: req.body.date,
-        officeInCharge: req.body.officeInCharge,
-        status: req.body.status,
-        description: req.body.description,
-    });
+// const addPoliceCase = (req, res) => {
+//     const newPoliceCase = new PoliceCase({
+//         crimeId: req.body.crimeId,
+//         citizenId:req.body.citizenId,
+//         date: req.body.date,
+//         officeInCharge: req.body.officeInCharge,
+//         status: req.body.status,
+//         description: req.body.description,
+//     });
 
-    newPoliceCase.save()
-        .then(data => {
-            res.json({
-                status:200,
-                msg:"Data added successfully",
-                data:data
-            })
-        })
-        .catch(error => {
-            res.status(500).json({
-                 msg: "Error adding police case",
-                 Error: error 
-            });
+//     newPoliceCase.save()
+//         .then(data => {
+//             res.json({
+//                 status:200,
+//                 msg:"Data added successfully",
+//                 data:data
+//             })
+//         })
+//         .catch(error => {
+//             res.status(500).json({
+//                  msg: "Error adding police case",
+//                  Error: error 
+//             });
+//         });
+// };
+
+const addPoliceCase =async(req, res) => {
+    const crime=await crimeSchema.findById(req.body.crimeId)
+        if(req.body.status=="closed"){
+           await crimeSchema.findByIdAndUpdate(crime._id,{approvalStatus:'closed'})
+        }
+        const newPoliceCase = new PoliceCase({
+            crimeId: req.body.crimeId,
+            citizenId:req.body.citizenId,
+            date: req.body.date,
+            officeInCharge: req.body.officeInCharge,
+            status: req.body.status,
+            description: req.body.description,
         });
-};
+    
+       await newPoliceCase.save()
+            .then(data => {
+                res.json({
+                    status:200,
+                    msg:"Data added successfully",
+                    data:data
+                })
+            })
+            .catch(error => {
+                res.status(500).json({
+                     msg: "Error adding police case",
+                     Error: error 
+                });
+            });
+    };
 
 // View all police cases
 const viewPoliceCases = (req, res) => {
