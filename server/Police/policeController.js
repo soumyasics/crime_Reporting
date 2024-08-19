@@ -2,7 +2,8 @@ const Police= require("./policeSchema")
 const PoliceCase = require('./CaseUpdates/policeCases')
 const secret = 'police';
 const jwt=require('jsonwebtoken')
-const multer=require('multer')
+const multer=require('multer');
+const crimeSchema = require("../Crimes/crimeSchema");
 const storage = multer.diskStorage({
     destination: function (req, res, cb) {
       cb(null, "./upload");
@@ -642,6 +643,31 @@ const viewPoliceCaseByCrimeId = (req, res) => {
         });
 };
 
+const viewPoliceCaseByCrimeIdForCitizen = (req, res) => {
+    const crimeId = req.params.id;
+    PoliceCase.find({ crimeId: crimeId }).sort({createdAt:-1}).limit(1)
+        .populate("citizenId")
+        .then(data => {
+            if (!data) {
+                return res.status(404).json({
+                    status: 404,
+                    message: "Police case not found"
+                });
+            }
+            res.status(200).json({
+                status: 200,
+                message: "Police case found",
+                data: data
+            });
+        })
+        .catch(error => {
+            res.status(500).json({
+                status: 500,
+                message: "Error fetching police case",
+                error: error
+            });
+        });
+};
 module.exports={
     registerPolice,
     viewPolices,
@@ -664,5 +690,6 @@ viewPoliceByDistrict,
     viewPoliceCases,
     viewPoliceCaseById,
     viewPoliceCaseByCitizenId,
-    viewPoliceCaseByCrimeId
+    viewPoliceCaseByCrimeId,
+    viewPoliceCaseByCrimeIdForCitizen
 }
