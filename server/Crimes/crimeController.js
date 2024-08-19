@@ -310,7 +310,7 @@ const viewAllCrimes = (req, res) => {
 const viewAprvdCrimeByPolicStationId = async (req, res) => {
     try {
         const { id } = req.params;
-        const crime = await Crime.find({ psId: id, approvalStatus:{$in:['approved','closed']} }).populate('psId').populate('citizenId')
+        const crime = await Crime.find({ psId: id, approvalStatus:{$in:['approved','closed']} }).populate('psId').populate('citizenId')        
         if (!crime) {
             return res.json({
                 status: 404,
@@ -324,6 +324,8 @@ const viewAprvdCrimeByPolicStationId = async (req, res) => {
             data: crime
         });
     } catch (error) {
+        console.log(error);
+        
         res.status(500).json({ message: error.message });
     }
 };

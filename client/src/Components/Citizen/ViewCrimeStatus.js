@@ -20,6 +20,8 @@ function ViewCrimeStatus() {
         axiosInstance
           .post(`/viewCrimeById/${id}`)
           .then((res) => {
+            console.log(res);
+            
             if (res.data.status === 200) {
               setCaseDetails(res.data.data);
             }
