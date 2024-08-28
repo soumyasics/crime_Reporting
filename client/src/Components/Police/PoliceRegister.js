@@ -316,14 +316,14 @@ function PoliceRegister() {
                 <div className="col-6 mt-4">
                   <input
                     type="file"
-                    className="file-input"
+                    className=""
                     name="idProof"
                     id="idProof"
                     onChange={handleChange}
                   />  
-                  <label htmlFor="idProof" className="custom-file-label">
+                  {/* <label htmlFor="idProof" className="">
                     <i className="ri-upload-2-fill"></i> Upload ID Proof
-                  </label>
+                  </label> */}
                   {errors.idProof && (
                     <div className="text-danger color">{errors.idProof}</div>
                   )}

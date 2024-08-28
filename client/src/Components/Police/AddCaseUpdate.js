@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 function AddCaseUpdate() {
   const [caseData, setCaseData] = useState({
-    date: '',
+    date: new Date().toISOString().split('T')[0],
     officeInCharge: '',
     status: '',
     crimeId:'',
@@ -93,7 +93,7 @@ function AddCaseUpdate() {
               />
             </div>
           </div>
-          <div className='row police_add_case_row'>
+          {/* <div className='row police_add_case_row'>
             <div className='col-4'>
               <p className='police_add_case_update_label'>Date of Update</p>
             </div>
@@ -108,7 +108,7 @@ function AddCaseUpdate() {
                 required
               />
             </div>
-          </div>
+          </div> */}
           <div className='row police_add_case_row'>
             <div className='col-4'>
               <p className='police_add_case_update_label'>Current Status</p>
