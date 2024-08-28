@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 
 function ViewCitizenProfile() {
-  const [userDetails, setUserDetails] = useState({});
+  const [userDetails, setUserDetails] = useState({dob:''});
   const { id } = useParams();
 
   useEffect(() => {
@@ -19,6 +19,34 @@ function ViewCitizenProfile() {
         toast.error("Failed to fetch user details");
       });
   }, [id]);
+
+  const handleActivate = () => {
+    axiosInstance.post(`/activateCitizenById/${id}`)
+      .then((res) => {
+        if (res.data.status === 200) {
+          setUserDetails({ ...userDetails, isActive: true });
+        } else {
+          console.error("Failed to activate");
+        }
+      })
+      .catch((error) => {
+        console.error("Error", error);
+      });
+  };
+
+  const handleDeactivate = () => {
+    axiosInstance.post(`/deactivateCitizenById/${id}`)
+      .then((res) => {
+        if (res.data.status === 200) {
+          setUserDetails({ ...userDetails, isActive: false });
+        } else {
+          console.error("Failed to deactivate");
+        }
+      })
+      .catch((error) => {
+        console.error("Error", error);
+      });
+  };
 
   return (
     <div>
@@ -51,7 +79,7 @@ function ViewCitizenProfile() {
               className="form-control user_inp"
               id="dob"
               name="dob"
-              value={userDetails.dob || ''}
+              value={userDetails.dob.slice(0,10) || ''}
               readOnly
             />
           </div>
@@ -132,6 +160,25 @@ function ViewCitizenProfile() {
               readOnly
             />
           </div>
+          <div className="col-12 mt-2 text-center">
+                    {userDetails.isActive ? (
+                      <button
+                        type="button"
+                        className='ms-4 viewprofile_policestation_cross_icon'
+                        onClick={handleDeactivate}
+                      >
+                        Deactivate
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        className='ms-4 viewprofile_policestation_tick_icon'
+                        onClick={handleActivate}
+                      >
+                        Activate
+                      </button>
+                    )}
+                  </div>
         </div>
       </form>
     </div>

@@ -278,7 +278,9 @@ const createToken = (user) => {
   
         if (user.password!=password) {
           return res.json({ status:405,msg: 'Password Mismatch !!' });
-        }
+        }if (!user.isActive) {
+            return res.json({ status:405,msg: 'You Are Currently Deactivated By Admin !!' });
+          }
   
       
         const token = createToken(user);
@@ -317,6 +319,46 @@ const createToken = (user) => {
     });
     console.log(req.user);
   };
+
+  const activateCitizenById = (req, res) => {
+    console.log("id",req.params.id);
+
+    Citizen.findByIdAndUpdate({ _id: req.params.id }, { isActive:true }).exec()
+        .then((result) => {
+            res.json({
+                status: 200,
+                data: result,
+                msg: 'data obtained'
+            })
+        })
+        .catch(err => {
+            res.json({
+                status: 500,
+                msg: 'Error in API',
+                err: err
+            })
+        })
+  }
+  //Police accept completed
+  
+  const deactivateCitizenById =async (req, res) => {
+    await Citizen.findByIdAndUpdate({ _id: req.params.id },{isActive:false}).exec()
+        .then((result) => {
+            res.json({
+                status: 200,
+                data: result,
+                msg: 'data deleted'
+            })
+        })
+        .catch(err => {
+            res.json({
+                status: 500,
+                msg: 'Error in API',
+                err: err
+            })
+        })
+  
+      }
   
   //Login Custome --finished
 
@@ -329,5 +371,7 @@ module.exports = {
     forgotPassword,
     resetPassword,
     login,
-    requireAuth
+    requireAuth,
+    deactivateCitizenById,
+    activateCitizenById
 };

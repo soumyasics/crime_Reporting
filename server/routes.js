@@ -17,6 +17,9 @@ router.post('/deleteCitizenById/:id', citizen.deleteCitizenById);
 router.post('/resetPassword/:id', citizen.resetPassword);
 router.post('/loginCitizen', citizen.login);
 router.post('/requireAuthCitizen', citizen.requireAuth);
+router.post('/activateCitizenById/:id',citizen.activateCitizenById)
+router.post('/deactivateCitizenById/:id',citizen.deactivateCitizenById)
+
 
 //police routes
 router.post('/policeregister',police.upload,police.registerPolice)
@@ -68,10 +71,10 @@ router.post('/viewcomplaintByCitizenId/:id',complaints.viewcomplaintByCitizenId)
 
 
 // Privacy Policy
-router.post('/addprivacypolicy',privacy.addPrivacy)
-router.post('/editprivacypolicy/:id',privacy.updatePrivacy)
-router.post('/viewpolicy/:id',privacy.viewPolicyById)
-router.post('/viewprivacypolicy',privacy.viewAllpolicy)
+// router.post('/addprivacypolicy',privacy.addPrivacy)
+// router.post('/editprivacypolicy/:id',privacy.updatePrivacy)
+// router.post('/viewpolicy/:id',privacy.viewPolicyById)
+// router.post('/viewprivacypolicy',privacy.viewAllpolicy)
 
 
 //Notifications

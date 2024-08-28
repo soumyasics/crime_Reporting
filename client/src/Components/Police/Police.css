@@ -67,7 +67,19 @@
     font-weight: bold;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+    /* transition: background-color 0.3s, color 0.3s; */
+  }
+
+  #idProof{
+    align-items: center;
+    width: 100%;
+    padding: 0.4rem 0;
+    color:grey;
+    box-shadow: 1px  3px 1px 0 rgba(0, 0, 0, 0.2);
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
   }
   
   .custom-file-label i {

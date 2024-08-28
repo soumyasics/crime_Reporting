@@ -8,7 +8,7 @@ function Footer2() {
         <div className='container footer2_titles' >
             <p>Copyright 2024</p>
             <p>All rights reserved by the Crime Reporting System</p>
-            <p>Websites Designed by Srishti Innovative</p>
+            {/* <p>Websites Designed by Srishti Innovative</p> */}
         </div>
       </div>
     </div>

@@ -100,9 +100,9 @@ function AdminLogin() {
                     </div>
                     {errors.password && <span className="text-danger">{errors.password}</span>}
                   </div>
-                  <div className="mt-3 container admin-login-link ">
+                  {/* <div className="mt-3 container admin-login-link ">
                     <Link className="admin-login-forgotpswd ">Forgot Password?</Link>
-                  </div>
+                  </div> */}
                   <div className="text-center mt-3">
                   <button
                   type="submit"
