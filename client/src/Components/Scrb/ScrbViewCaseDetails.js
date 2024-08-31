@@ -10,7 +10,7 @@ import { imageUrl } from '../Constants/Image_Url';
 function ScrbViewCaseDetails() {
      const [caseDetails, setCaseDetails] = useState({
         evidenceFiles: [{ file: { filename: '' } }],
-        incidentDate: '',_id:''
+        incidentDate: '',_id:'',citizenId:''
       });
       const [showModal, setShowModal] = useState(false);
       const [selectedEvidence, setSelectedEvidence] = useState(null);
@@ -75,6 +75,53 @@ function ScrbViewCaseDetails() {
       <span>Case No: ID{caseDetails._id.slice(19,24)} </span>
       </div>
       <div className='row mt-5'>
+
+      <div className="col">
+          <div className="case-details-span">
+            <span>Reported Person</span>
+          </div>
+          <div className="mt-4 container ms-4">
+            <div className="row">
+              <table className="case-details-table">
+                <tbody>
+                  <tr>
+                    <td className="case-details-victim">
+                      <label>Name</label>
+                    </td>
+                    <td className="case-details-victim1">
+                      <span>{caseDetails.citizenId.firstname}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="case-details-victim">
+                      <label>Contact</label>
+                    </td>
+                    <td className="case-details-victim1">
+                      <span>{caseDetails.citizenId.contact}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="case-details-victim">
+                      <label>Email</label>
+                    </td>
+                    <td className="case-details-victim1">
+                      <span>{caseDetails.citizenId.email}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="case-details-victim">
+                      <label>Aadhaar Number</label>
+                    </td>
+                    <td className="case-details-victim1">
+                      <span>{caseDetails.citizenId.aadhar}</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
         <div className='col'>
           <div className='case-details-span'>
             <span>Victim Information</span>
