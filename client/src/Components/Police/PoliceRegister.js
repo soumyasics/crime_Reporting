@@ -147,6 +147,13 @@ function PoliceRegister() {
       formIsValid = false;
       errors.confirmpassword = "Passwords do not match";
     }
+    if (!data.contact.trim()) {
+      formIsValid = false;
+      errors.contact = "Contact is required";
+    } else if (data.contact.length !== 10) {
+      formIsValid = false;
+      errors.contact = "Please enter a valid Contact Number";
+    }
 
     setErrors(errors);
     if (formIsValid) {
