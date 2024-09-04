@@ -204,6 +204,7 @@ function PoliceRegister() {
                   name="policestationname"
                   value={data.policestationname}
                   onChange={handleChange}
+                  required
                 />
                 {errors.policestationname && (
                   <div className="text-danger color">
@@ -221,6 +222,7 @@ function PoliceRegister() {
                       name="policestationcode"
                       value={data.policestationcode}
                       onChange={handleChange}
+                      required
                     />
                     {errors.policestationcode && (
                       <div className="text-danger color">
@@ -236,6 +238,7 @@ function PoliceRegister() {
                       name="stationchargeofficers"
                       value={data.stationchargeofficers}
                       onChange={handleChange}
+                      required
                     />
                     {errors.stationchargeofficers && (
                       <div className="text-danger color">
@@ -251,6 +254,7 @@ function PoliceRegister() {
                       name="totalofficers"
                       value={data.totalofficers}
                       onChange={handleChange}
+                      required
                     />
                     {errors.totalofficers && (
                       <div className="text-danger color">
@@ -268,6 +272,7 @@ function PoliceRegister() {
                       name="address"
                       value={data.address}
                       onChange={handleChange}
+                      required
                     />
                     {errors.address && (
                       <div className="text-danger color">{errors.address}</div>
@@ -281,6 +286,7 @@ function PoliceRegister() {
                       name="contact"
                       value={data.contact}
                       onChange={handleChange}
+                      required
                     />
                     {errors.contact && (
                       <div className="text-danger color">{errors.contact}</div>
@@ -292,6 +298,7 @@ function PoliceRegister() {
                       name="district"
                       value={data.district}
                       onChange={handleChange}
+                      required
                     >
                       <option>Select District</option>
                       {districts.map((district, index) => (
@@ -315,6 +322,7 @@ function PoliceRegister() {
                     name="email"
                     value={data.email}
                     onChange={handleChange}
+                    required
                   />
                   {errors.email && (
                     <div className="text-danger color">{errors.email}</div>
@@ -327,6 +335,7 @@ function PoliceRegister() {
                     name="idProof"
                     id="idProof"
                     onChange={handleChange}
+                    required
                   />  
                   {/* <label htmlFor="idProof" className="">
                     <i className="ri-upload-2-fill"></i> Upload ID Proof
@@ -347,6 +356,7 @@ function PoliceRegister() {
                       name="password"
                       value={data.password}
                       onChange={handleChange}
+                      required
                     />
                     {errors.password && (
                       <div className="text-danger color">{errors.password}</div>
@@ -362,6 +372,7 @@ function PoliceRegister() {
                       name="confirmpassword"
                       value={data.confirmpassword}
                       onChange={handleChange}
+                      required
                     />
                     {errors.confirmpassword && (
                       <div className="text-danger color">

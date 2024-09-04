@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 function ViewAllPoliceStation() {
   const [data, setData] = useState([]);
-  
+
   const getData = () => {
     axiosInstance
       .post("/viewPolices")
